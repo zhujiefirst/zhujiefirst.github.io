@@ -1,0 +1,428 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>投掷色子10次，所投点数总数为50点的可能性是多少种 | Codingforever</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="zhujiefirst">
+    
+    <meta name="description" content="问：投掷色子10次，所投点数总数为50点的可能性是多少种？
+这是道经典的面试问题，当然，面试时可能让你编程实现，也可能用数学知识做答。这里我们就从这两方面分别解析下如何破题。
+一、编程实现事实上，编程解决这题目着实不麻烦。首先我们定义一个过程f(x,y)表示投掷色子x次，所投点数为y点的可能性种数。">
+    
+    
+    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="Jay1002008" />
+    <meta name="twitter:title" content="投掷色子10次，所投点数总数为50点的可能性是多少种 | Codingforever" />
+      
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Codingforever">Codingforever</a></h1>
+				<h2 class="blog-motto">SHUT UP ur fucking mouth! Reading MORE, thinking MORE, coding MORE.</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/categories">分类</a></li>
+					
+						<li><a href="/tags">标签</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:codingforever.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/11/18/-2014-11-18-0-html/" title="投掷色子10次，所投点数总数为50点的可能性是多少种" itemprop="url">投掷色子10次，所投点数总数为50点的可能性是多少种</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://codingforever.com" title="zhujiefirst">zhujiefirst</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2014-11-17T16:00:00.000Z" itemprop="datePublished">11月 18 2014</time>
+    更新日期:<time datetime="2014-12-20T11:49:23.000Z" itemprop="dateModified">12月 20 2014</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+		</div>
+		
+		<p><strong>问</strong>：投掷色子10次，所投点数总数为50点的可能性是多少种？</p>
+<p>这是道经典的面试问题，当然，面试时可能让你编程实现，也可能用数学知识做答。这里我们就从这两方面分别解析下如何破题。</p>
+<p><strong>一、编程实现</strong><br>事实上，编程解决这题目着实不麻烦。首先我们定义一个过程f(x,y)表示投掷色子x次，所投点数为y点的可能性种数。分析投色子的过程，由于投掷一次色子可能的点数为1~6点,不难发现如下公式：</p>
+<pre><code><span class="function"><span class="title">f</span><span class="params">(x,y)</span>=<span class="title">f</span><span class="params">(x-<span class="number">1</span>,y-<span class="number">1</span>)</span>+<span class="title">f</span><span class="params">(x-<span class="number">1</span>,y-<span class="number">2</span>)</span>+<span class="title">f</span><span class="params">(x-<span class="number">1</span>,y-<span class="number">3</span>)</span>+<span class="title">f</span><span class="params">(x-<span class="number">1</span>,y-<span class="number">4</span>)</span>+<span class="title">f</span><span class="params">(x-<span class="number">1</span>,y-<span class="number">5</span>)</span>+<span class="title">f</span><span class="params">(x-<span class="number">1</span>,y-<span class="number">6</span>)</span></span>
+</code></pre><p>而f(x,y)在当6<em>xy时，值为0，当6</em>x=y时，值为1，当x=y时，值为1。<br>到这里，其实已经可以用递归解决这个问题了，代码如下：</p>
+<pre><code><span class="comment">// 投times次数色子，得到points点数，有多少种可能投法</span>
+func ThrowDice(<span class="keyword">times</span> <span class="keyword">int</span>, points <span class="keyword">int</span>) <span class="keyword">int</span> {
+    <span class="keyword">if</span> <span class="keyword">times</span>*MaxPoint &lt; points {
+        <span class="keyword">return</span> <span class="number">0</span>
+    }
+    <span class="keyword">if</span> <span class="keyword">times</span>*MaxPoint == points {
+        <span class="keyword">return</span> <span class="number">1</span>
+    }
+    <span class="keyword">if</span> <span class="keyword">times</span>*MinPoint &gt; points {
+        <span class="keyword">return</span> <span class="number">0</span>
+    }
+    <span class="keyword">if</span> <span class="keyword">times</span>*MinPoint == points {
+        <span class="keyword">return</span> <span class="number">1</span>
+    }
+    <span class="keyword">if</span> <span class="keyword">times</span> == <span class="number">1</span> {
+        <span class="keyword">return</span> <span class="number">1</span>
+    }
+    nextTimes := <span class="keyword">times</span> - <span class="number">1</span>
+    <span class="keyword">return</span> ThrowDice(nextTimes, points-OnePoint) + ThrowDice(nextTimes, points-TwoPoint) + ThrowDice(nextTimes, points-ThreePoint) + ThrowDice(nextTimes, points-FourPoint) + ThrowDice(nextTimes, points-FivePoint) + ThrowDice(nextTimes, points-SixPoint)
+}
+</code></pre><p><strong>二、数学实现</strong><br>这个问题的数学解法事实上用组合数学的知识很容易解决。</p>
+<p>首先，投一次色子的过程我们可以用一多项式表示：<strong>x+x^2+x^3+x^4+x^5+x^6</strong>,具体各项的系数为投掷的可能种类数，如上述多项式中x^5表示投掷一次色子，得到点数为5的可能种类数为1。</p>
+<p>既然有这种表示方法，原来投掷10次色子的问题用多项式表示如下：<strong>(x+x^2+x^3+x^4+x^5+x^6)^10</strong>。 原来问题的解即为多项式中x^50的系数。当然，这个多项式可以用数学公式解出来，我们就直接用python的sympy库计算，得出解为85225次。  </p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/面试题/">面试题</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/算法/">算法</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://codingforever.com/2014/11/18/-2014-11-18-0-html/" data-title="投掷色子10次，所投点数总数为50点的可能性是多少种 | Codingforever" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/11/20/-2014-11-20-0-html/" title="Golang性能分析工具">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  Golang性能分析工具</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2014/11/16/-2014-11-16-0-html/"  title="如何生成不重复随机数">
+ <strong>NEXT:</strong><br/> 
+ <span>如何生成不重复随机数
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">归档</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/03/">March 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">September 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">May 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">August 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">July 2010</a><span class="archive-list-count">1</span></li></ul>
+  </div>
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+			<li><a href="/categories/c-c/" title="c/c++">c/c++<sup>5</sup></a></li>
+		
+			<li><a href="/categories/golang/" title="golang">golang<sup>2</sup></a></li>
+		
+			<li><a href="/categories/lisp/" title="lisp">lisp<sup>1</sup></a></li>
+		
+			<li><a href="/categories/lua/" title="lua">lua<sup>1</sup></a></li>
+		
+			<li><a href="/categories/服务器编程/" title="服务器编程">服务器编程<sup>3</sup></a></li>
+		
+			<li><a href="/categories/杂感/" title="杂感">杂感<sup>5</sup></a></li>
+		
+			<li><a href="/categories/游戏开发/" title="游戏开发">游戏开发<sup>4</sup></a></li>
+		
+			<li><a href="/categories/算法/" title="算法">算法<sup>15</sup></a></li>
+		
+			<li><a href="/categories/编程思维/" title="编程思维">编程思维<sup>3</sup></a></li>
+		
+			<li><a href="/categories/设计模式/" title="设计模式">设计模式<sup>2</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/openGL/" title="openGL">openGL<sup>4</sup></a></li>
+		
+			<li><a href="/tags/pprof/" title="pprof">pprof<sup>1</sup></a></li>
+		
+			<li><a href="/tags/union-find/" title="union-find">union-find<sup>4</sup></a></li>
+		
+			<li><a href="/tags/代码质量/" title="代码质量">代码质量<sup>3</sup></a></li>
+		
+			<li><a href="/tags/元编程/" title="元编程">元编程<sup>1</sup></a></li>
+		
+			<li><a href="/tags/内存管理/" title="内存管理">内存管理<sup>1</sup></a></li>
+		
+			<li><a href="/tags/基础/" title="基础">基础<sup>1</sup></a></li>
+		
+			<li><a href="/tags/小技巧/" title="小技巧">小技巧<sup>1</sup></a></li>
+		
+			<li><a href="/tags/性能/" title="性能">性能<sup>4</sup></a></li>
+		
+			<li><a href="/tags/排序/" title="排序">排序<sup>8</sup></a></li>
+		
+			<li><a href="/tags/网络I-O/" title="网络I/O">网络I/O<sup>1</sup></a></li>
+		
+			<li><a href="/tags/设计/" title="设计">设计<sup>7</sup></a></li>
+		
+			<li><a href="/tags/面向对象/" title="面向对象">面向对象<sup>2</sup></a></li>
+		
+			<li><a href="/tags/面试题/" title="面试题">面试题<sup>4</sup></a></li>
+		
+			<li><a href="/tags/高阶函数/" title="高阶函数">高阶函数<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello world! I&#39;m zhujiefirst in Tencent. <br/>
+			从小我就有个梦想，就是当一名合格的程序员。我不是码畜，我为自己带盐！</p>
+	</section>
+	 
+	<div class="social-font clearfix">
+		
+		<a href="http://weibo.com/2421642590" target="_blank" title="weibo"></a>
+		
+		
+		<a href="https://twitter.com/Jay1002008" target="_blank" title="twitter"></a>
+		
+		
+		<a href="https://github.com/zhujiefirst" target="_blank" title="github"></a>
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2015 
+		
+		<a href="http://codingforever.com" target="_blank" title="zhujiefirst">zhujiefirst</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"null"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+  </body>
+</html>

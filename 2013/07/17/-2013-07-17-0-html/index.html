@@ -1,0 +1,471 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>openGL学习（二）-- 状态管理和绘制几何物体 | Codingforever</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="zhujiefirst">
+    
+    <meta name="description" content="在最高抽象层次上，有3种绘图是最基本的：消除窗口，绘制几何图形，以及绘制光栅对象(包括二维图像、位图和字体)。这里先介绍如何消除以及如何绘制几何物体，包括点、直接和平面多边形。
+1　绘图工具箱
+首先就是清除窗口。在计算机中，保存图片的内存通常被计算机所绘制的前一幅图像所填充，因此在绘制新场景之前，一">
+    
+    
+    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="Jay1002008" />
+    <meta name="twitter:title" content="openGL学习（二）-- 状态管理和绘制几何物体 | Codingforever" />
+      
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Codingforever">Codingforever</a></h1>
+				<h2 class="blog-motto">SHUT UP ur fucking mouth! Reading MORE, thinking MORE, coding MORE.</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/categories">分类</a></li>
+					
+						<li><a href="/tags">标签</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:codingforever.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2013/07/17/-2013-07-17-0-html/" title="openGL学习（二）-- 状态管理和绘制几何物体" itemprop="url">openGL学习（二）-- 状态管理和绘制几何物体</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://codingforever.com" title="zhujiefirst">zhujiefirst</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2013-07-16T16:00:00.000Z" itemprop="datePublished">7月 17 2013</time>
+    更新日期:<time datetime="2014-12-20T14:11:12.000Z" itemprop="dateModified">12月 20 2014</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1_绘图工具箱"><span class="toc-number">1.</span> <span class="toc-text">1　绘图工具箱</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2_描述点、直线和多边形"><span class="toc-number">2.</span> <span class="toc-text">2　描述点、直线和多边形</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3_基本状态管理"><span class="toc-number">3.</span> <span class="toc-text">3　基本状态管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4_显示点、直线和多边形"><span class="toc-number">4.</span> <span class="toc-text">4 　显示点、直线和多边形</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5_法线向量"><span class="toc-number">5.</span> <span class="toc-text">5　法线向量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6_顶点数组"><span class="toc-number">6.</span> <span class="toc-text">6　顶点数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7_缓冲区对象"><span class="toc-number">7.</span> <span class="toc-text">7　缓冲区对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8_顶点数组对象"><span class="toc-number">8.</span> <span class="toc-text">8　顶点数组对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9_属性组"><span class="toc-number">9.</span> <span class="toc-text">9　属性组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10_创建多边形表面模型的一些提示"><span class="toc-number">10.</span> <span class="toc-text">10　创建多边形表面模型的一些提示</span></a></li></ol>
+		</div>
+		
+		<p>在最高抽象层次上，有3种绘图是最基本的：<strong>消除窗口，绘制几何图形，以及绘制光栅对象</strong>(包括二维图像、位图和字体)。这里先介绍如何消除以及如何绘制几何物体，包括点、直接和平面多边形。</p>
+<h2 id="1_绘图工具箱"><strong>1　绘图工具箱</strong></h2>
+<p>首先就是清除窗口。在计算机中，保存图片的内存通常被计算机所绘制的前一幅图像所填充，因此在绘制新场景之前，一般需要把它清除为某种背景颜色(具体为何种颜色为应用场景所定，若下一幅图像为全屏，则不清除窗口也可以，因为全屏的图像把上一幅图像全部遮住了)。</p>
+<p>这里这个问题，为什么在绘图之前清除窗口？如果画一个适当颜色的矩形，让它足够大，则和清除窗口的效果不是一样吗？但是清除窗口具有几点优势：</p>
+<ol>
+<li>清除窗口函数(glClear( ))的效率可能远远高于普通的绘图函数；</li>
+<li>OpenGL允许程序员任意设置坐标系统、观察位置和观察方向。因此判定这个用于清除窗口的矩形的大小和位置可能非常困难；<br>3.　除了屏幕上显示和像素颜色的缓冲区之外，还包括一些别的缓冲区（如深度缓冲区），而glClear( )命令可以清除按照任意形式组合的方式清除相应缓冲区，如glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)命令直接方便地清除颜色缓冲区和深度缓冲区。</li>
+</ol>
+<p>其次就是指定颜色。在OpenGL，物体的开关与它的颜色无关。当一个特定的几何物体被绘制时，它是根据当前指定的方案进行绘制的。因此，OpenGL程序员首先设置颜色或者颜色方案（如用红色绘制所有的物体，又如物体由蓝色的塑料制成，有一盏黄色的聚光灯从某个方向对准物体表面的某个点），在这种颜色或者颜色方案被修改之前，所有的物体都用这种颜色或者颜色方案进行绘制。</p>
+<p>第三就是强制完成绘图操作。绝大多数的现代图像系统都可以看成是一条装配线（如福特汽车的汽车装配线）。在高端架构的计算机中，每一种操作都是由不同的硬件执行的。在这种情况下，如果CPU在发出下一条绘图命令之前还要等待前一条命令的完成，这无疑失去了流水装配线的强大优势。另外，应用程序可能在不同计算机上运行（主程序在一台称为客户机的计算机上，绘图结果则在另一台服务机上查看），它们之间每条绘图命令都是通过网络发送。通常客户机会把一组命令收集到一个网络包中，然后再将它们一起发送。但遗憾的是，如果这个网络包未填满，则它会一直等待下去，其结果就是在服务机上永远看不到绘图结果。</p>
+<p>因此，OpenGL提供了强制完成绘图操作glFlush( )。程序员应该在每个帧或者每个场景的最后添加一个glFlush( )调用。注意，这个操作并不等待绘图完成，它只是强制绘图命令开始执行。如果需要执行一些同步性的任务，以必需等待图形硬件或者网络提示帧缓冲区的绘图已经完成，则可以使用glFinish( )操作。</p>
+<p>最后就是坐标系统工具箱。绘图一定要设置一个坐标系。以下为简单地定义了一个2维坐标系：</p>
+<pre><code>void <span class="function">reshape</span>(int w, int h)
+{
+    <span class="function">glViewport</span>(0, 0, (GLsizei)w, (GLsizei)h);
+    <span class="function">glMatrixMode</span>(GL_PROJECTION);
+    <span class="function">glLoadIdentity</span>();
+    <span class="function">gluOrtho2D</span>(0<span class="class">.0</span>, (GLdouble)w, 0<span class="class">.0</span>, (GLdouble)h);
+}
+</code></pre><p>其定义了一个如屏幕相同像素的2维坐标系，原点(0, 0)在屏幕在左下角，屏幕右上角为点(w, h)。</p>
+<h2 id="2_描述点、直线和多边形"><strong>2　描述点、直线和多边形</strong></h2>
+<p>　　OpenGL绘图都是由几个简单的几何图元构成的，如点、直线、多边形。而这几个简单的几何图元最终又是根据它们的顶点(vertex)来描述的。</p>
+<h2 id="3_基本状态管理"><strong>3　基本状态管理</strong></h2>
+<p>　　OpenGL具有状态机特性，它维护了许多状态和状态变量，如光照、纹理、隐藏表面消除、雾以及其他影响物体外观的状态。在默认情况下，这些状态的大部分是处于不活动状态的，因为如果激活这些状态，OpenGL的渲染开销就会大大增大。因此，程序员应该按需对这些状态进行打开或者关闭。</p>
+<h2 id="4_显示点、直线和多边形"><strong>4 　显示点、直线和多边形</strong></h2>
+<p>　　首先探讨一下点的细节。默认情况下，点被画成屏幕上的一个像素。当然，可以使用glPointSize( )控制被渲染点的大小。如果在抗锯齿功能被禁用的情况（默认）下，带小数的宽度值将四舍五入为整型值，在屏幕上所绘制的是对齐的正方形像素区域。如果启用了抗锯齿功能，则屏幕上绘制的将是一个圆形的区域，非整型的宽度值并不会四舍五入。</p>
+<p>　　其次就是直线的细节。OpenGL下的直线并不是数学中的直线，实际上为数学概念中的线段。默认情况下直线的宽度为1个像素，可以通过glLineWidth( )对直线宽度进行设置。注意，在未使用抗锯齿功能的情况下，直线的的宽度并不是根据与直线垂直的方便进行测量的。实际上，如果直接斜率的绝对值小于1.0，它是根据y轴的方向进行测量的。否则，它就根据x轴的方向进行测量。而在抗锯齿情况下，就是按照特定的宽度渲染一个填充多边形。</p>
+<p>　　然后就是多边形的细节。按照约定，多边形的顶点默认以逆时针顺序出现在屏幕上，通常称为“正面”。当然我们可以利用glFrontFace( )将顺时针方向的表面被认为是正面。另外，在默认情况下，填充多边形是用实心模式绘制的，我们可能利用glPolygonStipple( )将填充方式设定为32*32的点画模式(有点像印章)。</p>
+<h2 id="5_法线向量"><strong>5　法线向量</strong></h2>
+<p>法线向量(简称法线)是一条垂直于某个表面的方向向量。物体的法线微量定义了它的表面在空间中的方向。具体地说，定义了它相对于光源的方向。OpenGL使用法线向量确定这个物体的各个顶点所接收的光照。在OpenGL中，除了之外，不能为多边形的其他地方分配法线。</p>
+<h2 id="6_顶点数组"><strong>6　顶点数组</strong></h2>
+<p>OpenGL提供了一些顶点数组函数，允许只用少数几个数组指定大量的顶点相关的数据，并用少量函数调用（与顶点数组的数量相仿）访问这些数据。<br>把数据放在顶点数组中可以提高应用程序的性能。使用顶点数组可以减少函数调用的次数，从而提高性能。另外，使用顶点数组还可以避免共享顶点的冗余处理。<br>使用顶点数据对几何图形进行渲染需要3个步骤:</p>
+<ul>
+<li>步骤一，启用数组。</li>
+<li>步骤二，指定数组的数据。</li>
+<li>步骤三，解引用和渲染。</li>
+</ul>
+<h2 id="7_缓冲区对象"><strong>7　缓冲区对象</strong></h2>
+<p>在许多OpenGL操作中，我们都向OpenGL发送一大块数据，例如向它传递需要处理的顶点数组数据。传输这种数据可能非常简单，如把数据从系统的内存中复制到图形卡。但是，由于OpenGL是按照客户机－服务器模式设计的，在OpenGL需要数据的任何时候，都必须把数据从客户机传输到服务器。如果数据并没有修改，或者客户机和服务器位于不同的计算机（分布式渲染），数据的传输可能会比较缓慢，或者是冗余的。</p>
+<p>所以，OpenGL在1.5开始，增加了缓冲区对象（buffer object），允许应用程序显式地指定把哪些数据存储在图形服务器中。</p>
+<ul>
+<li>第一、创建缓冲区对象。建议使用glGenBuffers( )接口让OpenGL分配标志符，以保证避免重复使用已被使用的缓冲区对象标识符，从而消除无意修改数据的风险。</li>
+<li>第二、激活缓冲区对象。激活缓冲区对象，首先需要将它绑定。绑定缓冲区对象表示选择未来的操作（对数据进行初始化或者使用缓冲区对象进行渲染）将影响到哪个缓冲区对象。</li>
+<li>第三、用数据分配和初始化缓冲区对象。具体情况参见glBufferData接口。</li>
+<li>第四、更新缓冲区对象的数据值。有两种方法可以更新存储在缓冲区对象中的数据。</li>
+</ul>
+<p>第一种方法假设我们已经在应用程序的一个缓冲区中准备了相同类型的数据。glBufferSubData( )将用我们提供的数据替换被绑定缓冲区对象的一些数据子集。</p>
+<p>第二种方法允许我们更灵活地选择需要更新的数据。即使用glMapBuffer( )返回一个指向缓冲区对象的指针，可以对这块内在进行修改更新缓冲区对象的数据。更新完毕后使用glUnmapBuffer( )取消对这个缓冲区的映射。</p>
+<p>注意，glMapBuffer( )提供了对缓冲区对象中包含的整个数据集合的访问。如果需要修改缓冲区中的大多数数据，这种方法很有用，但如果有一个很大的缓冲区并且只需要更新很小的一部分值，这种方法效率很低。在这种情况下，则使用glMapBufferRange( )效率更高。它允许只修改所需的范围内的数据值。</p>
+<ul>
+<li><p>第五，在缓冲区对象之间的复制数据。在OpenGL3.1之前，欲完成数据从一个缓冲区对象复制到别一个缓冲区对象，则必须分为两步走：首先将数据从缓冲区对象复制到应用程序的内存中，然后通过绑定到新的对象，现使用glBufferData( )初始化新的数据或者用glBufferSubData( )等方法更新缓冲区对象数据。显然这样做不是很优美，所以在3.1引入的glCopyBufferSubData( )接口直接将缓冲区对象A中的数据copy到缓冲区对象B中。</p>
+</li>
+<li><p>第六，清除缓冲区对象。对缓冲区对象的操作完成之后，调用glDeleteBuffers( )接口对缓冲区对象进行清除。</p>
+</li>
+</ul>
+<h2 id="8_顶点数组对象"><strong>8　顶点数组对象</strong></h2>
+<p>随着程序的增大并且使用更多的模型，在每个帧的多组顶点数组之间切换将不可避免。根据为每个顶点使用多少个顶点属性，你对glVertexPointer( )这样的函数的调用次数可能变得很大。因此，应该采用顶点数组对象提高效率。顶点数组对象捆绑了调用的集合，以设置顶点数据的状态。在初始化之后，可以通过单次调用在不同的数组集合之间快速修改。创建过程如下：</p>
+<p>首先，创建一个顶点数组对象。利用glGenvertexArrays( )函数。</p>
+<p>其次，初始化新的对象，并且把要使用的顶点数组数据的集合与单个已分配的对象关联起来。利用gBindVertexArray( )函数。</p>
+<p>这里不得不说顶点数组对象（VAO）和顶点缓冲对象（VBO）的区别。A Vertex Array Object (VAO) is an OpenGL Object that encapsulates all of the state needed to specify vertex data (with one minor exception noted below). They define the format of the vertex data as well as the sources for the vertex arrays. Note that VAOs do not contain the arrays themselves; the arrays are stored in Buffer Objects. The VAOs simply reference already existing buffer objects. OTHERWISE, A Vertex Buffer Object (VBO) is a Buffer Object which is used as the source for vertex array data.</p>
+<h2 id="9_属性组"><strong>9　属性组</strong></h2>
+<p>OpenGL可以设置或者查询一个单独的状态或状态变量。也可以用一个命令保存或恢复一组相关的状态变量的值。一般而言，使用这些函数，获取、保存和恢 复状态值的速度会更快一点。有些状态值可能是由硬件维护的，访问它们的开销可能较大。另外，如果是在远程客户机上进行操作，在获取、保存和恢复属性时，它们都要通过网络传输。但是，OpenGL实现可以把属性堆栈保存在服务器上，从而避免不必要的网络延迟。</p>
+<h2 id="10_创建多边形表面模型的一些提示"><strong>10　创建多边形表面模型的一些提示</strong></h2>
+<p>用多边形近似模拟法创建多边形表面模型是一项艺术，经验是均可替代的。下面是一些创建多边形表面模型的一些技巧：</p>
+<ul>
+<li>使多边形的方向（环绕）保持一致。</li>
+<li>对表面进行细分时，要密切注意那些非三角形的多边形。由于OpenGL可能无法正确地渲染非平面多边形，所有非三角形的多边形要保证其在同一平面。</li>
+<li>在显示速度和图像质量之间总存在一种权衡关系。理想的做法是向多边形细分函数提供一个参数，表示细分所达到的精度。如果物体距离距离较远，可以使用较为粗糙的的细分，另外，在进行细分时，在表面相对较平的区域，可以使用较大的多边形，而在曲率很大的表面部分，应该使用很小的多边形。</li>
+<li>为了实现高质量的图像，在轮廓边缘进行更精细的划分显然要比在表面内部进行精细划分的效果更好。</li>
+<li>如果想创建一个闭合的表面，确保闭合环的起点和终点使用完全相同的坐标，不然可能因为数值的四舍五入而产生有缺口的环。</li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/openGL/">openGL</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/游戏开发/">游戏开发</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://codingforever.com/2013/07/17/-2013-07-17-0-html/" data-title="openGL学习（二）-- 状态管理和绘制几何物体 | Codingforever" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2013/07/27/-2013-07-27-0-html/" title="openGL学习（三）-- 视图">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  openGL学习（三）-- 视图</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2013/07/15/-2013-07-15-0-html/"  title="自省一则">
+ <strong>NEXT:</strong><br/> 
+ <span>自省一则
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1_绘图工具箱"><span class="toc-number">1.</span> <span class="toc-text">1　绘图工具箱</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2_描述点、直线和多边形"><span class="toc-number">2.</span> <span class="toc-text">2　描述点、直线和多边形</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3_基本状态管理"><span class="toc-number">3.</span> <span class="toc-text">3　基本状态管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4_显示点、直线和多边形"><span class="toc-number">4.</span> <span class="toc-text">4 　显示点、直线和多边形</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5_法线向量"><span class="toc-number">5.</span> <span class="toc-text">5　法线向量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6_顶点数组"><span class="toc-number">6.</span> <span class="toc-text">6　顶点数组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7_缓冲区对象"><span class="toc-number">7.</span> <span class="toc-text">7　缓冲区对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8_顶点数组对象"><span class="toc-number">8.</span> <span class="toc-text">8　顶点数组对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9_属性组"><span class="toc-number">9.</span> <span class="toc-text">9　属性组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10_创建多边形表面模型的一些提示"><span class="toc-number">10.</span> <span class="toc-text">10　创建多边形表面模型的一些提示</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">归档</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/03/">March 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">September 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">May 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">August 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">July 2010</a><span class="archive-list-count">1</span></li></ul>
+  </div>
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+			<li><a href="/categories/c-c/" title="c/c++">c/c++<sup>5</sup></a></li>
+		
+			<li><a href="/categories/golang/" title="golang">golang<sup>2</sup></a></li>
+		
+			<li><a href="/categories/lisp/" title="lisp">lisp<sup>1</sup></a></li>
+		
+			<li><a href="/categories/lua/" title="lua">lua<sup>1</sup></a></li>
+		
+			<li><a href="/categories/服务器编程/" title="服务器编程">服务器编程<sup>3</sup></a></li>
+		
+			<li><a href="/categories/杂感/" title="杂感">杂感<sup>5</sup></a></li>
+		
+			<li><a href="/categories/游戏开发/" title="游戏开发">游戏开发<sup>4</sup></a></li>
+		
+			<li><a href="/categories/算法/" title="算法">算法<sup>15</sup></a></li>
+		
+			<li><a href="/categories/编程思维/" title="编程思维">编程思维<sup>3</sup></a></li>
+		
+			<li><a href="/categories/设计模式/" title="设计模式">设计模式<sup>2</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/openGL/" title="openGL">openGL<sup>4</sup></a></li>
+		
+			<li><a href="/tags/pprof/" title="pprof">pprof<sup>1</sup></a></li>
+		
+			<li><a href="/tags/union-find/" title="union-find">union-find<sup>4</sup></a></li>
+		
+			<li><a href="/tags/代码质量/" title="代码质量">代码质量<sup>3</sup></a></li>
+		
+			<li><a href="/tags/元编程/" title="元编程">元编程<sup>1</sup></a></li>
+		
+			<li><a href="/tags/内存管理/" title="内存管理">内存管理<sup>1</sup></a></li>
+		
+			<li><a href="/tags/基础/" title="基础">基础<sup>1</sup></a></li>
+		
+			<li><a href="/tags/小技巧/" title="小技巧">小技巧<sup>1</sup></a></li>
+		
+			<li><a href="/tags/性能/" title="性能">性能<sup>4</sup></a></li>
+		
+			<li><a href="/tags/排序/" title="排序">排序<sup>8</sup></a></li>
+		
+			<li><a href="/tags/网络I-O/" title="网络I/O">网络I/O<sup>1</sup></a></li>
+		
+			<li><a href="/tags/设计/" title="设计">设计<sup>7</sup></a></li>
+		
+			<li><a href="/tags/面向对象/" title="面向对象">面向对象<sup>2</sup></a></li>
+		
+			<li><a href="/tags/面试题/" title="面试题">面试题<sup>4</sup></a></li>
+		
+			<li><a href="/tags/高阶函数/" title="高阶函数">高阶函数<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello world! I&#39;m zhujiefirst in Tencent. <br/>
+			从小我就有个梦想，就是当一名合格的程序员。我不是码畜，我为自己带盐！</p>
+	</section>
+	 
+	<div class="social-font clearfix">
+		
+		<a href="http://weibo.com/2421642590" target="_blank" title="weibo"></a>
+		
+		
+		<a href="https://twitter.com/Jay1002008" target="_blank" title="twitter"></a>
+		
+		
+		<a href="https://github.com/zhujiefirst" target="_blank" title="github"></a>
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2015 
+		
+		<a href="http://codingforever.com" target="_blank" title="zhujiefirst">zhujiefirst</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"null"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+  </body>
+</html>

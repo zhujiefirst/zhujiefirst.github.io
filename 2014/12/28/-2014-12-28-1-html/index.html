@@ -1,0 +1,477 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>经典算法巡礼(六) -- 排序之快速排序 | Codingforever</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="zhujiefirst">
+    
+    <meta name="description" content="快速排序正如她的名字，她是一种排序效率相当高的算法，而且可能是应用最广泛的排序算法了。快速排序流行的原因是她实现简单，适用于各种不同的输入数据且在一般应用中比其他排序算法都要快。不仅如此，她与归并排序不同，她只需要很小的辅助空间就可以进行排序。
+快速排序也是分治思想的典型应用。她与归并排序是互补的：">
+    
+    
+    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="Jay1002008" />
+    <meta name="twitter:title" content="经典算法巡礼(六) -- 排序之快速排序 | Codingforever" />
+      
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Codingforever">Codingforever</a></h1>
+				<h2 class="blog-motto">SHUT UP ur fucking mouth! Reading MORE, thinking MORE, coding MORE.</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/categories">分类</a></li>
+					
+						<li><a href="/tags">标签</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:codingforever.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/12/28/-2014-12-28-1-html/" title="经典算法巡礼(六) -- 排序之快速排序" itemprop="url">经典算法巡礼(六) -- 排序之快速排序</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://codingforever.com" title="zhujiefirst">zhujiefirst</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2014-12-27T16:00:00.000Z" itemprop="datePublished">12月 28 2014</time>
+    更新日期:<time datetime="2014-12-28T11:34:39.000Z" itemprop="dateModified">12月 28 2014</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+		</div>
+		
+		<p><a href="http://zh.wikipedia.org/wiki/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F" target="_blank" rel="external">快速排序</a>正如她的名字，她是一种排序效率相当高的算法，而且<strong>可能是应用最广泛</strong>的排序算法了。快速排序流行的原因是她<strong>实现简单，适用于各种不同的输入数据且在一般应用中比其他排序算法都要快</strong>。不仅如此，她与<a href="http://codingforever.cn/2014/12-28-0.html" target="_blank" rel="external">归并排序</a>不同，她<strong>只需要很小的辅助空间就可以进行排序</strong>。</p>
+<p>快速排序也是<a href="http://en.wikipedia.org/wiki/Divide_and_conquer_algorithms" target="_blank" rel="external"><strong>分治思想</strong></a>的典型应用。她与<a href="http://codingforever.cn/2014/12-28-0.html" target="_blank" rel="external">归并排序</a>是互补的：归并排序将数组分成两个子数组分别排序，并将有序的子数组归并以将整个数组排序；而快速排序而是当两个子数组都有序时，整个数组也就自己有序了。前者的递归调用发生在处理整个数组之前，而后者的递归调用发生在处理整个之后。</p>
+<p>快速排序最主要的操作就是patition，即<strong>切分操作</strong>。选择数组中一元素，以该元素做为基准切分元素，姑且将其称为P，切分后使P之前的所有元素都小于P(排序成递增序列)，P之后的所有元素都大于P。然后对P切分成的两个子数组分别再一次进行切分操作。重复此过程直到不能切分为止，即整个数组排序完成。</p>
+<p>那么如何选择这个切分基准元素P呢？通常是随机取数组中任意值，所以快速排序的效率是和概率相关的，但实际使用过程中排序效率还是非常可观的。具体<a href="https://golang.org/" target="_blank" rel="external">golang</a>实现如下： </p>
+<pre><code><span class="comment">// partition方法即为快速排序中重要的切分操作，以首元素做为基准，将剩余元素从两端寻找，分别找到大于（小于）基准的元素并交换，重复此过程直到剩余元素全部遍历为止</span>
+func (<span class="keyword">this</span> *QuickSort) partition(a []Comparable, compare Compare, lo <span class="keyword">int</span>, hi <span class="keyword">int</span>) <span class="keyword">int</span> {
+    i := lo + <span class="number">1</span>
+    j := hi
+    v := a[lo]
+    <span class="keyword">for</span> <span class="keyword">true</span> {
+        <span class="keyword">for</span> <span class="keyword">this</span>.less(a[i], v, compare) == <span class="keyword">true</span> {
+            <span class="keyword">if</span> i == hi {
+                <span class="keyword">break</span>
+            }
+            i++
+        }
+        <span class="keyword">for</span> <span class="keyword">this</span>.less(a[j], v, compare) == <span class="keyword">false</span> {
+            <span class="keyword">if</span> j == lo {
+                <span class="keyword">break</span>
+            }
+            j--
+        }
+        <span class="keyword">if</span> i &gt;= j {
+            <span class="keyword">break</span>
+        }
+        <span class="keyword">this</span>.exch(a, i, j)
+        i++
+        j--
+    }
+    <span class="keyword">this</span>.exch(a, lo, j)
+
+    <span class="keyword">return</span> j
+}
+
+<span class="comment">// Sort中参数类型Comparable为统一的可比较接口，若为整数数组排序，则Comparable为int即可</span>
+<span class="comment">// Sort中参数类型Compare为配合Comparable接口的比较方法，若为整数数组排序，则Compare即满足a int &lt; a int即可</span>
+func (<span class="keyword">this</span> *QuickSort) <span class="keyword">Sort</span>(a []Comparable, compare Compare, lo <span class="keyword">int</span>, hi <span class="keyword">int</span>) {
+    <span class="keyword">if</span> hi &lt;= lo {
+        <span class="keyword">return</span>
+    }
+
+    p := <span class="keyword">this</span>.partition(a, compare, lo, hi)
+    <span class="keyword">this</span>.<span class="keyword">Sort</span>(a, compare, lo, p-<span class="number">1</span>)
+    <span class="keyword">this</span>.<span class="keyword">Sort</span>(a, compare, p+<span class="number">1</span>, hi)
+}
+</code></pre><p>上述实现过程在切分操作时，只是简单取数组第一个元素做为切分基准元素。如此做法，<strong>排序效率则与输入序列相关了，因此可以在排序之前shuffee数组，如此一来就与概率相关了</strong>。</p>
+<p>分析快速排序的过程，可以得到每次patition时，需要N-1次比较操作（数组元素为N的情况下），同时又可得到此patition过程需要进行logN次。因此，整个快速排序需要<strong>(N-1)logN ~ NlogN</strong>次比较操作，也就是说其<strong>时间复杂度为O(NlogN)</strong>。因此，她也是<strong>可以应用于大规模数组的排序，而且也不需要<a href="http://codingforever.cn/2014/12-28-0.html" target="_blank" rel="external">归并排序</a>大量的额外空间，同时也没有<a href="http://codingforever.cn/2014/12-27-3.html" target="_blank" rel="external">希尔排序</a>的不确定性</strong>。</p>
+<p>当然，其实快速排序有一种方便的改进，即可在对有大量相同元素的数组排序时，效率大大提高。她是由<a href="http://en.wikipedia.org/wiki/Edsger_W._Dijkstra" target="_blank" rel="external">Dijkstra</a>提出的“<strong>三向切分的快速排序</strong>“。具体实现如下：</p>
+<pre><code><span class="comment">// Sort方法采用”三向切分的快速排序“法进行排序</span>
+func (<span class="keyword">this</span> *QuickSort) <span class="keyword">Sort</span>(a []Comparable, compare Compare, lo <span class="keyword">int</span>, hi <span class="keyword">int</span>) {
+    <span class="keyword">if</span> hi &lt;= lo {
+        <span class="keyword">return</span>
+    }
+
+    lt := lo
+    i := lo + <span class="number">1</span>
+    gt := hi
+
+    v := a[lo]
+    <span class="keyword">for</span> i &lt;= gt {
+        cmp := compare(v, a[i])
+        <span class="keyword">if</span> cmp &lt; <span class="number">0</span> {
+            <span class="keyword">this</span>.exch(a, i, gt)
+            gt--
+        } <span class="keyword">else</span> <span class="keyword">if</span> cmp &gt; <span class="number">0</span> {
+            <span class="keyword">this</span>.exch(a, i, lt)
+            i++
+            lt++
+        } <span class="keyword">else</span> {
+            i++
+        }
+    }
+    <span class="keyword">this</span>.<span class="keyword">Sort</span>(a, compare, lo, lt-<span class="number">1</span>)
+    <span class="keyword">this</span>.<span class="keyword">Sort</span>(a, compare, gt+<span class="number">1</span>, hi)
+}
+</code></pre><p>“三向切分的快速排序”中的切分方法过程如下：  </p>
+<p>她遍历数组一次，维护一个指针lt使得a[lo..lt-1]中的元素都小于v(即切分基准元素)，一个指针gt使得a[gt+1..hi]中的元素都大于v，一个指针i使得a[lt..i-1]全部等于v，而a[i..gt]中的元素都还未确定。正如上述代码中所示，等遍历完数组后，数组就分为三部分，a[lo..lt-1]为小于v的部分，a[gt+1..hi]为大于v的部分，而a[lt..gt]则为等于v的部分。然后，对不等于v的部分数组再次切分递归，直到不能切分为止。  </p>
+<p>而<strong>如果数组中有大量相同元素时，采用”三向切分“方法就不会对相同部分再次进行重复比较，大大提高排序性能。而当没有重复元素时，”三向切分“方法又等同时原始快速排序</strong>。因此，”三向切分的快速排序“通常被用于实际场合中进行快速排序。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/排序/">排序</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/算法/">算法</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://codingforever.com/2014/12/28/-2014-12-28-1-html/" data-title="经典算法巡礼(六) -- 排序之快速排序 | Codingforever" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/12/28/-2014-12-28-2-html/" title="经典算法巡礼(七) -- 排序之堆排序">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  经典算法巡礼(七) -- 排序之堆排序</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2014/12/28/-2014-12-28-0-html/"  title="经典算法巡礼(五) -- 排序之归并排序">
+ <strong>NEXT:</strong><br/> 
+ <span>经典算法巡礼(五) -- 排序之归并排序
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">归档</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/03/">March 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">September 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">May 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">August 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">July 2010</a><span class="archive-list-count">1</span></li></ul>
+  </div>
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+			<li><a href="/categories/c-c/" title="c/c++">c/c++<sup>5</sup></a></li>
+		
+			<li><a href="/categories/golang/" title="golang">golang<sup>2</sup></a></li>
+		
+			<li><a href="/categories/lisp/" title="lisp">lisp<sup>1</sup></a></li>
+		
+			<li><a href="/categories/lua/" title="lua">lua<sup>1</sup></a></li>
+		
+			<li><a href="/categories/服务器编程/" title="服务器编程">服务器编程<sup>3</sup></a></li>
+		
+			<li><a href="/categories/杂感/" title="杂感">杂感<sup>5</sup></a></li>
+		
+			<li><a href="/categories/游戏开发/" title="游戏开发">游戏开发<sup>4</sup></a></li>
+		
+			<li><a href="/categories/算法/" title="算法">算法<sup>15</sup></a></li>
+		
+			<li><a href="/categories/编程思维/" title="编程思维">编程思维<sup>3</sup></a></li>
+		
+			<li><a href="/categories/设计模式/" title="设计模式">设计模式<sup>2</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/openGL/" title="openGL">openGL<sup>4</sup></a></li>
+		
+			<li><a href="/tags/pprof/" title="pprof">pprof<sup>1</sup></a></li>
+		
+			<li><a href="/tags/union-find/" title="union-find">union-find<sup>4</sup></a></li>
+		
+			<li><a href="/tags/代码质量/" title="代码质量">代码质量<sup>3</sup></a></li>
+		
+			<li><a href="/tags/元编程/" title="元编程">元编程<sup>1</sup></a></li>
+		
+			<li><a href="/tags/内存管理/" title="内存管理">内存管理<sup>1</sup></a></li>
+		
+			<li><a href="/tags/基础/" title="基础">基础<sup>1</sup></a></li>
+		
+			<li><a href="/tags/小技巧/" title="小技巧">小技巧<sup>1</sup></a></li>
+		
+			<li><a href="/tags/性能/" title="性能">性能<sup>4</sup></a></li>
+		
+			<li><a href="/tags/排序/" title="排序">排序<sup>8</sup></a></li>
+		
+			<li><a href="/tags/网络I-O/" title="网络I/O">网络I/O<sup>1</sup></a></li>
+		
+			<li><a href="/tags/设计/" title="设计">设计<sup>7</sup></a></li>
+		
+			<li><a href="/tags/面向对象/" title="面向对象">面向对象<sup>2</sup></a></li>
+		
+			<li><a href="/tags/面试题/" title="面试题">面试题<sup>4</sup></a></li>
+		
+			<li><a href="/tags/高阶函数/" title="高阶函数">高阶函数<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello world! I&#39;m zhujiefirst in Tencent. <br/>
+			从小我就有个梦想，就是当一名合格的程序员。我不是码畜，我为自己带盐！</p>
+	</section>
+	 
+	<div class="social-font clearfix">
+		
+		<a href="http://weibo.com/2421642590" target="_blank" title="weibo"></a>
+		
+		
+		<a href="https://twitter.com/Jay1002008" target="_blank" title="twitter"></a>
+		
+		
+		<a href="https://github.com/zhujiefirst" target="_blank" title="github"></a>
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2015 
+		
+		<a href="http://codingforever.com" target="_blank" title="zhujiefirst">zhujiefirst</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"null"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+  </body>
+</html>

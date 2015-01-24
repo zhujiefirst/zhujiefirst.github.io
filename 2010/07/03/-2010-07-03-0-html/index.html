@@ -1,0 +1,495 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>优化程序性能 | Codingforever</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="zhujiefirst">
+    
+    <meta name="description" content="编写高效程序需要两个活动：第一，我们必须选择一组最好的算法和数据结构；第二，我们必须编写出编译器能够有效优化以转换成高效可执行代码的源 代码。这里，我们主要讲述后者。
+首先，我们討論一下为什么要编写高效程序。不难想象，如果本来要用１０天运行完的程序，经过优化只需要１天就可运行完，这是一件多么令人振奋">
+    
+    
+    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="Jay1002008" />
+    <meta name="twitter:title" content="优化程序性能 | Codingforever" />
+      
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Codingforever">Codingforever</a></h1>
+				<h2 class="blog-motto">SHUT UP ur fucking mouth! Reading MORE, thinking MORE, coding MORE.</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/categories">分类</a></li>
+					
+						<li><a href="/tags">标签</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:codingforever.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2010/07/03/-2010-07-03-0-html/" title="优化程序性能" itemprop="url">优化程序性能</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://codingforever.com" title="zhujiefirst">zhujiefirst</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2010-07-02T16:00:00.000Z" itemprop="datePublished">7月 3 2010</time>
+    更新日期:<time datetime="2015-01-24T07:49:23.000Z" itemprop="dateModified">1月 24 2015</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+		</div>
+		
+		<p>编写高效程序需要两个活动：第一，我们必须选择一组最好的算法和数据结构；第二，我们必须编写出编译器能够有效优化以转换成高效可执行代码的源 代码。这里，我们主要讲述后者。</p>
+<p>首先，我们討論一下为什么要编写高效程序。不难想象，如果本来要用１０天运行完的程序，经过优化只需要１天就可运行完，这是一件多么令人振奋的 事啊。时间就是金钱呐。那么，什么时候才有必要优化。什么？优化不是无论什么时候都有必要的吗？太不可思议了！当然，作为一个程序员，我们必做在实现与维 护程序的简单性与它的运行速度之间做出权衡折衷。对于一个只会运行一次以产生一组数据点的程序，以一种尽量减少编程工作量并保证正确性来编写程序就更为重 要了。考虑一下，比如一个只用一次的算法，编写时间加上运行时间不超过一天，然而我们花上三天来优化这个算法让它只要一个小时就能出結果。乍一看多好的优 化啊，三天变成一小时！等等，让我们来算一算。不优化编写加运行时候只要一天，而优化后呢？三天加一小时！当然，如果这个算法反复执行的话，我们对它的优 化就值得肯定了。</p>
+<p>好了，说了这么多，切入正题，怎样才能在优码级别上进行优化呢？做那些编译器不能帮你做的优化。这里，我们先讲个例子。考虑一个简单向量数据结构。向量由两个存储器块表示。头部是一个声明如下的结构：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span>{</div><div class="line">    <span class="keyword">int</span> len;</div><div class="line">    data_t* data;</div><div class="line">}vec_rec, *vec_ptr;</div></pre></td></tr></table></figure>
+
+<p>这个声明用数据类型data_t作为基本元素的数据类型。可以用int,float,double类型来评价我们代码的性能，这里我们使用float。代码如下：</p>
+<pre><code><span class="keyword">typedef</span> <span class="built_in">float</span> data_t;
+</code></pre><p>除了头以外，我们还分配一个len长度的data_t类型对象的数组，以存放实际的向量元素。代码如下：</p>
+<pre><code>vec_ptr new_vec(<span class="type">int</span> len)
+{
+    vec_ptr <span class="literal">result</span> = (vec_ptr)malloc(sizeof(vec_rec));
+    <span class="keyword">if</span>(!<span class="literal">result</span>)
+        <span class="keyword">return</span> <span class="type">NULL</span>;
+    <span class="literal">result</span>-&gt;len = len;
+    <span class="keyword">if</span>(len &gt; <span class="number">0</span>){
+        data_t* data = (data_t*)calloc(len, sizeof(data_t));
+        <span class="keyword">if</span>(!data){
+            free((<span class="type">void</span>*)<span class="literal">result</span>);
+            <span class="keyword">return</span> <span class="type">NULL</span>;
+        }
+        <span class="literal">result</span>-&gt;data = data;
+    }
+    <span class="keyword">else</span>
+        <span class="literal">result</span>-&gt;data = <span class="type">NULL</span>;
+    <span class="keyword">return</span> <span class="literal">result</span>;
+}
+</code></pre><p>当然，还有另外的操作，如取data_t类型对象数组中的元素，得数组的长度等。</p>
+<pre><code><span class="keyword">int</span> get_vec_elment(vec_ptr v, <span class="keyword">int</span> <span class="keyword">index</span>, data_t* dest)
+{
+    <span class="keyword">if</span>(<span class="keyword">index</span> &lt; <span class="number">0</span> || <span class="keyword">index</span> &gt; <span class="number">0</span>)
+        <span class="keyword">return</span> <span class="number">0</span>;
+    *dest = v-&gt;data[<span class="keyword">index</span>];
+    <span class="keyword">return</span> <span class="number">1</span>;
+}
+
+<span class="keyword">int</span> vec_length(vec_ptr v)
+{
+    <span class="keyword">return</span> v-&gt;len;
+}
+</code></pre><p>作为一个优化示例，必须有操作。这里我们将操作定义为把data_t类型对象数组中的元素根据某种运算合并成一个值。通过使用编译时常数IDENT和OPER定义：</p>
+<pre><code><span class="preprocessor">#<span class="keyword">define</span> INENT 1</span>
+<span class="preprocessor">#<span class="keyword">define</span> OPER *</span>
+</code></pre><p>最后，我们进行操作，函数如下：</p>
+<pre><code><span class="keyword">void</span> combine1(vec_ptr v, data_t* dest)
+{
+    int i;
+
+    *dest = INENT;
+    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; vec_length(v); i++){
+        data_t <span class="keyword">val</span>;
+        get_vec_elment(v, i, &amp;<span class="keyword">val</span>);
+        *dest = *dest OPER <span class="keyword">val</span>;
+    }
+}
+</code></pre><p>这里就是将所有的元素通过乘法合并成一个元素。假设元素数组有１０亿个。默认地，编译器产生的代码没有经过任何的优化，所以，我们这个程序的运 行时间是相当的长。还是先说明下我的实验环境吧。我是在eclipse+Mingw下运行的，CPU为T5670　1.8GHz。那么这样的代码花了我多长时间呢？答案是12.680秒!天呐，那不是很慢嘛！这个嘛，要得益于我们高速发展的硬件设备了。但是，现在只是１０亿个，要是更多呢？操作只是简单的相乘，要是更复杂呢？不敢想象。。。</p>
+<p>至此，我们先来讨论第一个优化：消除循环的低效率 。观察combine1函数，我们发现，在for(i = 0; i &lt; vec_length(v); i++)中，我们调用函数vec_length()作为测试条件。想象一下上C语言课程时候对循环的讨论，每次循环迭代时都必须对测试条件进行求值。哇， 那我们运行１０亿次乘法不是要调用１０亿次vec_length()函数，但是，vec_length()的返回值在这１０亿次中根本不会变化!没错，我 们对一个不会变的结果运行计算了１０亿次！事实上１０亿减１次是根本不需要的！你想到了什么？没错，我们可以优化。正如在前面所说，我们要消除循环的低效率。</p>
+<p>我们编写combie2版本，它在开始时调用vec_length()函数，并将结果赋值给局部变量length,然后在for循环中使用这个变量。果不其然，我们提高了程序的性能，运行完只花了10.012秒。这里列出combine2的代码：</p>
+<pre><code>void combine2(vec_ptr v, data_t* dest)
+{
+    <span class="built_in">int</span> i;
+    <span class="built_in">int</span> len = vec_length(v);
+
+    *dest = INENT;
+    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; len; i++){
+        data_t <span class="keyword">val</span>;
+        get_vec_elment(v, i, &amp;<span class="keyword">val</span>);
+        *dest = *dest OPER <span class="keyword">val</span>;
+    }
+}
+</code></pre><p>这个优化是一类常见的、称为代码移动的优化实例。这类优化包括识别出在循环里执行多次，但结果不会变化的计算，因而我们可以将计算移动到循环体外，这样这个计算就不会被执行多次。</p>
+<p>下面，我们对第二个优化进行讨论：减少过程调用 。过程调用可能会带来相当大的开销。如combine2中的get_vec_elment()函数。每次迭代循环，我们都要调用 get_vec_elment()函数以获得下一个元素。仔细观察代码，我们发现完全可以避免这个过程调用，因而也不需要进行边界检查，对程序来说是一个 良好的优化。我们可以进行如下 的改变：</p>
+<pre><code><span class="title">data_t</span>* get_vec_start(vec_ptr v)
+{
+    return v-&gt;<span class="typedef"><span class="keyword">data</span>;</span>
+}
+
+<span class="title">void</span> combine3(vec_ptr v, data_t* dest)
+{
+    int i;
+    int len = vec_length(v);
+    data_t* <span class="typedef"><span class="keyword">data</span> = get_vec_start<span class="container">(<span class="title">v</span>)</span>;</span>
+
+    *dest = <span class="type">INENT</span>;
+    for(i = <span class="number">0</span>; i &lt; len; i++){
+        *dest = *dest <span class="type">OPER</span> <span class="typedef"><span class="keyword">data</span>[i];</span>
+    }
+}
+</code></pre><p>相比之前，我们在进行循环体之前先取得元素数组的起始位置，然后我们每次循环时用数组得到元素，而省去了对get+vec_elment的过程调用，减少了一些运行时间。改善后的时间是6.36秒。</p>
+<p>下面，我们再次进入下一个优化阶段：消除不必要的存储器引用 。我们知道，操作系统中对数据的读取与存储，寄存器快于存储器。然而，我们发现combine3中，每次循环中， <em>dest = </em>dest OPER data[i]语句先是对<em>dest进行读取，然后进行计算，再存到</em>dest中，这些是在存储器上进行的。但是，我们这一次存的数据就是我们下一次循环 读的数据，这样在存储器上操作不是很费时间？没错，所以，我们要消除不必要的存储器引用，将这个数据存到寄存器中。我们引入一个临时变量：</p>
+<pre><code>void combine4(vec_ptr v, data_t* dest)
+{
+    int i;
+    int <span class="variable">len =</span> vec_length(v);
+    data_t* <span class="variable">data =</span> get_vec_start(v);
+    data_t <span class="variable">tmp =</span> INENT;
+
+    for(<span class="variable">i =</span> <span class="number">0</span>; i &lt; len; i++){
+        <span class="variable">tmp =</span> tmp OPER data[i];
+    }
+    *<span class="variable">dest =</span> tmp;
+}
+</code></pre><p>经过如此改变之后，我们程序的性能又有所提高，只需要6.227秒。</p>
+<p>最后，我们再一次来回顾一下我们如何提高程序的性能。一、消除循环的低效率。二、减少过程调用。三、消除不必要的存储器引用。这里，有人会问，编译器不是 自己有优化的嘛。没错，现代的各种编译器都有能力不等的优化。但是，作为一个合格的程序员，把程序优化的工作交给编译器固然有益处，可编译器也不是万能的 啊。一部分的优化能是做不到的，而且，作为优化，最重要的是不能改变程序原来的执行结果。编译器当碰到能决定是否会改变你的程序结果的时候，他往往选择不 优化以保证结果的正确性，这个时候就需要我们手动来进行程序的优化了。所以，掌握这个技能还是很有必要的。</p>
+<p>另外，这是我第一次写Blog，当然文笔很生疏啦，请读者见谅！不管怎么样，这是我学习过程的一个总结，请批评指正。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/设计/">设计</a><a href="/tags/代码质量/">代码质量</a><a href="/tags/性能/">性能</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/c-c/">c/c++</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://codingforever.com/2010/07/03/-2010-07-03-0-html/" data-title="优化程序性能 | Codingforever" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2010/08/02/-2010-08-02-0-html/" title="《高效能人士的七个习惯》读后">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  《高效能人士的七个习惯》读后</span>
+</a>
+</div>
+
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">归档</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/03/">March 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">September 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">May 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">August 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">July 2010</a><span class="archive-list-count">1</span></li></ul>
+  </div>
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+			<li><a href="/categories/c-c/" title="c/c++">c/c++<sup>5</sup></a></li>
+		
+			<li><a href="/categories/golang/" title="golang">golang<sup>2</sup></a></li>
+		
+			<li><a href="/categories/lisp/" title="lisp">lisp<sup>1</sup></a></li>
+		
+			<li><a href="/categories/lua/" title="lua">lua<sup>1</sup></a></li>
+		
+			<li><a href="/categories/服务器编程/" title="服务器编程">服务器编程<sup>3</sup></a></li>
+		
+			<li><a href="/categories/杂感/" title="杂感">杂感<sup>5</sup></a></li>
+		
+			<li><a href="/categories/游戏开发/" title="游戏开发">游戏开发<sup>4</sup></a></li>
+		
+			<li><a href="/categories/算法/" title="算法">算法<sup>15</sup></a></li>
+		
+			<li><a href="/categories/编程思维/" title="编程思维">编程思维<sup>3</sup></a></li>
+		
+			<li><a href="/categories/设计模式/" title="设计模式">设计模式<sup>2</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/openGL/" title="openGL">openGL<sup>4</sup></a></li>
+		
+			<li><a href="/tags/pprof/" title="pprof">pprof<sup>1</sup></a></li>
+		
+			<li><a href="/tags/union-find/" title="union-find">union-find<sup>4</sup></a></li>
+		
+			<li><a href="/tags/代码质量/" title="代码质量">代码质量<sup>3</sup></a></li>
+		
+			<li><a href="/tags/元编程/" title="元编程">元编程<sup>1</sup></a></li>
+		
+			<li><a href="/tags/内存管理/" title="内存管理">内存管理<sup>1</sup></a></li>
+		
+			<li><a href="/tags/基础/" title="基础">基础<sup>1</sup></a></li>
+		
+			<li><a href="/tags/小技巧/" title="小技巧">小技巧<sup>1</sup></a></li>
+		
+			<li><a href="/tags/性能/" title="性能">性能<sup>4</sup></a></li>
+		
+			<li><a href="/tags/排序/" title="排序">排序<sup>8</sup></a></li>
+		
+			<li><a href="/tags/网络I-O/" title="网络I/O">网络I/O<sup>1</sup></a></li>
+		
+			<li><a href="/tags/设计/" title="设计">设计<sup>7</sup></a></li>
+		
+			<li><a href="/tags/面向对象/" title="面向对象">面向对象<sup>2</sup></a></li>
+		
+			<li><a href="/tags/面试题/" title="面试题">面试题<sup>4</sup></a></li>
+		
+			<li><a href="/tags/高阶函数/" title="高阶函数">高阶函数<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello world! I&#39;m zhujiefirst in Tencent. <br/>
+			从小我就有个梦想，就是当一名合格的程序员。我不是码畜，我为自己带盐！</p>
+	</section>
+	 
+	<div class="social-font clearfix">
+		
+		<a href="http://weibo.com/2421642590" target="_blank" title="weibo"></a>
+		
+		
+		<a href="https://twitter.com/Jay1002008" target="_blank" title="twitter"></a>
+		
+		
+		<a href="https://github.com/zhujiefirst" target="_blank" title="github"></a>
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2015 
+		
+		<a href="http://codingforever.com" target="_blank" title="zhujiefirst">zhujiefirst</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"null"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+  </body>
+</html>

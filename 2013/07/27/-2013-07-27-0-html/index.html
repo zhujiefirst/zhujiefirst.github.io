@@ -1,0 +1,458 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>openGL学习（三）-- 视图 | Codingforever</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="zhujiefirst">
+    
+    <meta name="description" content="计算机图形的要点就是创建三维物体的二维图像（图像必须是二维的，因为它是在平面的屏幕上显示的）。我们要避免考虑屏幕上的像素是如何绘制的，而是要尽量在三维空间中想象物体的形状。
+本章主要介绍如何使用OpenGL完成如下任务：如何在三维空间中设置模型的位置和方向，以及如何确定观察者的位置（也是在三维空间中">
+    
+    
+    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="Jay1002008" />
+    <meta name="twitter:title" content="openGL学习（三）-- 视图 | Codingforever" />
+      
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Codingforever">Codingforever</a></h1>
+				<h2 class="blog-motto">SHUT UP ur fucking mouth! Reading MORE, thinking MORE, coding MORE.</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/categories">分类</a></li>
+					
+						<li><a href="/tags">标签</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:codingforever.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2013/07/27/-2013-07-27-0-html/" title="openGL学习（三）-- 视图" itemprop="url">openGL学习（三）-- 视图</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://codingforever.com" title="zhujiefirst">zhujiefirst</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2013-07-26T16:00:00.000Z" itemprop="datePublished">7月 27 2013</time>
+    更新日期:<time datetime="2014-12-20T14:10:46.000Z" itemprop="dateModified">12月 20 2014</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1_简介：用照相机打比方"><span class="toc-number">1.</span> <span class="toc-text">1 简介：用照相机打比方</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2_视图变换和模型变换"><span class="toc-number">2.</span> <span class="toc-text">2 视图变换和模型变换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3_投影变换"><span class="toc-number">3.</span> <span class="toc-text">3 投影变换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4_视口变换"><span class="toc-number">4.</span> <span class="toc-text">4 视口变换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4_操纵矩阵堆栈"><span class="toc-number">5.</span> <span class="toc-text">4 操纵矩阵堆栈</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5_其他裁剪平面_"><span class="toc-number">6.</span> <span class="toc-text">5 其他裁剪平面  </span></a></li></ol>
+		</div>
+		
+		<p>计算机图形的要点就是创建三维物体的二维图像（图像必须是二维的，因为它是在平面的屏幕上显示的）。我们要避免考虑屏幕上的像素是如何绘制的，而是要尽量在三维空间中想象物体的形状。</p>
+<p>本章主要介绍如何使用OpenGL完成如下任务：如何在三维空间中设置模型的位置和方向，以及如何确定观察者的位置（也是在三维空间中），最后能够准确地判断屏幕上所显示的图像。</p>
+<p>把一个物体的三维坐标变换为屏幕上的像素坐标，需要完成如下步骤：</p>
+<ol>
+<li>变换包括模型、视图和投影操作，它们是由矩阵乘法表示的。这些操作包括旋转、移动、缩放、反射、正投影和透视投影等。一般情况下，在绘制场景时需要组合使用几种变换。</li>
+<li>由于场景是在一个矩形窗口中渲染的，因此位于窗口之外的物体（或者物体的一部分）必须裁剪掉。在三维计算机图像中，裁剪就是丢弃位于裁剪平面之外的物体。</li>
+<li>最后，经过了变换的坐标和屏幕像素之间必须建立对应关系。这个过程称为视口(viewport)变换。</li>
+</ol>
+<h2 id="1_简介：用照相机打比方"><strong>1 简介：用照相机打比方</strong></h2>
+<p>产生目标场景视图的变换过程类似于用照相机进行拍照。</p>
+<ol>
+<li>把照相机固定在三角架上，并让它对准场景（视图变换）。</li>
+<li>对场景进行安排，使各个物体在照片中的位置是我们所希望的（模型变换）。</li>
+<li>选择照相机镜头（广角镜头，标准镜头还是长焦镜头），并调整放大倍数（投影变换）。</li>
+<li>确定最终照片的大小。例如，我们很可能需要把它放大（视口变换）。</li>
+</ol>
+<p>以下具体介绍各方面：<br>首先是<strong>视图变换</strong>。通常在指定视图变换之前，需要使用glLoadIdentity( )函数把当前矩阵(current matrix)设置为单位矩阵。这个步骤是非常有必要的，因为绝大多数变换是把当前矩阵与指定的矩阵相乘，然后把结果指定为当前矩阵。如果没有通过加载单位矩阵来清除当前矩阵，它所进行的变换实际上是把当前的变换与上一次变换进行了组合。虽然有些情况下，确实需要这样的操作，但是更多情况下，还是需要清除当前矩阵。  </p>
+<p>使用gluLookAt( )函数指定了视图变换。如gluLookAt(0.0, 0.0, 5.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0)，若用照相机作比喻，则把照相机放在(0, 0, 5)的位置，把镜头瞄准(0, 0, 0)，并把朝上向量指定为(0, 1, 0)。如果没有调用gluLookAt( )函数，则照相机就被设置为默认的位置和方向。在默认情况下，照相机位于原点，指向Z轴的负方向，朝上向量为(0, 1, 0)。</p>
+<p>其次是<strong>模型变换</strong>。使用模型变换的目的是设置模型的位置和方向。例如，可以对模型进行旋转、移动和缩放，或者联合应用这些种操作。如模型变换函数glScalef(1.0, 3.0, 1.0)就是将模型y轴尺寸放大3倍。</p>
+<p>第三是<strong>投影变换</strong>。这种变换的目的是确定视野（或视景体），并因此确定哪些物体位于视野之内以及它们能够看到的程度。另外，投影变换还决定了物体是如何投影到屏幕上的。OpenGL提供了两种基本类型的投影，即透视投影（perspective projection）和正投影（orthographic projection）。透视投影类似于我们日常生活看到的景象。如果想创建现实感比较强的图像，就需要选择透视投影。而正投影直接映射到屏幕上，而不影响它们的相对大小，一般用于建筑和CAD应用程序中。</p>
+<p>与视图 / 模型变换一样，在设置投影变换之前，需要首先调用glMatrixMode(GL_PROJECTION)把当前矩阵指定为用于投影变换，再使用glLoadIdentity( )对当前的投影矩阵进行初始化。</p>
+<p>最后是<strong>视口变换</strong>。视口指定了场景在屏幕上所占据的区域，因此可以把视口变换看成是定义了最终经过处理的照片的大小和位置，如照片是否应该放大或者缩小。用glViewPort( )函数进行视口变换。</p>
+<p>视图变换、模型变换、投影变换和视口变换这四种变换一般将视图变换和模型变换分为一组，然后就剩下的再分为一组。视图变换和模型变换两种变换割裂开来是没有意义的。因为可以移动照相机（使用视图变换）来对准物体，也可以移动这个物体（模型变换）达到相同效果。而投影变换和视口变换则共同决定了场景是如何映射到计算机屏幕的。投影变换指定了映射的发生机制，而视口变换则决定了场景所映射的有效屏幕区域的形状。</p>
+<h2 id="2_视图变换和模型变换"><strong>2 视图变换和模型变换</strong></h2>
+<p>注意，在执行模型或视图变换之前，必须以GL_MODELVIEW为参数调用glMatrixMode( )函数。</p>
+<p>视图变换和模型变换都是用一个4<em>4的矩阵表示的。每个后续的glMultMatrix</em>( )函数或变换函数把一个新的4*4的M与当前的模型视图C相乘，产生结果矩阵CM。最后，每个与当前的模型视图矩阵相乘。这个过程意味着程序所调用的最后一个变换函数实际上是首先应用于顶点的：CMv.</p>
+<p>如下面的代码序列，它使用3个变换绘制了1个点：</p>
+<pre><code><span class="function">glMatrixMode</span>(GL_MODEVIEW);
+<span class="function">glLoadIdentity</span>( );
+<span class="function">glMultMatrixf</span>(N); <span class="comment">/* apply transformation N */</span>
+<span class="function">glMultMatrixf</span>(M); <span class="comment">/* apply transformation M */</span>
+<span class="function">glMultMatrixf</span>(L); <span class="comment">/* apply transformation L */</span>
+<span class="function">glBegin</span>(GL_POINTS);
+<span class="function">glVertedx3f</span>(v); <span class="comment">/* draw transformed vertex v */</span>
+<span class="function">glEnd</span>( );
+</code></pre><p>在上述代码中，模型视图矩阵按顺序分别包含了I、N、NM，最后是NML，其中I表示单位矩阵。经过变换的顶点是NMLv。因此，顶点变换就是N(M(Lv))。所以，顶点v的变换是按照代码中相反的顺序发生的。</p>
+<p>在OpenGL中 ，有三个函数用于执行模型变换，分别为glTranslate<em>( )，glRotate</em>( )和glScale<em>( )。这三个函数都 相当于产生一个适当的移动、旋转或缩放矩阵，然后以这个矩阵作为参数调用glMultMatrix</em>( )。但是，使用这3个函数可能比使用glMultMatrix*( )速度更快，因为OpenGL会自动计算矩阵，一般来说比自己写的性能更高。</p>
+<p>而视图变换一般也是由移动和旋转组成的，即glTranslate<em>( )和glRotate</em>( )。为了在最终图像或照片上实现某种场景组合，可以移动照相机，也可以从相反的方向移动所有的物体。因此，一个按照逆时针方向旋转物体的模型变换相当于一个按顺时针方向旋转照相机的视图变换。<strong>最后，要记住视图变换函数必须在调用任何模型变换函数之前调用，以确何首先作用于物体的是模型变换</strong>。当然，除了直接使用移动和旋转函数之外，也可以使用工具函数gluLookAt( )实现视图变换，事实上一般也采用工具函数进行视图变换。</p>
+<h2 id="3_投影变换"><strong>3 投影变换</strong></h2>
+<p>所谓投影变换就是定义投影矩阵用于对场景中的顶点进行变换。在调用手投影变换函数之前，必须首先进行以下操作：</p>
+<pre><code><span class="function">glMatrixMode</span>(GL_PROJECTION);
+<span class="function">glLoadIdentity</span>( );
+</code></pre><p>这样，接下来的变换函数将影响的是投影矩阵。由于每个投影变换函数都完整地描述了一个特定的变换，因此一般并不需要把投影变换与其他变换进行组合。</p>
+<p>投影变换的目的是定义一个视景体。视景体有两种用途。<strong>首先，视景体决定了一个物体是如何映射到屏幕上的（即通过透视投影还是正投影）。其次，视影体定义了哪些物体（或物体的一部分）被裁剪到最终的图像之外</strong>。</p>
+<p>投影变换分为两种，透视投影和正投影。</p>
+<p>透视投影方法常用于动画、视觉模拟以及其他要求某种程度的现实感的应用领域，因为它和我们在日常生活中观察事物的方式相同。该投影方法可以用glFrustum( )函数或者gluPerspective( )进行。</p>
+<p>正投影方法常用于建筑蓝图的计算机辅助设计（CAD）的应用程序。如果没有其他变换，投影的方向就与z轴平行，观察点的方向直接朝向z轴的负方向。该投影方法可以用glOrtho( )函数或者gluOrtho2D( )函数进行。</p>
+<h2 id="4_视口变换"><strong>4 视口变换</strong></h2>
+<p>视口变换对应于选择被冲洗相片的大小这个阶段。我们希望照片像钱包一样大还是像海报一样大？在计算机图形中，视口是一个矩形的窗口区域，图像就是在这个区域中绘制的。</p>
+<p>在屏幕上打开窗口的是由窗口系统而不是OpenGL负责的。但是，在默认情况下，视口被设置为占据打开窗口的整个像素矩形。可以使用glViewPort( )函数选择一个更小的绘图区域。例如可以对窗口进行划分，在同一个窗口中显示分割屏幕的效果，以显示多个视图。</p>
+<p>使用glViewport( )函数进行视口变换，在默认情况下，礼品的初始值是(0, 0, winWidth, winHeight)，其中winWidth和winHeight分别为窗口的宽和高。</p>
+<p><strong>视口的纵横比一般和视景体的纵横比相同。如果这两个纵横比不同，当图像投影到视口时就会变形</strong>。</p>
+<p>视口变换期间同时在做另一件事，那就是进行尝试坐标的编码（以后存储在尝试缓冲区中）。可以使用glDepthRange( )函数对z值进行缩放。<strong>注意的是，与x和y窗口坐标不同，在OpenGL中，z坐标总是被认为位于0.0到1.0范围之间</strong>。</p>
+<h2 id="4_操纵矩阵堆栈"><strong>4 操纵矩阵堆栈</strong></h2>
+<p>当我们对模型视图矩阵和投影矩阵进行创建、加载和乘法操作时，每一个操作针对的矩阵实际上是各自矩阵堆栈最顶部的那个元素，即栈顶的矩阵。换种说法就是，当前矩阵就是位于堆栈顶部的矩阵。</p>
+<p>可以采用glPushMatrix( )和glPopMatrix( )函数进行矩阵堆栈操作（包换模型视图矩阵和投影矩阵）。事实上，<strong>glPushMatrix( )</strong>表示“记住自己的位置”，即把当前堆栈中所有矩阵都下压一级。这个函数复制当前的顶部矩阵，并把它压到堆栈中。因此，刚调用完glPushMatrix( )函数时，堆栈最顶部的两个矩阵内容相同。而<strong>glPopMatrix( )</strong>表示“回到原来的位置”，即把堆栈顶部的矩阵弹出堆栈，销毁被弹出矩阵的内容。堆栈原先的第二个矩阵成为顶部矩阵。</p>
+<p>使用矩阵堆栈的效率要高于使用单独的堆栈，尤其是堆栈是用硬件实现时。压入一个矩阵时，并不需要把当前矩阵复制到主进程，并且硬件有可能一次能够复制多个矩阵元素。有时候，我们可能想在矩阵底部保存一个单位矩阵，以避免征象调用glLoadIdentity( )。</p>
+<h2 id="5_其他裁剪平面_"><strong>5 其他裁剪平面</strong>  </h2>
+<p>除了视景体的6个裁剪平面（左、右、底、顶、近和远），还可以另外再指定最多可达6个的其他裁剪平面，对视景体进一步限制。这些裁剪平面可以用于删除场景中的无关物体，如我们可能只想显示一个物体的剖面视图。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/openGL/">openGL</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/游戏开发/">游戏开发</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://codingforever.com/2013/07/27/-2013-07-27-0-html/" data-title="openGL学习（三）-- 视图 | Codingforever" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2013/07/28/-2013-07-28-0-html/" title="openGL学习（四） -- 颜色">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  openGL学习（四） -- 颜色</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2013/07/17/-2013-07-17-0-html/"  title="openGL学习（二）-- 状态管理和绘制几何物体">
+ <strong>NEXT:</strong><br/> 
+ <span>openGL学习（二）-- 状态管理和绘制几何物体
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1_简介：用照相机打比方"><span class="toc-number">1.</span> <span class="toc-text">1 简介：用照相机打比方</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2_视图变换和模型变换"><span class="toc-number">2.</span> <span class="toc-text">2 视图变换和模型变换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3_投影变换"><span class="toc-number">3.</span> <span class="toc-text">3 投影变换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4_视口变换"><span class="toc-number">4.</span> <span class="toc-text">4 视口变换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4_操纵矩阵堆栈"><span class="toc-number">5.</span> <span class="toc-text">4 操纵矩阵堆栈</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5_其他裁剪平面_"><span class="toc-number">6.</span> <span class="toc-text">5 其他裁剪平面  </span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">归档</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/03/">March 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">September 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">May 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">August 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">July 2010</a><span class="archive-list-count">1</span></li></ul>
+  </div>
+
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+			<li><a href="/categories/c-c/" title="c/c++">c/c++<sup>5</sup></a></li>
+		
+			<li><a href="/categories/golang/" title="golang">golang<sup>2</sup></a></li>
+		
+			<li><a href="/categories/lisp/" title="lisp">lisp<sup>1</sup></a></li>
+		
+			<li><a href="/categories/lua/" title="lua">lua<sup>1</sup></a></li>
+		
+			<li><a href="/categories/服务器编程/" title="服务器编程">服务器编程<sup>3</sup></a></li>
+		
+			<li><a href="/categories/杂感/" title="杂感">杂感<sup>5</sup></a></li>
+		
+			<li><a href="/categories/游戏开发/" title="游戏开发">游戏开发<sup>4</sup></a></li>
+		
+			<li><a href="/categories/算法/" title="算法">算法<sup>15</sup></a></li>
+		
+			<li><a href="/categories/编程思维/" title="编程思维">编程思维<sup>3</sup></a></li>
+		
+			<li><a href="/categories/设计模式/" title="设计模式">设计模式<sup>2</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/openGL/" title="openGL">openGL<sup>4</sup></a></li>
+		
+			<li><a href="/tags/pprof/" title="pprof">pprof<sup>1</sup></a></li>
+		
+			<li><a href="/tags/union-find/" title="union-find">union-find<sup>4</sup></a></li>
+		
+			<li><a href="/tags/代码质量/" title="代码质量">代码质量<sup>3</sup></a></li>
+		
+			<li><a href="/tags/元编程/" title="元编程">元编程<sup>1</sup></a></li>
+		
+			<li><a href="/tags/内存管理/" title="内存管理">内存管理<sup>1</sup></a></li>
+		
+			<li><a href="/tags/基础/" title="基础">基础<sup>1</sup></a></li>
+		
+			<li><a href="/tags/小技巧/" title="小技巧">小技巧<sup>1</sup></a></li>
+		
+			<li><a href="/tags/性能/" title="性能">性能<sup>4</sup></a></li>
+		
+			<li><a href="/tags/排序/" title="排序">排序<sup>8</sup></a></li>
+		
+			<li><a href="/tags/网络I-O/" title="网络I/O">网络I/O<sup>1</sup></a></li>
+		
+			<li><a href="/tags/设计/" title="设计">设计<sup>7</sup></a></li>
+		
+			<li><a href="/tags/面向对象/" title="面向对象">面向对象<sup>2</sup></a></li>
+		
+			<li><a href="/tags/面试题/" title="面试题">面试题<sup>4</sup></a></li>
+		
+			<li><a href="/tags/高阶函数/" title="高阶函数">高阶函数<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello world! I&#39;m zhujiefirst in Tencent. <br/>
+			从小我就有个梦想，就是当一名合格的程序员。我不是码畜，我为自己带盐！</p>
+	</section>
+	 
+	<div class="social-font clearfix">
+		
+		<a href="http://weibo.com/2421642590" target="_blank" title="weibo"></a>
+		
+		
+		<a href="https://twitter.com/Jay1002008" target="_blank" title="twitter"></a>
+		
+		
+		<a href="https://github.com/zhujiefirst" target="_blank" title="github"></a>
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2015 
+		
+		<a href="http://codingforever.com" target="_blank" title="zhujiefirst">zhujiefirst</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"null"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+  </body>
+</html>
