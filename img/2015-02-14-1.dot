@@ -1,0 +1,55 @@
+digraph G {
+	label = "二叉查找树形状";
+	node [shape = record];
+
+	subgraph cluster_0 {
+		label = "最好情况"
+
+		S0 [label = "<f0>|<f1>S|<f2>"];
+		E0 [label = "<f0>|<f1>E|<f2>"];
+		X0 [label = "<f0>|<f1>X|<f2>"];
+		A0 [label = "<f0>|<f1>A|<f2>"];
+		R0 [label = "<f0>|<f1>R|<f2>"];
+		C0 [label = "<f0>|<f1>C|<f2>"];
+		H0 [label = "<f0>|<f1>H|<f2>"];
+
+		S0:f0 -> E0:f1;
+		S0:f2 -> X0:f1;
+		E0:f0 -> A0:f1;
+		E0:f2 -> R0:f1;
+		X0:f0 -> C0:f1;
+		X0:f2 -> H0:f1;
+	}
+
+	subgraph cluster_1 {
+		label = "一般情况"
+
+		S1 [label = "<f0>|<f1>S|<f2>"];
+		E1 [label = "<f0>|<f1>E|<f2>"];
+		X1 [label = "<f0>|<f1>X|<f2>"];
+		A1 [label = "<f0>|<f1>A|<f2>"];
+		R1 [label = "<f0>|<f1>R|<f2>"];
+		C1 [label = "<f0>|<f1>C|<f2>"];
+		H1 [label = "<f0>|<f1>H|<f2>"];
+
+		S1:f0 -> E1:f1;
+		S1:f2 -> X1:f1;
+		E1:f0 -> A1:f1;
+		E1:f2 -> R1:f1;
+		A1:f0 -> C1:f1;
+		R1:f2 -> H1:f1;
+	}
+
+	subgraph cluster_2 {
+		label = "最差情况"
+
+		S2 [label = "<f0>|<f1>S|<f2>"];
+		E2 [label = "<f0>|<f1>E|<f2>"];
+		X2 [label = "<f0>|<f1>X|<f2>"];
+		A2 [label = "<f0>|<f1>A|<f2>"];
+
+		S2:f0 -> E2:f1;
+		E2:f0 -> X2:f1;
+		X2:f0 -> A2:f1;
+	}
+}

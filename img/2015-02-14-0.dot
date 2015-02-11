@@ -1,0 +1,19 @@
+digraph G {
+	label = "二叉查找树";
+	node [shape = record];
+
+	S [label = "<f0>|<f1>S|<f2>"];
+	E [label = "<f0>|<f1>E|<f2>"];
+	X [label = "<f0>|<f1>X|<f2>"];
+	A [label = "<f0>|<f1>A|<f2>"];
+	R [label = "<f0>|<f1>R|<f2>"];
+	C [label = "<f0>|<f1>C|<f2>"];
+	H [label = "<f0>|<f1>H|<f2>"];
+
+	S:f0 -> E:f1;
+	S:f2 -> X:f1;
+	E:f0 -> A:f1;
+	E:f2 -> R:f1;
+	A:f0 -> C:f1;
+	R:f2 -> H:f1;
+}
