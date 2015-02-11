@@ -1,5 +1,9 @@
 digraph G {
+<<<<<<< HEAD
 	label = "二叉查找树";
+=======
+	label = "Binary search tree";
+>>>>>>> c7374d6bb909c2a9d9993d40e3389619fce0695d
 	node [shape = record];
 
 	S [label = "<f0>|<f1>S|<f2>"];
