@@ -1,0 +1,629 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+    
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+  <link href='//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.4"/>
+
+
+    <meta name="description" content="学习总结 思考感悟 知识管理" />
+
+
+
+  <meta name="keywords" content="性能," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.4" />
+
+
+<meta name="description" content="理想与现实人们总是希望花最少的钱，办最多的事。对于服务器的构建也是如此，我们总是希望花最少的人力，最少的硬件设备条件，撑起最大的并发。当然理想总是那么的丰满，现实总是那么的骨感。虽说如此，但是我们不能没有理想，万一实现了呢？所以我们还是怀着敬畏的心，在构建高性能服务器的征途上奋力前行。
+
+性能指标 服务器的性能指标很多，而且相互之间还有着关联。
+1 吞吐率    如何判定服务器的性能状况呢？通常我">
+<meta property="og:type" content="article">
+<meta property="og:title" content="构建高性能服务器 -- 指标篇">
+<meta property="og:url" content="http://codingforever.com/2015/01/22//2015/01-22-0.html/index.html">
+<meta property="og:site_name" content="Codingforever">
+<meta property="og:description" content="理想与现实人们总是希望花最少的钱，办最多的事。对于服务器的构建也是如此，我们总是希望花最少的人力，最少的硬件设备条件，撑起最大的并发。当然理想总是那么的丰满，现实总是那么的骨感。虽说如此，但是我们不能没有理想，万一实现了呢？所以我们还是怀着敬畏的心，在构建高性能服务器的征途上奋力前行。
+
+性能指标 服务器的性能指标很多，而且相互之间还有着关联。
+1 吞吐率    如何判定服务器的性能状况呢？通常我">
+<meta property="og:updated_time" content="2015-06-19T16:09:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="构建高性能服务器 -- 指标篇">
+<meta name="twitter:description" content="理想与现实人们总是希望花最少的钱，办最多的事。对于服务器的构建也是如此，我们总是希望花最少的人力，最少的硬件设备条件，撑起最大的并发。当然理想总是那么的丰满，现实总是那么的骨感。虽说如此，但是我们不能没有理想，万一实现了呢？所以我们还是怀着敬畏的心，在构建高性能服务器的征途上奋力前行。
+
+性能指标 服务器的性能指标很多，而且相互之间还有着关联。
+1 吞吐率    如何判定服务器的性能状况呢？通常我">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post'
+  };
+</script>
+
+    <title> 构建高性能服务器 -- 指标篇 // Codingforever </title>
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+<!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+
+
+
+
+<div class="container one-column page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Codingforever</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-home"></i> <br />
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            標籤
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+        </div>
+    </header>
+
+    <main id="main" class="main">
+        <div class="main-inner">
+            <div id="content" class="content">
+                
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              构建高性能服务器 -- 指标篇
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於
+          <time itemprop="dateCreated" datetime="2015-01-22T00:00:00+08:00" content="1月 22 2015">
+            1月 22 2015
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分類於
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/服务器编程/" itemprop="url" rel="index"><span itemprop="name">服务器编程</span></a></span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h1 id="理想与现实">理想与现实</h1><p>人们总是希望花最少的钱，办最多的事。对于服务器的构建也是如此，我们总是希望花最少的人力，最少的硬件设备条件，撑起最大的并发。当然理想总是那么的丰满，现实总是那么的骨感。虽说如此，但是我们不能没有理想，万一实现了呢？所以我们还是怀着敬畏的心，在构建高性能服务器的征途上奋力前行。</p>
+<hr>
+<h1 id="性能指标">性能指标 </h1><p>服务器的性能指标很多，而且<strong>相互之间还有着关联</strong>。</p>
+<h2 id="1_吞吐率">1 吞吐率    </h2><p>如何判定服务器的性能状况呢？通常我们采用吞吐率来量化这个指标。所谓吞吐率，就是单位时间内服务器处理的请求数。注意，吞吐率有时候还用于描述其他指标，如单位时间内的通信数据量等。</p>
+<p>当然，对于量化服务器性能这个指标，我们牢记，<strong>吞吐率就是单位时间内服务器处理的请求数，单位是reqs/s，有时也作rps</strong>，别无他意。</p>
+<h2 id="2_CPU使用率，内存使用率，I/O_Wait率">2 CPU使用率，内存使用率，I/O Wait率  </h2><p>当然，服务器进程的CPU使用率，内存使用率，I/O Wait率也同样是评价服务器性能状况的重要指标。<strong>当CPU使用率较低，即CPU未跑满时（这里均是在压测情况下），说明服务器的瓶颈不在CPU上。同样，当内存使用率不高时，则说明服务器的瓶颈不在内存不够上</strong>。而至于I/O Wait率则不能简单的评价了。I/O Wait，它是指CPU空闲并且等待I/O操作完成的时间比例。但是，I/O Wait往往不能真实地代表I/O操作的情况或者工作量，它的设计出发点是用来衡量CPU性能的。假设有一任务需要花费10毫秒的I/O操作时间和10毫秒的CPU时间，那么I/O Wait率则为50%，这时并不意味着I/O操作的繁忙程度为50%。同样，I/O Wait为0%时，I/O操作也可能很繁忙。所以我们如果关心服务器的I/O情况的话，可以进行磁盘I/O测试或者查看网络I/O流量等。事实上，<strong>从I/O Wait率上，我们可以猜测服务器进程是I/O密集型的还是CPU密集型的</strong>。</p>
+<h2 id="3_系统负载">3 系统负载</h2><p>在进程调度器维护的运行队列中，任何时刻至少存在一个进程，那就是正在运行的进程。而当运行队列中有不止一个进程的时候，就说明此时CPU比较忙碌，其他进程还在等待正在运行的进程释放CPU的执行权限。</p>
+<p>所以系统负载也是影响服务器性能的指标之一。<strong>系统负载，即当然系统中等待CPU处理的进程数</strong>，所以系统负载越高，服务器进程得到CPU时间片愈发困难，从而影响服务器性能的下降。</p>
+<h2 id="4_进程上下文切换">4 进程上下文切换</h2><p>我们知道，操作系统中运行着不止一个进程，而进程数通常又是远远大于CPU核心数。所以进程不得不面对一个事实：<strong>轮流使用CPU进行运算</strong>。而当进程之间轮流占有CPU资源时，就会出现CPU上下文切换的过程，理所当然，这个过程不是免费的，也具有一定的开销。</p>
+<p>所以服务器进程上下文切换也会影响服务器的性能。<strong>当服务器CPU上下文切换频繁时，切换上下文的消耗则不能忽视</strong>。所以，适时查看服务器进程上下文切换频率也同样有助于构建高性能的服务器。</p>
+<h2 id="5_系统调用数">5 系统调用数</h2><p><strong>进程有用户态和内核态两种运行模式</strong>，进程可以在这两种运行模式之间切换。进程通常运行在用户态下，而进行需要对硬件外设进行操作时，如读取硬盘文件，发送网络数据等，进程就需要切换至内核态运行。</p>
+<p><strong>事实上这两种模式的切换对高级语言开发者来说是透明的，开发者只需要在需要的时候调用系统调用即可</strong>。内核提供了一系列系统调用函数，如read(), send()等。所以<strong>系统调用数从另一方面反应了用户态和内核态之间的切换数</strong>。</p>
+<p>当然，用户态和内核态之间的切换也是需要开销的，所以构建高性能服务器的过程中，对系统调用数的统计亦不能忽视。</p>
+<hr>
+<h1 id="如何测试">如何测试</h1><h2 id="1_吞吐率-1">1 吞吐率</h2><p>通常，我们关心的是服务器的最大吞吐率，即每秒最多能处理多少个请求，事实上就是平常我们所说的服务器压力测试。当然，压力测试工具有好多种，如<a href="http://en.wikipedia.org/wiki/Apache_JMeter" target="_blank" rel="external">JMeter</a>，<a href="http://en.wikipedia.org/wiki/HP_LoadRunner" target="_blank" rel="external">LoadRunner</a>等。当然，还有Apache附带的<a href="http://en.wikipedia.org/wiki/ApacheBench" target="_blank" rel="external">ab</a>工具。下面，我们以ab为例，简单测试下百度首页的情况。</p>
+<pre><code>ab -c10 -n100 www<span class="class">.baidu</span><span class="class">.com</span>
+</code></pre><p>相应的结果如下（部分）：</p>
+<pre><code>Concurrency <span class="string">Level:</span>      <span class="number">10</span>
+Time taken <span class="keyword">for</span> <span class="string">tests:</span>   <span class="number">9.031</span> seconds
+Complete <span class="string">requests:</span>      <span class="number">100</span>
+Failed <span class="string">requests:</span>        <span class="number">97</span>
+   (<span class="string">Connect:</span> <span class="number">0</span>, <span class="string">Receive:</span> <span class="number">0</span>, <span class="string">Length:</span> <span class="number">97</span>, <span class="string">Exceptions:</span> <span class="number">0</span>)
+Total <span class="string">transferred:</span>      <span class="number">8730133</span> bytes
+HTML <span class="string">transferred:</span>       <span class="number">8645328</span> bytes
+Requests per <span class="string">second:</span>    <span class="number">11.07</span> [#/sec] (mean)
+Time per <span class="string">request:</span>       <span class="number">903.139</span> [ms] (mean)
+Time per <span class="string">request:</span>       <span class="number">90.314</span> [ms] (mean, across all concurrent requests)
+Transfer <span class="string">rate:</span>          <span class="number">943.99</span> [Kbytes/sec] received
+</code></pre><p>从上述测试中可以得到，我们对百度首页利用ab进行简单的压力测试（总共100次请求且并发数为10）总共花了9.031秒，那平均每个请求处理时间为90.314毫秒，但是由于并发数为10，所以每个用户的平均等待时间为903.139毫秒。当然，我们这里不评价百度首页的性能情况。</p>
+<h2 id="2_CPU使用率，内存使用率，I/O_Wait率-1">2 CPU使用率，内存使用率，I/O Wait率</h2><p>我们查看服务器进程的CPU使用率，内存使用率，I/O Wait率可以直接使用linux的<strong>top命令</strong>，结果如下所示：</p>
+<pre><code>top - 21:47:41 up 50 min,  3 users,  load average: 0.01, 0.02, 0.05
+Tasks: 379 total,   1 running, 378 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.3 us,  0.3 sy,  0.0 ni, 99.3 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
+KiB Mem:   2042180 total,  1025404 used,  1016776 free,    48868 buffers
+KiB Swap:   521212 total,        0 used,   521212 free.   501296 cached Mem
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
+ 2190 zhujief+  20   0 1171408  98036  63920 S   0.7  4.8   0:31.79 compiz
+  177 root      20   0       0      0      0 S   0.3  0.0   0:03.20 kworker/1:1
+ 1436 root      20   0  319448  62368  22940 S   0.3  3.1   0:14.96 Xorg
+</code></pre><p>从top命令的结果中可以得到诸多有用的信息，如当前compiz进程的CPU使用率为0.7%，内存使用率为4.8%，具体使用为98036Kb物理内存。同样也可以看到I/O Wait率为0.0%，因为当前机器并没有跑任何I/O较为密集的程序。另外，iostat命令也可以查看I/O Wait情况。</p>
+<h2 id="3_系统负载-1">3 系统负载</h2><p>通过<strong>查看/proc/loadavg</strong>文件内容，可以了解到当前运行队列的情况，即系统负载情况。运行如下命令:</p>
+<pre><code>cat /<span class="keyword">proc</span>/loadavg
+</code></pre><p>得到如下：</p>
+<pre><code><span class="number">0.00 0.01</span> <span class="number">0.05 1/51</span>2 5082
+</code></pre><p>即在过去1分钟，5分钟，15分钟内平均系统负载为0.00，0.01，0.05，即平均分别有0.00，0.01，0.05个进程正在等待。而1/512表示当前总共有512个进程，但是当前运行队列中只有1个进程。最右边的5082为最后创建的进程的进程ID。</p>
+<h2 id="4_进程上下文切换-1">4 进程上下文切换</h2><p>利用<a href="http://nmon.sourceforge.net/pmwiki.php" target="_blank" rel="external">nmon</a>工具可以查看进程上下文切换情况。</p>
+<pre><code>RunQueue         <span class="number">1</span>       Load Average    CPU use since boot time              
+ContextSwitch    <span class="number">168.3</span>     <span class="number">1</span> mins  <span class="number">0</span>. <span class="number">00</span>   Uptime <span class="variable">Days=</span>  <span class="number">0</span> <span class="variable">Hours=</span> <span class="number">1</span> <span class="variable">Mins=</span><span class="number">59</span>   
+Forks             <span class="number">0.0</span>        <span class="number">5</span> mins  <span class="number">0.02</span>    Idle   <span class="variable">Days=</span>  <span class="number">0</span> <span class="variable">Hours=</span> <span class="number">3</span> <span class="variable">Mins=</span><span class="number">53</span>   
+Interrupts         <span class="number">70.9</span>   <span class="number">15</span> mins  <span class="number">0.05</span>    Average CPU <span class="variable">use=</span>-<span class="number">95.54</span>%           
+</code></pre><p>从上面的结果可以看到，当前系统上下文切换速度为168.3/s。</p>
+<h2 id="5_系统调用数-1">5 系统调用数</h2><p>同样，在linux下我们可以利用相关工具查看进程的系统调用情况 — <a href="http://linux.die.net/man/1/strace" target="_blank" rel="external">strace</a>。截取小段结果如下：</p>
+<pre><code>recvmsg<span class="list">(<span class="number">5</span>, <span class="number">0</span>x7fffe94c5540, <span class="number">0</span>)</span>           = <span class="number">-1</span> EAGAIN <span class="list">(<span class="keyword">Resource</span> temporarily unavailable)</span>
+recvmsg<span class="list">(<span class="number">5</span>, <span class="number">0</span>x7fffe94c5540, <span class="number">0</span>)</span>           = <span class="number">-1</span> EAGAIN <span class="list">(<span class="keyword">Resource</span> temporarily unavailable)</span>
+poll<span class="list">([{fd=5, events=POLLIN|POLLOUT}], <span class="number">1</span>, <span class="number">4294967295</span>)</span> = <span class="number">1</span> <span class="list">([{fd=5, revents=POLLOUT}])</span>
+writev<span class="list">(<span class="number">5</span>, [{<span class="string">"\213\n\2\0\327`\340\0"</span>, <span class="number">8</span>}, {NULL, <span class="number">0</span>}, {<span class="string">""</span>, <span class="number">0</span>}], <span class="number">3</span>)</span> = <span class="number">8</span>
+</code></pre><p>很明显，在截取的结果中，进程分别进行了recvmsg, poll, writev等系统调用，当然也就进行了用户态和内核态的切换。</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/性能/" rel="tag">#性能</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/01/23//2015/01-23-0.html/" rel="prev">构建高性能服务器 -- 缓存篇</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/12/28//2014/12-28-2.html/" rel="next">经典算法巡礼(七) -- 排序之堆排序</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+            </div>
+
+            
+
+            
+              <div class="comments" id="comments">
+                
+              </div>
+            
+        </div>
+
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="zhujiefirst" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">zhujiefirst</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">学习总结 思考感悟 知识管理</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">45</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">分類</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-name">標籤</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#理想与现实"><span class="nav-number">1.</span> <span class="nav-text">理想与现实</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#性能指标"><span class="nav-number">2.</span> <span class="nav-text">性能指标 </span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1_吞吐率"><span class="nav-number">2.1.</span> <span class="nav-text">1 吞吐率    </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2_CPU使用率，内存使用率，I/O_Wait率"><span class="nav-number">2.2.</span> <span class="nav-text">2 CPU使用率，内存使用率，I/O Wait率  </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3_系统负载"><span class="nav-number">2.3.</span> <span class="nav-text">3 系统负载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4_进程上下文切换"><span class="nav-number">2.4.</span> <span class="nav-text">4 进程上下文切换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5_系统调用数"><span class="nav-number">2.5.</span> <span class="nav-text">5 系统调用数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何测试"><span class="nav-number">3.</span> <span class="nav-text">如何测试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1_吞吐率-1"><span class="nav-number">3.1.</span> <span class="nav-text">1 吞吐率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2_CPU使用率，内存使用率，I/O_Wait率-1"><span class="nav-number">3.2.</span> <span class="nav-text">2 CPU使用率，内存使用率，I/O Wait率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3_系统负载-1"><span class="nav-number">3.3.</span> <span class="nav-text">3 系统负载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4_进程上下文切换-1"><span class="nav-number">3.4.</span> <span class="nav-text">4 进程上下文切换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5_系统调用数-1"><span class="nav-number">3.5.</span> <span class="nav-text">5 系统调用数</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+        <div class="footer-inner">
+            <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhujiefirst</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+        </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+</div>
+
+<script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.4"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.4"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.4" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/js/search-toggle.js"></script>
+
+
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.4" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if (isDesktop() && CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    });
+  </script>
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        if (CONFIG.sidebar === 'always') {
+            displaySidebar();
+        }
+    });
+</script>
+
+
+
+
+
+
+
+
+<!-- lazyload -->
+<script type="text/javascript" src="/js/lazyload.js"></script>
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery("#posts img").lazyload({
+            placeholder: "/images/loading.gif",
+            effect: "fadeIn"
+        });
+    });
+</script>
+</body>
+</html>

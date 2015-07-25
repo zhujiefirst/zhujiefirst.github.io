@@ -1,0 +1,732 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+    
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+  <link href='//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.4"/>
+
+
+    <meta name="description" content="学习总结 思考感悟 知识管理" />
+
+
+
+  <meta name="keywords" content="Hexo,next" />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.4" />
+
+
+<meta name="description" content="“编程语言不仅仅是一种技术，它更是一种思维。” －－ Paul Graham
+以前经常看到这样的言论：“什么C/C++，Java, C#等等都是编程语言而已，实现你想法的工具，学好一门语言，以不变应万变，就算用其他语言也是差不多的，只是工具变了而已。”这样的说法真心有失偏颇。没错，什么语言都只是工具，但他们不仅仅是工具，也包含了用这种工具时候所形成的思维方式。
+“著名的语言学家Roman Jako">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编程语言与编程思维杂感">
+<meta property="og:url" content="http://codingforever.com/2013/06/23//2013/06-23-0.html/index.html">
+<meta property="og:site_name" content="Codingforever">
+<meta property="og:description" content="“编程语言不仅仅是一种技术，它更是一种思维。” －－ Paul Graham
+以前经常看到这样的言论：“什么C/C++，Java, C#等等都是编程语言而已，实现你想法的工具，学好一门语言，以不变应万变，就算用其他语言也是差不多的，只是工具变了而已。”这样的说法真心有失偏颇。没错，什么语言都只是工具，但他们不仅仅是工具，也包含了用这种工具时候所形成的思维方式。
+“著名的语言学家Roman Jako">
+<meta property="og:updated_time" content="2015-06-19T16:09:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="编程语言与编程思维杂感">
+<meta name="twitter:description" content="“编程语言不仅仅是一种技术，它更是一种思维。” －－ Paul Graham
+以前经常看到这样的言论：“什么C/C++，Java, C#等等都是编程语言而已，实现你想法的工具，学好一门语言，以不变应万变，就算用其他语言也是差不多的，只是工具变了而已。”这样的说法真心有失偏颇。没错，什么语言都只是工具，但他们不仅仅是工具，也包含了用这种工具时候所形成的思维方式。
+“著名的语言学家Roman Jako">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post'
+  };
+</script>
+
+    <title> 编程语言与编程思维杂感 // Codingforever </title>
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+<!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+
+
+
+
+<div class="container one-column page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Codingforever</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-home"></i> <br />
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            標籤
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+        </div>
+    </header>
+
+    <main id="main" class="main">
+        <div class="main-inner">
+            <div id="content" class="content">
+                
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              编程语言与编程思维杂感
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於
+          <time itemprop="dateCreated" datetime="2013-06-23T00:00:00+08:00" content="6月 23 2013">
+            6月 23 2013
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分類於
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/编程思维/" itemprop="url" rel="index"><span itemprop="name">编程思维</span></a></span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p><strong>“编程语言不仅仅是一种技术，它更是一种思维。” －－ Paul Graham</strong></p>
+<p>以前经常看到这样的言论：“什么C/C++，Java, C#等等都是编程语言而已，实现你想法的工具，学好一门语言，以不变应万变，就算用其他语言也是差不多的，只是工具变了而已。”这样的说法真心有失偏颇。没错，什么语言都只是工具，但他们不仅仅是工具，也包含了用这种工具时候所形成的思维方式。</p>
+<p>“著名的语言学家Roman Jakobson曾用一句简单的名言指明了语言之间最关键的不同之处：语言之间的不同本质在于它们能够传达的信息，而不是它们不能传达的信息。这句名言告诉了我们解放我们母语潜能的关键所在：不同的语言用不同的方式影响我们的大脑思维，这并不是因为这种语言可以让我们这样思考问题，而是它在强迫你这样思考。”<br>“当你的语言日常的强迫你去使用某些类型的信息进行说明，这会迫使你去留意那些使用其它种语言的人平时不会注意的某些细节和体验。因为这种说法的习惯是从小养成的，这种习惯已经成为大脑思维的习惯，超越了语言本身，直接影响了你的言行，感知，联想，感觉，记忆，以及世界观。”</p>
+<p>Jokobson的名言同样也适合于编程语言界，不同语言对于程序员的思维要求并不是一样的。如C语言作为一门过程性语言，给予程序员的思维就是过程性的，先做什么，后做什么，任何一个步骤都是线性过程思维。而Java给我们带来的是一切均为对象的思维，当程序员码出任何一行代码之前所思考的是如何构成当前这个对象，该对象有何数据，有何处理这些数据的方法。所以，两种程序员码出来的代码是完全两种风格的。</p>
+<p>C和Java两种程序员码出来的代码当然是两种风格的，这有什么大惊小怪的。但是同样两位Java程序员码出来的Java代码也是风格各异，同样的工具，在不同思维的带领下，就会产生不同的结果。</p>
+<p>举个例子，有一棵Tree，遍历其结点，并进行打印各结点的值。</p>
+<p>Example 1:</p>
+<pre><code><span class="keyword">class</span> Tree {
+<span class="keyword">public</span>:
+    Tree(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; name, <span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;Tree*&gt; children);
+    ~Tree();
+
+    <span class="function"><span class="keyword">void</span> <span class="title">visit</span><span class="params">()</span></span>;
+
+    <span class="function"><span class="keyword">void</span> <span class="title">visitAll</span><span class="params">()</span></span>;
+
+    <span class="built_in">std</span>::<span class="function"><span class="built_in">string</span> <span class="title">getName</span><span class="params">()</span><span class="keyword">const</span> </span>{ <span class="keyword">return</span> m_name; }
+
+<span class="keyword">private</span>:
+    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;Tree*&gt; m_children;
+    <span class="built_in">std</span>::<span class="built_in">string</span> m_name;
+};
+
+Tree::Tree(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; name, <span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;Tree*&gt; children)
+    : m_name(name),
+      m_children(children)
+{
+
+}
+
+Tree::~Tree()
+{
+    for_each(m_children.begin(), m_children.end(), [](Tree* child){ <span class="keyword">delete</span> child; });
+}
+
+<span class="keyword">void</span> Tree::visit()
+{
+    <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; m_name &lt;&lt; <span class="built_in">std</span>::endl;
+}
+
+<span class="keyword">void</span> Tree::visitAll(<span class="built_in">std</span>::function&lt;<span class="keyword">void</span>(Tree*)&gt; action)
+{
+    visit(action);
+
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m_children.size(); ++i) {        m_children[i]-&gt;visitAll(action);
+    }
+}
+
+<span class="keyword">static</span> Tree* constructTree()
+{
+    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;Tree*&gt; v;
+    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;Tree*&gt; emptyVector;
+    v.push_back(<span class="keyword">new</span> Tree(<span class="string">"left child"</span>, emptyVector));
+    v.push_back(<span class="keyword">new</span> Tree(<span class="string">"right child"</span>, emptyVector));
+
+    <span class="keyword">return</span> <span class="keyword">new</span> Tree(<span class="string">"root"</span>, v);
+}
+
+<span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">destructTree</span><span class="params">(Tree* t)</span>
+</span>{
+    <span class="keyword">delete</span> t;
+}
+
+<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span>
+</span>{
+    Tree* root = constructTree();
+
+    root-&gt;visitAll();
+
+    destructTree(root);
+
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+</code></pre><p>没错，上述实现方法的确可行，但是如果遍历每一个结点，具体的操作由客户(依然是程序员)来决定，那又如何？似乎思路被堵住了。奥秘如下：</p>
+<p>Example 2:</p>
+<pre><code><span class="keyword">class</span> Tree {
+<span class="keyword">public</span>:
+    Tree(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; name, <span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;Tree*&gt; children);
+    ~Tree();
+
+    <span class="function"><span class="keyword">void</span> <span class="title">visit</span><span class="params">(<span class="built_in">std</span>::function&lt;<span class="keyword">void</span>(Tree*)</span>&gt; action)</span>;
+
+    <span class="function"><span class="keyword">void</span> <span class="title">visitAll</span><span class="params">(<span class="built_in">std</span>::function&lt;<span class="keyword">void</span>(Tree*)</span>&gt; action)</span>;
+
+    <span class="built_in">std</span>::<span class="function"><span class="built_in">string</span> <span class="title">getName</span><span class="params">()</span><span class="keyword">const</span> </span>{ <span class="keyword">return</span> m_name; }
+
+<span class="keyword">private</span>:
+    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;Tree*&gt; m_children;
+    <span class="built_in">std</span>::<span class="built_in">string</span> m_name;
+};
+
+Tree::Tree(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span>&amp; name, <span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;Tree*&gt; children)
+    : m_name(name),
+      m_children(children)
+{
+
+}
+
+Tree::~Tree()
+{
+    for_each(m_children.begin(), m_children.end(), [](Tree* child){ <span class="keyword">delete</span> child; });
+}
+
+<span class="keyword">void</span> Tree::visit(<span class="built_in">std</span>::function&lt;<span class="keyword">void</span>(Tree*)&gt; action)
+{
+    action(<span class="keyword">this</span>);
+}
+
+<span class="keyword">void</span> Tree::visitAll(<span class="built_in">std</span>::function&lt;<span class="keyword">void</span>(Tree*)&gt; action)
+{
+    visit(action);
+
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m_children.size(); ++i) {        m_children[i]-&gt;visitAll(action);
+    }
+}
+
+<span class="keyword">static</span> Tree* constructTree()
+{
+    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;Tree*&gt; v;
+    <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;Tree*&gt; emptyVector;
+    v.push_back(<span class="keyword">new</span> Tree(<span class="string">"left child"</span>, emptyVector));
+    v.push_back(<span class="keyword">new</span> Tree(<span class="string">"right child"</span>, emptyVector));
+
+    <span class="keyword">return</span> <span class="keyword">new</span> Tree(<span class="string">"root"</span>, v);
+}
+
+<span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">destructTree</span><span class="params">(Tree* t)</span>
+</span>{
+    <span class="keyword">delete</span> t;
+}
+
+<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span>
+</span>{
+    Tree* root = constructTree();
+
+    root-&gt;visitAll([](Tree* t) { <span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; t-&gt;getName() &lt;&lt; <span class="built_in">std</span>::endl; });
+
+    destructTree(root);
+
+    <span class="keyword">return</span> <span class="number">0</span>;
+}
+</code></pre><p>相当巧妙的思维，其实也是受一段ruby代码的启发，不同的程序语言的思维的启发。所以大神们说，每年至少学习一门新的编程语言是相当有道理的。当然我们学习它并不是为了把它使用在工作中（若是能使用那再好不过，因为实践是最好的老师），而是学习该语言随之而来的编程思维，如同简单的遍历Tree一样。</p>
+<p>最后，附上启发这篇怪文的Ruby源码。</p>
+<pre><code>class <span class="constant">Tree</span>
+    attr_accessor <span class="symbol">:children</span>, <span class="symbol">:node_name</span>
+
+    <span class="function"><span class="keyword">def</span> <span class="title">initialize</span></span>(name, children = [])
+        <span class="variable">@children</span> = children
+        <span class="variable">@node_name</span> = name
+    <span class="keyword">end</span>
+
+    <span class="function"><span class="keyword">def</span> <span class="title">visit_all</span></span>(&amp;block)
+        visit(&amp;block)
+        children.each { |c| c.visit_all &amp;block }
+    <span class="keyword">end</span>
+
+    <span class="function"><span class="keyword">def</span> <span class="title">visit</span></span>(&amp;block)
+        block.call <span class="keyword">self</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+ruby_tree = <span class="constant">Tree.</span>new(<span class="string">"Ruby"</span>,
+    [<span class="constant">Tree.</span>new(<span class="string">"Reia"</span>),
+        <span class="constant">Tree.</span>new(<span class="string">"MacRuby"</span>)])
+
+puts <span class="string">"Visiting a node"</span>
+ruby_tree.visit { |node| puts node.node_name }
+
+puts <span class="string">"Visiting entire tree"</span>
+ruby_tree.visit_all { |node| puts node.node_name }
+</code></pre></span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2013/06/29//2013/06-29-0.html/" rel="prev">openGL学习（一）-- 简介</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2013/06/22//2013/06-22-0.html/" rel="next">First-class Funciton's Cry</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+            </div>
+
+            
+
+            
+              <div class="comments" id="comments">
+                
+              </div>
+            
+        </div>
+
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="zhujiefirst" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">zhujiefirst</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">学习总结 思考感悟 知识管理</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">45</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">分類</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-name">標籤</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <p class="post-toc-empty">此文章未包含目錄</p>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+        <div class="footer-inner">
+            <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhujiefirst</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+        </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+</div>
+
+<script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.4"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.4"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.4" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/js/search-toggle.js"></script>
+
+
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.4" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if (isDesktop() && CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    });
+  </script>
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        if (CONFIG.sidebar === 'always') {
+            displaySidebar();
+        }
+    });
+</script>
+
+
+
+
+
+
+
+
+<!-- lazyload -->
+<script type="text/javascript" src="/js/lazyload.js"></script>
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery("#posts img").lazyload({
+            placeholder: "/images/loading.gif",
+            effect: "fadeIn"
+        });
+    });
+</script>
+</body>
+</html>

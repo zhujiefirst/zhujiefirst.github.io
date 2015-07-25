@@ -1,0 +1,734 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+    
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+  <link href='//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.4"/>
+
+
+    <meta name="description" content="学习总结 思考感悟 知识管理" />
+
+
+
+  <meta name="keywords" content="性能," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.4" />
+
+
+<meta name="description" content="写在前面服务器数据，如用户相关数据，都需要保存起来，随时取出再次使用。当然，现在的内存数据库也已经发展到相对可靠的阶段了，但是，我们这里还是讨论一个传统关系型数据库在构建高性能服务器方面的使用，如MySQL。
+利其器友好的MySQL状态报告俗话说，工欲善其事，必先利其器。所以，在服务器端数据库性能优化方面，我们先介绍下一个利器 — mysqlreport。
+当然，在MySQL命令行中，我们可获取当">
+<meta property="og:type" content="article">
+<meta property="og:title" content="构建高性能服务器 -- 数据库篇">
+<meta property="og:url" content="http://codingforever.com/2015/02/01//2015/02-01-0.html/index.html">
+<meta property="og:site_name" content="Codingforever">
+<meta property="og:description" content="写在前面服务器数据，如用户相关数据，都需要保存起来，随时取出再次使用。当然，现在的内存数据库也已经发展到相对可靠的阶段了，但是，我们这里还是讨论一个传统关系型数据库在构建高性能服务器方面的使用，如MySQL。
+利其器友好的MySQL状态报告俗话说，工欲善其事，必先利其器。所以，在服务器端数据库性能优化方面，我们先介绍下一个利器 — mysqlreport。
+当然，在MySQL命令行中，我们可获取当">
+<meta property="og:updated_time" content="2015-06-19T16:09:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="构建高性能服务器 -- 数据库篇">
+<meta name="twitter:description" content="写在前面服务器数据，如用户相关数据，都需要保存起来，随时取出再次使用。当然，现在的内存数据库也已经发展到相对可靠的阶段了，但是，我们这里还是讨论一个传统关系型数据库在构建高性能服务器方面的使用，如MySQL。
+利其器友好的MySQL状态报告俗话说，工欲善其事，必先利其器。所以，在服务器端数据库性能优化方面，我们先介绍下一个利器 — mysqlreport。
+当然，在MySQL命令行中，我们可获取当">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post'
+  };
+</script>
+
+    <title> 构建高性能服务器 -- 数据库篇 // Codingforever </title>
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+<!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+
+
+
+
+<div class="container one-column page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Codingforever</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-home"></i> <br />
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            標籤
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+        </div>
+    </header>
+
+    <main id="main" class="main">
+        <div class="main-inner">
+            <div id="content" class="content">
+                
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              构建高性能服务器 -- 数据库篇
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於
+          <time itemprop="dateCreated" datetime="2015-02-01T00:00:00+08:00" content="2月 1 2015">
+            2月 1 2015
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分類於
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/服务器编程/" itemprop="url" rel="index"><span itemprop="name">服务器编程</span></a></span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h2 id="写在前面">写在前面</h2><p>服务器数据，如用户相关数据，都需要保存起来，随时取出再次使用。当然，现在的<a href="http://zh.wikipedia.org/zh/%E5%86%85%E5%AD%98%E6%95%B0%E6%8D%AE%E5%BA%93" target="_blank" rel="external">内存数据库</a>也已经发展到相对可靠的阶段了，但是，我们这里还是讨论一个传统关系型数据库在构建高性能服务器方面的使用，如MySQL。</p>
+<h2 id="利其器">利其器</h2><h3 id="友好的MySQL状态报告">友好的MySQL状态报告</h3><p>俗话说，工欲善其事，必先利其器。所以，在服务器端数据库性能优化方面，我们先介绍下一个利器 — <a href="http://www.tin.org/bin/man.cgi?section=1&amp;topic=mysqlreport" target="_blank" rel="external">mysqlreport</a>。</p>
+<p>当然，在MySQL命令行中，我们可获取当前数据库的状态：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; show status;</span><br><span class="line">mysql&gt; show innodb status;</span><br></pre></td></tr></table></figure>
+<p>那么还需要mysqlreport干什么呢？当然，身为资深码农，我们一直以高标准要求，所以<strong>mysqlreport是一款友好方式的数据库状态检测工具</strong>，各方面甩直白的MySQL命令行好几条街。</p>
+<p>我们利用mysqlreport获取下当前状态：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; mysqlreport --user USER_NAME --password PASSWORD</span><br></pre></td></tr></table></figure>
+<p>具体状态结果很长，就不放了，有兴趣的同学可以自己去试下。</p>
+<h3 id="解释查询">解释查询</h3><p>SQL语句的性能如何该如何知晓呢？<strong>解释查询explain</strong>横空出世。</p>
+<p>explain的使用方式非常简单，举个简单例子，我们用以下语句创建数据表：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">create table <span class="built_in">test</span> (</span><br><span class="line">	id int(<span class="number">11</span>) not null auto_increment,</span><br><span class="line">	name varchar(<span class="number">255</span>) not null,</span><br><span class="line">	primary key (id)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>然后我们用存储过程向test数据表中增加一些数据。首先创建function:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">delimiter //&#10;create function rs(n int)&#10;returns varchar(255)&#10;begin&#10;&#9;declare chars char(26) default &#39;abcdefghijklmnopqrstuvwxyz&#39;;&#10;&#9;declare res varchar(1024) default &#39;&#39;;&#10;&#9;declare i int default 0;&#10;&#9;repeat&#10;&#9;set i = i + 1;&#10;&#9;set res = concat(res, substring(chars, floor(1 + rand() * 26), 1));&#10;&#9;until i = n end repeat;&#10;&#9;return res;&#10;end&#10;//</span><br></pre></td></tr></table></figure>
+<p>然后创建存储过程：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">delimiter //</span><br><span class="line">create procedure inst(n int)</span><br><span class="line">begin</span><br><span class="line">	<span class="built_in">declare</span> i int default <span class="number">0</span>;</span><br><span class="line">	<span class="built_in">set</span> autocommit = <span class="number">0</span>;</span><br><span class="line">	repeat</span><br><span class="line">	<span class="built_in">set</span> i = i + <span class="number">1</span>;</span><br><span class="line">	insert into <span class="built_in">test</span> <span class="built_in">set</span> name=rs(<span class="number">16</span>);</span><br><span class="line">	until i = n end repeat;</span><br><span class="line">	commit;</span><br><span class="line">	<span class="built_in">set</span> autocommit = <span class="number">1</span>;</span><br><span class="line">end</span><br><span class="line">//</span><br></pre></td></tr></table></figure>
+<p>最后调用新创建的存储过程inst：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">call inst(<span class="number">100000</span>);</span><br></pre></td></tr></table></figure>
+<p>这时，我们已向数据表中插入了10W条数据。这时，我们对该数据表中数据进行查询，看下效率如何该怎么办呢？我们利用<strong>explain</strong>语句进行查看：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">explain select * from <span class="built_in">test</span> <span class="built_in">where</span> id = <span class="number">999</span>;</span><br></pre></td></tr></table></figure>
+<p>得到结果如下：</p>
+<pre><code>+----+-------------+-------+-------+---------------+---------+---------+-------+------+-------+
+|<span class="string"> id </span>|<span class="string"> select_type </span>|<span class="string"> table </span>|<span class="string"> type  </span>|<span class="string"> possible_keys </span>|<span class="string"> key     </span>|<span class="string"> key_len </span>|<span class="string"> ref   </span>|<span class="string"> rows </span>|<span class="string"> extra </span>|
++----+-------------+-------+-------+---------------+---------+---------+-------+------+-------+
+|<span class="string">  1 </span>|<span class="string"> simple      </span>|<span class="string"> test  </span>|<span class="string"> const </span>|<span class="string"> primary       </span>|<span class="string"> primary </span>|<span class="string"> 4       </span>|<span class="string"> const </span>|<span class="string">    1 </span>|<span class="string">       </span>|
++----+-------------+-------+-------+---------------+---------+---------+-------+------+-------+
+</code></pre><p>我们可以看到，结果中type为const，这表示这次查询通过索引直接找到一个匹配行，优化器认为它的时间复杂度为常量。而根据key的值primary，意味着这次查询使用了主键索引。</p>
+<p>然后我们利用<strong>explain</strong>语句查看另外的查询语句：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">explain select * from test where name = &#39;yoxxwmxbpvhyxtyo&#39;;&#39;</span><br></pre></td></tr></table></figure>
+<p>得到结果为：</p>
+<pre><code>+----+-------------+-------+------+---------------+------+---------+------+--------+-------------+
+|<span class="string"> id </span>|<span class="string"> select_type </span>|<span class="string"> table </span>|<span class="string"> type </span>|<span class="string"> possible_keys </span>|<span class="string"> key  </span>|<span class="string"> key_len </span>|<span class="string"> ref  </span>|<span class="string"> rows   </span>|<span class="string"> Extra       </span>|
++----+-------------+-------+------+---------------+------+---------+------+--------+-------------+
+|<span class="string">  1 </span>|<span class="string"> SIMPLE      </span>|<span class="string"> test  </span>|<span class="string"> ALL  </span>|<span class="string"> NULL          </span>|<span class="string"> NULL </span>|<span class="string"> NULL    </span>|<span class="string"> NULL </span>|<span class="string"> 100260 </span>|<span class="string"> Using where </span>|
++----+-------------+-------+------+---------------+------+---------+------+--------+-------------+
+</code></pre><p>与之前不同的是，这里type值为all，即本次查询采用了全表扫描，而key的值为null，这也理所当然，因为我们并没有将name增加索引。</p>
+<p>经过上述简要讲述，大家应该了解到，<strong>explain</strong>语句在数据库优化过程中的确是一把利刃。</p>
+<h3 id="慢查询分析">慢查询分析</h3><p>在开发环境中，我们可以对所有查询语句进行explain分析，并建立适当的索引，把数据库性能调至最优。但是，在正式环境中，随着实际数据的积累，查询计算和开销有可能会增加，甚至我们发现有些索引设计并不理想。令人头疼的是，线上环境根本不可能用explain去分析查询语句。这个时候，我们需要一个自动记录下运行环境中每次查询执行时间的工具 —— <strong>MySQL慢查询日志</strong>。</p>
+<p>在MySQL中开启这项功能并不复杂，在my.cnf中增加下列配置选项：</p>
+<pre><code>long_query_time <span class="subst">=</span> <span class="number">1</span>
+<span class="keyword">log</span><span class="attribute">-slow</span><span class="attribute">-queries</span> <span class="subst">=</span> /<span class="built_in">data</span>/<span class="built_in">var</span>/mysql_slow<span class="built_in">.</span><span class="keyword">log</span>
+</code></pre><p>这意味着，MySQL对执行时间超过1秒的查询请求将记录在log-slow-queries路径的文件中，我们可以用MySQL提供的mysqldumpslow查看日志，也可以通过第三方工具 —— <a href="http://www.pythian.com/blog/query-profiling-tools-part-1-mysqlsla/" target="_blank" rel="external">mysqlsla</a>。</p>
+<p>当然，我们还可以在mysqlreport的友好报告中发现以下列：</p>
+<pre><code>Slow 1 s           722        0.2/s         0.01     %<span class="keyword">MDS</span>: 0.08     <span class="keyword">Log</span>:<span class="keyword">ON</span>
+</code></pre><p>这其实告诉我们，超过1秒的慢查询每秒有0.2次，占总请求数的0.08%。</p>
+<h2 id="善其事">善其事</h2><h3 id="正确使用索引">正确使用索引</h3><p>在影响数据库查询性能的诸多因素中，索引绝对是一个重量级的因素。</p>
+<h4 id="什么是索引">什么是索引</h4><p>索引说白了，就相当于一本书的目录。很容易理解，如果我们需要寻找一本书中的某一章节，我们会先去查找目录，如此做来可以大大提高查找的效率。但是如果没有索引，即书本目录，我们寻找过程就会变成全书遍历查找。</p>
+<p>事实上数据库索引也是一样，可以分为<strong>全表扫描（Full Table Scan）和索引扫描（Index Scan）</strong>两种。在大多数情况下，索引搜索当然要比全表扫描性能高很多，但这也不是绝对的。比如<strong>需要查找的记录占据了整个数据表的大部分，那么使用索引扫描反而比全表扫描更差</strong>。很容易想象，对于一本书，如果需要阅读绝大部分内容，那么按顺序全局阅读比按目录查找再阅读效率更高，因为查找目录也是需要开销的。</p>
+<p>另外，为数据库数据建立索引也不是一件简单的事，索引必须对应到数据库的每一行记录，这样一来，<strong>引入数据库索引将会带来一个巨大的目录</strong>，这点存储开销也是不得不重视的。而且，<strong>除了普通索引之外，还有唯一索引，主键，全文索引等，各种索引类型都有可能带来更多额外的开销，如唯一索引插入时必须保证其唯一性，而唯一性检查也是不笔不小的开销</strong>。</p>
+<p>这么说来，全表扫描和索引扫描孰优孰劣真心不好说，说句真心话，这是你自己的事情。记住：<strong>为数据表建立索引是你自己的事情，永远不要期待有什么工具会自动帮你建立索引，没有工具会知道你未来会频繁地在哪个字段上进行条件查询，为哪个字段建立索引最优</strong>。</p>
+<h4 id="初识索引">初识索引</h4><p>在<strong>利其器</strong>一节中，我们讨论到，可以利用<strong>explain</strong>来进行SQL语句的性能分析。我们还是接着那时的例子，利用主键id进行查询与利用普通字段name进行查询，在查询效率上确有不同，而且一般情况下(查询绝大多数条数情况除外)前者优于后者。</p>
+<p>那么我们现在把name字段也修改为索引呢？利用以下语句进行修改：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table <span class="built_in">test</span> add key name(name);</span><br></pre></td></tr></table></figure>
+<p>然后，我们再用<strong>explain</strong>进行查看：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">explain select * from <span class="built_in">test</span> <span class="built_in">where</span> name = <span class="string">'yoxxwmxbpvhyxtyo'</span>;</span><br></pre></td></tr></table></figure>
+<p>结果稍微有点变化：</p>
+<pre><code>+----+-------------+-------+------+---------------+------+---------+-------+------+--------------------------+
+|<span class="string"> id </span>|<span class="string"> select_type </span>|<span class="string"> table </span>|<span class="string"> type </span>|<span class="string"> possible_keys </span>|<span class="string"> key  </span>|<span class="string"> key_len </span>|<span class="string"> ref   </span>|<span class="string"> rows </span>|<span class="string"> Extra                    </span>|
++----+-------------+-------+------+---------------+------+---------+-------+------+--------------------------+
+|<span class="string">  1 </span>|<span class="string"> SIMPLE      </span>|<span class="string"> test  </span>|<span class="string"> ref  </span>|<span class="string"> name          </span>|<span class="string"> name </span>|<span class="string"> 257     </span>|<span class="string"> const </span>|<span class="string">    1 </span>|<span class="string"> Using where; Using index </span>|
++----+-------------+-------+------+---------------+------+---------+-------+------+--------------------------+
+</code></pre><p>现在是什么情况呢？我们可以看到，这时key字段的值为name，即本次查询采用了name字段的索引。另外，<strong>对于没有使用主键索引或者唯一索引的条件查询，查询结果可能有多个匹配行，所以MySQL为这种情况定义的type为ref</strong>，如本次结果中所示。</p>
+<p>那么，如果我们进行模糊查询呢？试下吧。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">explain select * from <span class="built_in">test</span> <span class="built_in">where</span> name like <span class="string">'%mxbpvhy'</span>;</span><br></pre></td></tr></table></figure>
+<p>看下结果：</p>
+<pre><code>+----+-------------+-------+-------+---------------+------+---------+------+--------+--------------------------+
+|<span class="string"> id </span>|<span class="string"> select_type </span>|<span class="string"> table </span>|<span class="string"> type  </span>|<span class="string"> possible_keys </span>|<span class="string"> key  </span>|<span class="string"> key_len </span>|<span class="string"> ref  </span>|<span class="string"> rows   </span>|<span class="string"> Extra                    </span>|
++----+-------------+-------+-------+---------------+------+---------+------+--------+--------------------------+
+|<span class="string">  1 </span>|<span class="string"> SIMPLE      </span>|<span class="string"> test  </span>|<span class="string"> index </span>|<span class="string"> NULL          </span>|<span class="string"> name </span>|<span class="string"> 257     </span>|<span class="string"> NULL </span>|<span class="string"> 100489 </span>|<span class="string"> Using where; Using index </span>|
++----+-------------+-------+-------+---------------+------+---------+------+--------+--------------------------+
+</code></pre><p>哇，还是很强力的，连模糊查询都能够利用name索引，可以看到type字段中明确写着index值。</p>
+<h4 id="使用组合索引">使用组合索引</h4><p>实际项目过程中，查询中包含组合条件是不可避免的，如：</p>
+<pre><code><span class="attribute">...</span> <span class="keyword">where</span> a <span class="subst">=</span> <span class="number">1</span> <span class="literal">and</span> b <span class="subst">=</span> <span class="number">2</span>
+<span class="attribute">...</span> <span class="keyword">where</span> a <span class="subst">=</span> <span class="number">1</span> <span class="keyword">order</span> <span class="keyword">by</span> b
+<span class="attribute">...</span> <span class="keyword">where</span> a <span class="subst">=</span> <span class="number">1</span> <span class="keyword">group</span> <span class="keyword">by</span> b
+</code></pre><p>这个时候，如果a和b字段都分别建立了索引，它们仍然不能同时发挥作用。因为<strong>一次查询只能利用一个索引</strong>。如何破？组合索引大叫：我来！</p>
+<p>还是基于先前的数据表，我们用以下命令删除先前增加的name索引，增加name_1和name_2两个字段，同时增加name，name_1和name_2的联合索引normal_key：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">alter table <span class="built_in">test</span> drop index name;</span><br><span class="line">alter table <span class="built_in">test</span> add name_1 not null;</span><br><span class="line">alter table <span class="built_in">test</span> add name_2 not null;</span><br><span class="line">alter table <span class="built_in">test</span> add index normal_key(name, name_1, name_2);</span><br></pre></td></tr></table></figure>
+<p>至此，数据表table中，包含4个字段，具体情况如下：</p>
+<pre><code>+--------+--------------+------+-----+---------+----------------+
+|<span class="string"> Field  </span>|<span class="string"> Type         </span>|<span class="string"> Null </span>|<span class="string"> Key </span>|<span class="string"> Default </span>|<span class="string"> Extra          </span>|
++--------+--------------+------+-----+---------+----------------+
+|<span class="string"> id     </span>|<span class="string"> int(11)      </span>|<span class="string"> NO   </span>|<span class="string"> PRI </span>|<span class="string"> NULL    </span>|<span class="string"> auto_increment </span>|
+|<span class="string"> name   </span>|<span class="string"> varchar(255) </span>|<span class="string"> NO   </span>|<span class="string"> MUL </span>|<span class="string"> NULL    </span>|<span class="string">                </span>|
+|<span class="string"> name_1 </span>|<span class="string"> varchar(255) </span>|<span class="string"> NO   </span>|<span class="string">     </span>|<span class="string"> NULL    </span>|<span class="string">                </span>|
+|<span class="string"> name_2 </span>|<span class="string"> varchar(255) </span>|<span class="string"> NO   </span>|<span class="string">     </span>|<span class="string"> NULL    </span>|<span class="string">                </span>|
++--------+--------------+------+-----+---------+----------------+
+</code></pre><p>而查看数据表中index得：</p>
+<pre><code>+-------+------------+------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+|<span class="string"> Table </span>|<span class="string"> Non_unique </span>|<span class="string"> Key_name   </span>|<span class="string"> Seq_in_index </span>|<span class="string"> Column_name </span>|<span class="string"> Collation </span>|<span class="string"> Cardinality </span>|<span class="string"> Sub_part </span>|<span class="string"> Packed </span>|<span class="string"> Null </span>|<span class="string"> Index_type </span>|<span class="string"> Comment </span>|<span class="string"> Index_comment </span>|
++-------+------------+------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+|<span class="string"> test  </span>|<span class="string">          0 </span>|<span class="string"> PRIMARY    </span>|<span class="string">            1 </span>|<span class="string"> id          </span>|<span class="string"> A         </span>|<span class="string">      100288 </span>|<span class="string">     NULL </span>|<span class="string"> NULL   </span>|<span class="string">      </span>|<span class="string"> BTREE      </span>|<span class="string">         </span>|<span class="string">               </span>|
+|<span class="string"> test  </span>|<span class="string">          1 </span>|<span class="string"> normal_key </span>|<span class="string">            1 </span>|<span class="string"> name        </span>|<span class="string"> A         </span>|<span class="string">         200 </span>|<span class="string">     NULL </span>|<span class="string"> NULL   </span>|<span class="string">      </span>|<span class="string"> BTREE      </span>|<span class="string">         </span>|<span class="string">               </span>|
+|<span class="string"> test  </span>|<span class="string">          1 </span>|<span class="string"> normal_key </span>|<span class="string">            2 </span>|<span class="string"> name_1      </span>|<span class="string"> A         </span>|<span class="string">         200 </span>|<span class="string">     NULL </span>|<span class="string"> NULL   </span>|<span class="string">      </span>|<span class="string"> BTREE      </span>|<span class="string">         </span>|<span class="string">               </span>|
+|<span class="string"> test  </span>|<span class="string">          1 </span>|<span class="string"> normal_key </span>|<span class="string">            3 </span>|<span class="string"> name_2      </span>|<span class="string"> A         </span>|<span class="string">         200 </span>|<span class="string">     NULL </span>|<span class="string"> NULL   </span>|<span class="string">      </span>|<span class="string"> BTREE      </span>|<span class="string">         </span>|<span class="string">               </span>|
++-------+------------+------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+</code></pre><p>可看，当前数据表的除了主键索引以外，还有我们刚设置的联合索引normal_key。</p>
+<p>这个时候，我们利用<strong>explain</strong>命令看下相关查询语句：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">explain select * from <span class="built_in">test</span> <span class="built_in">where</span> name = <span class="string">'abc'</span>;</span><br><span class="line">explain select * from <span class="built_in">test</span> <span class="built_in">where</span> name = <span class="string">'abc'</span> and name_1 = <span class="string">"def"</span>;</span><br><span class="line">explain select * from <span class="built_in">test</span> <span class="built_in">where</span> name = <span class="string">'abc'</span> and name_1 = <span class="string">'def'</span> and name_2 = <span class="string">'ghi'</span>;</span><br></pre></td></tr></table></figure>
+<p>这些查询语句的结果都是使用索引，具体结果大家可以自行尝试。</p>
+<p>这里我们要引入一个<strong>“最左前缀”这个组合索引的基本原则</strong>。这个概念可以如此解释：<strong>如果查询条件检索时，只需要匹配联合索引中的最左顺序一个或多个字段，称为最左索引原则，或者叫最左前缀</strong>。所以，我们查看如下SQL语句时，得到的结果应该是不使用索引。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">explain select * from <span class="built_in">test</span> <span class="built_in">where</span> name_2 = <span class="string">'ghi'</span> and name = <span class="string">'abc'</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>然而实际上，还是使用索引的，不得不佩服MySQL强大的SQL优化器</strong>！</p>
+<h4 id="索引的正确使用姿势">索引的正确使用姿势</h4><p>当然，事实上，<strong>在整个数据库优化过程中，索引的利用永远是难点，所以，利用好你的explain工具，千万不要想当然</strong>！</p>
+<p>凡是都有两面性，所以索引的使用也会有代价产生，具体可以归纳为以下几点：</p>
+<ul>
+<li><strong>索引会占据更多的磁盘空间，很多时候索引甚至比数据本身还要大</strong>。不这现在磁盘的空间很容易达到TB级别，所以通常磁盘空间还未写满时，计算能力的瓶颈已经显现出来的。</li>
+<li><strong>当建立索引的字段发生更新时，会引发索引本身的更新，这将产生不小的计算开销</strong>。这直接决定使用索引的数据表必须是读多写少。</li>
+<li><strong>索引需要我们花费一些额外的时候来维护</strong>。MyISAM和Innodb类型的数据表存储结构会有不同，所以具体维护时也有些不同，比如MyISAM的索引写缓存由于断电可能造成索引的损坏，需要我们及时地手动修复。</li>
+</ul>
+<h3 id="锁写与等待">锁写与等待</h3><p>当有多个用户并发访问数据库中某一资源的时候，为了保证并发访问的一致性，数据库必须通过锁机制来协调这些访问。而<strong>锁机制也是影响数据库性能的一个重要点</strong>。</p>
+<p><strong>MySQL为MyISAM类型表提供了表级别的锁定，即当有请求对数据表有更新操作（如update)时，数据表就会被锁定，其他任何对当前表的操作将被排斥，甚至包括select查询</strong>。另外需要注意的是，<strong>更新操作有着默认高优先级，即当表锁释放后，更新操作将先获得锁定，然后才能轮到读取操作</strong>。此机制将可能引发以下情况：频繁更新操作将会使得读取操作长时间等待。</p>
+<p><strong>MySQL为Innodb类型表提供了行锁，即当有请求对数据表有更新操作时，数据表不是全表被锁定，而是更新的特定行，其他任何对当前行的操作将被排斥，但是对其他行的操作将不被限制</strong>。</p>
+<p>从概念上对比，似乎行锁要比表锁好。但这并不是绝对的，<strong>理论上就锁定本身而言，行锁定的开销并不比表锁小</strong>。比如对于update密集型的场景，行锁定并不是救世主，因为行锁单位锁定开销比表锁大，所以具体性能只能实测。</p>
+<h3 id="事务性表的性能">事务性表的性能</h3><p><strong>MySQL中Innodb类型表不仅支持行锁定，还支持事务</strong>。有时候，我们选择Innodb类型的数据表就是因为其支持事务。当然，如果我们没有在应用程序中使用事务操作的打算，而只是看中了其他特性，如行锁定，外键以及易于修复等，我们仍然可以使用它。</p>
+<p>Innodb实现事务是采用<strong>预写日志方式（WAL）</strong>完成的。当有事务提交时，Innodb首先将它写到内存中的事务日志缓冲区中，随后当事务日志写入磁盘时，Innodb才更新实际数据和索引。这里，事务日志写入磁盘的时机可以分为3种：</p>
+<ul>
+<li>innodb_flush_log_at_trx_commit=1。这个设置表示事务提交时立即将事务写入磁盘，同时实际数据和索引也更新。</li>
+<li>innodb_flush_log_at_trx_commit=0。这个设置表示事务提交时不立即将事务写入磁盘，而是每隔1秒写入磁盘文件一次，并且刷新到磁盘中，同时更新实际数据和索引。这种方式如果在事务提交和事务写入磁盘之间发生mysqld崩溃的话，那么在内存中的最近1秒的数据将会丢失，注意，是永久性丢失。</li>
+<li>innodb_flush_log_at_trx_commit=2。这个设置表示事务提交时立即写入磁盘，但没有刷新到磁盘，而是存放在磁盘缓冲区，每隔1秒刷新磁盘一次，同时更新数据和索引。这种方式如果发生mysqld崩溃的话，数据并不会丢失，因为存放在磁盘缓冲区的数据还是会刷新到磁盘中。但是如果操作系统崩溃的话，那就永久丢失了。</li>
+</ul>
+<p>显然，第2种方式性能最高，但是丢失数据的可能性也最大。</p>
+<p>另外，MySQL有一个选项会影响到上述3种方式的实现，它就是innodb_flush_method选项。我们可以将该选项设置为O_DIRECT，如下</p>
+<pre><code><span class="attribute">innodb_flush_method </span>=<span class="string"> O_DIRECT</span>
+</code></pre><p>如此一来，Innodb可以直接I/O，所有的读写操作将会跳过文件系统的系统缓冲区，提高I/O性能，当然，预写日志方式也就会随之改变。</p>
+<h3 id="使用查询缓存">使用查询缓存</h3><p><strong>使用查询缓存的目的很简单，那就是提高数据库查询数据的性能</strong>。</p>
+<p><strong>在默认情况下，MySQL是没有开启查询缓存功能</strong>的，我们可以进行以下配置进行开启（开启256MB的内存空间来缓存查询结果）：</p>
+<pre><code><span class="setting">query_cache_size = <span class="value"><span class="number">268435446</span></span></span>
+<span class="setting">query_cache_type = <span class="value"><span class="number">1</span></span></span>
+<span class="setting">query_cache_limit = <span class="value"><span class="number">1048576</span></span></span>
+</code></pre><p>查询缓存功能，不论是MyISAM还是Innodb类型，对于以select为主的应用显然性能会大增。但是令人遗憾的是，MySQL的缓存过期策略并不是十分令人满意。<strong>当一个数据表有更新操作后，那么涉及这个表的所有查询缓存均失效</strong>。话虽如此，但是对于select操作占绝大部分的应用，还是极大的福音。我们只要注意不要将其使用在select和update交叉混合的应用就可以了。</p>
+<p>另外，我们可以利用mysqlreport查看查询缓存的状态，如下所示：</p>
+<pre><code><span class="strong">__ Query Cache __</span><span class="strong">_____</span><span class="strong">_____</span><span class="strong">_____</span><span class="strong">_____</span><span class="strong">_____</span><span class="strong">_____</span><span class="strong">_____</span><span class="strong">_____</span><span class="strong">_____</span><span class="strong">_____</span>__
+Memory usage   17.11k of  16.00M  %Used:   0.10
+Block Fragmnt 100.00%
+Hits                2     0.0/s
+Inserts            13     0.0/s
+Insrt:Prune      13:1     0.0/s
+Hit:Insert     0.15:1
+</code></pre><p>很显示，当前缓存区大小为16M，而现在使用了17K，另外，Insrt:Prume代表查询结果进入缓存的次数和过期被删除的次数的比例，当然，这个比例越大，表示查询操作与更新操作相比更频繁，也就更适合使用查询缓存。</p>
+<h3 id="临时表">临时表</h3><p>我们利用mysqlreport时，可以发现有Using temporary的状态，如下：</p>
+<pre><code><span class="strong">__ Created Temp __</span><span class="strong">_____</span><span class="strong">_____</span><span class="strong">_____</span><span class="strong">_____</span><span class="strong">_____</span><span class="strong">_____</span><span class="strong">_____</span><span class="strong">_____</span><span class="strong">_____</span><span class="strong">_____</span><span class="emphasis">___</span>_
+Disk table         75     0.0/s
+Table             296     0.0/s    Size:  16.0M
+File               10     0.0/s
+</code></pre><p>当然，我们这里的要求就是<strong>尽量避免使用临时表，因为无论是在磁盘（Disk table），内存(Table)，还是在文件（File）中创建临时表，这都会是不小的开销</strong>。</p>
+<h3 id="线程池">线程池</h3><p>与临时表类似，我们可以从mysqlreport中看到线程的使用情况：</p>
+<pre><code><span class="strong">__ Threads __</span><span class="strong">_____</span><span class="strong">_____</span><span class="strong">_____</span><span class="strong">_____</span><span class="strong">_____</span><span class="strong">_____</span><span class="strong">_____</span><span class="strong">_____</span><span class="strong">_____</span><span class="strong">_____</span><span class="strong">_____</span>
+Running             1 of    1
+Cached              1 of    8      %Hit:  97.44
+Created             2     0.0/s
+Slow                0       0/s
+</code></pre><p>这里我们看到，线程池的命中情况为97.44%，当然，命中率100%当然是最好的。一个比较好的以夷伐夷是在应用中，<strong>尽量使用持久连接，这将在一定程度上减少线程的重复创建</strong>。</p>
+<h3 id="反范式化设计">反范式化设计</h3><p>在学校的时候，数据库老师都会教我们，设计数据库的时候，要遵守一定的范式。比如说<strong>第三范式</strong>。简单的说，<strong>第三范式要求在一个数据表中，非主键字段这之间不能存在依赖关系，这样可以避免更新异常、插入异常和删除异常，保证关系的一致性，并且减少数据冗余</strong>。</p>
+<p>比如以下表的设计就是遵循范式：</p>
+<pre><code>（用户ID，好友ID）
+（用户ID，用户昵称，用户邮箱，注册时间，联系电话）
+</code></pre><p>如果这是学校考试，那绝对是满分呐。我们对这两表中的数据进行查询，比如查询某用户的其好友的昵称。这里，我们可以有两种查询方式：</p>
+<ul>
+<li>将两个表进行一次联合查询；</li>
+<li>先在第一个表中查询出所有好友的ID，然后在第二个表中查询这些ID对应的昵称。</li>
+</ul>
+<p>显然，不论是采用哪一种方式，都需要打开两张数据表。那么，如果我们这么设计呢：</p>
+<pre><code>（用户ID，好友ID，用户昵称）
+（用户ID，用户昵称，用户邮箱，注册时间，联系电话）
+</code></pre><p>这样一来，刚刚查询好友昵称的需求只需要打开第一张表就可以完成，当然付出的代价就是数据有冗余，而且进行数据更新时，可能会对数据造成不一致。但是实际中，有多少用户会一直修改它的昵称呢？所以，<strong>实际中，引入一些反范式的设计也是可行的，当然前提是，它的性能将会提高</strong>。</p>
+<h3 id="放弃关系型数据库">放弃关系型数据库</h3><p>有些时候，相较于传统关系型数据库，我们采用Key-Value形式的数据库更加简单有效。具体可以阅读下相关资料 —— <a href="http://en.wikipedia.org/wiki/NoSQL" target="_blank" rel="external">NoSQL</a>。</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/性能/" rel="tag">#性能</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/02/14//2015/02-14-0.html/" rel="prev">经典算法巡礼(八) -- 查找之二叉查找树</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/01/30//2015/01-30-0.html/" rel="next">构建高性能服务器 -- 负载均衡篇</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+            </div>
+
+            
+
+            
+              <div class="comments" id="comments">
+                
+              </div>
+            
+        </div>
+
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="zhujiefirst" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">zhujiefirst</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">学习总结 思考感悟 知识管理</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">45</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">分類</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-name">標籤</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#写在前面"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#利其器"><span class="nav-number">2.</span> <span class="nav-text">利其器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#友好的MySQL状态报告"><span class="nav-number">2.1.</span> <span class="nav-text">友好的MySQL状态报告</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解释查询"><span class="nav-number">2.2.</span> <span class="nav-text">解释查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#慢查询分析"><span class="nav-number">2.3.</span> <span class="nav-text">慢查询分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#善其事"><span class="nav-number">3.</span> <span class="nav-text">善其事</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#正确使用索引"><span class="nav-number">3.1.</span> <span class="nav-text">正确使用索引</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#什么是索引"><span class="nav-number">3.1.1.</span> <span class="nav-text">什么是索引</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#初识索引"><span class="nav-number">3.1.2.</span> <span class="nav-text">初识索引</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用组合索引"><span class="nav-number">3.1.3.</span> <span class="nav-text">使用组合索引</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#索引的正确使用姿势"><span class="nav-number">3.1.4.</span> <span class="nav-text">索引的正确使用姿势</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#锁写与等待"><span class="nav-number">3.2.</span> <span class="nav-text">锁写与等待</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事务性表的性能"><span class="nav-number">3.3.</span> <span class="nav-text">事务性表的性能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用查询缓存"><span class="nav-number">3.4.</span> <span class="nav-text">使用查询缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#临时表"><span class="nav-number">3.5.</span> <span class="nav-text">临时表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线程池"><span class="nav-number">3.6.</span> <span class="nav-text">线程池</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反范式化设计"><span class="nav-number">3.7.</span> <span class="nav-text">反范式化设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#放弃关系型数据库"><span class="nav-number">3.8.</span> <span class="nav-text">放弃关系型数据库</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+        <div class="footer-inner">
+            <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhujiefirst</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+        </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+</div>
+
+<script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.4"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.4"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.4" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/js/search-toggle.js"></script>
+
+
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.4" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if (isDesktop() && CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    });
+  </script>
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        if (CONFIG.sidebar === 'always') {
+            displaySidebar();
+        }
+    });
+</script>
+
+
+
+
+
+
+
+
+<!-- lazyload -->
+<script type="text/javascript" src="/js/lazyload.js"></script>
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery("#posts img").lazyload({
+            placeholder: "/images/loading.gif",
+            effect: "fadeIn"
+        });
+    });
+</script>
+</body>
+</html>

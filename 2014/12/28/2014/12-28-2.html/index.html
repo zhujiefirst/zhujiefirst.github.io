@@ -1,0 +1,650 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+    
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+  <link href='//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.4"/>
+
+
+    <meta name="description" content="学习总结 思考感悟 知识管理" />
+
+
+
+  <meta name="keywords" content="排序," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.4" />
+
+
+<meta name="description" content="一、优先队列很多时候，我们需要处理有序的元素，但不一定要求它们全部有序，或是不一定要一次就将它们排序。比如你可能启动了若干个定时器，那么下一次处理定时器事件只需要考虑距离现在时间最近的定时器即可，定时器触发时间无须全部有序，只需要处理优化级最高的定时器即可。
+这种情况下，一个合适的数据结构应该支持两种操作：删除最小元素和插入元素。而且这两种操作的效率应该在可接受范围之内。这种数据类型叫优先队列。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="经典算法巡礼(七) -- 排序之堆排序">
+<meta property="og:url" content="http://codingforever.com/2014/12/28//2014/12-28-2.html/index.html">
+<meta property="og:site_name" content="Codingforever">
+<meta property="og:description" content="一、优先队列很多时候，我们需要处理有序的元素，但不一定要求它们全部有序，或是不一定要一次就将它们排序。比如你可能启动了若干个定时器，那么下一次处理定时器事件只需要考虑距离现在时间最近的定时器即可，定时器触发时间无须全部有序，只需要处理优化级最高的定时器即可。
+这种情况下，一个合适的数据结构应该支持两种操作：删除最小元素和插入元素。而且这两种操作的效率应该在可接受范围之内。这种数据类型叫优先队列。">
+<meta property="og:updated_time" content="2015-06-19T16:09:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="经典算法巡礼(七) -- 排序之堆排序">
+<meta name="twitter:description" content="一、优先队列很多时候，我们需要处理有序的元素，但不一定要求它们全部有序，或是不一定要一次就将它们排序。比如你可能启动了若干个定时器，那么下一次处理定时器事件只需要考虑距离现在时间最近的定时器即可，定时器触发时间无须全部有序，只需要处理优化级最高的定时器即可。
+这种情况下，一个合适的数据结构应该支持两种操作：删除最小元素和插入元素。而且这两种操作的效率应该在可接受范围之内。这种数据类型叫优先队列。">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post'
+  };
+</script>
+
+    <title> 经典算法巡礼(七) -- 排序之堆排序 // Codingforever </title>
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+<!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+
+
+
+
+<div class="container one-column page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Codingforever</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-home"></i> <br />
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            標籤
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+        </div>
+    </header>
+
+    <main id="main" class="main">
+        <div class="main-inner">
+            <div id="content" class="content">
+                
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              经典算法巡礼(七) -- 排序之堆排序
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於
+          <time itemprop="dateCreated" datetime="2014-12-28T00:00:00+08:00" content="12月 28 2014">
+            12月 28 2014
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分類於
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a></span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h2 id="一、优先队列">一、优先队列</h2><p>很多时候，我们需要处理有序的元素，但不一定要求它们全部有序，或是不一定要一次就将它们排序。比如你可能启动了若干个定时器，那么下一次处理定时器事件只需要考虑距离现在时间最近的定时器即可，定时器触发时间无须全部有序，只需要处理优化级最高的定时器即可。</p>
+<p>这种情况下，一个合适的数据结构应该支持两种操作：<strong>删除最小元素</strong>和<strong>插入元素</strong>。而且这两种操作的效率应该在可接受范围之内。这种数据类型叫<a href="http://zh.wikipedia.org/wiki/%E5%84%AA%E5%85%88%E4%BD%87%E5%88%97" target="_blank" rel="external"><strong>优先队列</strong></a>。</p>
+<h2 id="二、堆的定义">二、堆的定义</h2><p><a href="http://zh.wikipedia.org/zh/%E4%BA%8C%E5%8F%89%E5%A0%86" target="_blank" rel="external"><strong>二叉堆</strong></a>能够很好的实现<strong>优先队列</strong>的基本操作。在二叉堆中，每个元素都要保证大于等于它的孩子结点。相应的，这些孩子结点同样要大于等于它们的孩子结点，以此类推。当然，这样的二叉堆又称<strong>最大堆</strong>。与最大堆类似，若每个元素均小于等于它的孩子结点，则称<strong>最小堆</strong>。之前提到的定时器触发问题，它所适合的数据结构应该为最小堆。</p>
+<h2 id="三、二叉堆表示法">三、二叉堆表示法</h2><p>二叉堆是<a href="http://zh.wikipedia.org/zh/%E4%BA%8C%E5%8F%89%E6%A0%91" target="_blank" rel="external">完全二叉树</a>，因此可以只用数组来表示二叉堆。具体方法是将二叉树的结点按照层级顺序放入数组中，根结点放在位置1，它的子结点放在位置2和3，而子结点的子结点则放在位置4，5，6，7，以此类推。而事实上，很容易就可以在数组中表示二叉树，即位置k的结点，它的子结点在数组中的位置则为2k和2k+1。</p>
+<h2 id="四、堆的操作">四、堆的操作</h2><p>在堆的有序化过程中，我们会碰到以下两种情况：</p>
+<ul>
+<li>当某个结点的优先级上升(或者在堆底中加入一个新的元素)时，我们需要<strong>由下至上</strong>恢复堆的有序性；</li>
+<li>当某个结点的优先级下降(比如根结点被替换为一个新的元素)时，我们需要<strong>由上至下</strong>恢复堆的有序列性。</li>
+</ul>
+<p>为了解决以上两个问题，就有了下面将要描述的<strong>上浮(swin)</strong>和<strong>下沉(sink)</strong>操作。</p>
+<p><strong>由下至上的有序化（上浮）</strong></p>
+<p>由于某结点的变化，造成了该结点比它的父结点更大（最大堆情况），从而影响了堆的有序性。比如堆中有新的元素加入堆底，而该新加入元素又比它的父结点更大，则需要将其与它的父结点交换位置，从而恢复它及其父结点的有序性。当然，这个过程会不停重复，直至堆中元素全部有序为止。整个过程就是之前所说的由下至上的上浮过程。具体<a href="https://golang.org/" target="_blank" rel="external">golang</a>可参考如下：</p>
+<pre><code>func (<span class="keyword">this</span> *HeapPQ) swim(idx <span class="keyword">int</span>) {
+    <span class="keyword">for</span> idx &gt; <span class="number">1</span> &amp;&amp; <span class="keyword">this</span>.less(idx/<span class="number">2</span>, idx) == <span class="keyword">true</span> {
+        <span class="keyword">this</span>.exch(idx/<span class="number">2</span>, idx)
+        idx /= <span class="number">2</span>
+    }
+}
+</code></pre><p><strong>由上至下的有序化（下沉）</strong>  </p>
+<p>由于某结点的变化，造成了该结点比它的子结点更小（最大堆情况），从而影响了堆的有序性。比如删除堆中根结点的元素，并原先在堆底的元素放置于根结点位置。事实上这就是最大堆中取最大元素的操作。当然，为了保持堆的有序性，则对新的根结点进行下沉操作，若根结点比它的子结点中的任意一个小，则将根结点与此结点交换，同时将该子结点进行重复操作，直到堆恢复有序性为止。整个过程就是之前的说的由上至下的下沉过程。具体<a href="https://golang.org/" target="_blank" rel="external">golang</a>可参考如下：</p>
+<pre><code>func (<span class="keyword">this</span> *HeapPQ) sink(idx <span class="keyword">int</span>) {
+    <span class="keyword">for</span> <span class="number">2</span>*idx &lt;= <span class="keyword">this</span>.Size() {
+        child := 2 * idx
+        <span class="keyword">if</span> child &lt; <span class="keyword">this</span>.Size() &amp;&amp; <span class="keyword">this</span>.less(child, child+1) == <span class="keyword">true</span> {
+            child++
+        }
+        <span class="keyword">if</span> <span class="keyword">this</span>.less(idx, child) != <span class="keyword">true</span> {
+            <span class="keyword">break</span>
+        }
+        <span class="keyword">this</span>.exch(idx, child)
+        idx = child
+    }
+}
+</code></pre><h2 id="五、堆排序">五、堆排序</h2><p>堆排序可以分为两个阶段：</p>
+<ul>
+<li><strong>堆的构造阶段</strong></li>
+<li><strong>下沉排序阶段</strong></li>
+</ul>
+<p>构造一个堆，可以用以下两种方法进行。第一种，从左至右遍历数组，用swin()保证扫描指针左侧的所有元素已经是一棵堆有序的完全树即可。第二种，事实上是更聪明更高效的方法。就是<strong>从右至左用sink()函数构造子堆</strong>。开始时我们只需要扫描数组中的一半元素，所以是更高效的方法。</p>
+<p>第二个阶段，即下沉排序阶段，我们可以将堆中最大元素删除，然后放入堆缩小后数组空出的位置。</p>
+<p>整个过程用代码表述如下：</p>
+<pre><code>func (<span class="keyword">this</span> *HeapSort) sink(a []Comparable, i <span class="typename">int</span>, j <span class="typename">int</span>, compare Compare) {
+    <span class="string">b :</span>= a[<span class="string">i:</span>j]
+    b = append(make([]Comparable, <span class="number">1</span>), b...)
+    <span class="string">size :</span>= len(b) - <span class="number">1</span>
+
+    func(idx <span class="typename">int</span>) {
+        <span class="keyword">for</span> <span class="number">2</span>*idx &lt;= size {
+            <span class="string">child :</span>= <span class="number">2</span> * idx
+            <span class="comment">// fmt.Println(idx, child, size)</span>
+            <span class="keyword">if</span> child &lt; size &amp;&amp; compare(b[child], b[child+<span class="number">1</span>]) &lt; <span class="number">0</span> {
+                child++
+            }
+            <span class="keyword">if</span> compare(b[idx], b[child]) &lt; <span class="number">0</span> {
+                <span class="keyword">this</span>.exch(b, idx, child)
+                idx = child
+                <span class="keyword">continue</span>
+            }
+            <span class="keyword">break</span>
+        }
+    }(<span class="number">1</span>)
+
+    copy(a[<span class="string">i:</span>j], b[<span class="number">1</span>:])
+}
+
+<span class="comment">// Sort中参数类型Comparable为统一的可比较接口，若为整数数组排序，则Comparable为int即可</span>
+<span class="comment">// Sort中参数类型Compare为配合Comparable接口的比较方法，若为整数数组排序，则Compare即满足a int &lt; a int即可</span>
+func (<span class="keyword">this</span> *HeapSort) Sort(a []Comparable, compare Compare) {
+    <span class="string">n :</span>= len(a)
+
+    <span class="comment">// 堆构造</span>
+    <span class="keyword">for</span> <span class="string">i :</span>= n / <span class="number">2</span>; i &gt;= <span class="number">0</span>; i-- {
+        <span class="keyword">this</span>.sink(a, i, n, compare)
+    }
+
+    <span class="comment">// 堆排序的下沉阶段</span>
+    <span class="keyword">for</span> <span class="string">i :</span>= n - <span class="number">1</span>; i &gt; <span class="number">1</span>; {
+        <span class="keyword">this</span>.exch(a, <span class="number">0</span>, i)
+        i--
+        <span class="keyword">this</span>.sink(a, <span class="number">0</span>, i, compare)
+    }
+}
+</code></pre><p>至于堆排序的效率，在sink()函数中，比较操作最多进行2logN次，所以排序整个数组最多需要N<em>2logN次比较操作，因此<em>*堆排序的时间复杂度为O(NlogN)</em></em>，所以可以用于大规模数据的排序。</p>
+<p><strong>堆排序是能够同时最优地利用空间和时间的方法，即使在最坏的情况下，它也能保证使用~2NlogN次比较和恒定的额外空间</strong>。但现代系统的许多应用很少使用它，因为<strong>堆排序无法有效利用缓存</strong>。数组元素很少和相邻的其他元素进行比较，因此缓存未命中的次数要远远高于大多数比较都在相邻元素间进行的算法，如快速排序，归并排序，甚至是希尔排序（希尔排序算是没有多少相信元素间的比较的算法了）。</p>
+<p>但是，<strong>用堆实现优先队列在现代应用程序中却起着重要的作用，因为它能在插入操作和删除最大元素操作保证对数级别的运行时间（logN）</strong>。</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/排序/" rel="tag">#排序</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/01/22//2015/01-22-0.html/" rel="prev">构建高性能服务器 -- 指标篇</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/12/28//2014/12-28-1.html/" rel="next">经典算法巡礼(六) -- 排序之快速排序</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+            </div>
+
+            
+
+            
+              <div class="comments" id="comments">
+                
+              </div>
+            
+        </div>
+
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="zhujiefirst" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">zhujiefirst</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">学习总结 思考感悟 知识管理</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">45</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">分類</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-name">標籤</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、优先队列"><span class="nav-number">1.</span> <span class="nav-text">一、优先队列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、堆的定义"><span class="nav-number">2.</span> <span class="nav-text">二、堆的定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、二叉堆表示法"><span class="nav-number">3.</span> <span class="nav-text">三、二叉堆表示法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、堆的操作"><span class="nav-number">4.</span> <span class="nav-text">四、堆的操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、堆排序"><span class="nav-number">5.</span> <span class="nav-text">五、堆排序</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+        <div class="footer-inner">
+            <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhujiefirst</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+        </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+</div>
+
+<script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.4"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.4"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.4" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/js/search-toggle.js"></script>
+
+
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.4" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if (isDesktop() && CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    });
+  </script>
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        if (CONFIG.sidebar === 'always') {
+            displaySidebar();
+        }
+    });
+</script>
+
+
+
+
+
+
+
+
+<!-- lazyload -->
+<script type="text/javascript" src="/js/lazyload.js"></script>
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery("#posts img").lazyload({
+            placeholder: "/images/loading.gif",
+            effect: "fadeIn"
+        });
+    });
+</script>
+</body>
+</html>

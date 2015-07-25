@@ -1,0 +1,611 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+    
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+  <link href='//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.4"/>
+
+
+    <meta name="description" content="学习总结 思考感悟 知识管理" />
+
+
+
+  <meta name="keywords" content="小技巧," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.4" />
+
+
+<meta name="description" content="这几天用go实现项目原有的xml数据导入服务器新设计的数据库中，以实现数据从客户机向服务器的转移。由于服务器的接口协议为json,所以面临的问题就是从xml解析出相应的struct，并将其转换为json。在这个过程中，go中xml与json库就不得不赞一下了。
+只需简单的定义struct的结构，并用相应的标签表示xml或者json中的字段名称即可，编码方便性不言而喻。具体定义可以参见如下：
+typ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Go中实现Set类型">
+<meta property="og:url" content="http://codingforever.com/2014/11/14//2014/11-14-0.html/index.html">
+<meta property="og:site_name" content="Codingforever">
+<meta property="og:description" content="这几天用go实现项目原有的xml数据导入服务器新设计的数据库中，以实现数据从客户机向服务器的转移。由于服务器的接口协议为json,所以面临的问题就是从xml解析出相应的struct，并将其转换为json。在这个过程中，go中xml与json库就不得不赞一下了。
+只需简单的定义struct的结构，并用相应的标签表示xml或者json中的字段名称即可，编码方便性不言而喻。具体定义可以参见如下：
+typ">
+<meta property="og:updated_time" content="2015-06-19T16:09:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Go中实现Set类型">
+<meta name="twitter:description" content="这几天用go实现项目原有的xml数据导入服务器新设计的数据库中，以实现数据从客户机向服务器的转移。由于服务器的接口协议为json,所以面临的问题就是从xml解析出相应的struct，并将其转换为json。在这个过程中，go中xml与json库就不得不赞一下了。
+只需简单的定义struct的结构，并用相应的标签表示xml或者json中的字段名称即可，编码方便性不言而喻。具体定义可以参见如下：
+typ">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post'
+  };
+</script>
+
+    <title> Go中实现Set类型 // Codingforever </title>
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+<!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+
+
+
+
+<div class="container one-column page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Codingforever</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-home"></i> <br />
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            標籤
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+        </div>
+    </header>
+
+    <main id="main" class="main">
+        <div class="main-inner">
+            <div id="content" class="content">
+                
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              Go中实现Set类型
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於
+          <time itemprop="dateCreated" datetime="2014-11-14T00:00:00+08:00" content="11月 14 2014">
+            11月 14 2014
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分類於
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/golang/" itemprop="url" rel="index"><span itemprop="name">golang</span></a></span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>这几天用go实现项目原有的xml数据导入服务器新设计的数据库中，以实现数据从客户机向服务器的转移。由于服务器的接口协议为json,所以面临的问题就是从xml解析出相应的struct，并将其转换为json。在这个过程中，go中xml与json库就不得不赞一下了。</p>
+<p>只需简单的定义struct的结构，并用相应的标签表示xml或者json中的字段名称即可，编码方便性不言而喻。具体定义可以参见如下：</p>
+<pre><code><span class="typedef"><span class="keyword">type</span> <span class="type">XmlSample</span> struct <span class="container">{
+    <span class="type">A</span> <span class="title">int</span> `<span class="title">xml</span>:"<span class="type">AField</span>"`
+    <span class="type">B</span> <span class="title">string</span> `<span class="title">xml</span>:"<span class="type">BField</span>"`
+}</span></span>
+
+<span class="typedef"><span class="keyword">type</span> <span class="type">JsonSample</span> struct <span class="container">{
+    <span class="type">A</span> <span class="title">int</span> `<span class="title">json</span>:"<span class="type">AField</span>"`
+    <span class="type">B</span> <span class="title">string</span> `<span class="title">json</span>:"<span class="type">BField</span>"`
+}</span></span>
+</code></pre><p>那么这个和“go中如何实现set”有半毛钱关系？是没有关系，鄙人好闲扯。那么，再来看下go中如何实现set。</p>
+<p>起因是这样的：某天，鄙人欲实现一不重复随机数生成器，即将产生的随机数放入set中，如何可保证产生的随机数的唯一性。但是，鄙人发现go中没有set这样的container！这可怎么破？只能自己实现个了。既然go中有map,索性基于map实现个吧。纳尼？map是map,如何将其转成set!哈哈，map中的keys不是需要保证其唯一性么，我们只是利用map中keys而已。</p>
+<p>首先我们定义一个struct，以存放set中元素，定义如下：</p>
+<pre><code>type Set <span class="class"><span class="keyword">struct</span> {</span>
+    set map[<span class="class"><span class="keyword">interface</span>{</span>}]<span class="class"><span class="keyword">struct</span>{</span>}
+}
+</code></pre><p>map[interface{}]struct{}中keys的类型比较容易理解，因为set要适合所有类型元素，所以interface{}类型最为合适。但是values的类型是个什么东东？可以是个简单的bool型么，或者int型也可以嘛。是的，values的具体类型当然可以是bool,int，如果想作孽，可以定义成map[stirng]string也可，但是为什么要选择struct{}呢？嗯，原因么，因为鄙人在google group上看到说,struct{}可以占有较少的空间（其实是不占空间，具体鄙人才疏学浅，未能得证），所以采用以上定义方法。</p>
+<p>如此一定义，便可亮出Set可以接收的方法，无非是InSet(), Insert(), Size(), Clear()这几样，如下：</p>
+<pre><code><span class="func"><span class="keyword">func</span> <span class="params">(s *Set)</span></span> <span class="type">InSet</span>(e interface{}) bool {
+    <span class="number">_</span>, ok := s.<span class="keyword">set</span>[e]
+    <span class="keyword">return</span> ok
+}
+
+<span class="func"><span class="keyword">func</span> <span class="params">(s *Set)</span></span> <span class="type">Insert</span>(e interface{}) bool {
+    <span class="keyword">in</span> := s.<span class="type">InSet</span>(e)
+    s.<span class="keyword">set</span>[e] = <span class="class"><span class="keyword">struct</span></span>{}{}
+    <span class="keyword">return</span> <span class="keyword">in</span>
+}
+
+<span class="func"><span class="keyword">func</span> <span class="params">(s *Set)</span></span> <span class="type">Clear</span>() {
+    s.<span class="keyword">set</span> = make(<span class="built_in">map</span>[interface{}]<span class="type">Struct</span>{})
+}
+
+<span class="func"><span class="keyword">func</span> <span class="params">(s *Set)</span></span> <span class="type">Size</span>() int {
+    <span class="keyword">return</span> len(s.<span class="keyword">set</span>)
+}
+</code></pre><p>额，好像还少了点东西。怎么遍历元素呢？当然，我是指不暴露其内部实现的遍历。go中range又只能支持slice,map,chan。那么，再增加个方法，将内部set返回，如下：</p>
+<pre><code><span class="func"><span class="keyword">func</span> <span class="params">(s *Set)</span></span> <span class="type">Range</span>() <span class="built_in">map</span>[interface{}]<span class="class"><span class="keyword">struct</span></span>{}{
+    <span class="keyword">return</span> s.<span class="keyword">set</span>
+}
+</code></pre><p>Set需要遍历时，只需for i, v := range s.Range()即可。嗯，不是说不暴露其内部实现么，Range方法一出，看返回值大家都知道啦。额，鄙人未曾想到更甚的方法，暂时就这样吧。</p>
+<p>BTW, 这述代码中可以将struct{}先type成自定义None类型，这样代码就更具体美感了。嘿嘿。</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/小技巧/" rel="tag">#小技巧</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/11/16//2014/11-16-0.html/" rel="prev">如何生成不重复随机数</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/08/09//2014/08-09-2.html/" rel="next">编程语言的发展之路 — 读《代码的未来》</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+            </div>
+
+            
+
+            
+              <div class="comments" id="comments">
+                
+              </div>
+            
+        </div>
+
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="zhujiefirst" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">zhujiefirst</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">学习总结 思考感悟 知识管理</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">45</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">分類</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-name">標籤</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <p class="post-toc-empty">此文章未包含目錄</p>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+        <div class="footer-inner">
+            <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhujiefirst</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+        </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+</div>
+
+<script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.4"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.4"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.4" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/js/search-toggle.js"></script>
+
+
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.4" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if (isDesktop() && CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    });
+  </script>
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        if (CONFIG.sidebar === 'always') {
+            displaySidebar();
+        }
+    });
+</script>
+
+
+
+
+
+
+
+
+<!-- lazyload -->
+<script type="text/javascript" src="/js/lazyload.js"></script>
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery("#posts img").lazyload({
+            placeholder: "/images/loading.gif",
+            effect: "fadeIn"
+        });
+    });
+</script>
+</body>
+</html>

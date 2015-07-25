@@ -1,0 +1,632 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+    
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+  <link href='//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.4"/>
+
+
+    <meta name="description" content="学习总结 思考感悟 知识管理" />
+
+
+
+  <meta name="keywords" content="查找," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.4" />
+
+
+<meta name="description" content="理论说概念二叉查找树是计算机科学中最重要的算法之一，它将链表插入的灵活性和有序数组查找的高效性结合在一起，即同时拥有插入灵活性和查找高效性的一种符号表实现。
+性能我们知道，链表以插入灵活性闻名，但是它的实现直接导致在查找效率上不是如此优美，平均情况下的成本数量级为O(N/2)，最坏情况下为O(N)。而有序数组查找时利用二分法直接将查找效率提高至平均情况和最坏情况均为对数级别O(lgN)，而查找情况">
+<meta property="og:type" content="article">
+<meta property="og:title" content="经典算法巡礼(八) -- 查找之二叉查找树">
+<meta property="og:url" content="http://codingforever.com/2015/02/14//2015/02-14-0.html/index.html">
+<meta property="og:site_name" content="Codingforever">
+<meta property="og:description" content="理论说概念二叉查找树是计算机科学中最重要的算法之一，它将链表插入的灵活性和有序数组查找的高效性结合在一起，即同时拥有插入灵活性和查找高效性的一种符号表实现。
+性能我们知道，链表以插入灵活性闻名，但是它的实现直接导致在查找效率上不是如此优美，平均情况下的成本数量级为O(N/2)，最坏情况下为O(N)。而有序数组查找时利用二分法直接将查找效率提高至平均情况和最坏情况均为对数级别O(lgN)，而查找情况">
+<meta property="og:image" content="http://codingforever.com/img/2015-02-14-0.png">
+<meta property="og:image" content="http://codingforever.com/img/2015-02-14-1.png">
+<meta property="og:updated_time" content="2015-07-25T07:23:08.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="经典算法巡礼(八) -- 查找之二叉查找树">
+<meta name="twitter:description" content="理论说概念二叉查找树是计算机科学中最重要的算法之一，它将链表插入的灵活性和有序数组查找的高效性结合在一起，即同时拥有插入灵活性和查找高效性的一种符号表实现。
+性能我们知道，链表以插入灵活性闻名，但是它的实现直接导致在查找效率上不是如此优美，平均情况下的成本数量级为O(N/2)，最坏情况下为O(N)。而有序数组查找时利用二分法直接将查找效率提高至平均情况和最坏情况均为对数级别O(lgN)，而查找情况">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post'
+  };
+</script>
+
+    <title> 经典算法巡礼(八) -- 查找之二叉查找树 // Codingforever </title>
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+<!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+
+
+
+
+<div class="container one-column page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Codingforever</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-home"></i> <br />
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            標籤
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+        </div>
+    </header>
+
+    <main id="main" class="main">
+        <div class="main-inner">
+            <div id="content" class="content">
+                
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              经典算法巡礼(八) -- 查找之二叉查找树
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於
+          <time itemprop="dateCreated" datetime="2015-02-14T00:00:00+08:00" content="2月 14 2015">
+            2月 14 2015
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分類於
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a></span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h2 id="理论说">理论说</h2><h3 id="概念">概念</h3><p><a href="http://zh.wikipedia.org/zh/%E4%BA%8C%E5%85%83%E6%90%9C%E5%B0%8B%E6%A8%B9" target="_blank" rel="external">二叉查找树</a>是计算机科学中最重要的算法之一，它将<a href="http://zh.wikipedia.org/zh/%E9%93%BE%E8%A1%A8" target="_blank" rel="external">链表</a>插入的灵活性和<a href="http://baike.baidu.com/view/3792536.htm" target="_blank" rel="external">有序数组</a>查找的高效性结合在一起，即同时拥有插入灵活性和查找高效性的一种符号表实现。</p>
+<h3 id="性能">性能</h3><p>我们知道，链表以插入灵活性闻名，但是它的实现直接导致在查找效率上不是如此优美，<strong>平均情况下的成本数量级为O(N/2)，最坏情况下为O(N)</strong>。而有序数组查找时利用二分法直接将查找效率提高至<strong>平均情况和最坏情况均为对数级别O(lgN)</strong>，而查找情况下却也丑陋不堪，<strong>平均情况下增长数量级为O(N/2)，最坏情况下为O(N)</strong>。二叉查找树结合两者的优势，<strong>在平均情况下查找和插入均提高至O(lgN)，最坏情况下为O(N)</strong>。</p>
+<h3 id="数据结构">数据结构</h3><p>二叉查找树所使用的数组结构由结点组成，每个结点均包含指向其他指点的指针(可以为空)。在二叉树中，每个结点有且只能有一个父结点，即只能有一个另外的结点包含指向该结点的指针(树的根结点除外)，而每个结点都有左右两个分别指向不同结点的指针，称之为左子指针和右子指针，被指向的两个结点分别为该结点的左子结点和右子结点(可以为nil，即没有相应的子结点)。同时，二叉查找树有一个重要的性质，即结点的左子结点及其左子结点的所有递归子结点的值均小于该结点，而右子结点及其右子结点的所有递归所有子结点的值均大于该结点。这个特性使得该树成为一个按一定方式有序的树，从而支持高效查询。</p>
+<p>一棵典型的二叉查找树如下图所示：</p>
+<p><img src="/img/2015-02-14-0.png" alt=""></p>
+<p>如图中所示，结点S为二叉查找树的根结点，它是没有父结点的，但是拥有两个子结点，左子结点为E，父子结点为X。同时，结点E又拥有两个子结点，而结点X没有子结点。另外，由于二叉查找树的性质，结点S,E,X的大小 为E&lt;S&lt;X。</p>
+<h2 id="实践说">实践说</h2><p>我们实现二叉查找树中几个常用的接口，均以golang实现。</p>
+<h3 id="结点定义">结点定义</h3><p>我们首先定义结点的数据结构，根据<strong>“理论说”</strong>中表述，结点必须包含指向左子结点和右子结点的两个指针。另外，结点是数据承载的容器，所以还必须包括与数据相关的字段。我们将结点定义如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Key <span class="typename">string</span></span><br><span class="line"><span class="keyword">type</span> Value <span class="typename">string</span></span><br><span class="line"><span class="keyword">type</span> Node <span class="keyword">struct</span> &#123;</span><br><span class="line">	key         Key</span><br><span class="line">	value       Value</span><br><span class="line">	left, right *Node</span><br><span class="line">	N           <span class="typename">int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上述结构中，我们包含了指向子结点的两个指针，而且具有一对Key-Value对，这表明我们结点中所存储数据为Key-Value对，另外N为结点计数器，值为以该结点为根结点的子树的结点总数，如<strong>“基础说”</strong>中E结点的N值为5。</p>
+<h3 id="二叉查找树定义">二叉查找树定义</h3><p>定义二叉查找树，有了<strong>“结点定义”</strong>后，该定义非常方便，如下所示：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> BST <span class="keyword">struct</span> &#123;</span><br><span class="line">	root *Node</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由代码段明显可知，二叉查找树的定义，只要直接保存其根结点即可。</p>
+<h3 id="二叉查找树一般性接口定义">二叉查找树一般性接口定义</h3><p>一般来说，二叉查找树具有以下几个类型的接口：</p>
+<ul>
+<li>Size：二叉查找树结点数</li>
+<li>Get：从二叉查找树中获取相应的值</li>
+<li>Put：将相应的值插入到二叉查找树中</li>
+<li>Min：从二叉查找树中获取最小值</li>
+<li>Max：从二叉查找树中获取最大值</li>
+<li>Floor：从二叉查找树中获取比给定值小的且是最大的值，即向下取整</li>
+<li>Ceiling：从二叉查找树中获比给定值大的且是最小的值，即向上取整</li>
+<li>Select：从二叉查找树中获取第k个结点的值（从0开始）</li>
+<li>Rank: Select接口的反操作，即从二叉查找树中获取给定值的结点的排序值</li>
+<li>DeleteMin：删除二叉查找树中最小值</li>
+<li>DeleteMax：删除二叉查找树中最大值</li>
+<li>Delete：删除指定结点</li>
+<li>Travel: 遍历二叉查找树</li>
+</ul>
+<h3 id="接口实现：Size">接口实现：Size</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">func</span> (this *BST) Size() <span class="typename">int</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> this.size(this.root)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">func</span> (this *BST) size(n *Node) <span class="typename">int</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> n != <span class="constant">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> n.N</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由于我们在定义结点结构体的时候，特别增加字段N表示以该结点为根结点的子树的结点数，所以Size()接口的实现非常方便，直接返回N字段的值即可。</p>
+<h3 id="接口实现：Get">接口实现：Get</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">func</span> (this *BST) Get(key Key) *Node &#123;</span><br><span class="line">	<span class="keyword">return</span> this.get(this.root, key)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">func</span> (this *BST) get(n *Node, key Key) *Node &#123;</span><br><span class="line">	<span class="keyword">if</span> n == <span class="constant">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="constant">nil</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> n.key == key &#123;</span><br><span class="line">		<span class="keyword">return</span> n</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> n.key &gt; key &#123;</span><br><span class="line">		<span class="keyword">return</span> this.get(n.left, key)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> n.key &lt; key &#123;</span><br><span class="line">		<span class="keyword">return</span> this.get(n.right, key)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="constant">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Get()接口的实现思路比较简单，递归遍历所有结点，若寻找Key的值等于结点的值，则找到相应结点；若小于结点的值，则在该结点的左子结点上再次进行相同的操作；若大于结点的值，则相应查看右子结点。</p>
+<h3 id="接口实现：Put">接口实现：Put</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">func</span> (this *BST) Put(key Key, value Value) &#123;</span><br><span class="line">	this.root = this.put(this.root, key, value)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">func</span> (this *BST) put(n *Node, key Key, value Value) *Node &#123;</span><br><span class="line">	<span class="keyword">if</span> n == <span class="constant">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> &amp;Node&#123;key: key, value: value, N: <span class="number">1</span>&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> n.key == key &#123;</span><br><span class="line">		n.value = value</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> n.key &lt; key &#123;</span><br><span class="line">		n.right = this.put(n.right, key, value)</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		n.left = this.put(n.left, key, value)</span><br><span class="line">	&#125;</span><br><span class="line">	n.N = this.size(n.left) + this.size(n.right) + <span class="number">1</span></span><br><span class="line">	<span class="keyword">return</span> n</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Put()接口的实现思路可以归纳为两种情况：一种是找到相应结点并修改值，另一种是未找到相应结点，在合适的位置增加结点。具体实现时，递归比较结点值，若值相等，则为情况一。若值大于，则对结点左子树进行相同操作，若值小于，则对结点右子树进行相同操作，直到子结点为nil为止，即未找到相应结点，对应于情况二，则主动在该位置增加新结点。</p>
+<h3 id="接口实现：Min">接口实现：Min</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">func</span> (this *BST) Min() Key &#123;</span><br><span class="line">	<span class="keyword">return</span> this.min(this.root).key</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">func</span> (this *BST) min(n *Node) *Node &#123;</span><br><span class="line">	<span class="keyword">if</span> n.left != <span class="constant">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> this.min(n.left)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> n</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Min()接口实现比较简单，由于二叉查找树本身的特点是有序的，所以直接一直找到最深左子结点即可。</p>
+<h3 id="接口实现：Max">接口实现：Max</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">func</span> (this *BST) Max() Key &#123;</span><br><span class="line">	<span class="keyword">return</span> this.max(this.root).key</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">func</span> (this *BST) max(n *Node) *Node &#123;</span><br><span class="line">	<span class="keyword">if</span> n.right != <span class="constant">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> this.max(n.right)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> n</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Max()接口与Min()接口类似，这里不再赘述。</p>
+<h3 id="接口实现：Floor">接口实现：Floor</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">func</span> (this *BST) Floor(key Key) Key &#123;</span><br><span class="line">	<span class="keyword">if</span> n := this.floor(this.root, key); n != <span class="constant">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> n.key</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="string">""</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">func</span> (this *BST) floor(n *Node, key Key) *Node &#123;</span><br><span class="line">	<span class="keyword">if</span> n == <span class="constant">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="constant">nil</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> key == n.key &#123;</span><br><span class="line">		<span class="keyword">return</span> n</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> key &lt; n.key &#123;</span><br><span class="line">		<span class="keyword">return</span> this.floor(n.left, key)</span><br><span class="line">	&#125;</span><br><span class="line">	node := this.floor(n.right, key)</span><br><span class="line">	<span class="keyword">if</span> node == <span class="constant">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> n</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> node</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="constant">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Floor()接口实现思路如下：如果给定Key等于结点的Key，则该结点为向下取整后结点，这种情况是最简单的；如果给定Key小于结点的Key，则向下取整后结点一定存在于以结点左子结点为根结点的子树中，递归调用即可；剩下的情况就是大于结点Key的情况，在此种情况下，向下取整后结点可能在右子树中，若不在，则该结点即为所需要结点。</p>
+<h3 id="接口实现：Ceiling">接口实现：Ceiling</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">func</span> (this *BST) Ceiling(key Key) Key &#123;</span><br><span class="line">	<span class="keyword">if</span> n := this.ceiling(this.root, key); n != <span class="constant">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> n.key</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="string">""</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">func</span> (this *BST) ceiling(n *Node, key Key) *Node &#123;</span><br><span class="line">	<span class="keyword">if</span> n == <span class="constant">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="constant">nil</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> key == n.key &#123;</span><br><span class="line">		<span class="keyword">return</span> n</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> key &gt; n.key &#123;</span><br><span class="line">		<span class="keyword">return</span> this.ceiling(n.right, key)</span><br><span class="line">	&#125;</span><br><span class="line">	node := this.ceiling(n.left, key)</span><br><span class="line">	<span class="keyword">if</span> node == <span class="constant">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> n</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> node</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="constant">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Ceiling()接口与Floor()接口类似，也不再赘述。</p>
+<h3 id="接口实现：Select">接口实现：Select</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">func</span> (this *BST) Select(k <span class="typename">int</span>) Key &#123;</span><br><span class="line">	<span class="keyword">if</span> n := this.innerSelect(this.root, k); n != <span class="constant">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> n.key</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="string">""</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 在go中select为关键字，所以以innerSelect代替</span></span><br><span class="line"><span class="keyword">func</span> (this *BST) innerSelect(n *Node, k <span class="typename">int</span>) *Node &#123;</span><br><span class="line">	<span class="keyword">if</span> n == <span class="constant">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="constant">nil</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> k &lt;= <span class="number">0</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> n</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> n.left == <span class="constant">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> this.innerSelect(n.right, k-<span class="number">1</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> n.left.N == k &#123;</span><br><span class="line">		<span class="keyword">return</span> n</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> n.left.N &gt; k &#123;</span><br><span class="line">		<span class="keyword">return</span> this.innerSelect(n.left, k)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> n.left.N &lt; k &#123;</span><br><span class="line">		<span class="keyword">return</span> this.innerSelect(n.right, k-n.left.N-<span class="number">1</span>)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="constant">nil</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Select()接口实现的是给定一个k值，找到这样一个结点，小于这个结点的所有结点数正好为k。由于我们定义结点数据结构时，字段N的值代码以该结点为根结点形成的树的结点数。因此，Select()接口的实现只有找到这样一个结点，该结点的左子结点的N值为k即可。</p>
+<h3 id="接口实现：Rank">接口实现：Rank</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">func</span> (this *BST) Rank(key Key) <span class="typename">int</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> this.rank(this.root, key)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">func</span> (this *BST) rank(n *Node, key Key) <span class="typename">int</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> n == <span class="constant">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> n.key == key &#123;</span><br><span class="line">		<span class="keyword">if</span> n.left != <span class="constant">nil</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> n.left.N</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> n.key &gt; key &#123;</span><br><span class="line">		<span class="keyword">return</span> this.rank(n.left, key)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> n.key &lt; key &#123;</span><br><span class="line">		<span class="keyword">if</span> n.left != <span class="constant">nil</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> n.left.N + <span class="number">1</span> + this.rank(n.right, key)</span><br><span class="line">		&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">1</span> + this.rank(n.right, key)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Rank()接口即Select()接口的反操作，即找到给比定结点小的结点数。实现过程中可以分为三种情况：结点值与Key相等时，结果为结点左子结点的N值；大于Key时，保存结果的结点在该结点的左子树中；小于Key时，情况略微复杂，由三部分组成，分别为左子树的结点数，该结点和右子树中比Key小的结点数。</p>
+<h3 id="接口实现：DeleteMin">接口实现：DeleteMin</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">func</span> (this *BST) DeleteMin() &#123;</span><br><span class="line">	this.root = this.deleteMin(this.root)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">func</span> (this *BST) deleteMin(n *Node) *Node &#123;</span><br><span class="line">	<span class="keyword">if</span> n.left == <span class="constant">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> n.right</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		n.left = this.deleteMin(n.left)</span><br><span class="line">		n.N = this.size(n.left) + this.size(n.right) + <span class="number">1</span></span><br><span class="line">		<span class="keyword">return</span> n</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>DeleteMin()接口实现思路就是找到最小结点，并且删除它即可。根据二叉查找树的特点，最小结点只要沿着树的左子结点走，直到发现一个结点，其左子结点为nil，那么该结点就是最小结点。</p>
+<h3 id="接口实现：DeleteMax">接口实现：DeleteMax</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">func</span> (this *BST) DeleteMax() &#123;</span><br><span class="line">	this.root = this.deleteMax(this.root)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">func</span> (this *BST) deleteMax(n *Node) *Node &#123;</span><br><span class="line">	<span class="keyword">if</span> n.right == <span class="constant">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> n.left</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		n.right = this.deleteMax(n.right)</span><br><span class="line">		n.N = this.size(n.left) + this.size(n.right) + <span class="number">1</span></span><br><span class="line">		<span class="keyword">return</span> n</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>DeleteMax()接口与DeleteMin()接口类似，这里不再赘述。</p>
+<h3 id="接口实现：Delete">接口实现：Delete</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">func</span> (this *BST) Delete(key Key) &#123;</span><br><span class="line">	this.root = this.<span class="built_in">delete</span>(this.root, key)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">func</span> (this *BST) <span class="built_in">delete</span>(n *Node, key Key) *Node &#123;</span><br><span class="line">	<span class="keyword">if</span> n == <span class="constant">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="constant">nil</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> n.key &gt; key &#123;</span><br><span class="line">		n.left = this.<span class="built_in">delete</span>(n.left, key)</span><br><span class="line">	&#125; <span class="keyword">else</span> <span class="keyword">if</span> n.key &lt; key &#123;</span><br><span class="line">		n.right = this.<span class="built_in">delete</span>(n.right, key)</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> n.left == <span class="constant">nil</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> n.right</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> n.right == <span class="constant">nil</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> n.left</span><br><span class="line">		&#125;</span><br><span class="line">		node := n</span><br><span class="line">		n = this.min(n.right)</span><br><span class="line">		n.right = this.deleteMin(n)</span><br><span class="line">		n.left = node.left</span><br><span class="line">	&#125;</span><br><span class="line">	n.N = this.size(n.left) + this.size(n.right) + <span class="number">1</span></span><br><span class="line">	<span class="keyword">return</span> n</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Delete()接口实现与查找类似，若结点值大于Key，则对结点左子数据进行递归操作，若结点值小于Key，则对结点右子数进行递归操作，当结点值等于Key时，则将该结点删除即可。在删除过程中，思路也很简单，即将删除结点的右子树中的最小结点代替该结点即可。</p>
+<h3 id="接口实现：Travel">接口实现：Travel</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> oper <span class="keyword">func</span>(*Node)</span><br><span class="line"><span class="keyword">func</span> (this *BST) Travel(f oper, sort <span class="typename">string</span>) &#123;</span><br><span class="line">	this.travel(this.root, f, sort)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">func</span> (this *BST) travel(n *Node, f oper, sort <span class="typename">string</span>) &#123;</span><br><span class="line">	<span class="keyword">if</span> n == <span class="constant">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">switch</span> sort &#123;</span><br><span class="line">	<span class="keyword">case</span> <span class="string">"in-order"</span>:</span><br><span class="line">		this.travel(n.left, f, sort)</span><br><span class="line">		f(n)</span><br><span class="line">		this.travel(n.right, f, sort)</span><br><span class="line">	<span class="keyword">case</span> <span class="string">"pre-order"</span>:</span><br><span class="line">		f(n)</span><br><span class="line">		this.travel(n.left, f, sort)</span><br><span class="line">		this.travel(n.right, f, sort)</span><br><span class="line">	<span class="keyword">case</span> <span class="string">"post-order"</span>:</span><br><span class="line">		this.travel(n.left, f, sort)</span><br><span class="line">		this.travel(n.right, f, sort)</span><br><span class="line">		f(n)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Travel接口实现考虑了三种情况，即<a href="http://zh.wikipedia.org/zh/%E6%A0%91%E7%9A%84%E9%81%8D%E5%8E%86" target="_blank" rel="external">中序遍历，先序遍历和后序遍历</a>。</p>
+<h2 id="分析说">分析说</h2><p>使用二叉查找树的算法的<strong>运行时间取决于树的形状，而树的形状又取决于键被插入的先后顺序</strong>。在最好的情况下，二叉查找树是完全平衡的，每条空链接和根结点的距离都为~lgN，但是在最坏的情况下，二叉查找树与链表无异，具体参见下图：</p>
+<p><img src="/img/2015-02-14-1.png" alt=""></p>
+<p>但是，二叉查找树的形状由于取决于键被插入的先后顺序，所以我们无法控制其一直保持基本平衡状态。那么，<strong>我们是否可以如同<a href="http://codingforever.com/2014/12/28/-2014-12-28-1-html/">快速排序</a>一般事先进行随机打乱呢？事实上这是不行的，因为二叉查找树本身是有序的，而且它携带着键值的插入顺序</strong>。</p>
+<p>为了方便我们分析，我们假设二叉查找树的键的分布是随机的，即它们插入的顺序是随机的。这里，我们直接引入两个命题：</p>
+<pre><code>命题一：在由N个随机键构造的二叉查找树中，查找命中平均所需的比较次数为~<span class="number">2l</span>nN(约<span class="number">1.39l</span>gN)。
+
+命题二：在由N个随机键构造的二叉查找树中插入操作和查找未命中平均所需的比较次数为~<span class="number">2l</span>nN(约<span class="number">1.39l</span>gN)。
+</code></pre><p>命题一说明，<strong>二叉查找树在查找随机键的成本方面比二分查找大约高出39%(二分查找为lnN)</strong>，但是这高出的成本是值得的。因为命题二说明，<strong>二叉查找树在插入新键方面也是~2lnN，与二分查找的~N相比，对数级别的成本相对来说是高效很多</strong>。</p>
+<p>以上分析均是基于二叉查找树的正常情况，而实际上，最坏情况也是可能发生的。<strong>在最坏情况下，二叉查找树的性能完全取决于树的高度</strong>，具体如命题三所描述。</p>
+<pre><code>命题三：在一棵二叉查找树中，所有操作在最坏情况下所需要的时间都和树的高度成正比。
+</code></pre><p>很明显，最坏情况下成本（即树的高度）一定会大于平均情况下的成本。但是具体是多少呢？事实上，<strong>随机键构造的二叉查找树的平均高度为树中结点数的对数级别，具体值趋近于2.99lgN</strong>。因此，<strong>二叉查找树的所有操作，在最坏情况下所需成本也是对数级别的</strong>，这不得不说是一个可喜的结果。</p>
+<p>但是，请注意，我们之前有个假设：<strong>二叉查找树的键是随机插入的</strong>，但是实际应用中，这通常是理想情况下才会发生的事。而且，这种非随机插入，我们并不能如快速排序一般事先进行随机打乱操作。那么，真的无能为力了吗？当然不是！<a href="">平衡查找树</a>就是为这个而生的！</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/查找/" rel="tag">#查找</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/02/01//2015/02-01-0.html/" rel="next">构建高性能服务器 -- 数据库篇</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+            </div>
+
+            
+
+            
+              <div class="comments" id="comments">
+                
+              </div>
+            
+        </div>
+
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="zhujiefirst" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">zhujiefirst</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">学习总结 思考感悟 知识管理</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">45</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">分類</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-name">標籤</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#理论说"><span class="nav-number">1.</span> <span class="nav-text">理论说</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概念"><span class="nav-number">1.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#性能"><span class="nav-number">1.2.</span> <span class="nav-text">性能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据结构"><span class="nav-number">1.3.</span> <span class="nav-text">数据结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实践说"><span class="nav-number">2.</span> <span class="nav-text">实践说</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#结点定义"><span class="nav-number">2.1.</span> <span class="nav-text">结点定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉查找树定义"><span class="nav-number">2.2.</span> <span class="nav-text">二叉查找树定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉查找树一般性接口定义"><span class="nav-number">2.3.</span> <span class="nav-text">二叉查找树一般性接口定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接口实现：Size"><span class="nav-number">2.4.</span> <span class="nav-text">接口实现：Size</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接口实现：Get"><span class="nav-number">2.5.</span> <span class="nav-text">接口实现：Get</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接口实现：Put"><span class="nav-number">2.6.</span> <span class="nav-text">接口实现：Put</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接口实现：Min"><span class="nav-number">2.7.</span> <span class="nav-text">接口实现：Min</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接口实现：Max"><span class="nav-number">2.8.</span> <span class="nav-text">接口实现：Max</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接口实现：Floor"><span class="nav-number">2.9.</span> <span class="nav-text">接口实现：Floor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接口实现：Ceiling"><span class="nav-number">2.10.</span> <span class="nav-text">接口实现：Ceiling</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接口实现：Select"><span class="nav-number">2.11.</span> <span class="nav-text">接口实现：Select</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接口实现：Rank"><span class="nav-number">2.12.</span> <span class="nav-text">接口实现：Rank</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接口实现：DeleteMin"><span class="nav-number">2.13.</span> <span class="nav-text">接口实现：DeleteMin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接口实现：DeleteMax"><span class="nav-number">2.14.</span> <span class="nav-text">接口实现：DeleteMax</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接口实现：Delete"><span class="nav-number">2.15.</span> <span class="nav-text">接口实现：Delete</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接口实现：Travel"><span class="nav-number">2.16.</span> <span class="nav-text">接口实现：Travel</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析说"><span class="nav-number">3.</span> <span class="nav-text">分析说</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+        <div class="footer-inner">
+            <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhujiefirst</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+        </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+</div>
+
+<script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.4"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.4"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.4" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/js/search-toggle.js"></script>
+
+
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.4" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if (isDesktop() && CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    });
+  </script>
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        if (CONFIG.sidebar === 'always') {
+            displaySidebar();
+        }
+    });
+</script>
+
+
+
+
+
+
+
+
+<!-- lazyload -->
+<script type="text/javascript" src="/js/lazyload.js"></script>
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery("#posts img").lazyload({
+            placeholder: "/images/loading.gif",
+            effect: "fadeIn"
+        });
+    });
+</script>
+</body>
+</html>

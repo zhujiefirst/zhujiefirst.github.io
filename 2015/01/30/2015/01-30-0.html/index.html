@@ -1,0 +1,670 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+    
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+  <link href='//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.4"/>
+
+
+    <meta name="description" content="学习总结 思考感悟 知识管理" />
+
+
+
+  <meta name="keywords" content="性能," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.4" />
+
+
+<meta name="description" content="说在前面的话服务器规模的扩展是构建高性能服务器过程中不得不面对的事。当然，这里我们不是指垂直扩展，即增加服务器的硬件性能，如CPU频率，内存等，从而提升服务器单机处理能力，而是水平扩展，即增加服务器台数，而每台服务器的单机处理能力可能并不出众。
+那么，问题来了，这么多的机器，也可以称为服务器节点，该如何选择由哪个节点处理呢？会不会出现请求总是发向固定一个或者几个节点，从而造成这些节点负载高，请求来">
+<meta property="og:type" content="article">
+<meta property="og:title" content="构建高性能服务器 -- 负载均衡篇">
+<meta property="og:url" content="http://codingforever.com/2015/01/30//2015/01-30-0.html/index.html">
+<meta property="og:site_name" content="Codingforever">
+<meta property="og:description" content="说在前面的话服务器规模的扩展是构建高性能服务器过程中不得不面对的事。当然，这里我们不是指垂直扩展，即增加服务器的硬件性能，如CPU频率，内存等，从而提升服务器单机处理能力，而是水平扩展，即增加服务器台数，而每台服务器的单机处理能力可能并不出众。
+那么，问题来了，这么多的机器，也可以称为服务器节点，该如何选择由哪个节点处理呢？会不会出现请求总是发向固定一个或者几个节点，从而造成这些节点负载高，请求来">
+<meta property="og:image" content="http://codingforever.com/img/2015-01-30-0.jpg">
+<meta property="og:image" content="http://codingforever.com/img/2015-01-30-1.jpg">
+<meta property="og:updated_time" content="2015-06-19T16:09:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="构建高性能服务器 -- 负载均衡篇">
+<meta name="twitter:description" content="说在前面的话服务器规模的扩展是构建高性能服务器过程中不得不面对的事。当然，这里我们不是指垂直扩展，即增加服务器的硬件性能，如CPU频率，内存等，从而提升服务器单机处理能力，而是水平扩展，即增加服务器台数，而每台服务器的单机处理能力可能并不出众。
+那么，问题来了，这么多的机器，也可以称为服务器节点，该如何选择由哪个节点处理呢？会不会出现请求总是发向固定一个或者几个节点，从而造成这些节点负载高，请求来">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post'
+  };
+</script>
+
+    <title> 构建高性能服务器 -- 负载均衡篇 // Codingforever </title>
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+<!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+
+
+
+
+<div class="container one-column page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Codingforever</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-home"></i> <br />
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            標籤
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+        </div>
+    </header>
+
+    <main id="main" class="main">
+        <div class="main-inner">
+            <div id="content" class="content">
+                
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              构建高性能服务器 -- 负载均衡篇
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於
+          <time itemprop="dateCreated" datetime="2015-01-30T00:00:00+08:00" content="1月 30 2015">
+            1月 30 2015
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分類於
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/服务器编程/" itemprop="url" rel="index"><span itemprop="name">服务器编程</span></a></span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h2 id="说在前面的话">说在前面的话</h2><p>服务器规模的扩展是构建高性能服务器过程中不得不面对的事。当然，这里我们不是指<strong>垂直扩展</strong>，即增加服务器的硬件性能，如CPU频率，内存等，从而提升服务器单机处理能力，而是<strong>水平扩展</strong>，即增加服务器台数，而每台服务器的单机处理能力可能并不出众。</p>
+<p>那么，问题来了，这么多的机器，也可以称为服务器节点，该如何选择由哪个节点处理呢？会不会出现请求总是发向固定一个或者几个节点，从而造成这些节点负载高，请求来不及处理，同时剩余的节点又非常空闲呢？当然，这个时候<strong>负载均衡</strong>技术就该大显身手了。</p>
+<h2 id="HTTP重定向">HTTP重定向</h2><p>Http重定向可以将HTTP请求进行转移，它在Web开发中十分常见，比如用户登陆成功后自动跳转到相应的管理页面。然而事实上它也可以用来做负载均衡。</p>
+<p>我们熟悉的镜像下载事实上就是HTTP重定向进行负载均衡的最鲜活生动的例子。我们以从<a href="github.com">github</a>下载一个zip包为例。在你的终端中输入以下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/mogutt/TTServer/archive/master.zip</span><br></pre></td></tr></table></figure>
+<p>以上命令就是获取github上某一下载包，其过程如下：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--2015-01-25 14:05:20--  https://github.com/mogutt/TTServer/archive/master.zip&#10;Resolving github.com (github.com)... 192.30.252.130&#10;Connecting to github.com (github.com)|192.30.252.130|:443... connected.&#10;HTTP request sent, awaiting response... 302 Found&#10;Location: https://codeload.github.com/mogutt/TTServer/zip/master [following]&#10;--2015-01-25 14:05:22--  https://codeload.github.com/mogutt/TTServer/zip/master&#10;Resolving codeload.github.com (codeload.github.com)... 192.30.252.147&#10;Connecting to codeload.github.com (codeload.github.com)|192.30.252.147|:443... connected.&#10;HTTP request sent, awaiting response... 200 OK&#10;Length: 501048 (489K) [application/zip]&#10;Saving to: &#8216;master.zip&#8217;&#10;100%[==================================================================&#62;] 501,048     45.4KB/s   in 12s&#10;2015-01-25 14:05:35 (40.9 KB/s) - &#8216;master.zip&#8217; saved [501048/501048]</span><br></pre></td></tr></table></figure>
+<p>分析以上过程，我们发现，<em>wget</em>命令首先向<em>github.com</em>（192.30.252.130）发送一个http请求，但是收到的状态码为302，而<strong>302状态码就是让<em>front end</em>重新发送请求至另外新的url上，在字段Location上标志，这里即<em>codeload.github.com</em>域名下</strong>。这里有同学就会有疑问：哪里有负载均衡的影子？莫急，且听我慢慢道来。请注意这里重定向的做法，我们本来请求的是域名A，即<em>github.con</em>，但是服务却响应状态码302，让我们重新将请求发至域名B，即<em>codeload.github.com</em>。既然Http重定向可以将请求重新转发至另外的服务器，那么用来做负载均衡有何不可？我们可以总是将Http请求重新定向到负载较小的服务器，如此一来，负载均衡的目的就达到了。</p>
+<p>但是，现实总是残酷的。Http重定向实现负载均衡虽然简单易行，但是我们发现，每次请求都会客户端向服务器发送请求， 然后服务器响应Http重定向，然后客户端用新得到的服务器地址再一次请求，最后服务器发送正确响应。OMG，一个请求在客户端与服务端之间来回跑了两次！这是多大的消耗啊！所以<strong>若是对性能有高要求，Http重定向实现负载均衡终归不是较优选择</strong>。</p>
+<h2 id="DNS负载均衡">DNS负载均衡</h2><p>我们知道，DNS负责提供域名解析服务，即将域名解析成实际服务器的IP地址。那么，我们能让DNS稍微智能点，在其解析成实际服务器地址时，帮我们进行负载均衡呢？当然，这里的答案的肯定的。</p>
+<p>首先，我们来看一个<em>www.google.com</em>在小猿所在地杭州西湖会解析成什么IP地址。在终端下输入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dig www.google.com</span><br></pre></td></tr></table></figure>
+<p>得到如下结果:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">; &lt;&lt;&gt;&gt; DiG <span class="number">9.9</span>.<span class="number">5</span>-<span class="number">4.3</span>-Ubuntu &lt;&lt;&gt;&gt; www.google.com</span><br><span class="line">;; global options: +cmd</span><br><span class="line">;; Got answer:</span><br><span class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: <span class="number">12748</span></span><br><span class="line">;; flags: qr rd ra; QUERY: <span class="number">1</span>, ANSWER: <span class="number">5</span>, AUTHORITY: <span class="number">0</span>, ADDITIONAL: <span class="number">1</span></span><br><span class="line">;; OPT PSEUDOSECTION:</span><br><span class="line">; EDNS: version: <span class="number">0</span>, flags:; udp: <span class="number">4096</span></span><br><span class="line">;; QUESTION SECTION:</span><br><span class="line">;www.google.com.                        IN      A</span><br><span class="line">;; ANSWER SECTION:</span><br><span class="line">www.google.com.         <span class="number">30</span>      IN      A       <span class="number">173.194</span>.<span class="number">127.210</span></span><br><span class="line">www.google.com.         <span class="number">30</span>      IN      A       <span class="number">173.194</span>.<span class="number">127.211</span></span><br><span class="line">www.google.com.         <span class="number">30</span>      IN      A       <span class="number">173.194</span>.<span class="number">127.208</span></span><br><span class="line">www.google.com.         <span class="number">30</span>      IN      A       <span class="number">173.194</span>.<span class="number">127.209</span></span><br><span class="line">www.google.com.         <span class="number">30</span>      IN      A       <span class="number">173.194</span>.<span class="number">127.212</span></span><br><span class="line">;; Query time: <span class="number">71</span> msec</span><br><span class="line">;; SERVER: <span class="number">127.0</span>.<span class="number">1.1</span><span class="comment">#53(127.0.1.1)</span></span><br><span class="line">;; WHEN: Sun Jan <span class="number">25</span> <span class="number">14</span>:<span class="number">46</span>:<span class="number">34</span> CST <span class="number">2015</span></span><br><span class="line">;; MSG SIZE  rcvd: <span class="number">123</span></span><br></pre></td></tr></table></figure></p>
+<p>这里，我们可以看到，<em>www.google.com</em>拥有5个不同的A记录，事实上DNS解析域名时，也是轮流解析成不同IP地址，以实现简单的负载均衡。</p>
+<p>但是，DNS实现负载均衡有一个巨大的弊端，即DNS会进行缓存。DNS缓存本身是一件好事，它会缓解DNS服务器的压力，并且达到快速解析URL的作用。但是若是采用DNS缓存进行负载均衡，其缓存功能就会带来一定的问题：若其中一台服务器出现故障，将其在DNS解析规则中移除，向它的更新要经过TTL时间（一般会设置为10分钟）才会对用户生效，这将是灾难型的。</p>
+<p>另一方面，由于DNS负载均衡调度器基本DNS层面，这将导致它的调度灵活性大大减少，比如无法在应用层面（根据HTTP请求的内容）对客户端请求进行策略调度，又或者无法根据服务器真实的负载情况进行灵活调度，将请求转发至负载较小的服务器。</p>
+<p>总之，<strong>DNS负载均衡技术看似美好，但是由于它的缓存机制和基本DNS层的特性，最终将其推向无法实际应用的深渊</strong>。</p>
+<h2 id="反向代理负载均衡">反向代理负载均衡</h2><p><a href="http://zh.wikipedia.org/wiki/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86" target="_blank" rel="external">反向代理</a>大家都不陌生，但是它的功能不仅仅如此，事实上，它还能完成负载均衡的工作。<strong>目前几乎所有主流的Web服务器都热衷于支持基于反向代理的负载均衡</strong>。</p>
+<p>相比于之前介绍的Http重定向负载均衡和DNS负载均衡，反射代理负载均衡更注重的是请求的“转发”，而前两者更偏向于“转移”。当然，无论是“转发”还是“转移”，我们最终的目的还是相同的，即实现服务器的负载均衡。</p>
+<p>那么，反向代理实现负载均衡有什么优势呢？通过我们之前的分析，<strong>Http重定向会让请求在广域网上来回多跑一次，耗时巨大，而DNS实现负载均衡又无法根据实际服务器的真实负载进行均衡，缺乏灵活性</strong>。而反射代理负载均衡将这两个问题全部解决。</p>
+<p>但是，反射代理负载均衡也有它的缺点。由于我们是通过反射代理这种机制，即通过Web服务器进行Http请求的调度，这就意味着两件事：</p>
+<ul>
+<li>任何对于实际服务器的HTTP请求都必须经过调度器；</li>
+<li>调度器必须等待实际服务器的HTTP响应，并将它反馈给用户。</li>
+</ul>
+<p>而这两件事就决定着所有实际服务器的HTTP流量都要经过调度器，即Web服务器。所以，<strong>若采用这种负载均衡方案，如果后期实际服务器压力巨大需要扩容时，就会有一个制约，那就是Web服务器将成为整个系统的瓶颈</strong>。比如服务器不是密集计算型，则扩展实际服务器对整体的吞吐率提升没有多大的帮助，因为大量的压力在反向代理服务器上。当然，我们了解了这点，只要扩展反向代理服务器就行了。但是<strong>我们将不得不面对服务器可能产生的实际服务器压力或者反向代理服务器压力</strong>。</p>
+<h2 id="IP负载均衡">IP负载均衡</h2><p>之前讲述利用反向代理服务器实现负载均衡时，我们没有提到，这种<strong>负载均衡方案是基于HTTP层面的，即应用层</strong>。我们知道，应用层是网络分层模型中属于最上层，所以每次HTTP请求转发时，都要经过数据链路层（第二层）、网络层（第三层）、传输层（第四层）的转换，实际上这些性能开销是可以尽量避免的。首先，我们来看看传输层上有没有相应的负载均衡方案。</p>
+<p>还记得<a href="http://en.wikipedia.org/wiki/Network_address_translation" target="_blank" rel="external">网络地址转换（NAT）</a>技术吧。当然，这个过程还是一样的。</p>
+<p><img src="/img/2015-01-30-0.jpg" alt=""></p>
+<p>如上图所示，NAT服务器有两块网卡（可能虚拟出来），分别连接外部网络与内部网络，连接外部网络的IP地址为125.12.12.12，连接内部网络的IP地址为10.0.1.50。在内网中与NAT服务器相连的是两台实际服务器，IP地址分别为10.0.1.210和10.0.1.211，它们的默认网关均为10.0.1.50，同时它们在8000端口上监听服务。我们假设从外部IP为202.20.20.20:5656发送数据包至服务器地址125.12.12.12:80。这时，数据包的源IP地址与目的IP地址分别如下：</p>
+<pre><code>来源<span class="tag">IP</span>地址: 202<span class="class">.20</span><span class="class">.20</span><span class="class">.20</span><span class="pseudo">:5656</span>
+目的<span class="tag">IP</span>地址： 125<span class="class">.12</span><span class="class">.12</span><span class="class">.12</span><span class="pseudo">:80</span>
+</code></pre><p>当数据包到达NAT服务器时内核缓冲区后，NAT服务修改其数据包的目的IP地址，将其修改为实际服务器IP地址，假设修改为10.0.1.210:8000，则经过NAT服务器后，数据包的源IP地址与目的地址分别如下：</p>
+<pre><code>来源<span class="tag">IP</span>地址: 202<span class="class">.20</span><span class="class">.20</span><span class="class">.20</span><span class="pseudo">:5656</span>
+目的<span class="tag">IP</span>地址： 10<span class="class">.0</span><span class="class">.1</span><span class="class">.210</span><span class="pseudo">:8000</span>
+</code></pre><p>当然，这个数据包最终会到达10.0.1.210这台实际服务器，经过处理后，实际服务器返回响应数据包，其源IP地址与目的地址分别如下：</p>
+<pre><code>来源<span class="tag">IP</span>地址: 10<span class="class">.0</span><span class="class">.1</span><span class="class">.210</span><span class="pseudo">:8000</span>
+目的<span class="tag">IP</span>地址：202<span class="class">.20</span><span class="class">.20</span><span class="class">.20</span><span class="pseudo">:5656</span>
+</code></pre><p>由于实际服务器的网关为10.0.1.50，所以数据包会到达NAT服务器，而数据包在NAT服务器的内核缓冲区中，其来源IP地址又会被修改为NAT服务器的IP地址，即125.12.12.12，这时其源IP地址与目的地址分别如下：</p>
+<pre><code>来源<span class="tag">IP</span>地址: 125<span class="class">.12</span><span class="class">.12</span><span class="class">.12</span><span class="pseudo">:80</span> 
+目的<span class="tag">IP</span>地址： 202<span class="class">.20</span><span class="class">.20</span><span class="class">.20</span><span class="pseudo">:5656</span>
+</code></pre><p>所以，在客户端角度看来，他完全不知道有NAT服务器与实际服务器的存在，所以利用NAT服务器进行负载均衡是完全可行的，而且过程就如上述描述过程。</p>
+<p>那么问题就剩下这个NAT服务器如何实现了。往简单了说，就是如何修改IP数据包。事实上，Linux内核已经具备这样的能力，从Linux2.4内核开始，其内置的<a href="http://en.wikipedia.org/wiki/Netfilter" target="_blank" rel="external">Netfilter</a>模块就可以实现这样的功能。通过<a href="http://en.wikipedia.org/wiki/Iptables" target="_blank" rel="external">iptables</a>就可以控制Netfilter模块进行IP数据包的修改。</p>
+<p>不严谨的说，NAT服务器就如同路由器一样，它连接外部网络和私有网络，并将来自外部网络的数据包正确转发至私有网络机器。当然，实际上这不能称为路由器。<strong>我们知道路由器的工作是存储转发，除了修改数据包的MAC地址以外，通常它不会对数据包做其他手脚，但这里的NAT服务器却是要对数据包进行必要的修改，包括来源地址和端口，或者目的地址和端口</strong>。</p>
+<p>但是，与反向代理一样，NAT服务器<strong>不仅要将用户的请求转发给实际服务器，同时还要将来自实际服务器的响应转发给用户，所以实际上在数据流量较大时，NAT服务器也将成为瓶颈</strong>。请不要忘记，<strong>NAT服务器的数据包转发是在内核缓存中实现的，所以其开销与应用层转发相比将会小很多，所以NAT服务器的转发能力主要取决于NAT服务器的网络带宽，当然同时包括外部网络和内部网络</strong>。</p>
+<p>BWT，由于利用NAT实现负载均衡由于工作在运输层，所以还有一个附加的优点：<strong>除了支持HTTP协议以下，还支持其他网络服务协议，如FTP，SMTP，DNS等</strong>。</p>
+<h2 id="直接路由">直接路由</h2><p>之前讲述的是基于运输层的负载均衡实现，现在我们来看下基于数据链路层的实现。简单来说，它就是<strong>修改数据包的目标MAC地址，将数据包转发到实际服务器上，并且最重要的是，实际服务器的响应包将直接发送至客户端，而不经过调度器</strong>。</p>
+<p>R U kidding me？这不可能吧，不经过调度器直接将响应数据包发送至客户端，那不是要求<strong>实际服务器要接入外部网络</strong>？当然，这点是肯定的。</p>
+<h3 id="IP别名">IP别名</h3><p>首先，我们来了解一下IP别名。我们知道，一个网络接口拥有一个IP地址，但是除此之外，我们还可以为它配置多个IP地址，它们称为<strong>IP别名</strong>。这里的<strong>网络接口可以是物理网卡，如eth0，eth1，也可以是虚拟接口，如回环网络接口lo</strong>。</p>
+<p>配置IP别名的方法如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ifconfig eth0:<span class="number">0</span> <span class="number">192.168</span>.<span class="number">0.200</span></span><br></pre></td></tr></table></figure>
+<p>上述命令将给本机增加一个IP别名，具体为<em>192.168.0.200</em>。这时我们通过<em>ping</em>命令可以直接通过IP别名连接到本机，当然，在局域网其他机器上用<em>arp</em>命令也可以看到刚新加的IP别名，而且应该与其他另外一个IP拥有相同的MAC地址，而另外一个IP就是本机原来的IP地址。这时，我们就有两个IP指向了同一个MAC地址，即两个IP指向了同一个机器。</p>
+<h3 id="修改MAC地址进行负载均衡">修改MAC地址进行负载均衡</h3><p>之前我们也讨论过，将数据包的目标MAC地址修改成实际服务器的MAC地址，那么该数据包将会转发给实际服务器。同时，实际服务器又直接接入外部网络，所以实际服务器的响应包不经过调度服务器就可以直接发送回客户端。那么设置IP别名有什么作用呢？事实上，这种方法因为只操作在数据链路层，所以只修改了数据包的目的MAC地址，而网络层相关的数据，如IP地址和端口，还是保持原样的。所以当实际服务器收到数据包时，它会发现该数据包的IP地址并不是它自己的IP地址，这时会发生什么事呢？当然，这种事谁也不想发生。所以这个时候，IP别名就起到了关键性作用，将IP别名设置成与调度服务器的IP相同，这样实际服务器收到的IP包将会非常有归属感。</p>
+<p>我们还是看下示意图：</p>
+<p><img src="/img/2015-01-30-1.jpg" alt=""></p>
+<p>具体各服务器的IP地址，网关，IP别名如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th>服务器说明</th>
+<th>外部网络IP地址</th>
+<th>默认网关</th>
+<th>IP别名</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>负载均衡调度器</td>
+<td>125.12.12.12</td>
+<td>125.12.12.1</td>
+<td>125.12.12.77</td>
+</tr>
+<tr>
+<td>实际服务器</td>
+<td>125.12.12.20</td>
+<td>125.12.12.1</td>
+<td>125.12.12.77</td>
+</tr>
+<tr>
+<td>实际服务器</td>
+<td>125.12.12.21</td>
+<td>125.12.12.1</td>
+<td>125.12.12.77</td>
+</tr>
+</tbody>
+</table>
+<p>我们看到，两台实际服务器都具有外网IP地址，即接入外部网络，同时均设置了IP别名为125.12.12.77。但是该IP地址并不是负载均衡调度器的IP地址，而负载均衡调度器同时也设置IP别名为125.12.12.77。这是出于什么考虑呢？这样做当然拥有其优点，这样负载均衡调度器可以方便进行替换，只要新设置的负载均衡调度器设置成与实际服务器相同的IP别名即可。    </p>
+<p>当客户端数据包来临时，当然该数据包发向的IP地址为125.12.12.77，即负载均衡调度器可以收到该数据包。这里有同学就会有疑问，实际服务器与调度服务器拥有相同的IP别名，而且均接入外网，为什么不是实际服务器收到数据包呢？事实上，网关在收到数据包时，通过<em>arp</em>会问：你们谁的IP地址是125.12.12.77？这个时候，只要调度服务器回答：我！而实际服务器不作声就可以了。当然这里就不详细介绍怎么设置，有兴趣的同学可以搜索关键字“防止服务器响应ARP广播”即可。</p>
+<p>调度服务器通过某些策略，如<a href="http://en.wikipedia.org/wiki/Round-robin_scheduling" target="_blank" rel="external">RR(Round-robin)</a>，然后将数据包转发给后端实际服务器，假设这里转发给IP地址为125.12.12.20这台实际服务器（通过修改目标MAC地址）。该服务器收到数据包后，发现该数据包的目的IP地址正是自己的IP别名，因为就快乐的收下了。当其处理完业务逻辑，准备给客户端响应时，响应数据包绕过调度服务器，直接发送至125.12.12.1的网关，从而送向外网，到达客户端。</p>
+<p>整个过程非常流畅，<strong>实际服务器收到的数据包经过调度服务器负载均衡的，而发送的响应数据包直接流向外网，绕过调度服务器</strong>。如此一来，<strong>上节中NAT负载均衡方法的弱点 — 请求与响应均经过调度服务器，将毫不存在</strong>。</p>
+<p>可惜的是，通过直接路由进行负载均衡也有其不优美之处。<strong>首先，使用直接路由进行数据包转发是基于数据链路层的，因此无法修改数据包的目的端口。其次，由于实际服务器必须连接外网，因此要向IDC购买合法IP地址，不过相比于负载均衡硬件设备，它们还是要便宜得多</strong>。</p>
+<h2 id="IP隧道">IP隧道</h2><p>前文讲述的<strong>直接路由负载均衡方法，实际服务器和调度服务器必须在同一个网段，而本节讲述的IP隧道负载均衡方法可以跨WAN网段进行负载均衡</strong>。</p>
+<p>基于IP隧道的数据包转发机制，往简单了说，就是<strong>将调度器收到的IP数据包重新封装成一个新的IP数据包，然后将新的数据包转发给实际服务器，然后实际服务器将响应直接发送给客户端</strong>。当然，大家都注意到了，利用此法进行负载均衡，<strong>实际服务器也必须接入外网</strong>，因为与直接路由方法相似，响应数据包要直接从实际服务器发送到客户端，而不经过调度服务器。</p>
+<p>另外，<strong>基于IP隧道的负载均衡方式，由于可以跨WAN网段进行数据包转发，所以我们可以将实际服务器根据需要部属在不同的地域，并且根据就近访问的原则来转移请求，比如一些CDN服务便是基于IP隧道技术来实现的</strong>。</p>
+<h2 id="写在最后">写在最后</h2><p>总的来说，各种负载均衡技术可归纳为：</p>
+<ul>
+<li><strong>基于HTTP重定向负载均衡性能上不佳；</strong></li>
+<li><strong>基于DNS负载均衡灵活性不够；</strong></li>
+<li><strong>基于反向代理负载均衡在应用层操作，可以根据应用层数据进行数据转发，但性能上相较于更低层负载均衡较差；</strong></li>
+<li><strong>基于IP负载均衡请求响应均经过调度服务器，后期服务器扩展上，调度服务器将成为瓶颈；</strong></li>
+<li><strong>基于直接路由和基于IP隧道的负载均衡技术都适合请求和响应不对称的服务器，如视频服务器，文件下载服务器等，可以非常有效地提高集群的扩展能力；</strong></li>
+<li><strong>实际实现过程中，还是要与业务紧密结合的，比如CDN服务需要将实际服务器部署在不同的IDC，所以只能采用基于IP隧道的方法。</strong></li>
+</ul>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/性能/" rel="tag">#性能</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/02/01//2015/02-01-0.html/" rel="prev">构建高性能服务器 -- 数据库篇</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/01/25//2015/01-25-0.html/" rel="next">移动时代互联网金融的架构趋势</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+            </div>
+
+            
+
+            
+              <div class="comments" id="comments">
+                
+              </div>
+            
+        </div>
+
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="zhujiefirst" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">zhujiefirst</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">学习总结 思考感悟 知识管理</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">45</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">分類</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-name">標籤</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#说在前面的话"><span class="nav-number">1.</span> <span class="nav-text">说在前面的话</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP重定向"><span class="nav-number">2.</span> <span class="nav-text">HTTP重定向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DNS负载均衡"><span class="nav-number">3.</span> <span class="nav-text">DNS负载均衡</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反向代理负载均衡"><span class="nav-number">4.</span> <span class="nav-text">反向代理负载均衡</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IP负载均衡"><span class="nav-number">5.</span> <span class="nav-text">IP负载均衡</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#直接路由"><span class="nav-number">6.</span> <span class="nav-text">直接路由</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IP别名"><span class="nav-number">6.1.</span> <span class="nav-text">IP别名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改MAC地址进行负载均衡"><span class="nav-number">6.2.</span> <span class="nav-text">修改MAC地址进行负载均衡</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IP隧道"><span class="nav-number">7.</span> <span class="nav-text">IP隧道</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#写在最后"><span class="nav-number">8.</span> <span class="nav-text">写在最后</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+        <div class="footer-inner">
+            <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhujiefirst</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+        </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+</div>
+
+<script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.4"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.4"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.4" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/js/search-toggle.js"></script>
+
+
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.4" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if (isDesktop() && CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    });
+  </script>
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        if (CONFIG.sidebar === 'always') {
+            displaySidebar();
+        }
+    });
+</script>
+
+
+
+
+
+
+
+
+<!-- lazyload -->
+<script type="text/javascript" src="/js/lazyload.js"></script>
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery("#posts img").lazyload({
+            placeholder: "/images/loading.gif",
+            effect: "fadeIn"
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,574 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+    
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+  <link href='//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.4"/>
+
+
+    <meta name="description" content="学习总结 思考感悟 知识管理" />
+
+
+
+  <meta name="keywords" content="openGL," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.4" />
+
+
+<meta name="description" content="1 RGBA和颜色索引模式  RGB显示模式：在此模式下，硬件为R、G、B和A成分保留一定数量的位平面（每种成分位平面数量并不一定相同）。像素可以显示的不同颜色的数量取决于位平面的数量以及硬件是如何解释这些位平面的。不同颜色的数量不能超过2的N次方，其中N是位平面的数量。  
+有些图形硬件使用抖动来增加可以显示的颜色数量。假定系统分别只有1个位来表示R、G、B，这样一共可以显示8种颜色：黑、白、红">
+<meta property="og:type" content="article">
+<meta property="og:title" content="openGL学习（四） -- 颜色">
+<meta property="og:url" content="http://codingforever.com/2013/07/28//2013/07-28-0.html/index.html">
+<meta property="og:site_name" content="Codingforever">
+<meta property="og:description" content="1 RGBA和颜色索引模式  RGB显示模式：在此模式下，硬件为R、G、B和A成分保留一定数量的位平面（每种成分位平面数量并不一定相同）。像素可以显示的不同颜色的数量取决于位平面的数量以及硬件是如何解释这些位平面的。不同颜色的数量不能超过2的N次方，其中N是位平面的数量。  
+有些图形硬件使用抖动来增加可以显示的颜色数量。假定系统分别只有1个位来表示R、G、B，这样一共可以显示8种颜色：黑、白、红">
+<meta property="og:updated_time" content="2015-06-19T16:09:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="openGL学习（四） -- 颜色">
+<meta name="twitter:description" content="1 RGBA和颜色索引模式  RGB显示模式：在此模式下，硬件为R、G、B和A成分保留一定数量的位平面（每种成分位平面数量并不一定相同）。像素可以显示的不同颜色的数量取决于位平面的数量以及硬件是如何解释这些位平面的。不同颜色的数量不能超过2的N次方，其中N是位平面的数量。  
+有些图形硬件使用抖动来增加可以显示的颜色数量。假定系统分别只有1个位来表示R、G、B，这样一共可以显示8种颜色：黑、白、红">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post'
+  };
+</script>
+
+    <title> openGL学习（四） -- 颜色 // Codingforever </title>
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+<!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+
+
+
+
+<div class="container one-column page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Codingforever</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-home"></i> <br />
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            標籤
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+        </div>
+    </header>
+
+    <main id="main" class="main">
+        <div class="main-inner">
+            <div id="content" class="content">
+                
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              openGL学习（四） -- 颜色
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於
+          <time itemprop="dateCreated" datetime="2013-07-28T00:00:00+08:00" content="7月 28 2013">
+            7月 28 2013
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分類於
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/游戏开发/" itemprop="url" rel="index"><span itemprop="name">游戏开发</span></a></span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h2 id="1_RGBA和颜色索引模式"><strong>1 RGBA和颜色索引模式</strong>  </h2><p><strong>RGB显示模式</strong>：在此模式下，硬件为R、G、B和A成分保留一定数量的位平面（每种成分位平面数量并不一定相同）。像素可以显示的不同颜色的数量取决于位平面的数量以及硬件是如何解释这些位平面的。不同颜色的数量不能超过2的N次方，其中N是位平面的数量。  </p>
+<p>有些图形硬件使用<strong>抖动</strong>来增加可以显示的颜色数量。假定系统分别只有1个位来表示R、G、B，这样一共可以显示8种颜色：黑、白、红、蓝、绿、黄、青和洋红。现有一种颜色粉红色，这种颜色并不在系统可以显示的8种颜色中，那么系统如何实现显示呢。图形硬件仍然采用棋盘模式的方法，用红色和白色交替对像素进行着色。如果眼睛距离屏幕足够远，不能看到单独的像素，这块区域看上去就是粉红色的，那就是红色和白色的均值。但是，如果是从帧缓冲区读取像素信息，所得到的是实际的红色和白色的像素值，因为帧缓冲区中不存在“粉红色”。  </p>
+<p>如果分别用8位来表示R、G和B值，即使不借助抖动也可以创建高质量的图像。但是，并不是说，如果计算机具有24位的位平面，就可以不需要使用抖动了。例如，如果是在双缓冲模式下运行，位平面可能被分成两组，每组12位，这样每种颜色成分实际上只有4位。在许多情况下，如果不使用抖动，每种分4位的颜色是无法产生令人满意的效果的。<br>可以用GL_DITHER为参数调用glEnable( )或glDisable( )函数，分别启用或禁用抖动功能。<strong>注意，和其他许多特性不同，抖动在默认情况下是启用的</strong>。</p>
+<p><strong>颜色索引模式</strong>:在颜色索引模式下，OpenGL使用一个颜色映射表（或颜色查找表），类似于使用调色板来混合颜料，准备根据颜色编号来绘制场景。颜色映射表的大小是由专用的硬件决定的。</p>
+<h2 id="2_在RGBA和颜色索引模式中进行选择"><strong>2 在RGBA和颜色索引模式中进行选择</strong>  </h2><p>应该根据可用的硬件和应用程序的要求来选择使用RGBA模式还是颜色索引模式。在绝大多数系统中，RGBA模式可以显示的颜色数量要远远多于颜色索引模式。另外，对于有些效果（如着色、光照、纹理贴图和雾），RGBA模式能够提供更大的灵活性。  </p>
+<p>一般而言，应该尽可能使用RGBA模式。RGBA模式可以在纹理贴图中使用，并且在使用光照、着色、雾和抗锯齿功能时更为灵活。</p>
+<h2 id="3_指定颜色和着色模型"><strong>3 指定颜色和着色模型</strong>  </h2><p>OpenGL维护一种当前颜色（在RGBA模式下）或一个当前颜色索引（在颜色索引模式下）。一般每个物体都是用当前颜色（或当前颜色索引）绘制的，除非使用了一些更为复杂的着色模型，例如光照和纹理贴图。  </p>
+<p>在RGBA模式下，使用glColor<em>( )函数选择一种当前颜色。在颜色索引模式下，可以使用glIndex</em>( )函数选择一个单值颜色索引，把它作为当前的颜色索引。  </p>
+<p>直线或填充多边形可以用一种颜色进行绘制（<strong>单调着色</strong>），也可以用多种颜色进行绘制（<strong>平滑着色</strong>，也称Gouraud着色）。可以用glShadeModel( )函数指定所需的着色模型。在单调着色模型下，整个图元的颜色就是它任何一个顶点的颜色。在平滑着色模型下，每个顶点都是单独进行处理的。如果图元是直线，线段的颜色将根据两个顶点的颜色进行均匀插值。如果图元是多边形，多边形的内部颜色是所有顶点颜色的均匀插值。</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/openGL/" rel="tag">#openGL</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/07/03//2014/07-03-0.html/" rel="prev">时间都去哪了</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2013/07/27//2013/07-27-0.html/" rel="next">openGL学习（三）-- 视图</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+            </div>
+
+            
+
+            
+              <div class="comments" id="comments">
+                
+              </div>
+            
+        </div>
+
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="zhujiefirst" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">zhujiefirst</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">学习总结 思考感悟 知识管理</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">45</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">分類</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-name">標籤</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1_RGBA和颜色索引模式"><span class="nav-number">1.</span> <span class="nav-text">1 RGBA和颜色索引模式  </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2_在RGBA和颜色索引模式中进行选择"><span class="nav-number">2.</span> <span class="nav-text">2 在RGBA和颜色索引模式中进行选择  </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3_指定颜色和着色模型"><span class="nav-number">3.</span> <span class="nav-text">3 指定颜色和着色模型  </span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+        <div class="footer-inner">
+            <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhujiefirst</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+        </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+</div>
+
+<script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.4"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.4"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.4" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/js/search-toggle.js"></script>
+
+
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.4" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if (isDesktop() && CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    });
+  </script>
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        if (CONFIG.sidebar === 'always') {
+            displaySidebar();
+        }
+    });
+</script>
+
+
+
+
+
+
+
+
+<!-- lazyload -->
+<script type="text/javascript" src="/js/lazyload.js"></script>
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery("#posts img").lazyload({
+            placeholder: "/images/loading.gif",
+            effect: "fadeIn"
+        });
+    });
+</script>
+</body>
+</html>

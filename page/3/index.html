@@ -1,405 +1,1482 @@
-
- <!DOCTYPE HTML>
-<html lang="zh-CN">
+<!doctype html>
+<html class="theme-next use-motion ">
 <head>
-  <meta charset="UTF-8">
-  
-    <title>Codingforever</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
-    <meta name="author" content="zhujiefirst">
-    
-    <meta name="description" content="学习总结 思考感悟 知识管理">
-    
-    
-    
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:site" content="Jay1002008" />
-    <meta name="twitter:title" content="Codingforever" />
-      
-    
-    
-    
-    <link rel="icon" href="/img/favicon.ico">
-    
-    
-    <link rel="apple-touch-icon" href="/img/pacman.jpg">
-    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
-    
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
 
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+  <link href='//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.4"/>
+
+
+    <meta name="description" content="学习总结 思考感悟 知识管理" />
+
+
+
+  <meta name="keywords" content="Hexo,next" />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.4" />
+
+
+<meta name="description" content="学习总结 思考感悟 知识管理">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Codingforever">
+<meta property="og:url" content="http://codingforever.com/page/3/index.html">
+<meta property="og:site_name" content="Codingforever">
+<meta property="og:description" content="学习总结 思考感悟 知识管理">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Codingforever">
+<meta name="twitter:description" content="学习总结 思考感悟 知识管理">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post'
+  };
+</script>
+
+    <title> Codingforever </title>
 </head>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+<!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
 
-  <body>
-    <header>
-      <div>
-		
-			<div id="textlogo">
-				<h1 class="site-name"><a href="/" title="Codingforever">Codingforever</a></h1>
-				<h2 class="blog-motto">SHUT UP ur fucking mouth! Reading MORE, thinking MORE, coding MORE.</h2>
-			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
-			</a></div>
-			<nav class="animated">
-				<ul>
-					
-						<li><a href="/">首页</a></li>
-					
-						<li><a href="/archives">归档</a></li>
-					
-						<li><a href="/categories">分类</a></li>
-					
-						<li><a href="/tags">标签</a></li>
-					
-						<li><a href="/about">关于</a></li>
-					
-					<li>
-					
-					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
-						<label>Search</label>
-						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
-						<input type="hidden" name="q" value="site:codingforever.com">
-					</form>
-					
-					</li>
-				</ul>
-			</nav>			
+
+
+
+<div class="container one-column 
+   page-home 
+">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Codingforever</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
 </div>
 
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-home"></i> <br />
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            標籤
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+        </div>
     </header>
-    <div id="container">
-      <div id="main">
 
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2014/11/14/-2014-11-14-0-html/" title="Go中实现Set类型" itemprop="url">
-  
-    <h1 itemprop="name">Go中实现Set类型</h1>
+    <main id="main" class="main">
+        <div class="main-inner">
+            <div id="content" class="content">
+                
+  <section id="posts" class="posts-expand">
     
-     
-           <p itemprop="description" >这几天用go实现项目原有的xml数据导入服务器新设计的数据库中，以实现数据从客户机向服务器的转移。由于服务器的接口协议为json,所以面临的问题就是从xml解析出相应的struct，并将其转换为json。在这个过程中，go中xml与json库就不得不赞一下了。
-只需简单的定义st</p>
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2014/11/14//2014/11-14-0.html/" itemprop="url">
+                Go中实现Set类型
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於
+          <time itemprop="dateCreated" datetime="2014-11-14T00:00:00+08:00" content="11月 14 2014">
+            11月 14 2014
+          </time>
+        </span>
+
         
-    
-    <time datetime="2014-11-13T16:00:00.000Z" itemprop="datePublished">11月 14 2014</time>
-  </a>
-</section>
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分類於
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/golang/" itemprop="url" rel="index"><span itemprop="name">golang</span></a></span>
 
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2014/08/09/-2014-08-09-1-html/" title="如何用lua实现面向对象" itemprop="url">
-  
-    <h1 itemprop="name">如何用lua实现面向对象</h1>
-    
-     
-           <p itemprop="description" >lua作为一门非面向对象的轻量级语言，如何才能方便的用面向对象的方法来进行编程呢？
-首先,编程范型对面向对象编程（OOP）是如何定义的呢？通常，OOP被理解为一种将程序分解为封装数据及相关操作的模块而进行的编程方式。有别于其他编程方式，OOP中的与某些数据类型相关的一系列操作都被</p>
+              
+              
+
+            
+          </span>
         
-    
-    <time datetime="2014-08-08T16:00:00.000Z" itemprop="datePublished">8月 9 2014</time>
-  </a>
-</section>
 
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2014/08/09/-2014-08-09-0-html/" title="高效使用I/O" itemprop="url">
-  
-    <h1 itemprop="name">高效使用I/O</h1>
-    
-     
-           <p itemprop="description" >网络编程中，遇到最多而且必定会遇到的就是I/O了。那么，如何正确使用I/O模型，使程序能高效率运行呢?首先，我们要了解下具体有哪些I/O模型。
-I/O模型基本I/O模型一般有同步和异步，阻塞和非阻塞，基本可以分为阻塞型，非阻塞型，多路复用型和异步型4类。
-阻塞型阻塞型即最简单使用</p>
         
-    
-    <time datetime="2014-08-08T16:00:00.000Z" itemprop="datePublished">8月 9 2014</time>
-  </a>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2014/08/09/-2014-08-09-2-html/" title="编程语言的发展之路 — 读《代码的未来》" itemprop="url">
-  
-    <h1 itemprop="name">编程语言的发展之路 — 读《代码的未来》</h1>
-    
-     
-           <p itemprop="description" >本书是Matz在《日经Linux》上连载的各期内容的合集，虽然内容有些部分重复，但是内容还是很丰富的，主题也比较鲜明，与国内的某些合集甩开太远。    
-通书下来，个人觉得最精华的还是第2章：编程语言的过去、现在和未来。Matz通过简单回顾编程语言的过去，着重分析现在和未来的发展</p>
+          
         
-    
-    <time datetime="2014-08-08T16:00:00.000Z" itemprop="datePublished">8月 9 2014</time>
-  </a>
-</section>
+      </div>
+    </header>
 
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2014/07/03/-2014-07-03-0-html/" title="时间都去哪了" itemprop="url">
-  
-    <h1 itemprop="name">时间都去哪了</h1>
-    
-     
-           <p itemprop="description" >“我有太多的事要做，但却没有足够的时间。”“为什么我每天都忙的不可开交，有些人却一切井井有条?”“每次周末我都计划了一堆事，看书，运动，见朋友，但每次却都没有完成。”……
-这些曾经困扰我的问题，现在似乎已全都不存在了。因为我懂得了，时间是整理出来的。鲁迅先生说“时间就像海绵里的水</p>
+    <div class="post-body">
+
+      
+      
+
+      
         
-    
-    <time datetime="2014-07-02T16:00:00.000Z" itemprop="datePublished">7月 3 2014</time>
-  </a>
-</section>
+          <span itemprop="articleBody"><p>这几天用go实现项目原有的xml数据导入服务器新设计的数据库中，以实现数据从客户机向服务器的转移。由于服务器的接口协议为json,所以面临的问题就是从xml解析出相应的struct，并将其转换为json。在这个过程中，go中xml与json库就不得不赞一下了。</p>
+<p>只需简单的定义struct的结构，并用相应的标签表示xml或者json中的字段名称即可，编码方便性不言而喻。具体定义可以参见如下：</p>
+<pre><code><span class="typedef"><span class="keyword">type</span> <span class="type">XmlSample</span> struct <span class="container">{
+    <span class="type">A</span> <span class="title">int</span> `<span class="title">xml</span>:"<span class="type">AField</span>"`
+    <span class="type">B</span> <span class="title">string</span> `<span class="title">xml</span>:"<span class="type">BField</span>"`
+}</span></span>
 
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2013/07/28/-2013-07-28-0-html/" title="openGL学习（四） -- 颜色" itemprop="url">
-  
-    <h1 itemprop="name">openGL学习（四） -- 颜色</h1>
-    
-     
-           <p itemprop="description" >1 RGBA和颜色索引模式  
-RGB显示模式：在此模式下，硬件为R、G、B和A成分保留一定数量的位平面（每种成分位平面数量并不一定相同）。像素可以显示的不同颜色的数量取决于位平面的数量以及硬件是如何解释这些位平面的。不同颜色的数量不能超过2的N次方，其中N是位平面的数量。  
-</p>
+<span class="typedef"><span class="keyword">type</span> <span class="type">JsonSample</span> struct <span class="container">{
+    <span class="type">A</span> <span class="title">int</span> `<span class="title">json</span>:"<span class="type">AField</span>"`
+    <span class="type">B</span> <span class="title">string</span> `<span class="title">json</span>:"<span class="type">BField</span>"`
+}</span></span>
+</code></pre><p>那么这个和“go中如何实现set”有半毛钱关系？是没有关系，鄙人好闲扯。那么，再来看下go中如何实现set。</p>
+<p>起因是这样的：某天，鄙人欲实现一不重复随机数生成器，即将产生的随机数放入set中，如何可保证产生的随机数的唯一性。但是，鄙人发现go中没有set这样的container！这可怎么破？只能自己实现个了。既然go中有map,索性基于map实现个吧。纳尼？map是map,如何将其转成set!哈哈，map中的keys不是需要保证其唯一性么，我们只是利用map中keys而已。</p>
+<p>首先我们定义一个struct，以存放set中元素，定义如下：</p>
+<pre><code>type Set <span class="class"><span class="keyword">struct</span> {</span>
+    set map[<span class="class"><span class="keyword">interface</span>{</span>}]<span class="class"><span class="keyword">struct</span>{</span>}
+}
+</code></pre><p>map[interface{}]struct{}中keys的类型比较容易理解，因为set要适合所有类型元素，所以interface{}类型最为合适。但是values的类型是个什么东东？可以是个简单的bool型么，或者int型也可以嘛。是的，values的具体类型当然可以是bool,int，如果想作孽，可以定义成map[stirng]string也可，但是为什么要选择struct{}呢？嗯，原因么，因为鄙人在google group上看到说,struct{}可以占有较少的空间（其实是不占空间，具体鄙人才疏学浅，未能得证），所以采用以上定义方法。</p>
+<p>如此一定义，便可亮出Set可以接收的方法，无非是InSet(), Insert(), Size(), Clear()这几样，如下：</p>
+<pre><code><span class="func"><span class="keyword">func</span> <span class="params">(s *Set)</span></span> <span class="type">InSet</span>(e interface{}) bool {
+    <span class="number">_</span>, ok := s.<span class="keyword">set</span>[e]
+    <span class="keyword">return</span> ok
+}
+
+<span class="func"><span class="keyword">func</span> <span class="params">(s *Set)</span></span> <span class="type">Insert</span>(e interface{}) bool {
+    <span class="keyword">in</span> := s.<span class="type">InSet</span>(e)
+    s.<span class="keyword">set</span>[e] = <span class="class"><span class="keyword">struct</span></span>{}{}
+    <span class="keyword">return</span> <span class="keyword">in</span>
+}
+
+<span class="func"><span class="keyword">func</span> <span class="params">(s *Set)</span></span> <span class="type">Clear</span>() {
+    s.<span class="keyword">set</span> = make(<span class="built_in">map</span>[interface{}]<span class="type">Struct</span>{})
+}
+
+<span class="func"><span class="keyword">func</span> <span class="params">(s *Set)</span></span> <span class="type">Size</span>() int {
+    <span class="keyword">return</span> len(s.<span class="keyword">set</span>)
+}
+</code></pre><p>额，好像还少了点东西。怎么遍历元素呢？当然，我是指不暴露其内部实现的遍历。go中range又只能支持slice,map,chan。那么，再增加个方法，将内部set返回，如下：</p>
+<pre><code><span class="func"><span class="keyword">func</span> <span class="params">(s *Set)</span></span> <span class="type">Range</span>() <span class="built_in">map</span>[interface{}]<span class="class"><span class="keyword">struct</span></span>{}{
+    <span class="keyword">return</span> s.<span class="keyword">set</span>
+}
+</code></pre><p>Set需要遍历时，只需for i, v := range s.Range()即可。嗯，不是说不暴露其内部实现么，Range方法一出，看返回值大家都知道啦。额，鄙人未曾想到更甚的方法，暂时就这样吧。</p>
+<p>BTW, 这述代码中可以将struct{}先type成自定义None类型，这样代码就更具体美感了。嘿嘿。</p>
+</span>
         
-    
-    <time datetime="2013-07-27T16:00:00.000Z" itemprop="datePublished">7月 28 2013</time>
-  </a>
-</section>
+      
+    </div>
 
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2013/07/27/-2013-07-27-0-html/" title="openGL学习（三）-- 视图" itemprop="url">
-  
-    <h1 itemprop="name">openGL学习（三）-- 视图</h1>
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
-     
-           <p itemprop="description" >计算机图形的要点就是创建三维物体的二维图像（图像必须是二维的，因为它是在平面的屏幕上显示的）。我们要避免考虑屏幕上的像素是如何绘制的，而是要尽量在三维空间中想象物体的形状。
-本章主要介绍如何使用OpenGL完成如下任务：如何在三维空间中设置模型的位置和方向，以及如何确定观察者的位</p>
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2014/08/09//2014/08-09-2.html/" itemprop="url">
+                编程语言的发展之路 — 读《代码的未来》
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於
+          <time itemprop="dateCreated" datetime="2014-08-09T00:00:00+08:00" content="8月 9 2014">
+            8月 9 2014
+          </time>
+        </span>
+
         
-    
-    <time datetime="2013-07-26T16:00:00.000Z" itemprop="datePublished">7月 27 2013</time>
-  </a>
-</section>
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分類於
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/编程思维/" itemprop="url" rel="index"><span itemprop="name">编程思维</span></a></span>
 
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2013/07/17/-2013-07-17-0-html/" title="openGL学习（二）-- 状态管理和绘制几何物体" itemprop="url">
-  
-    <h1 itemprop="name">openGL学习（二）-- 状态管理和绘制几何物体</h1>
-    
-     
-           <p itemprop="description" >在最高抽象层次上，有3种绘图是最基本的：消除窗口，绘制几何图形，以及绘制光栅对象(包括二维图像、位图和字体)。这里先介绍如何消除以及如何绘制几何物体，包括点、直接和平面多边形。
-1　绘图工具箱
-首先就是清除窗口。在计算机中，保存图片的内存通常被计算机所绘制的前一幅图像所填充，因此</p>
+              
+              
+
+            
+          </span>
         
-    
-    <time datetime="2013-07-16T16:00:00.000Z" itemprop="datePublished">7月 17 2013</time>
-  </a>
-</section>
 
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2013/07/15/-2013-07-15-0-html/" title="自省一则" itemprop="url">
-  
-    <h1 itemprop="name">自省一则</h1>
-    
-     
-           <p itemprop="description" >一个人在某一方面的层次分为4层，即不知道自己不知道，知道自己不知道，知道自己知道，不知道自己知道。虽然很绕，但细细想来，还是很有道理的。而小猿自认为自己目前处在第二层，即知道自己不知道，所以也偶尔发奋努力下，但通常是三天打鱼，两天晒网了。所以在成就系统里至今也没有什么拿得出手的。</p>
         
-    
-    <time datetime="2013-07-14T16:00:00.000Z" itemprop="datePublished">7月 15 2013</time>
-  </a>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2013/06/29/-2013-06-29-0-html/" title="openGL学习（一）-- 简介" itemprop="url">
-  
-    <h1 itemprop="name">openGL学习（一）-- 简介</h1>
-    
-     
-           <p itemprop="description" >1　什么是OpenGL, 它能够做什么，不能够做什么？
-OpenGL是图形硬件的一种软件接口。OpenGL包含700多个函数（OpenGL3.0），这些函数可以用于指定物体和操作，创建交互式的三维应用程序。但OpenGL并未包含用于执行窗口任务或者获取用户输入之类的函数，也不提供</p>
+          
         
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><p>本书是Matz在《日经Linux》上连载的各期内容的合集，虽然内容有些部分重复，但是内容还是很丰富的，主题也比较鲜明，与国内的某些合集甩开太远。    </p>
+<p>通书下来，个人觉得最精华的还是第2章：编程语言的过去、现在和未来。Matz通过简单回顾编程语言的过去，着重分析现在和未来的发展。主要分为以下几类：<strong>DSL，meta-programming，内存管理，异常处理，闭包</strong>。     </p>
+<p><strong>DSL</strong>，即特定领域语言，将几乎只有程序员的编程语言进化成符合具体领域业务的特定语言，而且该语言与自然语言类似，方便非编程人员也可用其进行编程，可以解决开发人员对业务透视程度不够，业务人员无能力进行编码的矛盾。回想还在前东家码程序时，由于是游戏工作室，经常出现小工具方便策划实现自己的想法，这几乎是与DSL方向不谋而合。做为攻城师，如何把自己从代码中解放出来，如何让非编程人员方便的进行编程工作也是一种能力啊。  </p>
+<p><strong>元编程</strong>，即可以自己写程序的程序。身为苦逼码农，还记得需求一日一变的痛若吗？还记得数据库迁移时，代码大动的尴尬吗？请用元编程利器，让你一劳永逸，面对千变万化，不动任何代码就是完善支持。善哉，这才是程序员的理想生活。当然，元编程并不是所有语言都支持，当然上古语言Lisp可以说是其始祖，但是便于理解，还是举个Ruby的例子，如下：</p>
+<pre><code>require 'builder'
+builder = Builder::XmlMarkup.new
+xml = builder.<span class="keyword">person</span> { |b| 
+     b.name(<span class="string">"Jay"</span>) 
+     b.phone(<span class="string">"123-123321"</span>) 
+} 
+#=&gt; &lt;<span class="keyword">person</span>&gt;&lt;name&gt;Jay&lt;/name&gt;&lt;phone&gt;123-123321&lt;/phone&gt;&lt;/<span class="keyword">person</span>&gt; 
+</code></pre><p>代码中对person, name, phone标签是用方法调用实现的，但这些方法并不是Builder库所定义的。因为XML中的标签是任意定义的，不可能在Builder库中事先全部准备好所有方法，所以这就是元编程的力量。若要增加home标签，无须动Builder库的任何代码，只需直接调用home方法即可。完美生活啊。  </p>
+<p><strong>内存管理</strong>。说到这个，不得不提业务说c/c++是如何难用，很大一部分是由于要开发者进行内存管理。虽然现代c++语言经过一定的封装可以做到不用自己进行内存管理，但是曾经坑害多少无知码农的阴影是不会这么轻易散去。所以，垃圾回收，将内存管理从程序员手上释放出来是巨大的福利。  </p>
+<p><strong>异常处理</strong>。C代码中对各种异常返回值的判断，往往在程序中占有很大的比例，如下：  </p>
+<pre><code>int main<span class="params">()</span> 
+{ 
+     FILE<span class="built_in">*</span> f = open<span class="params">(<span class="string">"/path/to/file"</span>)</span>; 
+     <span class="keyword">if</span> <span class="params">(f == NULL)</span> { 
+        puts<span class="params">(<span class="string">"file open failed"</span>)</span>; 
+     } <span class="keyword">else</span> { 
+        puts<span class="params">(<span class="string">"file open succeeded"</span>)</span>; 
+    } 
+    f.close<span class="params">()</span>; 
+    return <span class="number">0</span>; 
+} 
+</code></pre><p>当然，这里只是举个简单的例子，现实情况比这个糟糕太多。写一个并不复杂的业务，假设只需要10行代码，但是对异常情况的判断并且处理，往往占据了大量的代码量，也许从开始的10行渐渐臃肿到了100行。这不仅对编码人员造成了大量的工作量，而且对维护人员进行代码学习也是一种负担。若采用异常机制，很容量让编码人员只关注重要的逻辑，而不用一头淹没在异常处理代码中。上文的例子，同样实现一个Ruby版本：  </p>
+<pre><code><span class="keyword">begin</span>
+    open(<span class="string">"path/to/file"</span>, <span class="string">"r"</span>) <span class="keyword">do</span> |f| 
+    puts<span class="string">"file open succeed"</span>
+<span class="keyword">end</span>
+<span class="keyword">rescue</span>
+    puts<span class="string">"file open failed"</span>
+<span class="keyword">end</span>
+</code></pre><p><strong>闭包</strong>，含有“包含”的意思。如其名称，闭包就是将数据包含在函数内，与面向对象正好相反，面向对象是将数据的行为包含在数据内。对于闭包，我目前还没有体会到其带来的好处，当然是巨大的好处，值得做为编程语言未来发展的方法的好处，所以就先搁着，等到感受到其巨大力量再来补上。  </p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
-    <time datetime="2013-06-28T16:00:00.000Z" itemprop="datePublished">6月 29 2013</time>
-  </a>
-</section>
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2014/08/09//2014/08-09-1.html/" itemprop="url">
+                如何用lua实现面向对象
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於
+          <time itemprop="dateCreated" datetime="2014-08-09T00:00:00+08:00" content="8月 9 2014">
+            8月 9 2014
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分類於
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/lua/" itemprop="url" rel="index"><span itemprop="name">lua</span></a></span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><p>lua作为一门非面向对象的轻量级语言，如何才能方便的用面向对象的方法来进行编程呢？</p>
+<p>首先,编程范型对面向对象编程（OOP）是如何定义的呢？<strong>通常，OOP被理解为一种将程序分解为封装数据及相关操作的模块而进行的编程方式</strong>。有别于其他编程方式，OOP中的与某些数据类型相关的一系列操作都被有机地封装到该数据类型当中，而非散放于其外，因而<strong>OPP中的数据类型不仅有着状态，还有着相关的操作</strong>。（来自wikipedia）</p>
+<p>以一言蔽之，就是数据中包含对数据的操作行为。如此甚好，在lua中只要有<strong>强力类型table</strong>即实现了。</p>
+<pre><code><span class="comment">-- 定义table类型</span>
+point = { }
+
+<span class="comment">-- 在table中增加x, y两个数据</span>
+point.x = <span class="number">3</span>
+point.y = <span class="number">4</span>
+
+<span class="comment">-- 在table中增加magnitude方法</span>
+point.magnitude = <span class="function"><span class="keyword">function</span> <span class="params">()</span></span>
+    <span class="keyword">return</span> <span class="built_in">math</span>.sqrt(point.x^<span class="number">2</span> + point.y^<span class="number">2</span>)
+<span class="keyword">end</span>
+
+<span class="comment">-- 调用point中方法处理数据</span>
+<span class="built_in">print</span>(point.magnitude())
+</code></pre><p>确实，数据的行为被封装在table类型point中了，但是，这看上去也太不专业了，我们不能这么没追求是吧。而且，继承呢，多态呢？完全没有面向对象的影子嘛。模仿也要有模仿的样子嘛。</p>
+<p>当然，这并不是我们可以接受的版本。在讲解可用版本之前，先来解释下lua中的一大利器–metatable。先来看其官方定义：<strong>metatable用来定义原始值在特定操作下的行为</strong>。你可以通过在metatable中的特定域设一值来改变拥有这个metatable的值的指定操作行为。举例来说，当一个非数字的值作加法操作的时候，Lua会检查它的metatable中的“__add“域中是否有一个函数，如果有这么一个函数的，Lua调用这个函数来执行一次加法（来自lua中文手册）。人们说，“光说不练，假把式”，所以show the code(加法改用add方法)。</p>
+<pre><code>-- 定义table point
+point = <span class="comment">{ }</span>
+<span class="function"><span class="keyword">function</span> <span class="title">point</span>:</span><span class="keyword">add</span>(p)
+    <span class="keyword">self</span>.x = <span class="keyword">self</span>.x + p.x 
+    <span class="keyword">self</span>.y = <span class="keyword">self</span>.y + p.y 
+<span class="keyword">end</span>
+
+-- 定义table point_a和point_b
+point_a = <span class="comment">{ x = 1, y = 2 }</span>
+point_b = <span class="comment">{ x = 2, y = 1 }</span>
+
+-- 对point_a设置元表
+setmetatable(point_a, <span class="comment">{ __index = point }</span>)
+
+-- 调用point_a的<span class="keyword">add</span>方法，由于point_a为没有<span class="keyword">add</span>方法，所以向其元表point中查询，发现有<span class="keyword">add</span>方法，调用之
+point_a:<span class="keyword">add</span>(point_b)
+
+-- 打印调用<span class="keyword">add</span>方法后的point_a
+print(point_a.x, point_a.y)
+</code></pre><p>这里定义了一个table point，其包含add方法，并将其设置为point_a的元表。当调用point_a的add方法时，首在在point_a中寻找add方法，但是point_a中并没有add方法，所以再次在point_a的元表，即point中寻找add方法并进行调用。</p>
+<p>在一个table中找不到某个方法，就向其元表中寻找。这个特性不就如同面向对象中子类方法找不到时，在其父类中寻找。既然如此，那么利用Lua的metatable，很容易就实现类似面向对象的功能。</p>
+<p>首先，定义一个全局的Class做为“类的关键字”。</p>
+<pre><code><span class="comment">-- Object为所有对象的上级</span>
+Object = { }
+
+<span class="comment">-- 创建现有对象副本的方法</span>
+<span class="function"><span class="keyword">function</span> <span class="title">Object:clone</span><span class="params">()</span></span>
+    <span class="keyword">local</span> object = { }
+    <span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="built_in">pairs</span>(self) <span class="keyword">do</span>
+        object[k] = v
+    <span class="keyword">end</span>
+
+    <span class="built_in">setmetatable</span>(object, { __index = self })
+
+    <span class="keyword">return</span> object
+<span class="keyword">end</span>
+
+<span class="comment">-- 允许类似基于类编程的用法</span>
+<span class="function"><span class="keyword">function</span> <span class="title">Object:new</span><span class="params">(...)</span></span>
+    <span class="keyword">local</span> object = { }
+
+    <span class="built_in">setmetatable</span>(object, { __index = self })
+
+    object:initialize(...)
+
+    <span class="keyword">return</span> object
+<span class="keyword">end</span>
+
+<span class="function"><span class="keyword">function</span> <span class="title">Object:initialize</span><span class="params">(...)</span></span>
+    <span class="comment">-- do nothing </span>
+<span class="keyword">end</span>
+
+<span class="comment">-- 定义Class原型</span>
+Class = Object:new()
+</code></pre><p>里面定义了一个名为Object的table, 然后在该table中分别定义了clone(),new(…)和initialize(…)三个方法。</p>
+<p>首先看clone方法，该方法对Object自身制作了一份copy，同时又将Object自身作为copy对象的元表的__index域的值。这样，当copy对象对某一变量或者方法进行索引时，并且发现copy对象并不包含索引对象时，就再次对被copy对象进行索引。如此便可实现上文中metatable.lua文件中的功能。</p>
+<p>然后看new方法。该方法中定义一个object table, 并对其进行初始化操作后直接返回。</p>
+<p>最后，直接定义Class原型，作为“类关键字”，方便以后调用。</p>
+<p>定义完”Class关键字”后，实现类似面向对象的编程就非常简单了。直接附上经典示例。</p>
+<pre><code><span class="built_in">require</span> <span class="string">'lua/class'</span>
+
+<span class="comment">-- 定义Point类</span>
+Point = Class:new()
+
+<span class="comment">-- 定义Point类的初始化方法</span>
+<span class="function"><span class="keyword">function</span> <span class="title">Point:initialize</span><span class="params">(x, y)</span></span>
+    self.x = x
+    self.y = y
+<span class="keyword">end</span>
+
+<span class="comment">-- 定义Point类的距离方法</span>
+<span class="function"><span class="keyword">function</span> <span class="title">Point:magnitude</span><span class="params">()</span></span>
+    <span class="keyword">return</span> <span class="built_in">math</span>.sqrt(self.x^<span class="number">2</span> + self.y^<span class="number">2</span>)
+<span class="keyword">end</span>
+
+<span class="comment">-- 打印point(3, 4)的距离</span>
+<span class="built_in">print</span>(Point:new(<span class="number">3</span>, <span class="number">4</span>):magnitude())
 
 
-  <nav id="page-nav" class="clearfix">
-    <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
+<span class="built_in">require</span> <span class="string">'lua/point'</span>
+
+<span class="comment">-- 定义Point3D类, 该类继承自Point类</span>
+Point3D = Point:clone()
+
+<span class="comment">-- 定义Point3D类的初始化方法</span>
+<span class="function"><span class="keyword">function</span> <span class="title">Point3D:initialize</span><span class="params">(x, y, z)</span></span>
+    Point.initialize(self, x, y)
+    self.z = z
+<span class="keyword">end</span>
+
+<span class="comment">-- 定义Point3D类的距离方法</span>
+<span class="function"><span class="keyword">function</span> <span class="title">Point3D:magnitude</span><span class="params">()</span></span>
+    <span class="keyword">return</span> <span class="built_in">math</span>.sqrt(self.x^<span class="number">2</span> + self.y^<span class="number">2</span> + self.z^<span class="number">2</span>)
+<span class="keyword">end</span>
+
+<span class="comment">-- 打印point(1, 2, 3)的距离</span>
+<span class="built_in">print</span>(Point3D:new(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>):magnitude())
+</code></pre><p><strong>[REFERENCE]</strong>    </p>
+<ul>
+<li>wikipedia    </li>
+<li>lua中文手册    </li>
+<li>代码的未来    </li>
+</ul>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2014/08/09//2014/08-09-0.html/" itemprop="url">
+                高效使用I/O
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於
+          <time itemprop="dateCreated" datetime="2014-08-09T00:00:00+08:00" content="8月 9 2014">
+            8月 9 2014
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分類於
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/服务器编程/" itemprop="url" rel="index"><span itemprop="name">服务器编程</span></a></span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><p>网络编程中，遇到最多而且必定会遇到的就是I/O了。那么，如何正确使用I/O模型，使程序能高效率运行呢?首先，我们要了解下具体有哪些I/O模型。</p>
+<p><strong>I/O模型</strong><br>基本I/O模型一般有同步和异步，阻塞和非阻塞，<strong>基本可以分为阻塞型，非阻塞型，多路复用型和异步型4类</strong>。</p>
+<p><strong>阻塞型</strong><br>阻塞型即最简单使用read(2)等方法。由于read(2)方法是阻塞型函数，当程序使用read(2)向输入读取数据时，如果没有任何数据读取，则read(2)函数就会阻塞，直到输入中有数据可读并读出为止。如图2中简单程序，用read(2)实现阻塞型输入操作。</p>
+<pre><code>void read_input(int fd, void* data)
+{
+     <span class="keyword">char</span> buf[BUFSIZ];
+     int <span class="keyword">n</span>;
+
+     <span class="keyword">n</span> = <span class="keyword">read</span>(fd, buf, BUFSIZ);
+     <span class="keyword">if</span> (<span class="keyword">n</span> &lt; 0)      <span class="keyword">return</span> -1;  <span class="comment">/* failed */</span>
+     <span class="keyword">if</span> (<span class="keyword">n</span> == 0) <span class="keyword">return</span> 0;       <span class="comment">/* EOF */</span>
+     process(fd, buf, <span class="keyword">n</span>);      <span class="comment">/* success */</span>
+
+     <span class="keyword">return</span> 1;
+}
+</code></pre><p>图2中代码向输入读取最多BUFSIZ长度的数据，如果read(2)返回&lt;0, 则read(2)调用失败，可能为遇到中断信号等错误，如果read(2)返回==0，则为读到文件尾，在网络通信中即对端关闭了socket连接。如果返回其他值，则说明read(2)读取输入正常，且读取n长度的数据。但是，如果输入数据大于读取的最大长度BUFSIZ时，read(2)返回BUFSIZ长度，剩下的数据等待下次read(2)进行读取。当然，这里可能出现这样的情况，输入数据正好等于BUFSIZ长度时，read(2)也返回BUFSIZ值，这时就无法判断输入数据到底还有没有剩下，只能等待下次read(2)调用时才得认证。</p>
+<p>阻塞型模型必须循环调用read(2)以保证当有输入数据时，程序能得到这些数据。因为阻塞型模型无法知晓何时有数据可读，而且有多少数据也无从知道。在常见的网络编程中，并发存在成千上万个socket连接是很正常的现象，而阻塞型模型对每一个连接都要循环调用read(2)函数以保证每一个连接上有数据可读时能及时准备读取，这样就不得不开启N个线程（进程）进行read(2)调用，而且当大量空闲连接存在时，大量线程阻塞在read(2)上，显然这不是一个可行的方案。</p>
+<p>可见，阻塞型模型并不是现代网络编程可以采用的网络模型。</p>
+<p><strong>非阻塞型</strong><br>非阻塞型，依旧调用read(2)等方法。但不同的是，read(2)并不会阻塞，而是立即返回。若该连接的fd被设置为O_NONBLOCK时，则read(2)表现就会略有不同。当内核有数据可读取时，则返回读取的数据，返回数据的规则和阻塞型中read(2)相同；但是当内核没有数据可读时，read(2)并不会一直阻塞直到有数据可读，而是立即返回EAGAIN或者EWOULDBLOCK。具体情况见图3中代码。</p>
+<pre><code>void read_input(int fd, void*data)
+{
+     <span class="keyword">char</span> buf[BUFSIZ];
+     int <span class="keyword">n</span>;
+
+     <span class="comment">// 由于read(2)最多只能读取BUFSIZ数据，所以循环读取至无数据为止</span>
+     <span class="keyword">for</span> ( ; ; ) {
+          <span class="keyword">n</span> = <span class="keyword">read</span>(fd, buf, BUFSIZ);
+          <span class="keyword">if</span> (<span class="keyword">n</span> &lt; 0) {
+               <span class="comment">// 事先设置fd为O_NONBLOCK，所以当无数据可读时，返回error</span>
+               <span class="keyword">if</span> (errno == EAGAIN || errno == EWOULDBLOCK) {
+                    <span class="keyword">return</span> 1;
+               }
+               <span class="keyword">return</span> -1;
+          }
+          <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">n</span> == 0) {
+               <span class="comment">// 对端关闭连接</span>
+               <span class="keyword">return</span> 0;
+          }
+          <span class="keyword">else</span> {
+               <span class="comment">// 数据已读取，处理</span>
+               process(fd, buf, <span class="keyword">n</span>);
+          }
+     }
+}
+</code></pre><p>图3中代码，事先对连接fd设置O_NONBLOCK（代码中无体现），所以当调用read(2)时，若内核中无数据可读时，则直接返回fail(值为-1)， 同时设置错误码为EAGAIN或者EWOULDBLOCK。同样，若返回0则表示对端可能关闭了相应的连接，现也没有数据过来了，而当返回&gt;0时，则接收数据正常，但同样无法保证数据已读取完毕。所以，代码中采用循环读取数据，由于当内核中无数据可读时，read(2)也会立即返回，并对错误码进行置位，如此可判断数据已读取完毕。综上所述图3中代码不会对程序造成阻塞，而且也读取数据时也不会因为数据长度超过BUFSZIZ而造成读取不完整，可见，与阻塞型相比，非阻塞型解决了调用read(2)阻塞和数据可能读取不完整的问题，但是同样，在现代服务器动辄上万连接的情况下，开启同样数据线程并定时读取的方法并不可行。</p>
+<p><strong>多路复用型</strong><br>无论是阻塞型和非阻塞型，两都均不适用于现代服务器。若是出现一位管家，当fd上有数据可读时，再通知应用程序，那不是很方便。这时，多路复用就登场了。目前支持多路复用的系统调用包括select, poll, epoll, kqueue等。</p>
+<p>说到这位管家，那就不得不说明下这管家有两种型号，分别对应在事件监视中同步的工作形态，即边沿触发和电平触发。这本来是在机械领域的两个概念，边沿触发是指只在状态变化的瞬间发出通知，而电平触发是指在状态发生变化的整个过程中都持续发出通知，具体可自行google。而在网络编程中，边沿触发和电平触发又是如何体现的呢？边沿触发，只在数据到达的瞬间产生通知，即每次数据到达只会通知一次，具体读取还是不读取，就要看应用程序了。而电平触发，只有内核缓冲区中有数据，它就会持续通知应用程序，多么敬业的一位管家啊。当然，在效率上，边沿触发还是占有绝对的优势。<br>下面举下select的例子，伪代码如图4。</p>
+<pre><code>int fd_socket = socket<span class="params">(...)</span>;     <span class="comment">// 监听新连接socket</span>
+bind<span class="params">(...)</span>;
+listen<span class="params">(...)</span>;
+
+int fd_in[MAX];     <span class="comment">// 监听已连接socket</span>
+
+fd_set fs;
+
+while<span class="params">(<span class="number">1</span>)</span>{
+  FD_ZERO<span class="params">(fs...)</span>;
+  <span class="comment">// 对所有已连接socket进行监听</span>
+  for_each<span class="params">(fd_in)</span> {
+       FD_SET<span class="params">(fd, fs)</span>;
+  }
+  <span class="comment">// 对接收新连接socket进行监听</span>
+  FD_SET<span class="params">(fd_socket, fs)</span>;
+
+  <span class="comment">// 若没有任何fd可读，则阻塞</span>
+  select<span class="params">(...)</span>;
+
+  <span class="keyword">if</span><span class="params">(FD_ISSET<span class="params">(fd_socket...)</span>)</span> {
+        accept<span class="params">(...)</span>;
+    }
+
+  <span class="keyword">if</span><span class="params">(FD_ISSET<span class="params">(fd_stdin...)</span>)</span> {
+        read<span class="params">(...)</span>;
+  }
+}
+</code></pre><p>这里，select总管所有可能有数据可读的fd, 并阻塞调用直到至少有一个fd可读。当然，读者可能觉得该代码中有个小问题，就是之前描述过的read(2)数据读取不完全的情况。当然，这是个必须考虑的问题。但是select只支持电平触发，所以read(2)未读取完全，下次调用select时内核也会继续通知该fd可读，所以理论上是不会出现数据读取不完整的情况，但是由于要等到下次循环时才能读取数据，对性能有追求的情况下，依然还是可以对fd设置O_NONBLOCK，循环读取fd直到读取完毕为止。当然，在边沿触发情况下（epoll可设置），则必须使用O_NONBLOCK读取完全，否则有可能出现数据读取不完整的情况。<br>当然非阻塞型非常适合现代服务器的编写，即不会造成大量线程阻塞，也不会需要成千上万的线程对每一个连接进行数据读取，这不得不说多路复用真是个好管家。</p>
+<p><strong>异步型</strong><br>若是采用异步模型，则必须使用异步接口I/O接口了。异步模型可以说是最理想的网络模型，因为CPU只是在有必要的时候参与，对CPU的利用没有一点浪费。当然，若是采用异步模型，直接采用异步接口进行编程就可以了，这里就不再赘述。</p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2014/07/03//2014/07-03-0.html/" itemprop="url">
+                时间都去哪了
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於
+          <time itemprop="dateCreated" datetime="2014-07-03T00:00:00+08:00" content="7月 3 2014">
+            7月 3 2014
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分類於
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/杂感/" itemprop="url" rel="index"><span itemprop="name">杂感</span></a></span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><p>“我有太多的事要做，但却没有足够的时间。”<br>“为什么我每天都忙的不可开交，有些人却一切井井有条?”<br>“每次周末我都计划了一堆事，看书，运动，见朋友，但每次却都没有完成。”<br>……</p>
+<p>这些曾经困扰我的问题，现在似乎已全都不存在了。因为我懂得了，时间是整理出来的。鲁迅先生说“时间就像海绵里的水，只要愿意挤，总还是有的”。</p>
+<p>为什么会想做的事情太多，而时间太少？其实并不是这样的，也许你想做的事情并不多，其实你的时间也并不少，只是你的时间花在了不该花的地方。每次面对你杂乱无章的桌面，你是不是都无动于衷？你有多久没整理电脑里的文件了？没错，时间花错了地。当你要做某件事时，是不是总是要花点时间去寻找东西？既然如此，定时整理，让杂乱的生活离你远去，你的时间就会增多，你再也不会觉得时间不够了。</p>
+<p>你是否一直觉得自己很拖拉，是位不折不扣的拖延症患者？如果你不了解什么是拖延症，请移步<a href="http://book.douban.com/subject/4180711/" target="_blank" rel="external">《拖延心理学》</a>。对于拖延，我只想说，你拖延不拖延，事情就在那里，不会多，也不会少。所以，马上“治愈”拖延症，说干就干，do it right now!</p>
+<p>时间最大的杀手事实上是不断打断你的环境。电话，email, IM工具，同事聊天等等，这些每天不间断地扼杀你的时间。也许你会认为，收个email, 说几句话也占用不了几分钟时间，那么你就错了。如果做事时不断被打断，那么进入<a href="http://en.wikipedia.org/wiki/Flow_\(psychology\" target="_blank" rel="external">Flow</a>)（心流，俗称神驰）就几乎不可能，而效率最大的时刻就是进入Flow的阶段。另外，当你收了一封email，你心里有个小人就会说，浏览会网页吧，反正也花不了多少时间。然后，你就去浏览下今天的新闻，看看天气如何，当你回到现实时，又到了吃饭的时间了，糟了，我事还没干呢！</p>
+<p>“为什么加班的总是我？” 我每天白天一直在忙，晚上还要加班，事情总是干不完似的。那么，请你想想，你一天中有多少会，每次开会又花多少时间。开会的时候，是不是都在讨论相关的事。有没有在会上拉家常？另外，有没有每天被email所淹没，大量的时间花在收email, 回email上？</p>
+<p>最后，给你的时间加把劲。多用用你手边的高科技产品，随时记录将要做的事，必要的按时提醒，“科技是以人为本”的，学会善用它们。</p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2013/07/28//2013/07-28-0.html/" itemprop="url">
+                openGL学习（四） -- 颜色
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於
+          <time itemprop="dateCreated" datetime="2013-07-28T00:00:00+08:00" content="7月 28 2013">
+            7月 28 2013
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分類於
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/游戏开发/" itemprop="url" rel="index"><span itemprop="name">游戏开发</span></a></span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><h2 id="1_RGBA和颜色索引模式"><strong>1 RGBA和颜色索引模式</strong>  </h2><p><strong>RGB显示模式</strong>：在此模式下，硬件为R、G、B和A成分保留一定数量的位平面（每种成分位平面数量并不一定相同）。像素可以显示的不同颜色的数量取决于位平面的数量以及硬件是如何解释这些位平面的。不同颜色的数量不能超过2的N次方，其中N是位平面的数量。  </p>
+<p>有些图形硬件使用<strong>抖动</strong>来增加可以显示的颜色数量。假定系统分别只有1个位来表示R、G、B，这样一共可以显示8种颜色：黑、白、红、蓝、绿、黄、青和洋红。现有一种颜色粉红色，这种颜色并不在系统可以显示的8种颜色中，那么系统如何实现显示呢。图形硬件仍然采用棋盘模式的方法，用红色和白色交替对像素进行着色。如果眼睛距离屏幕足够远，不能看到单独的像素，这块区域看上去就是粉红色的，那就是红色和白色的均值。但是，如果是从帧缓冲区读取像素信息，所得到的是实际的红色和白色的像素值，因为帧缓冲区中不存在“粉红色”。  </p>
+<p>如果分别用8位来表示R、G和B值，即使不借助抖动也可以创建高质量的图像。但是，并不是说，如果计算机具有24位的位平面，就可以不需要使用抖动了。例如，如果是在双缓冲模式下运行，位平面可能被分成两组，每组12位，这样每种颜色成分实际上只有4位。在许多情况下，如果不使用抖动，每种分4位的颜色是无法产生令人满意的效果的。<br>可以用GL_DITHER为参数调用glEnable( )或glDisable( )函数，分别启用或禁用抖动功能。<strong>注意，和其他许多特性不同，抖动在默认情况下是启用的</strong>。</p>
+<p><strong>颜色索引模式</strong>:在颜色索引模式下，OpenGL使用一个颜色映射表（或颜色查找表），类似于使用调色板来混合颜料，准备根据颜色编号来绘制场景。颜色映射表的大小是由专用的硬件决定的。</p>
+<h2 id="2_在RGBA和颜色索引模式中进行选择"><strong>2 在RGBA和颜色索引模式中进行选择</strong>  </h2><p>应该根据可用的硬件和应用程序的要求来选择使用RGBA模式还是颜色索引模式。在绝大多数系统中，RGBA模式可以显示的颜色数量要远远多于颜色索引模式。另外，对于有些效果（如着色、光照、纹理贴图和雾），RGBA模式能够提供更大的灵活性。  </p>
+<p>一般而言，应该尽可能使用RGBA模式。RGBA模式可以在纹理贴图中使用，并且在使用光照、着色、雾和抗锯齿功能时更为灵活。</p>
+<h2 id="3_指定颜色和着色模型"><strong>3 指定颜色和着色模型</strong>  </h2><p>OpenGL维护一种当前颜色（在RGBA模式下）或一个当前颜色索引（在颜色索引模式下）。一般每个物体都是用当前颜色（或当前颜色索引）绘制的，除非使用了一些更为复杂的着色模型，例如光照和纹理贴图。  </p>
+<p>在RGBA模式下，使用glColor<em>( )函数选择一种当前颜色。在颜色索引模式下，可以使用glIndex</em>( )函数选择一个单值颜色索引，把它作为当前的颜色索引。  </p>
+<p>直线或填充多边形可以用一种颜色进行绘制（<strong>单调着色</strong>），也可以用多种颜色进行绘制（<strong>平滑着色</strong>，也称Gouraud着色）。可以用glShadeModel( )函数指定所需的着色模型。在单调着色模型下，整个图元的颜色就是它任何一个顶点的颜色。在平滑着色模型下，每个顶点都是单独进行处理的。如果图元是直线，线段的颜色将根据两个顶点的颜色进行均匀插值。如果图元是多边形，多边形的内部颜色是所有顶点颜色的均匀插值。</p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2013/07/27//2013/07-27-0.html/" itemprop="url">
+                openGL学习（三）-- 视图
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於
+          <time itemprop="dateCreated" datetime="2013-07-27T00:00:00+08:00" content="7月 27 2013">
+            7月 27 2013
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分類於
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/游戏开发/" itemprop="url" rel="index"><span itemprop="name">游戏开发</span></a></span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><p>计算机图形的要点就是创建三维物体的二维图像（图像必须是二维的，因为它是在平面的屏幕上显示的）。我们要避免考虑屏幕上的像素是如何绘制的，而是要尽量在三维空间中想象物体的形状。</p>
+<p>本章主要介绍如何使用OpenGL完成如下任务：如何在三维空间中设置模型的位置和方向，以及如何确定观察者的位置（也是在三维空间中），最后能够准确地判断屏幕上所显示的图像。</p>
+<p>把一个物体的三维坐标变换为屏幕上的像素坐标，需要完成如下步骤：</p>
+<ol>
+<li>变换包括模型、视图和投影操作，它们是由矩阵乘法表示的。这些操作包括旋转、移动、缩放、反射、正投影和透视投影等。一般情况下，在绘制场景时需要组合使用几种变换。</li>
+<li>由于场景是在一个矩形窗口中渲染的，因此位于窗口之外的物体（或者物体的一部分）必须裁剪掉。在三维计算机图像中，裁剪就是丢弃位于裁剪平面之外的物体。</li>
+<li>最后，经过了变换的坐标和屏幕像素之间必须建立对应关系。这个过程称为视口(viewport)变换。</li>
+</ol>
+<h2 id="1_简介：用照相机打比方"><strong>1 简介：用照相机打比方</strong></h2><p>产生目标场景视图的变换过程类似于用照相机进行拍照。</p>
+<ol>
+<li>把照相机固定在三角架上，并让它对准场景（视图变换）。</li>
+<li>对场景进行安排，使各个物体在照片中的位置是我们所希望的（模型变换）。</li>
+<li>选择照相机镜头（广角镜头，标准镜头还是长焦镜头），并调整放大倍数（投影变换）。</li>
+<li>确定最终照片的大小。例如，我们很可能需要把它放大（视口变换）。</li>
+</ol>
+<p>以下具体介绍各方面：<br>首先是<strong>视图变换</strong>。通常在指定视图变换之前，需要使用glLoadIdentity( )函数把当前矩阵(current matrix)设置为单位矩阵。这个步骤是非常有必要的，因为绝大多数变换是把当前矩阵与指定的矩阵相乘，然后把结果指定为当前矩阵。如果没有通过加载单位矩阵来清除当前矩阵，它所进行的变换实际上是把当前的变换与上一次变换进行了组合。虽然有些情况下，确实需要这样的操作，但是更多情况下，还是需要清除当前矩阵。  </p>
+<p>使用gluLookAt( )函数指定了视图变换。如gluLookAt(0.0, 0.0, 5.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0)，若用照相机作比喻，则把照相机放在(0, 0, 5)的位置，把镜头瞄准(0, 0, 0)，并把朝上向量指定为(0, 1, 0)。如果没有调用gluLookAt( )函数，则照相机就被设置为默认的位置和方向。在默认情况下，照相机位于原点，指向Z轴的负方向，朝上向量为(0, 1, 0)。</p>
+<p>其次是<strong>模型变换</strong>。使用模型变换的目的是设置模型的位置和方向。例如，可以对模型进行旋转、移动和缩放，或者联合应用这些种操作。如模型变换函数glScalef(1.0, 3.0, 1.0)就是将模型y轴尺寸放大3倍。</p>
+<p>第三是<strong>投影变换</strong>。这种变换的目的是确定视野（或视景体），并因此确定哪些物体位于视野之内以及它们能够看到的程度。另外，投影变换还决定了物体是如何投影到屏幕上的。OpenGL提供了两种基本类型的投影，即透视投影（perspective projection）和正投影（orthographic projection）。透视投影类似于我们日常生活看到的景象。如果想创建现实感比较强的图像，就需要选择透视投影。而正投影直接映射到屏幕上，而不影响它们的相对大小，一般用于建筑和CAD应用程序中。</p>
+<p>与视图 / 模型变换一样，在设置投影变换之前，需要首先调用glMatrixMode(GL_PROJECTION)把当前矩阵指定为用于投影变换，再使用glLoadIdentity( )对当前的投影矩阵进行初始化。</p>
+<p>最后是<strong>视口变换</strong>。视口指定了场景在屏幕上所占据的区域，因此可以把视口变换看成是定义了最终经过处理的照片的大小和位置，如照片是否应该放大或者缩小。用glViewPort( )函数进行视口变换。</p>
+<p>视图变换、模型变换、投影变换和视口变换这四种变换一般将视图变换和模型变换分为一组，然后就剩下的再分为一组。视图变换和模型变换两种变换割裂开来是没有意义的。因为可以移动照相机（使用视图变换）来对准物体，也可以移动这个物体（模型变换）达到相同效果。而投影变换和视口变换则共同决定了场景是如何映射到计算机屏幕的。投影变换指定了映射的发生机制，而视口变换则决定了场景所映射的有效屏幕区域的形状。</p>
+<h2 id="2_视图变换和模型变换"><strong>2 视图变换和模型变换</strong></h2><p>注意，在执行模型或视图变换之前，必须以GL_MODELVIEW为参数调用glMatrixMode( )函数。</p>
+<p>视图变换和模型变换都是用一个4<em>4的矩阵表示的。每个后续的glMultMatrix</em>( )函数或变换函数把一个新的4*4的M与当前的模型视图C相乘，产生结果矩阵CM。最后，每个与当前的模型视图矩阵相乘。这个过程意味着程序所调用的最后一个变换函数实际上是首先应用于顶点的：CMv.</p>
+<p>如下面的代码序列，它使用3个变换绘制了1个点：</p>
+<pre><code>glMatrixMode<span class="list">(<span class="keyword">GL_MODEVIEW</span>)</span><span class="comment">;</span>
+glLoadIdentity<span class="list">( )</span><span class="comment">;</span>
+glMultMatrixf<span class="list">(<span class="keyword">N</span>)</span><span class="comment">; /* apply transformation N */</span>
+glMultMatrixf<span class="list">(<span class="keyword">M</span>)</span><span class="comment">; /* apply transformation M */</span>
+glMultMatrixf<span class="list">(<span class="keyword">L</span>)</span><span class="comment">; /* apply transformation L */</span>
+glBegin<span class="list">(<span class="keyword">GL_POINTS</span>)</span><span class="comment">;</span>
+glVertedx3f<span class="list">(<span class="keyword">v</span>)</span><span class="comment">; /* draw transformed vertex v */</span>
+glEnd<span class="list">( )</span><span class="comment">;</span>
+</code></pre><p>在上述代码中，模型视图矩阵按顺序分别包含了I、N、NM，最后是NML，其中I表示单位矩阵。经过变换的顶点是NMLv。因此，顶点变换就是N(M(Lv))。所以，顶点v的变换是按照代码中相反的顺序发生的。</p>
+<p>在OpenGL中 ，有三个函数用于执行模型变换，分别为glTranslate<em>( )，glRotate</em>( )和glScale<em>( )。这三个函数都 相当于产生一个适当的移动、旋转或缩放矩阵，然后以这个矩阵作为参数调用glMultMatrix</em>( )。但是，使用这3个函数可能比使用glMultMatrix*( )速度更快，因为OpenGL会自动计算矩阵，一般来说比自己写的性能更高。</p>
+<p>而视图变换一般也是由移动和旋转组成的，即glTranslate<em>( )和glRotate</em>( )。为了在最终图像或照片上实现某种场景组合，可以移动照相机，也可以从相反的方向移动所有的物体。因此，一个按照逆时针方向旋转物体的模型变换相当于一个按顺时针方向旋转照相机的视图变换。<strong>最后，要记住视图变换函数必须在调用任何模型变换函数之前调用，以确何首先作用于物体的是模型变换</strong>。当然，除了直接使用移动和旋转函数之外，也可以使用工具函数gluLookAt( )实现视图变换，事实上一般也采用工具函数进行视图变换。</p>
+<h2 id="3_投影变换"><strong>3 投影变换</strong></h2><p>所谓投影变换就是定义投影矩阵用于对场景中的顶点进行变换。在调用手投影变换函数之前，必须首先进行以下操作：</p>
+<pre><code>glMatrixMode<span class="list">(<span class="keyword">GL_PROJECTION</span>)</span><span class="comment">;</span>
+glLoadIdentity<span class="list">( )</span><span class="comment">;</span>
+</code></pre><p>这样，接下来的变换函数将影响的是投影矩阵。由于每个投影变换函数都完整地描述了一个特定的变换，因此一般并不需要把投影变换与其他变换进行组合。</p>
+<p>投影变换的目的是定义一个视景体。视景体有两种用途。<strong>首先，视景体决定了一个物体是如何映射到屏幕上的（即通过透视投影还是正投影）。其次，视影体定义了哪些物体（或物体的一部分）被裁剪到最终的图像之外</strong>。</p>
+<p>投影变换分为两种，透视投影和正投影。</p>
+<p>透视投影方法常用于动画、视觉模拟以及其他要求某种程度的现实感的应用领域，因为它和我们在日常生活中观察事物的方式相同。该投影方法可以用glFrustum( )函数或者gluPerspective( )进行。</p>
+<p>正投影方法常用于建筑蓝图的计算机辅助设计（CAD）的应用程序。如果没有其他变换，投影的方向就与z轴平行，观察点的方向直接朝向z轴的负方向。该投影方法可以用glOrtho( )函数或者gluOrtho2D( )函数进行。</p>
+<h2 id="4_视口变换"><strong>4 视口变换</strong></h2><p>视口变换对应于选择被冲洗相片的大小这个阶段。我们希望照片像钱包一样大还是像海报一样大？在计算机图形中，视口是一个矩形的窗口区域，图像就是在这个区域中绘制的。</p>
+<p>在屏幕上打开窗口的是由窗口系统而不是OpenGL负责的。但是，在默认情况下，视口被设置为占据打开窗口的整个像素矩形。可以使用glViewPort( )函数选择一个更小的绘图区域。例如可以对窗口进行划分，在同一个窗口中显示分割屏幕的效果，以显示多个视图。</p>
+<p>使用glViewport( )函数进行视口变换，在默认情况下，礼品的初始值是(0, 0, winWidth, winHeight)，其中winWidth和winHeight分别为窗口的宽和高。</p>
+<p><strong>视口的纵横比一般和视景体的纵横比相同。如果这两个纵横比不同，当图像投影到视口时就会变形</strong>。</p>
+<p>视口变换期间同时在做另一件事，那就是进行尝试坐标的编码（以后存储在尝试缓冲区中）。可以使用glDepthRange( )函数对z值进行缩放。<strong>注意的是，与x和y窗口坐标不同，在OpenGL中，z坐标总是被认为位于0.0到1.0范围之间</strong>。</p>
+<h2 id="4_操纵矩阵堆栈"><strong>4 操纵矩阵堆栈</strong></h2><p>当我们对模型视图矩阵和投影矩阵进行创建、加载和乘法操作时，每一个操作针对的矩阵实际上是各自矩阵堆栈最顶部的那个元素，即栈顶的矩阵。换种说法就是，当前矩阵就是位于堆栈顶部的矩阵。</p>
+<p>可以采用glPushMatrix( )和glPopMatrix( )函数进行矩阵堆栈操作（包换模型视图矩阵和投影矩阵）。事实上，<strong>glPushMatrix( )</strong>表示“记住自己的位置”，即把当前堆栈中所有矩阵都下压一级。这个函数复制当前的顶部矩阵，并把它压到堆栈中。因此，刚调用完glPushMatrix( )函数时，堆栈最顶部的两个矩阵内容相同。而<strong>glPopMatrix( )</strong>表示“回到原来的位置”，即把堆栈顶部的矩阵弹出堆栈，销毁被弹出矩阵的内容。堆栈原先的第二个矩阵成为顶部矩阵。</p>
+<p>使用矩阵堆栈的效率要高于使用单独的堆栈，尤其是堆栈是用硬件实现时。压入一个矩阵时，并不需要把当前矩阵复制到主进程，并且硬件有可能一次能够复制多个矩阵元素。有时候，我们可能想在矩阵底部保存一个单位矩阵，以避免征象调用glLoadIdentity( )。</p>
+<h2 id="5_其他裁剪平面"><strong>5 其他裁剪平面</strong>  </h2><p>除了视景体的6个裁剪平面（左、右、底、顶、近和远），还可以另外再指定最多可达6个的其他裁剪平面，对视景体进一步限制。这些裁剪平面可以用于删除场景中的无关物体，如我们可能只想显示一个物体的剖面视图。</p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2013/07/17//2013/07-17-0.html/" itemprop="url">
+                openGL学习（二）-- 状态管理和绘制几何物体
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於
+          <time itemprop="dateCreated" datetime="2013-07-17T00:00:00+08:00" content="7月 17 2013">
+            7月 17 2013
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分類於
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/游戏开发/" itemprop="url" rel="index"><span itemprop="name">游戏开发</span></a></span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><p>在最高抽象层次上，有3种绘图是最基本的：<strong>消除窗口，绘制几何图形，以及绘制光栅对象</strong>(包括二维图像、位图和字体)。这里先介绍如何消除以及如何绘制几何物体，包括点、直接和平面多边形。</p>
+<h2 id="1_绘图工具箱"><strong>1　绘图工具箱</strong></h2><p>首先就是清除窗口。在计算机中，保存图片的内存通常被计算机所绘制的前一幅图像所填充，因此在绘制新场景之前，一般需要把它清除为某种背景颜色(具体为何种颜色为应用场景所定，若下一幅图像为全屏，则不清除窗口也可以，因为全屏的图像把上一幅图像全部遮住了)。</p>
+<p>这里这个问题，为什么在绘图之前清除窗口？如果画一个适当颜色的矩形，让它足够大，则和清除窗口的效果不是一样吗？但是清除窗口具有几点优势：</p>
+<ol>
+<li>清除窗口函数(glClear( ))的效率可能远远高于普通的绘图函数；</li>
+<li>OpenGL允许程序员任意设置坐标系统、观察位置和观察方向。因此判定这个用于清除窗口的矩形的大小和位置可能非常困难；<br>3.　除了屏幕上显示和像素颜色的缓冲区之外，还包括一些别的缓冲区（如深度缓冲区），而glClear( )命令可以清除按照任意形式组合的方式清除相应缓冲区，如glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)命令直接方便地清除颜色缓冲区和深度缓冲区。</li>
+</ol>
+<p>其次就是指定颜色。在OpenGL，物体的开关与它的颜色无关。当一个特定的几何物体被绘制时，它是根据当前指定的方案进行绘制的。因此，OpenGL程序员首先设置颜色或者颜色方案（如用红色绘制所有的物体，又如物体由蓝色的塑料制成，有一盏黄色的聚光灯从某个方向对准物体表面的某个点），在这种颜色或者颜色方案被修改之前，所有的物体都用这种颜色或者颜色方案进行绘制。</p>
+<p>第三就是强制完成绘图操作。绝大多数的现代图像系统都可以看成是一条装配线（如福特汽车的汽车装配线）。在高端架构的计算机中，每一种操作都是由不同的硬件执行的。在这种情况下，如果CPU在发出下一条绘图命令之前还要等待前一条命令的完成，这无疑失去了流水装配线的强大优势。另外，应用程序可能在不同计算机上运行（主程序在一台称为客户机的计算机上，绘图结果则在另一台服务机上查看），它们之间每条绘图命令都是通过网络发送。通常客户机会把一组命令收集到一个网络包中，然后再将它们一起发送。但遗憾的是，如果这个网络包未填满，则它会一直等待下去，其结果就是在服务机上永远看不到绘图结果。</p>
+<p>因此，OpenGL提供了强制完成绘图操作glFlush( )。程序员应该在每个帧或者每个场景的最后添加一个glFlush( )调用。注意，这个操作并不等待绘图完成，它只是强制绘图命令开始执行。如果需要执行一些同步性的任务，以必需等待图形硬件或者网络提示帧缓冲区的绘图已经完成，则可以使用glFinish( )操作。</p>
+<p>最后就是坐标系统工具箱。绘图一定要设置一个坐标系。以下为简单地定义了一个2维坐标系：</p>
+<pre><code>void reshape<span class="params">(int w, int h)</span>
+{
+    glViewport<span class="params">(<span class="number">0</span>, <span class="number">0</span>, <span class="params">(GLsizei)</span>w, <span class="params">(GLsizei)</span>h)</span>;
+    glMatrixMode<span class="params">(GL_PROJECTION)</span>;
+    glLoadIdentity<span class="params">()</span>;
+    gluOrtho2D<span class="params">(<span class="number">0.0</span>, <span class="params">(GLdouble)</span>w, <span class="number">0.0</span>, <span class="params">(GLdouble)</span>h)</span>;
+}
+</code></pre><p>其定义了一个如屏幕相同像素的2维坐标系，原点(0, 0)在屏幕在左下角，屏幕右上角为点(w, h)。</p>
+<h2 id="2_描述点、直线和多边形"><strong>2　描述点、直线和多边形</strong></h2><p>　　OpenGL绘图都是由几个简单的几何图元构成的，如点、直线、多边形。而这几个简单的几何图元最终又是根据它们的顶点(vertex)来描述的。</p>
+<h2 id="3_基本状态管理"><strong>3　基本状态管理</strong></h2><p>　　OpenGL具有状态机特性，它维护了许多状态和状态变量，如光照、纹理、隐藏表面消除、雾以及其他影响物体外观的状态。在默认情况下，这些状态的大部分是处于不活动状态的，因为如果激活这些状态，OpenGL的渲染开销就会大大增大。因此，程序员应该按需对这些状态进行打开或者关闭。</p>
+<h2 id="4_显示点、直线和多边形"><strong>4 　显示点、直线和多边形</strong></h2><p>　　首先探讨一下点的细节。默认情况下，点被画成屏幕上的一个像素。当然，可以使用glPointSize( )控制被渲染点的大小。如果在抗锯齿功能被禁用的情况（默认）下，带小数的宽度值将四舍五入为整型值，在屏幕上所绘制的是对齐的正方形像素区域。如果启用了抗锯齿功能，则屏幕上绘制的将是一个圆形的区域，非整型的宽度值并不会四舍五入。</p>
+<p>　　其次就是直线的细节。OpenGL下的直线并不是数学中的直线，实际上为数学概念中的线段。默认情况下直线的宽度为1个像素，可以通过glLineWidth( )对直线宽度进行设置。注意，在未使用抗锯齿功能的情况下，直线的的宽度并不是根据与直线垂直的方便进行测量的。实际上，如果直接斜率的绝对值小于1.0，它是根据y轴的方向进行测量的。否则，它就根据x轴的方向进行测量。而在抗锯齿情况下，就是按照特定的宽度渲染一个填充多边形。</p>
+<p>　　然后就是多边形的细节。按照约定，多边形的顶点默认以逆时针顺序出现在屏幕上，通常称为“正面”。当然我们可以利用glFrontFace( )将顺时针方向的表面被认为是正面。另外，在默认情况下，填充多边形是用实心模式绘制的，我们可能利用glPolygonStipple( )将填充方式设定为32*32的点画模式(有点像印章)。</p>
+<h2 id="5_法线向量"><strong>5　法线向量</strong></h2><p>法线向量(简称法线)是一条垂直于某个表面的方向向量。物体的法线微量定义了它的表面在空间中的方向。具体地说，定义了它相对于光源的方向。OpenGL使用法线向量确定这个物体的各个顶点所接收的光照。在OpenGL中，除了之外，不能为多边形的其他地方分配法线。</p>
+<h2 id="6_顶点数组"><strong>6　顶点数组</strong></h2><p>OpenGL提供了一些顶点数组函数，允许只用少数几个数组指定大量的顶点相关的数据，并用少量函数调用（与顶点数组的数量相仿）访问这些数据。<br>把数据放在顶点数组中可以提高应用程序的性能。使用顶点数组可以减少函数调用的次数，从而提高性能。另外，使用顶点数组还可以避免共享顶点的冗余处理。<br>使用顶点数据对几何图形进行渲染需要3个步骤:</p>
+<ul>
+<li>步骤一，启用数组。</li>
+<li>步骤二，指定数组的数据。</li>
+<li>步骤三，解引用和渲染。</li>
+</ul>
+<h2 id="7_缓冲区对象"><strong>7　缓冲区对象</strong></h2><p>在许多OpenGL操作中，我们都向OpenGL发送一大块数据，例如向它传递需要处理的顶点数组数据。传输这种数据可能非常简单，如把数据从系统的内存中复制到图形卡。但是，由于OpenGL是按照客户机－服务器模式设计的，在OpenGL需要数据的任何时候，都必须把数据从客户机传输到服务器。如果数据并没有修改，或者客户机和服务器位于不同的计算机（分布式渲染），数据的传输可能会比较缓慢，或者是冗余的。</p>
+<p>所以，OpenGL在1.5开始，增加了缓冲区对象（buffer object），允许应用程序显式地指定把哪些数据存储在图形服务器中。</p>
+<ul>
+<li>第一、创建缓冲区对象。建议使用glGenBuffers( )接口让OpenGL分配标志符，以保证避免重复使用已被使用的缓冲区对象标识符，从而消除无意修改数据的风险。</li>
+<li>第二、激活缓冲区对象。激活缓冲区对象，首先需要将它绑定。绑定缓冲区对象表示选择未来的操作（对数据进行初始化或者使用缓冲区对象进行渲染）将影响到哪个缓冲区对象。</li>
+<li>第三、用数据分配和初始化缓冲区对象。具体情况参见glBufferData接口。</li>
+<li>第四、更新缓冲区对象的数据值。有两种方法可以更新存储在缓冲区对象中的数据。</li>
+</ul>
+<p>第一种方法假设我们已经在应用程序的一个缓冲区中准备了相同类型的数据。glBufferSubData( )将用我们提供的数据替换被绑定缓冲区对象的一些数据子集。</p>
+<p>第二种方法允许我们更灵活地选择需要更新的数据。即使用glMapBuffer( )返回一个指向缓冲区对象的指针，可以对这块内在进行修改更新缓冲区对象的数据。更新完毕后使用glUnmapBuffer( )取消对这个缓冲区的映射。</p>
+<p>注意，glMapBuffer( )提供了对缓冲区对象中包含的整个数据集合的访问。如果需要修改缓冲区中的大多数数据，这种方法很有用，但如果有一个很大的缓冲区并且只需要更新很小的一部分值，这种方法效率很低。在这种情况下，则使用glMapBufferRange( )效率更高。它允许只修改所需的范围内的数据值。</p>
+<ul>
+<li><p>第五，在缓冲区对象之间的复制数据。在OpenGL3.1之前，欲完成数据从一个缓冲区对象复制到别一个缓冲区对象，则必须分为两步走：首先将数据从缓冲区对象复制到应用程序的内存中，然后通过绑定到新的对象，现使用glBufferData( )初始化新的数据或者用glBufferSubData( )等方法更新缓冲区对象数据。显然这样做不是很优美，所以在3.1引入的glCopyBufferSubData( )接口直接将缓冲区对象A中的数据copy到缓冲区对象B中。</p>
+</li>
+<li><p>第六，清除缓冲区对象。对缓冲区对象的操作完成之后，调用glDeleteBuffers( )接口对缓冲区对象进行清除。</p>
+</li>
+</ul>
+<h2 id="8_顶点数组对象"><strong>8　顶点数组对象</strong></h2><p>随着程序的增大并且使用更多的模型，在每个帧的多组顶点数组之间切换将不可避免。根据为每个顶点使用多少个顶点属性，你对glVertexPointer( )这样的函数的调用次数可能变得很大。因此，应该采用顶点数组对象提高效率。顶点数组对象捆绑了调用的集合，以设置顶点数据的状态。在初始化之后，可以通过单次调用在不同的数组集合之间快速修改。创建过程如下：</p>
+<p>首先，创建一个顶点数组对象。利用glGenvertexArrays( )函数。</p>
+<p>其次，初始化新的对象，并且把要使用的顶点数组数据的集合与单个已分配的对象关联起来。利用gBindVertexArray( )函数。</p>
+<p>这里不得不说顶点数组对象（VAO）和顶点缓冲对象（VBO）的区别。A Vertex Array Object (VAO) is an OpenGL Object that encapsulates all of the state needed to specify vertex data (with one minor exception noted below). They define the format of the vertex data as well as the sources for the vertex arrays. Note that VAOs do not contain the arrays themselves; the arrays are stored in Buffer Objects. The VAOs simply reference already existing buffer objects. OTHERWISE, A Vertex Buffer Object (VBO) is a Buffer Object which is used as the source for vertex array data.</p>
+<h2 id="9_属性组"><strong>9　属性组</strong></h2><p>OpenGL可以设置或者查询一个单独的状态或状态变量。也可以用一个命令保存或恢复一组相关的状态变量的值。一般而言，使用这些函数，获取、保存和恢 复状态值的速度会更快一点。有些状态值可能是由硬件维护的，访问它们的开销可能较大。另外，如果是在远程客户机上进行操作，在获取、保存和恢复属性时，它们都要通过网络传输。但是，OpenGL实现可以把属性堆栈保存在服务器上，从而避免不必要的网络延迟。</p>
+<h2 id="10_创建多边形表面模型的一些提示"><strong>10　创建多边形表面模型的一些提示</strong></h2><p>用多边形近似模拟法创建多边形表面模型是一项艺术，经验是均可替代的。下面是一些创建多边形表面模型的一些技巧：</p>
+<ul>
+<li>使多边形的方向（环绕）保持一致。</li>
+<li>对表面进行细分时，要密切注意那些非三角形的多边形。由于OpenGL可能无法正确地渲染非平面多边形，所有非三角形的多边形要保证其在同一平面。</li>
+<li>在显示速度和图像质量之间总存在一种权衡关系。理想的做法是向多边形细分函数提供一个参数，表示细分所达到的精度。如果物体距离距离较远，可以使用较为粗糙的的细分，另外，在进行细分时，在表面相对较平的区域，可以使用较大的多边形，而在曲率很大的表面部分，应该使用很小的多边形。</li>
+<li>为了实现高质量的图像，在轮廓边缘进行更精细的划分显然要比在表面内部进行精细划分的效果更好。</li>
+<li>如果想创建一个闭合的表面，确保闭合环的起点和终点使用完全相同的坐标，不然可能因为数值的四舍五入而产生有缺口的环。</li>
+</ul>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2013/07/15//2013/07-15-0.html/" itemprop="url">
+                自省一则
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於
+          <time itemprop="dateCreated" datetime="2013-07-15T00:00:00+08:00" content="7月 15 2013">
+            7月 15 2013
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分類於
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/杂感/" itemprop="url" rel="index"><span itemprop="name">杂感</span></a></span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><p>一个人在某一方面的层次分为4层，即<strong>不知道自己不知道，知道自己不知道，知道自己知道，不知道自己知道</strong>。虽然很绕，但细细想来，还是很有道理的。而小猿自认为自己目前处在第二层，即知道自己不知道，所以也偶尔发奋努力下，但通常是三天打鱼，两天晒网了。所以在成就系统里至今也没有什么拿得出手的。最近小猿拜读了Andy Hunt的<a href="http://book.douban.com/subject/5372651/" target="_blank" rel="external">《程序员思维修炼——开发认知潜能的九堂课》</a>，读后思维万纤（其实是被打了鸡血，顿时兴奋无比），也准备对自己重新定位下。</p>
+<p>说到定位，Andy向我们展现了<a href="http://en.wikipedia.org/wiki/Dreyfus_model_of_skill_acquisition" target="_blank" rel="external">Dreyfus模型</a>，它分为5个阶段：<strong>新手-&gt;高级新手-&gt;胜任者-&gt;精通者-&gt;专家</strong>。这个历程也是任何人在任何方面从新手成为专家的必经之路。每个在低层次阶段的人都渴望成为高层次阶段的人（除没有进取心的人以外），但遗憾的是，在任何一方面80%的人都只能是新手（其实小猿觉得远远超过，最起码95%以上）。比如，小猿会fix bug，但不会fix computer，会骑自行车，但不会修自行车，会煮饭，但不会烧菜。小猿360行，只会做code monkey。所以说，我们绝大部分人都是新手。</p>
+<p>新手在该领域经验很少或者根本没有经验。所以<strong>新手工作时，他需要的是规则与指令</strong>。如果没有一个明确的规则，新手不知道应该做什么，而且出错的时候，他们非常容易慌乱。没有一个既定的目标与规则，如“当X发生时，请执行Y”，那么新手将不知所措。</p>
+<p>而高级新手则并不需要规则，他们可以独自尝试完成任务，但是只能根据过去的经验去完成任务，<strong>缺乏全局思维</strong>，有时候仍难以解决问题。</p>
+<p>新手与高级新手终究是newer范畴，需要一位导师带着，对其发出任务指令或者为其掌舵，让它们顺利启程与航行。而经历了新手与高级新手两个阶段，我们将迎来胜任者阶段。故名思义，所谓胜任者，即是对任务胜任的人。他们可以独立解决自己遇到的问题，并开始考虑如何解决新的问题，当然也可以指导新手，甚至可以寻求与利用专家的意见，并顺利完成相应的任务。虽然胜任者能够解决问题，但是他们<strong>缺乏足够的能力进行反思与自我纠正</strong>。</p>
+<p>而胜任者有能力从专家或者书本中获得经验，并且进行自我纠正，使自身对该方向技能的掌握程度更进一步时，他们就进入了精通者阶段。精通者能够纠正以往不好的表现，反思以前是如何做的，并修正其做法，期望下一次表现得更好。他们<strong>形成了一条反馈线路，这次的经历将会做为下次的输入，并且影响下次的结果表现</strong>。</p>
+<p>当然，一个技能领域的顶峰就是成为该方面的专家。<strong>专家是各个领域知识和信息的主要来源</strong>，他们是整个行业的风向标。所以，小猿认为非专家的人对专家的关注是十分有必要的。如果想在这一行混，却对这行的信息了解甚少，那还混个P啊（Sorry，激动了下）。</p>
+<p>扯了这么多，小猿对自己的定位目前徘徊在胜任者，而且对精通者遥不可及。一方面，精通确实不易；另一方面，小猿虽然看了一些专家的书（经验），但对其转换成自己生产力的能力还不足。经常说“知易行难”，“理论与实践是有差距的”，确实，小猿给自己下定义：本人目前处于而且将长期处于coding的胜任者阶段，并坚持向精通者进发的目标不动摇，最终实现专家的梦想！</p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2013/06/29//2013/06-29-0.html/" itemprop="url">
+                openGL学习（一）-- 简介
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於
+          <time itemprop="dateCreated" datetime="2013-06-29T00:00:00+08:00" content="6月 29 2013">
+            6月 29 2013
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分類於
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/游戏开发/" itemprop="url" rel="index"><span itemprop="name">游戏开发</span></a></span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><h2 id="1_什么是OpenGL,_它能够做什么，不能够做什么？"><strong>1　什么是OpenGL, 它能够做什么，不能够做什么？</strong></h2><p>OpenGL是图形硬件的一种软件接口。OpenGL包含700多个函数（OpenGL3.0），这些函数可以用于指定物体和操作，创建交互式的三维应用程序。但OpenGL并未包含用于执行窗口任务或者获取用户输入之类的函数，也不提供用于描述三维物体模型的高级函数，如汽车。身体的某个部分、飞机等。OpenGL只包含一些为数不多的基本几何图元，如点、直线和多边形。</p>
+<h2 id="2_OpenGL对场景中图像进行渲染时所执行的主要图形操作。"><strong>2　OpenGL对场景中图像进行渲染时所执行的主要图形操作。</strong></h2><ol>
+<li>根据几何图元(点、直线、多边形和位图)创建形状，从而建立物体的数学描述；</li>
+<li>在三维空间中排列物体、并选择观察复合场景的视角；</li>
+<li>计算所有物体的颜色。这个计算过程可以由着色器来执行，也可以使用OpenGL的预编程算法在其内部执行(固定功能的管线)</li>
+<li>光栅化(rasterization)，即把物体的数学描述以及与物体相关的颜色信息转换为屏幕上的像素。</li>
+</ol>
+<h2 id="3_OpenGL的状态机特性。"><strong>3　OpenGL的状态机特性。</strong></h2><p>OpenGL是一个状态机，可以对它的各种状态进行设置，直抒到再次修改它们。如当前颜色就是一种状态，若当前颜色为红色，则绘制出的所有物体都将是红色，直到下次修改OpenGL的颜色状态为止。另外，许多表示模式的状态可以用glEnable()和glDisable()启用或者禁用。</p>
+<h2 id="4_OpenGL渲染管线：展示一个用于处理几何和图像数据的典型操作序列。"><strong>4　OpenGL渲染管线：展示一个用于处理几何和图像数据的典型操作序列。</strong></h2><p><img src="/img/2013-06-29-0.png" alt="渲染管线" title="渲染管线"></p>
+<p>OpenGL渲染管线分为两条路，一为几何数据（顶点、直接和多边形）处理，二为像素数据（像素、图像和位图）处理。</p>
+<h2 id="5_OpenGL如何实现动画？"><strong>5　OpenGL如何实现动画？</strong></h2><p>在电影院里，屏幕上的运动画面是通过拍摄大量的图片，然后以每秒24帧的频率把它们投影到屏幕上来实现的。而OpenGL实现动画也如此。如以下代码：</p>
+<pre><code>open_window<span class="list">()</span><span class="comment">;</span>
+for <span class="list">(<span class="keyword">i</span> = <span class="number">0</span><span class="comment">; i &lt; 1000000; +=i) {</span>
+     clear_the_window<span class="list">()</span><span class="comment">;</span>
+     draw_frame<span class="list">(<span class="keyword">i</span>)</span><span class="comment">;</span>
+     wait_untile_a_24th_of_a_second_is_over<span class="list">()</span><span class="comment">;</span>
+}</span>
+</code></pre><p>但是这个方法仅仅局限于clear_the_window( )和draw_frame( )方法在1/24秒内完成，若这两个操作所需时间大于1/24秒，则动画就显得不平滑。所以绝大多数OpenGL实现提供双缓冲（包括硬件或者软件），即提供两个完整的颜色缓冲区。于是过程就变成如下形式：</p>
+<pre><code>open_window_in_double_buffer_mode<span class="list">()</span><span class="comment">;</span>
+for <span class="list">(<span class="keyword">i</span> = <span class="number">0</span><span class="comment">; i &lt; 1000000; +=i) {</span>
+    clear_the_window<span class="list">()</span><span class="comment">;</span>
+    draw_frame<span class="list">(<span class="keyword">i</span>)</span><span class="comment">;</span>
+    swap_the_buffers  <span class="list">()</span><span class="comment">;</span>
+}</span>
+</code></pre></span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo;</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">&raquo;</a>
   </nav>
 
-</div>
-      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
 
-<div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
-<aside class="clearfix">
+            </div>
 
+            
+
+            
+        </div>
+
+        
   
-  <div class="archiveslist">
-    <p class="asidetitle"><a href="/archives">归档</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">February 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/03/">March 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">September 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">May 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">August 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">July 2010</a><span class="archive-list-count">1</span></li></ul>
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
   </div>
 
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
 
-  
-<div class="categorieslist">
-	<p class="asidetitle">分类</p>
-		<ul>
-		
-			<li><a href="/categories/c-c/" title="c/c++">c/c++<sup>5</sup></a></li>
-		
-			<li><a href="/categories/golang/" title="golang">golang<sup>2</sup></a></li>
-		
-			<li><a href="/categories/lisp/" title="lisp">lisp<sup>1</sup></a></li>
-		
-			<li><a href="/categories/lua/" title="lua">lua<sup>1</sup></a></li>
-		
-			<li><a href="/categories/服务器编程/" title="服务器编程">服务器编程<sup>6</sup></a></li>
-		
-			<li><a href="/categories/杂感/" title="杂感">杂感<sup>5</sup></a></li>
-		
-			<li><a href="/categories/游戏开发/" title="游戏开发">游戏开发<sup>4</sup></a></li>
-		
-			<li><a href="/categories/算法/" title="算法">算法<sup>16</sup></a></li>
-		
-			<li><a href="/categories/编程思维/" title="编程思维">编程思维<sup>3</sup></a></li>
-		
-			<li><a href="/categories/设计模式/" title="设计模式">设计模式<sup>2</sup></a></li>
-		
-		</ul>
-</div>
+      
 
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="zhujiefirst" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">zhujiefirst</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">学习总结 思考感悟 知识管理</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">45</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
 
-  
-<div class="tagslist">
-	<p class="asidetitle">标签</p>
-		<ul class="clearfix">
-		
-			<li><a href="/tags/openGL/" title="openGL">openGL<sup>4</sup></a></li>
-		
-			<li><a href="/tags/pprof/" title="pprof">pprof<sup>1</sup></a></li>
-		
-			<li><a href="/tags/union-find/" title="union-find">union-find<sup>4</sup></a></li>
-		
-			<li><a href="/tags/代码质量/" title="代码质量">代码质量<sup>3</sup></a></li>
-		
-			<li><a href="/tags/元编程/" title="元编程">元编程<sup>1</sup></a></li>
-		
-			<li><a href="/tags/内存管理/" title="内存管理">内存管理<sup>1</sup></a></li>
-		
-			<li><a href="/tags/基础/" title="基础">基础<sup>1</sup></a></li>
-		
-			<li><a href="/tags/小技巧/" title="小技巧">小技巧<sup>1</sup></a></li>
-		
-			<li><a href="/tags/性能/" title="性能">性能<sup>6</sup></a></li>
-		
-			<li><a href="/tags/排序/" title="排序">排序<sup>8</sup></a></li>
-		
-			<li><a href="/tags/架构/" title="架构">架构<sup>1</sup></a></li>
-		
-			<li><a href="/tags/查找/" title="查找">查找<sup>1</sup></a></li>
-		
-			<li><a href="/tags/网络I-O/" title="网络I/O">网络I/O<sup>1</sup></a></li>
-		
-			<li><a href="/tags/设计/" title="设计">设计<sup>7</sup></a></li>
-		
-			<li><a href="/tags/面向对象/" title="面向对象">面向对象<sup>2</sup></a></li>
-		
-			<li><a href="/tags/面试题/" title="面试题">面试题<sup>4</sup></a></li>
-		
-			<li><a href="/tags/高阶函数/" title="高阶函数">高阶函数<sup>1</sup></a></li>
-		
-		</ul>
-</div>
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">分類</span>
+              
+          </div>
 
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-name">標籤</span>
+              </a>
+          </div>
 
-</aside>
-</div>
-    </div>
-    <footer><div id="footer" >
-	
-	<div class="line">
-		<span></span>
-		<div class="author"></div>
-	</div>
-	
-	
-	<section class="info">
-		<p> Hello world! I&#39;m zhujiefirst in Tencent. <br/>
-			从小我就有个梦想，就是当一名合格的程序员。我不是码畜，我为自己带盐！</p>
-	</section>
-	 
-	<div class="social-font clearfix">
-		
-		<a href="http://weibo.com/2421642590" target="_blank" title="weibo"></a>
-		
-		
-		<a href="https://twitter.com/Jay1002008" target="_blank" title="twitter"></a>
-		
-		
-		<a href="https://github.com/zhujiefirst" target="_blank" title="github"></a>
-		
-		
-		
-	</div>
-		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2015 
-		
-		<a href="http://codingforever.com" target="_blank" title="zhujiefirst">zhujiefirst</a>
-		
-		</p>
-</div>
-</footer>
-    <script src="/js/jquery-2.1.0.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.navbar').click(function(){
-    $('header nav').toggleClass('shownav');
-  });
-  var myWidth = 0;
-  function getSize(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-  };
-  var m = $('#main'),
-      a = $('#asidepart'),
-      c = $('.closeaside'),
-      o = $('.openaside');
-  $(window).resize(function(){
-    getSize(); 
-    if (myWidth >= 1024) {
-      $('header nav').removeClass('shownav');
-    }else
-    {
-      m.removeClass('moveMain');
-      a.css('display', 'block').removeClass('fadeOut');
-      o.css('display', 'none');
+        </nav>
+
         
-    }
-  });
-  c.click(function(){
-    a.addClass('fadeOut').css('display', 'none');
-    o.css('display', 'block').addClass('fadeIn');
-    m.addClass('moveMain');
-  });
-  o.click(function(){
-    o.css('display', 'none').removeClass('beforeFadeIn');
-    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
-    m.removeClass('moveMain');
-  });
-  $(window).scroll(function(){
-    o.css("top",Math.max(80,260-$(this).scrollTop()));
-  });
-});
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+        <div class="footer-inner">
+            <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhujiefirst</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+        </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+</div>
+
+<script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+  
+  
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.4"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.4"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.4" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/js/search-toggle.js"></script>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        if (CONFIG.sidebar === 'always') {
+            displaySidebar();
+        }
+    });
 </script>
 
 
 
 
+  
+  
+
+  
 
 
 
-  </body>
- </html>
+
+
+
+
+<!-- lazyload -->
+<script type="text/javascript" src="/js/lazyload.js"></script>
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery("#posts img").lazyload({
+            placeholder: "/images/loading.gif",
+            effect: "fadeIn"
+        });
+    });
+</script>
+</body>
+</html>

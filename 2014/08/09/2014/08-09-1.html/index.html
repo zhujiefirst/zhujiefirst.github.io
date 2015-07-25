@@ -1,0 +1,687 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+    
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+  <link href='//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.4"/>
+
+
+    <meta name="description" content="学习总结 思考感悟 知识管理" />
+
+
+
+  <meta name="keywords" content="面向对象," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.4" />
+
+
+<meta name="description" content="lua作为一门非面向对象的轻量级语言，如何才能方便的用面向对象的方法来进行编程呢？
+首先,编程范型对面向对象编程（OOP）是如何定义的呢？通常，OOP被理解为一种将程序分解为封装数据及相关操作的模块而进行的编程方式。有别于其他编程方式，OOP中的与某些数据类型相关的一系列操作都被有机地封装到该数据类型当中，而非散放于其外，因而OPP中的数据类型不仅有着状态，还有着相关的操作。（来自wikipedi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何用lua实现面向对象">
+<meta property="og:url" content="http://codingforever.com/2014/08/09//2014/08-09-1.html/index.html">
+<meta property="og:site_name" content="Codingforever">
+<meta property="og:description" content="lua作为一门非面向对象的轻量级语言，如何才能方便的用面向对象的方法来进行编程呢？
+首先,编程范型对面向对象编程（OOP）是如何定义的呢？通常，OOP被理解为一种将程序分解为封装数据及相关操作的模块而进行的编程方式。有别于其他编程方式，OOP中的与某些数据类型相关的一系列操作都被有机地封装到该数据类型当中，而非散放于其外，因而OPP中的数据类型不仅有着状态，还有着相关的操作。（来自wikipedi">
+<meta property="og:updated_time" content="2015-06-19T16:09:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何用lua实现面向对象">
+<meta name="twitter:description" content="lua作为一门非面向对象的轻量级语言，如何才能方便的用面向对象的方法来进行编程呢？
+首先,编程范型对面向对象编程（OOP）是如何定义的呢？通常，OOP被理解为一种将程序分解为封装数据及相关操作的模块而进行的编程方式。有别于其他编程方式，OOP中的与某些数据类型相关的一系列操作都被有机地封装到该数据类型当中，而非散放于其外，因而OPP中的数据类型不仅有着状态，还有着相关的操作。（来自wikipedi">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post'
+  };
+</script>
+
+    <title> 如何用lua实现面向对象 // Codingforever </title>
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+<!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+
+
+
+
+<div class="container one-column page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Codingforever</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-home"></i> <br />
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            標籤
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+        </div>
+    </header>
+
+    <main id="main" class="main">
+        <div class="main-inner">
+            <div id="content" class="content">
+                
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              如何用lua实现面向对象
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於
+          <time itemprop="dateCreated" datetime="2014-08-09T00:00:00+08:00" content="8月 9 2014">
+            8月 9 2014
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分類於
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/lua/" itemprop="url" rel="index"><span itemprop="name">lua</span></a></span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>lua作为一门非面向对象的轻量级语言，如何才能方便的用面向对象的方法来进行编程呢？</p>
+<p>首先,编程范型对面向对象编程（OOP）是如何定义的呢？<strong>通常，OOP被理解为一种将程序分解为封装数据及相关操作的模块而进行的编程方式</strong>。有别于其他编程方式，OOP中的与某些数据类型相关的一系列操作都被有机地封装到该数据类型当中，而非散放于其外，因而<strong>OPP中的数据类型不仅有着状态，还有着相关的操作</strong>。（来自wikipedia）</p>
+<p>以一言蔽之，就是数据中包含对数据的操作行为。如此甚好，在lua中只要有<strong>强力类型table</strong>即实现了。</p>
+<pre><code><span class="comment">-- 定义table类型</span>
+point = { }
+
+<span class="comment">-- 在table中增加x, y两个数据</span>
+point.x = <span class="number">3</span>
+point.y = <span class="number">4</span>
+
+<span class="comment">-- 在table中增加magnitude方法</span>
+point.magnitude = <span class="function"><span class="keyword">function</span> <span class="params">()</span></span>
+    <span class="keyword">return</span> <span class="built_in">math</span>.sqrt(point.x^<span class="number">2</span> + point.y^<span class="number">2</span>)
+<span class="keyword">end</span>
+
+<span class="comment">-- 调用point中方法处理数据</span>
+<span class="built_in">print</span>(point.magnitude())
+</code></pre><p>确实，数据的行为被封装在table类型point中了，但是，这看上去也太不专业了，我们不能这么没追求是吧。而且，继承呢，多态呢？完全没有面向对象的影子嘛。模仿也要有模仿的样子嘛。</p>
+<p>当然，这并不是我们可以接受的版本。在讲解可用版本之前，先来解释下lua中的一大利器–metatable。先来看其官方定义：<strong>metatable用来定义原始值在特定操作下的行为</strong>。你可以通过在metatable中的特定域设一值来改变拥有这个metatable的值的指定操作行为。举例来说，当一个非数字的值作加法操作的时候，Lua会检查它的metatable中的“__add“域中是否有一个函数，如果有这么一个函数的，Lua调用这个函数来执行一次加法（来自lua中文手册）。人们说，“光说不练，假把式”，所以show the code(加法改用add方法)。</p>
+<pre><code>-- 定义table point
+point = <span class="comment">{ }</span>
+<span class="function"><span class="keyword">function</span> <span class="title">point</span>:</span><span class="keyword">add</span>(p)
+    <span class="keyword">self</span>.x = <span class="keyword">self</span>.x + p.x 
+    <span class="keyword">self</span>.y = <span class="keyword">self</span>.y + p.y 
+<span class="keyword">end</span>
+
+-- 定义table point_a和point_b
+point_a = <span class="comment">{ x = 1, y = 2 }</span>
+point_b = <span class="comment">{ x = 2, y = 1 }</span>
+
+-- 对point_a设置元表
+setmetatable(point_a, <span class="comment">{ __index = point }</span>)
+
+-- 调用point_a的<span class="keyword">add</span>方法，由于point_a为没有<span class="keyword">add</span>方法，所以向其元表point中查询，发现有<span class="keyword">add</span>方法，调用之
+point_a:<span class="keyword">add</span>(point_b)
+
+-- 打印调用<span class="keyword">add</span>方法后的point_a
+print(point_a.x, point_a.y)
+</code></pre><p>这里定义了一个table point，其包含add方法，并将其设置为point_a的元表。当调用point_a的add方法时，首在在point_a中寻找add方法，但是point_a中并没有add方法，所以再次在point_a的元表，即point中寻找add方法并进行调用。</p>
+<p>在一个table中找不到某个方法，就向其元表中寻找。这个特性不就如同面向对象中子类方法找不到时，在其父类中寻找。既然如此，那么利用Lua的metatable，很容易就实现类似面向对象的功能。</p>
+<p>首先，定义一个全局的Class做为“类的关键字”。</p>
+<pre><code><span class="comment">-- Object为所有对象的上级</span>
+Object = { }
+
+<span class="comment">-- 创建现有对象副本的方法</span>
+<span class="function"><span class="keyword">function</span> <span class="title">Object:clone</span><span class="params">()</span></span>
+    <span class="keyword">local</span> object = { }
+    <span class="keyword">for</span> k, v <span class="keyword">in</span> <span class="built_in">pairs</span>(self) <span class="keyword">do</span>
+        object[k] = v
+    <span class="keyword">end</span>
+
+    <span class="built_in">setmetatable</span>(object, { __index = self })
+
+    <span class="keyword">return</span> object
+<span class="keyword">end</span>
+
+<span class="comment">-- 允许类似基于类编程的用法</span>
+<span class="function"><span class="keyword">function</span> <span class="title">Object:new</span><span class="params">(...)</span></span>
+    <span class="keyword">local</span> object = { }
+
+    <span class="built_in">setmetatable</span>(object, { __index = self })
+
+    object:initialize(...)
+
+    <span class="keyword">return</span> object
+<span class="keyword">end</span>
+
+<span class="function"><span class="keyword">function</span> <span class="title">Object:initialize</span><span class="params">(...)</span></span>
+    <span class="comment">-- do nothing </span>
+<span class="keyword">end</span>
+
+<span class="comment">-- 定义Class原型</span>
+Class = Object:new()
+</code></pre><p>里面定义了一个名为Object的table, 然后在该table中分别定义了clone(),new(…)和initialize(…)三个方法。</p>
+<p>首先看clone方法，该方法对Object自身制作了一份copy，同时又将Object自身作为copy对象的元表的__index域的值。这样，当copy对象对某一变量或者方法进行索引时，并且发现copy对象并不包含索引对象时，就再次对被copy对象进行索引。如此便可实现上文中metatable.lua文件中的功能。</p>
+<p>然后看new方法。该方法中定义一个object table, 并对其进行初始化操作后直接返回。</p>
+<p>最后，直接定义Class原型，作为“类关键字”，方便以后调用。</p>
+<p>定义完”Class关键字”后，实现类似面向对象的编程就非常简单了。直接附上经典示例。</p>
+<pre><code><span class="built_in">require</span> <span class="string">'lua/class'</span>
+
+<span class="comment">-- 定义Point类</span>
+Point = Class:new()
+
+<span class="comment">-- 定义Point类的初始化方法</span>
+<span class="function"><span class="keyword">function</span> <span class="title">Point:initialize</span><span class="params">(x, y)</span></span>
+    self.x = x
+    self.y = y
+<span class="keyword">end</span>
+
+<span class="comment">-- 定义Point类的距离方法</span>
+<span class="function"><span class="keyword">function</span> <span class="title">Point:magnitude</span><span class="params">()</span></span>
+    <span class="keyword">return</span> <span class="built_in">math</span>.sqrt(self.x^<span class="number">2</span> + self.y^<span class="number">2</span>)
+<span class="keyword">end</span>
+
+<span class="comment">-- 打印point(3, 4)的距离</span>
+<span class="built_in">print</span>(Point:new(<span class="number">3</span>, <span class="number">4</span>):magnitude())
+
+
+<span class="built_in">require</span> <span class="string">'lua/point'</span>
+
+<span class="comment">-- 定义Point3D类, 该类继承自Point类</span>
+Point3D = Point:clone()
+
+<span class="comment">-- 定义Point3D类的初始化方法</span>
+<span class="function"><span class="keyword">function</span> <span class="title">Point3D:initialize</span><span class="params">(x, y, z)</span></span>
+    Point.initialize(self, x, y)
+    self.z = z
+<span class="keyword">end</span>
+
+<span class="comment">-- 定义Point3D类的距离方法</span>
+<span class="function"><span class="keyword">function</span> <span class="title">Point3D:magnitude</span><span class="params">()</span></span>
+    <span class="keyword">return</span> <span class="built_in">math</span>.sqrt(self.x^<span class="number">2</span> + self.y^<span class="number">2</span> + self.z^<span class="number">2</span>)
+<span class="keyword">end</span>
+
+<span class="comment">-- 打印point(1, 2, 3)的距离</span>
+<span class="built_in">print</span>(Point3D:new(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>):magnitude())
+</code></pre><p><strong>[REFERENCE]</strong>    </p>
+<ul>
+<li>wikipedia    </li>
+<li>lua中文手册    </li>
+<li>代码的未来    </li>
+</ul>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/面向对象/" rel="tag">#面向对象</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/08/09//2014/08-09-2.html/" rel="prev">编程语言的发展之路 — 读《代码的未来》</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/08/09//2014/08-09-0.html/" rel="next">高效使用I/O</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+            </div>
+
+            
+
+            
+              <div class="comments" id="comments">
+                
+              </div>
+            
+        </div>
+
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="zhujiefirst" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">zhujiefirst</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">学习总结 思考感悟 知识管理</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">45</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">分類</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-name">標籤</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <p class="post-toc-empty">此文章未包含目錄</p>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+        <div class="footer-inner">
+            <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhujiefirst</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+        </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+</div>
+
+<script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.4"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.4"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.4" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/js/search-toggle.js"></script>
+
+
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.4" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if (isDesktop() && CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    });
+  </script>
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        if (CONFIG.sidebar === 'always') {
+            displaySidebar();
+        }
+    });
+</script>
+
+
+
+
+
+
+
+
+<!-- lazyload -->
+<script type="text/javascript" src="/js/lazyload.js"></script>
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery("#posts img").lazyload({
+            placeholder: "/images/loading.gif",
+            effect: "fadeIn"
+        });
+    });
+</script>
+</body>
+</html>

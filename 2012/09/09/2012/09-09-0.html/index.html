@@ -1,0 +1,696 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+    
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+  <link href='//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.4"/>
+
+
+    <meta name="description" content="学习总结 思考感悟 知识管理" />
+
+
+
+  <meta name="keywords" content="设计," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.4" />
+
+
+<meta name="description" content="观察者模式(Observer patten)，定义了对象之间的一对多依赖，这样一来一个对象改变状态时，它的所有依赖者都会收到通知并自动更新。
+它在现实生活中也非常常见，如报纸、杂志的订阅关系。比如Bob向报社订阅了《程序员》，《程序员》供应商就将Bob加入订阅者的表格中。每次新的《程序 员》一出版，就会通知Bob：新一期《程序员》出版了，并同时将《程序员》送到Bob手中。过了半年，Bob不想再订阅">
+<meta property="og:type" content="article">
+<meta property="og:title" content="观察者模式(Observer Pattern)">
+<meta property="og:url" content="http://codingforever.com/2012/09/09//2012/09-09-0.html/index.html">
+<meta property="og:site_name" content="Codingforever">
+<meta property="og:description" content="观察者模式(Observer patten)，定义了对象之间的一对多依赖，这样一来一个对象改变状态时，它的所有依赖者都会收到通知并自动更新。
+它在现实生活中也非常常见，如报纸、杂志的订阅关系。比如Bob向报社订阅了《程序员》，《程序员》供应商就将Bob加入订阅者的表格中。每次新的《程序 员》一出版，就会通知Bob：新一期《程序员》出版了，并同时将《程序员》送到Bob手中。过了半年，Bob不想再订阅">
+<meta property="og:image" content="http://codingforever.com/img/2012-09-09-0.png">
+<meta property="og:updated_time" content="2015-06-19T16:09:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="观察者模式(Observer Pattern)">
+<meta name="twitter:description" content="观察者模式(Observer patten)，定义了对象之间的一对多依赖，这样一来一个对象改变状态时，它的所有依赖者都会收到通知并自动更新。
+它在现实生活中也非常常见，如报纸、杂志的订阅关系。比如Bob向报社订阅了《程序员》，《程序员》供应商就将Bob加入订阅者的表格中。每次新的《程序 员》一出版，就会通知Bob：新一期《程序员》出版了，并同时将《程序员》送到Bob手中。过了半年，Bob不想再订阅">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post'
+  };
+</script>
+
+    <title> 观察者模式(Observer Pattern) // Codingforever </title>
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+<!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+
+
+
+
+<div class="container one-column page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Codingforever</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-home"></i> <br />
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            標籤
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+        </div>
+    </header>
+
+    <main id="main" class="main">
+        <div class="main-inner">
+            <div id="content" class="content">
+                
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              观察者模式(Observer Pattern)
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於
+          <time itemprop="dateCreated" datetime="2012-09-09T00:00:00+08:00" content="9月 9 2012">
+            9月 9 2012
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分類於
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/设计模式/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a></span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p><a href="http://en.wikipedia.org/wiki/Observer_pattern" target="_blank" rel="external">观察者模式(Observer patten)</a>，<strong>定义了对象之间的一对多依赖，这样一来一个对象改变状态时，它的所有依赖者都会收到通知并自动更新</strong>。</p>
+<p>它在现实生活中也非常常见，如报纸、杂志的订阅关系。比如Bob向报社订阅了《程序员》，《程序员》供应商就将Bob加入订阅者的表格中。每次新的《程序 员》一出版，就会通知Bob：新一期《程序员》出版了，并同时将《程序员》送到Bob手中。过了半年，Bob不想再订阅《程序员》了，因了他订阅了 ipad版的。这时，《程序员》供应商就将Bob从订阅者表格中删除。以后每月新一期《程序员》出版时，就不再通知Bob，并送杂志到他手中了。</p>
+<p>没错，这就是观察者模式，并不复杂。很多地方都用到这个模式，如著名的<a href="http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller" target="_blank" rel="external">MVC(Model-View-controler)</a>中重要的部分就是观察者模式，而Swing中也存在着观察者模式的实现。</p>
+<p>下面，我们具体来分析一下这个强大的观察者模式。</p>
+<p>观察者模式可以分为主题(Subject)和观察者(Observer)。主题其实就是被观察者对象，就如上面杂志订阅中的杂志社，而观察者就是各个订阅 者。杂志社可以将新的订阅者加入订阅者列表中，也可以加老是订阅者从订阅者列表中删除，所以主题类也拥有这两种能力，即拥有 registerObserver( )和removeObserver( )方法(方法名称仅仅是名称而已，可用其他)。而且，杂志社可以通知各个订阅者新杂志到了，所以主题类也有相应的方法：notifObservers( )。而观察者呢？杂志社通知订阅都有新的杂志到了，订阅者就有相应的动作，或阅读，或送人。当然，观察者类则有update( )方法与之对应。对应的UML图如下：</p>
+<p><img src="/img/2012-09-09-0.png" alt="UML图" title="UML图"></p>
+<p>那么，这个观察者模式有什么好处呢？<strong>观察者模式提供了一种对象设计，让主题和观察者之间松耦合</strong>(还记得学校里老师教的“强内聚，松耦合”吗)。</p>
+<p>在主题方，它对观察者基本不知道任何详情，只知道观察者实现了某个接口，其他具体细节一概不知，如具体类是什么，有多少种方法，各种方法内又做了什么。主 题只要维护好自己的观察者列表和其他数据，在新的观察者申请加入时，将其加入列表；在理的观察者申请退出时，将其从列表中删除；在自己的数据更新时，依次 通知各个观察者，即调用它们的update方法(上段中update方法)。如果主题类增加维护数据时，已有的观察者们都无须更新代码，因为这只与主题类 相关，这就是松耦合的威力。</p>
+<p>在观察者方，它只关心所观察对象(即主题类)推送过来的更新消息，取得自己感兴趣的数据，做自己相应的动作，而无需知道被观察者(主题)具体有多少观察 者，有多少数据，或者是肥是瘦。而如果不想观察这个主题，则调用主题remove方法将自己从主题的观察者列表中删除，不影响该主题和其他观察者。</p>
+<p>可见，改变主题或者观察者的任何一方都不会影响另一方，这就是松耦合。</p>
+<p>附<a href="http://book.douban.com/subject/2243615/" target="_blank" rel="external">《Head First 设计模式》</a>中相应章节源代码，以更方便理解观察者模式。Java中Observable类与Observer类就是相应的被观察者(主题类)与观察者:</p>
+<pre><code><span class="keyword">package</span> com.Observor;  
+
+<span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">DisplayEmlement</span> </span>{  
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">display</span><span class="params">()</span></span>;  
+}
+</code></pre><hr>
+<pre><code><span class="keyword">package</span> com.Observor;  
+
+<span class="keyword">import</span> java.util.Observable;  
+
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WeatherData</span> <span class="keyword">extends</span> <span class="title">Observable</span> </span>{  
+    <span class="keyword">private</span> <span class="keyword">float</span> temperature;  
+    <span class="keyword">private</span> <span class="keyword">float</span> humidity;  
+    <span class="keyword">private</span> <span class="keyword">float</span> pressure;  
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">measurementChanged</span><span class="params">()</span> </span>{  
+        setChanged();  
+        notifyObservers();  
+    }  
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setMeasurements</span><span class="params">(<span class="keyword">float</span> temperature, <span class="keyword">float</span> humidigy, <span class="keyword">float</span> pressure)</span> </span>{  
+        <span class="keyword">this</span>.temperature = temperature;  
+        <span class="keyword">this</span>.humidity = humidigy;  
+        <span class="keyword">this</span>.pressure = pressure;  
+        measurementChanged();  
+    }  
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">float</span> <span class="title">getTemperature</span><span class="params">()</span> </span>{  
+        <span class="keyword">return</span> temperature;  
+    }  
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">float</span> <span class="title">getHumidity</span><span class="params">()</span> </span>{  
+        <span class="keyword">return</span> humidity;  
+    }  
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">float</span> <span class="title">getPressure</span><span class="params">()</span> </span>{  
+        <span class="keyword">return</span> pressure;  
+    }  
+}
+</code></pre><hr>
+<pre><code><span class="keyword">package</span> com.Observor;  
+
+<span class="keyword">import</span> java.util.Observable;  
+<span class="keyword">import</span> java.util.Observer;  
+
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CurrentConditionsDisplay</span> <span class="keyword">implements</span> <span class="title">Observer</span>, <span class="title">DisplayEmlement</span> </span>{  
+    Observable observable;  
+    <span class="keyword">private</span> <span class="keyword">float</span> temerature;  
+    <span class="keyword">private</span> <span class="keyword">float</span> humidity;  
+
+    <span class="function"><span class="keyword">public</span> <span class="title">CurrentConditionsDisplay</span><span class="params">(Observable observable)</span> </span>{  
+        <span class="keyword">this</span>.observable = observable;  
+        observable.addObserver(<span class="keyword">this</span>);  
+    }  
+
+    <span class="annotation">@Override</span> 
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">display</span><span class="params">()</span> </span>{  
+        <span class="comment">// <span class="doctag">TODO</span> Auto-generated method stub  </span>
+        System.out.println(<span class="string">"Current conditions: "</span> + temerature + <span class="string">"F degrees and "</span> + humidity + <span class="string">"% humidity"</span>);  
+    }  
+
+    <span class="annotation">@Override</span> 
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(Observable arg0, Object arg1)</span> </span>{  
+        <span class="comment">// <span class="doctag">TODO</span> Auto-generated method stub  </span>
+        <span class="keyword">if</span> (arg0 <span class="keyword">instanceof</span> WeatherData) {  
+            WeatherData weatherData = (WeatherData)arg0;  
+            <span class="keyword">this</span>.temerature = weatherData.getTemperature();  
+            <span class="keyword">this</span>.humidity = weatherData.getHumidity();  
+            display();  
+        }  
+    }  
+
+}
+</code></pre><hr>
+<pre><code><span class="keyword">package</span> com.Observor;  
+
+<span class="keyword">import</span> java.util.Observable;  
+<span class="keyword">import</span> java.util.Observer;  
+
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ForecastDisplay</span> <span class="keyword">implements</span> <span class="title">Observer</span>, <span class="title">DisplayEmlement</span> </span>{  
+    <span class="keyword">private</span> <span class="keyword">float</span>  currentPressure = <span class="number">29.92f</span>;  
+    <span class="keyword">private</span> <span class="keyword">float</span> lastPressure;  
+
+    <span class="function"><span class="keyword">public</span> <span class="title">ForecastDisplay</span><span class="params">(Observable observable)</span> </span>{  
+        observable.addObserver(<span class="keyword">this</span>);  
+    }  
+
+    <span class="annotation">@Override</span> 
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">display</span><span class="params">()</span> </span>{  
+        <span class="comment">// <span class="doctag">TODO</span> Auto-generated method stub  </span>
+        System.out.println(<span class="string">"lastPressure: "</span> + lastPressure + <span class="string">" curPressure:"</span> + currentPressure);  
+    }  
+
+    <span class="annotation">@Override</span> 
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(Observable o, Object arg)</span> </span>{  
+        <span class="comment">// <span class="doctag">TODO</span> Auto-generated method stub  </span>
+        <span class="keyword">if</span> (o <span class="keyword">instanceof</span> WeatherData) {  
+            lastPressure = currentPressure;  
+            currentPressure = ((WeatherData) o).getPressure();  
+        }  
+        display();  
+    }  
+
+}
+</code></pre><hr>
+<pre><code><span class="keyword">package</span> com.Observor;  
+
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WeatherStation</span> </span>{  
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{  
+        WeatherData weatherData = <span class="keyword">new</span> WeatherData();  
+
+        CurrentConditionsDisplay currentDisplay = <span class="keyword">new</span> CurrentConditionsDisplay(weatherData);  
+        ForecastDisplay forecastDisplay = <span class="keyword">new</span> ForecastDisplay(weatherData);  
+        weatherData.setMeasurements(<span class="number">80</span>, <span class="number">90</span>, <span class="number">100</span>);  <span class="comment">// 数字乱来的哦  </span>
+        weatherData.setMeasurements(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);  
+        weatherData.setMeasurements(<span class="number">11</span>, <span class="number">22</span>, <span class="number">33</span>);  
+    }  
+}
+</code></pre></span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/设计/" rel="tag">#设计</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2013/03/24//2013/03-24-0.html/" rel="prev">Calling Convention on X86 -- Using C for Example</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2012/09/02//2012/09-02-0.html/" rel="next">策略模式(Strategy Pattern)</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+            </div>
+
+            
+
+            
+              <div class="comments" id="comments">
+                
+              </div>
+            
+        </div>
+
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="zhujiefirst" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">zhujiefirst</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">学习总结 思考感悟 知识管理</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">45</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">分類</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-name">標籤</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <p class="post-toc-empty">此文章未包含目錄</p>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+        <div class="footer-inner">
+            <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhujiefirst</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+        </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+</div>
+
+<script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.4"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.4"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.4" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/js/search-toggle.js"></script>
+
+
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.4" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if (isDesktop() && CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    });
+  </script>
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        if (CONFIG.sidebar === 'always') {
+            displaySidebar();
+        }
+    });
+</script>
+
+
+
+
+
+
+
+
+<!-- lazyload -->
+<script type="text/javascript" src="/js/lazyload.js"></script>
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery("#posts img").lazyload({
+            placeholder: "/images/loading.gif",
+            effect: "fadeIn"
+        });
+    });
+</script>
+</body>
+</html>

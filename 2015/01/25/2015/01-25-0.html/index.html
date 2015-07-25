@@ -1,0 +1,644 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+    
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+  <link href='//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.4"/>
+
+
+    <meta name="description" content="学习总结 思考感悟 知识管理" />
+
+
+
+  <meta name="keywords" content="架构," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.4" />
+
+
+<meta name="description" content="引子有幸参加了又拍网组织的Open Talk No.2 — 移动时代互联网金融的架构趋势。虽然没有接触过互联网金融这方面的内容，但是怀着成为一个合格程序员的人生梦想的人，怎能错过这样的聚会。
+本次Talk请来了三位讲师分别讲述了其所在公司的相关后台技术架构，技术虽然各有千秋，但万变不离其中：并发，缓存，异步是后台永恒的话题。
+下面主要回顾下挖财和同盾科技的两位讲师的Key Point，而51信用卡">
+<meta property="og:type" content="article">
+<meta property="og:title" content="移动时代互联网金融的架构趋势">
+<meta property="og:url" content="http://codingforever.com/2015/01/25//2015/01-25-0.html/index.html">
+<meta property="og:site_name" content="Codingforever">
+<meta property="og:description" content="引子有幸参加了又拍网组织的Open Talk No.2 — 移动时代互联网金融的架构趋势。虽然没有接触过互联网金融这方面的内容，但是怀着成为一个合格程序员的人生梦想的人，怎能错过这样的聚会。
+本次Talk请来了三位讲师分别讲述了其所在公司的相关后台技术架构，技术虽然各有千秋，但万变不离其中：并发，缓存，异步是后台永恒的话题。
+下面主要回顾下挖财和同盾科技的两位讲师的Key Point，而51信用卡">
+<meta property="og:image" content="http://codingforever.com/img/2015-01-25-0.jpg">
+<meta property="og:image" content="http://codingforever.com/img/2015-01-25-1.jpg">
+<meta property="og:image" content="http://codingforever.com/img/2015-01-25-2.jpg">
+<meta property="og:updated_time" content="2015-06-19T16:09:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="移动时代互联网金融的架构趋势">
+<meta name="twitter:description" content="引子有幸参加了又拍网组织的Open Talk No.2 — 移动时代互联网金融的架构趋势。虽然没有接触过互联网金融这方面的内容，但是怀着成为一个合格程序员的人生梦想的人，怎能错过这样的聚会。
+本次Talk请来了三位讲师分别讲述了其所在公司的相关后台技术架构，技术虽然各有千秋，但万变不离其中：并发，缓存，异步是后台永恒的话题。
+下面主要回顾下挖财和同盾科技的两位讲师的Key Point，而51信用卡">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post'
+  };
+</script>
+
+    <title> 移动时代互联网金融的架构趋势 // Codingforever </title>
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+<!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+
+
+
+
+<div class="container one-column page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Codingforever</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-home"></i> <br />
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            標籤
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+        </div>
+    </header>
+
+    <main id="main" class="main">
+        <div class="main-inner">
+            <div id="content" class="content">
+                
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              移动时代互联网金融的架构趋势
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於
+          <time itemprop="dateCreated" datetime="2015-01-25T00:00:00+08:00" content="1月 25 2015">
+            1月 25 2015
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分類於
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/服务器编程/" itemprop="url" rel="index"><span itemprop="name">服务器编程</span></a></span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h2 id="引子">引子</h2><p>有幸参加了<a href="https://www.upyun.com/index.html" target="_blank" rel="external">又拍网</a>组织的Open Talk No.2 — 移动时代互联网金融的架构趋势。虽然没有接触过互联网金融这方面的内容，但是怀着成为一个合格程序员的人生梦想的人，怎能错过这样的聚会。</p>
+<p>本次Talk请来了三位讲师分别讲述了其所在公司的相关后台技术架构，技术虽然各有千秋，但万变不离其中：<strong>并发，缓存，异步是后台永恒的话题</strong>。</p>
+<p>下面主要回顾下挖财和同盾科技的两位讲师的Key Point，而51信用卡的分享以其原始PPT呈现。</p>
+<h2 id="挖财的互联网金融技术探索">挖财的互联网金融技术探索</h2><p>讲师是挖财首席架构师王福强，原阿里资深架构师。他的主题分为以下：</p>
+<ul>
+<li><p><strong>Separation Everywhere</strong>，即组件分离，将服务分组，模块化，有点类似<a href="http://en.wikipedia.org/wiki/Service-oriented_architecture" target="_blank" rel="external">SOA</a>的味道（事实上就是SOA）。模块化架构不仅易于后期的代码重构，而且也方便后期的架构调整。而且，组件分离后，可以对各类服务进行分组，将耗时操作与非耗时操作分离，保证两者互不干涉，即使一方繁忙时也不影响另一方。</p>
+</li>
+<li><p><strong>Async Everywhere</strong>，即异步化。服务器并发量达到一定数量级，必需经过调用的异步化。当相对耗时调用等待时，可以进行其他调用的处理，以此让服务器并发化处理相应业务。</p>
+</li>
+<li><p><strong>Message Passing Everywhere</strong>，即消息化。服务器内部或者之间通信全部使用消息机制，统一调度。这里<a href="http://baike.baidu.com/view/3118541.htm" target="_blank" rel="external">消息中间件</a>就会大显身手。这里挖财就应用了<a href="http://kafka.apache.org/" target="_blank" rel="external">Kafka</a>。</p>
+</li>
+<li><p><strong>Immutability Everywhere</strong>，即持久化。内存中的数据在断电后是无法恢复的，所以一些重要数据，特别是互联网金融领域的相关数据，是不能丢失的，所以及时对数据进行持久化是十分必要的。</p>
+</li>
+<li><p><strong>Security Everywhere</strong>，即安全性。与持久化类似，互联网金融领域的一些数据是用户的敏感数据，所以对数据的安全必须要仔细考虑。如果数据被拖库的话，在业内声誉就基本毁于一旦了。</p>
+</li>
+<li><p><strong>Intercept Everywhere</strong>，即拦截。与安全性一样，对敏感业务，数据必须要多长一个心眼。</p>
+</li>
+<li><p><strong>Auditing Everywhere</strong>，即监控化。服务器硬件各项指标，如CPU负载，内存利用率，磁盘利用率，网络I/O状态等，服务器业务进程各项指标，如业务请求成功数，失败数等，都必须收集汇总，以显示服务器健康度。</p>
+</li>
+<li><p><strong>Bulkheads Everywhere</strong>，即隔离化。同样这也是服务器架构方面的注意点，合理分层化，模块化，某一服务的异常确保不会影响到其他服务。</p>
+</li>
+<li><p><strong>Switches Everywhere</strong>，即开关化。针对单独业务接口，或者单独用户，又或者单独IP进行服务开关化。在遇见异常情况下，如恶意用户进行的攻击，窃取私密数据时，及时关闭相应服务。</p>
+</li>
+<li><p><strong>Redundancy Everywhere</strong>，即冗余化。特别是金融重要数据，如果其丢失将造成不可挽回的损失，所以对相应数据的冗余化，及时做备份也是必要的。</p>
+</li>
+<li><p><strong>Reactive Everywhere</strong>，即事件驱动化（可能并不是很准确）。这里是指采用事件驱动，网络请求，信号发生等采用事件循环驱动，可以高性能进行并发服务处理。比如<a href="http://libevent.org" target="_blank" rel="external">libevent</a>、<a href="http://software.schmorp.de/pkg/libev.html" target="_blank" rel="external">libev</a>、<a href="https://github.com/libuv/libuv" target="_blank" rel="external">libuv</a>就是成熟的事件驱动框架。</p>
+</li>
+</ul>
+<h2 id="从零打造千万级的实时风控云服务">从零打造千万级的实时风控云服务</h2><p>讲师是来自同盾科技的联合创始人、技术总监张新波，原阿里集团安全部专家。</p>
+<h3 id="挑战">挑战</h3><p>风控云服务如果要做好，就必需跨越以下几个挑战：</p>
+<ul>
+<li><strong>性能</strong></li>
+<li><strong>可用性</strong></li>
+<li><strong>可扩展性</strong></li>
+</ul>
+<p>事实上，所有后台服务器如果要支持大并发量都要考虑以上3点挑战。</p>
+<p>具体到风控云服务上（具体点就是同盾科技内部），性能上的挑战有：</p>
+<ul>
+<li>实时性要求高，服务响应时间通常小于500ms（客户要求）</li>
+<li>计算结果无法缓存，全部需要实时动态计算（风控业务要求)</li>
+<li>参与计算数据量大，计算维度多且复杂（风控业务要求）</li>
+<li>无法像静态资源盘多机房缓存和加速（风控业务要求）</li>
+</ul>
+<p>而可用性上有：</p>
+<ul>
+<li>保证服务的稳定性，消除单点故障（服务器基本要求）</li>
+<li>完备的灾备和紧急处理方案，以备不时之需（服务器基本要求）</li>
+</ul>
+<p>在可扩展性上则为：</p>
+<ul>
+<li>应用服务器可线性扩展，支撑业务的快速发展（服务器基本要求）</li>
+<li>海量数据的存储和计算，支持线性扩展（服务器基本要求）</li>
+</ul>
+<p>可见，在可用性和可扩展性上，同盾科技的实时风控云服务与一般高性能服务器挑战一致，但是在性能上却更具有挑战性，由于一些业务上的特殊情况，不能缓存计算结果将会对服务器的情况上造成巨大的伤害。</p>
+<h3 id="服务器架构演化">服务器架构演化</h3><p>下图是同盾科技最早版本的服务器架构V0.1（切莫嘲笑其简单，创业初期先走业务实现是根本原则）：<br><img src="/img/2015-01-25-0.jpg" alt=""></p>
+<p>我们可以看到，整套服务器采用<a href="http://httpd.apache.org/" target="_blank" rel="external">Apache</a>作为服务器的接入层，具体业务逻辑层分别用两台机器做为Admin控制和具体接口服务逻辑计算，而数据层则直接用<a href="http://www.mysql.com/" target="_blank" rel="external">MySQL</a>进行存储。特别注意，业务主要逻辑(用户校验，查找策略，保存数据)采用的是直接向数据库<strong>同步</strong>加载数据，而我们知道数据库操作的慢速操作，因此整个服务的并发上不去，明显这个操作将会成为巨大的瓶颈。</p>
+<p>因此，在V0.2时，针对V0.1中的同步向数据库读取数据的操作进行缓存优化，使用<a href="https://code.google.com/p/guava-libraries/wiki/CachesExplained" target="_blank" rel="external">Guava Cache</a>定时预先加载，缓存全部用户及对应的策略数据。当然这里有些同学就有疑问了，缓存全部用户数据这是不是脑洞太大了。没错，就是全部用户数据，由于早期用户数据不多且业务类型特性（面向企业）决定全部数据也不是不可控。<br>在另一方面，数据库写入操作则采用异步写入，引入<a href="http://en.wikipedia.org/wiki/Berkeley_DB" target="_blank" rel="external">Berkeley DB</a>作为本地队列辅助进行异步写入。</p>
+<p>在V0.2中，随着用户数据量的增多，原先使用Guava Cache进行缓存的方式已经力不从心，所以在V0.3中直接用<a href="http://memcached.org/" target="_blank" rel="external">Memcached</a>代替，而且对缓存数据进行了Base64+Gzip的压缩，减少缓存的数据大小。当然，有同学有疑问进行数据压缩转换是否增加了性能压力。事实上，这点性能的损失对服务整体的耗时来说可以忽略不计，所以引入压缩转换减少的缓存量和网络传输量在性价比上来说是值得的。</p>
+<p>我们注意到，在上面提及的所有版本中都没有集群的概念，事实上，所有的服务都是单点。当然，这对于一个服务的可用性来说是不良信号，所以在V1.0版本时，不仅消除单点问题，而且新增监控系统(<a href="http://www.zabbix.com/" target="_blank" rel="external">Zabbix</a>)，同时，接入层由Apache替换成性能更强力的<a href="http://nginx.com/" target="_blank" rel="external">Nginx</a>，具体架构如下：<br><img src="/img/2015-01-25-1.jpg" alt=""></p>
+<p>但是这样就够了吗？</p>
+<p>业务数据增加过快，直接引入了新的问题：数据库分表已无法解决数据增加过快问题。所以在V2.x中引入<a href="http://cassandra.apache.org/" target="_blank" rel="external">Cassandra</a>数据库，其Wide column store的特点正好解决数据单表过大无法存储的问题。同时，为了解决根据任意维度进行数据查询和分析的性能问题，引入<a href="http://www.elasticsearch.org/" target="_blank" rel="external">ElasticSerch</a>进行全字段索引查询。另一方面，坐拥大数据却不知利用则会冠以暴殄天物之名。所以引入<a href="https://spark.apache.org/" target="_blank" rel="external">Spark</a>进行离线分析，<a href="https://spark.apache.org/streaming/" target="_blank" rel="external">Spark streaming</a>结合<a href="https://spark.apache.org/streaming/" target="_blank" rel="external">Kafka</a>则进行实时流计算，<br>所以现在的架构演化成如下：<br><img src="/img/2015-01-25-2.jpg" alt=""></p>
+<h3 id="架构演化带来的思考">架构演化带来的思考</h3><ul>
+<li><strong>使用熟悉、成熟和社区活跃的开源技术</strong>。</li>
+<li><strong>先满足业务需求，再优化，逐步演进</strong>。</li>
+<li><strong>监控报警，应急预案必须成为系统的一部分</strong>。</li>
+<li><strong>纸上得来终觉浅，绝知此事要躬行</strong>。</li>
+</ul>
+<h2 id="51信用卡的日志分析变迁史">51信用卡的日志分析变迁史</h2><p>参见文后Reference。</p>
+<h2 id="[Reference]">[Reference]</h2><ul>
+<li><a href="http://upyun-open-talk.b0.upaiyun.com/wacai.pdf" target="_blank" rel="external">挖财的互联网金融技术探索</a></li>
+<li><a href="http://upyun-open-talk.b0.upaiyun.com/tongdun.pdf" target="_blank" rel="external">从零打造千万级的实时风控云服务</a></li>
+<li><a href="http://upyun-open-talk.b0.upaiyun.com/51xinyongka.pdf" target="_blank" rel="external">51信用卡的日志分析变迁史</a></li>
+</ul>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/架构/" rel="tag">#架构</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/01/30//2015/01-30-0.html/" rel="prev">构建高性能服务器 -- 负载均衡篇</a>
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/01/23//2015/01-23-0.html/" rel="next">构建高性能服务器 -- 缓存篇</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+            </div>
+
+            
+
+            
+              <div class="comments" id="comments">
+                
+              </div>
+            
+        </div>
+
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="zhujiefirst" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">zhujiefirst</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">学习总结 思考感悟 知识管理</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">45</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">分類</span>
+              
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-name">標籤</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引子"><span class="nav-number">1.</span> <span class="nav-text">引子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#挖财的互联网金融技术探索"><span class="nav-number">2.</span> <span class="nav-text">挖财的互联网金融技术探索</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从零打造千万级的实时风控云服务"><span class="nav-number">3.</span> <span class="nav-text">从零打造千万级的实时风控云服务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#挑战"><span class="nav-number">3.1.</span> <span class="nav-text">挑战</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务器架构演化"><span class="nav-number">3.2.</span> <span class="nav-text">服务器架构演化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#架构演化带来的思考"><span class="nav-number">3.3.</span> <span class="nav-text">架构演化带来的思考</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#51信用卡的日志分析变迁史"><span class="nav-number">4.</span> <span class="nav-text">51信用卡的日志分析变迁史</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#[Reference]"><span class="nav-number">5.</span> <span class="nav-text">[Reference]</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+        <div class="footer-inner">
+            <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhujiefirst</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+        </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+</div>
+
+<script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+    
+
+  
+
+
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.4"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.4"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.4" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/js/search-toggle.js"></script>
+
+
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.4" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if (isDesktop() && CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    });
+  </script>
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        if (CONFIG.sidebar === 'always') {
+            displaySidebar();
+        }
+    });
+</script>
+
+
+
+
+
+
+
+
+<!-- lazyload -->
+<script type="text/javascript" src="/js/lazyload.js"></script>
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery("#posts img").lazyload({
+            placeholder: "/images/loading.gif",
+            effect: "fadeIn"
+        });
+    });
+</script>
+</body>
+</html>

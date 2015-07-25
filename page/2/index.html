@@ -1,415 +1,1373 @@
-
- <!DOCTYPE HTML>
-<html lang="zh-CN">
+<!doctype html>
+<html class="theme-next use-motion ">
 <head>
-  <meta charset="UTF-8">
-  
-    <title>Codingforever</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
-    <meta name="author" content="zhujiefirst">
-    
-    <meta name="description" content="学习总结 思考感悟 知识管理">
-    
-    
-    
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:site" content="Jay1002008" />
-    <meta name="twitter:title" content="Codingforever" />
-      
-    
-    
-    
-    <link rel="icon" href="/img/favicon.ico">
-    
-    
-    <link rel="apple-touch-icon" href="/img/pacman.jpg">
-    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
-    
-    <link rel="stylesheet" href="/css/style.css" type="text/css">
 
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+  <link href='//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.4"/>
+
+
+    <meta name="description" content="学习总结 思考感悟 知识管理" />
+
+
+
+  <meta name="keywords" content="Hexo,next" />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.4" />
+
+
+<meta name="description" content="学习总结 思考感悟 知识管理">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Codingforever">
+<meta property="og:url" content="http://codingforever.com/page/2/index.html">
+<meta property="og:site_name" content="Codingforever">
+<meta property="og:description" content="学习总结 思考感悟 知识管理">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Codingforever">
+<meta name="twitter:description" content="学习总结 思考感悟 知识管理">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post'
+  };
+</script>
+
+    <title> Codingforever </title>
 </head>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+<!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
 
-  <body>
-    <header>
-      <div>
-		
-			<div id="textlogo">
-				<h1 class="site-name"><a href="/" title="Codingforever">Codingforever</a></h1>
-				<h2 class="blog-motto">SHUT UP ur fucking mouth! Reading MORE, thinking MORE, coding MORE.</h2>
-			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
-			</a></div>
-			<nav class="animated">
-				<ul>
-					
-						<li><a href="/">首页</a></li>
-					
-						<li><a href="/archives">归档</a></li>
-					
-						<li><a href="/categories">分类</a></li>
-					
-						<li><a href="/tags">标签</a></li>
-					
-						<li><a href="/about">关于</a></li>
-					
-					<li>
-					
-					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
-						<label>Search</label>
-						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
-						<input type="hidden" name="q" value="site:codingforever.com">
-					</form>
-					
-					</li>
-				</ul>
-			</nav>			
+
+
+
+<div class="container one-column 
+   page-home 
+">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Codingforever</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
 </div>
 
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-home"></i> <br />
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            標籤
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+        </div>
     </header>
-    <div id="container">
-      <div id="main">
 
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2014/12/27/-2014-12-27-3-html/" title="经典算法巡礼(四) -- 排序之希尔排序" itemprop="url">
-  
-    <h1 itemprop="name">经典算法巡礼(四) -- 排序之希尔排序</h1>
+    <main id="main" class="main">
+        <div class="main-inner">
+            <div id="content" class="content">
+                
+  <section id="posts" class="posts-expand">
     
-     
-           <p itemprop="description" >希尔排序与之前的排序算法不同，她是以她的发明者Donald Shell来命名的。她是插入排序的一种改进版本。
-希尔排序是基于插入排序的以下两点性质而提出的改进算法：
+      
 
-插入排序的效率与输入序列有关，当输入序列处于基本排好序的情况下可以达到线性排序的效率；
-插入排序在大规模乱序情况</p>
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2014/12/27//2014/12-27-1.html/" itemprop="url">
+                经典算法巡礼(二) -- 排序之选择排序
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於
+          <time itemprop="dateCreated" datetime="2014-12-27T00:00:00+08:00" content="12月 27 2014">
+            12月 27 2014
+          </time>
+        </span>
+
         
-    
-    <time datetime="2014-12-26T16:00:00.000Z" itemprop="datePublished">12月 27 2014</time>
-  </a>
-</section>
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分類於
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a></span>
 
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2014/12/27/-2014-12-27-0-html/" title="经典算法巡礼(一) -- 排序之冒泡排序" itemprop="url">
-  
-    <h1 itemprop="name">经典算法巡礼(一) -- 排序之冒泡排序</h1>
-    
-     
-           <p itemprop="description" >冒泡排序是一种简单的排序算法，相信绝大多数人学会的第一种排序算法就是她了。
-事实上，她重复地遍历需要排序的元素，一次比较相邻的两个元素，如果不满足预先定义的比较条件，则交换；否则继续下一组元素比较，直至遍历完成需要排序的所有元素。当然，遍历需要排序的元素需要重复进行，直到没有需要</p>
+              
+              
+
+            
+          </span>
         
-    
-    <time datetime="2014-12-26T16:00:00.000Z" itemprop="datePublished">12月 27 2014</time>
-  </a>
-</section>
 
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2014/12/27/-2014-12-27-1-html/" title="经典算法巡礼(二) -- 排序之选择排序" itemprop="url">
-  
-    <h1 itemprop="name">经典算法巡礼(二) -- 排序之选择排序</h1>
-    
-     
-           <p itemprop="description" >选择排序，如冒泡排序一样，从名字中即可大概猜测其排序的原理。其工作原理就是从未排序的数组中选出最大（小）的元素，将其放置至数组的首（尾）部，重复此过程直至没有未排序的子数组。
-当然，在分析该排序算法前还是先将golang实现版本放置出来献下丑：
-// Sort方法从数组头开始，将</p>
         
-    
-    <time datetime="2014-12-26T16:00:00.000Z" itemprop="datePublished">12月 27 2014</time>
-  </a>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2014/12/12/-2014-12-12-0-html/" title="案例研究：union-find算法(四) — 加权quick-union算法" itemprop="url">
-  
-    <h1 itemprop="name">案例研究：union-find算法(四) — 加权quick-union算法</h1>
-    
-     
-           <p itemprop="description" >在Quick-Union算法中，在Union方法中归并两个分量时，我们始终是分量p归并至分量q。事实上，这里我们可以进行简单的优化，将含有节点少的分量归并至含有节点多的分量，如此做法可以减少分量形成的树的高度，从而在Find方法中寻找根节点时，适当增加效率。
-加权Quick-Un</p>
+          
         
-    
-    <time datetime="2014-12-11T16:00:00.000Z" itemprop="datePublished">12月 12 2014</time>
-  </a>
-</section>
+      </div>
+    </header>
 
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2014/12/08/-2014-12-08-0-html/" title="案例研究：union-find算法(三) -- quick-union算法" itemprop="url">
-  
-    <h1 itemprop="name">案例研究：union-find算法(三) -- quick-union算法</h1>
-    
-     
-           <p itemprop="description" >Quick-Union算法，就是提高Union方法的速度。在Quick-Find算法中，Union方法每次调用均会遍历id[ ]数组，那么如何才能提高Union方法的效率呢。当然，这里我们先要赋予数组id[ ]不同的意义。Quick-Find中，id[i]表示第i个触点所有的分量</p>
+    <div class="post-body">
+
+      
+      
+
+      
         
-    
-    <time datetime="2014-12-07T16:00:00.000Z" itemprop="datePublished">12月 8 2014</time>
-  </a>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2014/12/07/-2014-12-07-0-html/" title="案例研究：union-find算法(二) -- quick-find算法" itemprop="url">
-  
-    <h1 itemprop="name">案例研究：union-find算法(二) -- quick-find算法</h1>
-    
-     
-           <p itemprop="description" >所谓Quick-Find算法，顾名思义就是Find实现是Quick版本，而相对于Union，则显得不那么Quick了。当然，这是通过结论推导原因，放在这里是十分牵强的。所以，还是正常思维，如果要实现这个功能，当然，暴力算法是不可少的。而恰巧，这个暴力算法正好就是Quick-Fin</p>
+          <span itemprop="articleBody"><p><a href="http://en.wikipedia.org/wiki/Selection_sort" target="_blank" rel="external">选择排序</a>，如<a href="http://codingforever.cn/2014/12-27-0.html" target="_blank" rel="external">冒泡排序</a>一样，从名字中即可大概猜测其排序的原理。其工作原理就是从未排序的数组中选出最大（小）的元素，将其放置至数组的首（尾）部，重复此过程直至没有未排序的子数组。</p>
+<p>当然，在分析该排序算法前还是先将<a href="https://golang.org/" target="_blank" rel="external">golang</a>实现版本放置出来献下丑：</p>
+<pre><code>// Sort方法从数组头开始，将未排序的元素做为子数组，并在子数组中选择中最小的元素，将其放置子数组的最首位置做为已排序元素，重复此过程，直到所有数组元素排序完成为止<span class="comment">
+// Sort中参数类型Comparable为统一的可比较接口，若为整数数组排序，则Comparable为int即可</span><span class="comment">
+// Sort中参数类型Compare为配合Comparable接口的比较方法，若为整数数组排序，则Compare即满足a int &lt; a int即可</span>
+func (this *SelectSort) Sort(<span class="operator">a</span> []Comparable, compare Compare) {
+    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="built_in">len</span>(<span class="operator">a</span>); i++ {
+        <span class="built_in">min</span> := i
+        <span class="keyword">for</span> j := i + <span class="number">1</span>; j &lt; <span class="built_in">len</span>(<span class="operator">a</span>); j++ {
+            <span class="keyword">if</span> this.less(<span class="operator">a</span>[j], <span class="operator">a</span>[<span class="built_in">min</span>], compare) == <span class="constant">true</span> {
+                <span class="built_in">min</span> = j
+            }
+        }
+        this.exch(<span class="operator">a</span>, i, <span class="built_in">min</span>)
+    }
+}
+</code></pre><p>同样，我们用与<a href="http://codingforever.cn/2014/12-27-0.html" target="_blank" rel="external">冒泡排序</a>相同的方法分析其效率。观察选择排序的代码实现，明显她也是<strong>时间复杂度为O(N^2)</strong>的排序算法。同样以元素比较作为单元操作，完成一个长度为N的数组的排序工作需要<strong>N-1 + N-2 + … + 2 + 1</strong>次比较操作，简化后为<strong>(N-1)/2*N = (N^2-N)/2 ~ N^2</strong>。</p>
+<p>与<a href="http://codingforever.cn/2014/12-27-0.html" target="_blank" rel="external">冒泡排序</a>不同的是，虽然两种排序算法的比较次数是相同的，但是其元素交换操作数目并不是相同的。选择排序的交换操作<strong>最多为N次</strong>，而冒泡排序的交换操作却与数组中不满足顺序的元素对数量相同，即与被排序数组相关，在最差情况下，其次数与比较次数相同，即<strong>N^2</strong>。</p>
+<p>虽然选择排序在元素交换方面比<a href="http://codingforever.cn/2014/12-27-0.html" target="_blank" rel="external">冒泡排序</a>具有一定的优势，但是其时间复杂度依然是万恶的<strong>平方级别的，即O(N^2)</strong>，所以其依然<strong>只适用于小型数组的排序，不能满足大量数据的排序</strong>。</p>
+</span>
         
-    
-    <time datetime="2014-12-06T16:00:00.000Z" itemprop="datePublished">12月 7 2014</time>
-  </a>
-</section>
+      
+    </div>
 
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2014/12/01/-2014-12-01-0-html/" title="案例研究：union-find算法(一) -- 问题" itemprop="url">
-  
-    <h1 itemprop="name">案例研究：union-find算法(一) -- 问题</h1>
-    
-     
-           <p itemprop="description" >问题描述:问题的输入是一列整数对，其中每个整数都表示一个某种类型的对象，一对整数p, q可以被理解为”p和q是相连的”。假设”相连”是一种等价关系，这就意味着相连满足以下3个性质： 
+    <footer class="post-footer">
+      
 
-自反性: p和p是相连的。 
-对称性: 如果p和q是相连的，则q和p也是相连的。 
-传递性: </p>
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2014/12/27//2014/12-27-3.html/" itemprop="url">
+                经典算法巡礼(四) -- 排序之希尔排序
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於
+          <time itemprop="dateCreated" datetime="2014-12-27T00:00:00+08:00" content="12月 27 2014">
+            12月 27 2014
+          </time>
+        </span>
+
         
-    
-    <time datetime="2014-11-30T16:00:00.000Z" itemprop="datePublished">12月 1 2014</time>
-  </a>
-</section>
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分類於
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a></span>
 
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2014/11/20/-2014-11-20-0-html/" title="Golang性能分析工具" itemprop="url">
-  
-    <h1 itemprop="name">Golang性能分析工具</h1>
-    
-     
-           <p itemprop="description" >作为一名合格的开发人员，对自己开发程序的性能分析是必不可少的技能。c++可以采用gperftools进行性能分析，那么go呢？是否也有同样逼格的工具？当当当当~当然有，她就是pprof!
-pprof是go自带的性能分析工具，当然她优雅，美丽，易操作。see~
-package ma</p>
+              
+              
+
+            
+          </span>
         
-    
-    <time datetime="2014-11-19T16:00:00.000Z" itemprop="datePublished">11月 20 2014</time>
-  </a>
-</section>
 
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2014/11/18/-2014-11-18-0-html/" title="投掷色子10次，所投点数总数为50点的可能性是多少种" itemprop="url">
-  
-    <h1 itemprop="name">投掷色子10次，所投点数总数为50点的可能性是多少种</h1>
-    
-     
-           <p itemprop="description" >问：投掷色子10次，所投点数总数为50点的可能性是多少种？
-这是道经典的面试问题，当然，面试时可能让你编程实现，也可能用数学知识做答。这里我们就从这两方面分别解析下如何破题。
-一、编程实现事实上，编程解决这题目着实不麻烦。首先我们定义一个过程f(x,y)表示投掷色子x次，所投点数</p>
         
-    
-    <time datetime="2014-11-17T16:00:00.000Z" itemprop="datePublished">11月 18 2014</time>
-  </a>
-</section>
-
-  <section class="post" itemscope itemprop="blogPost">
-  
-    <a href="/2014/11/16/-2014-11-16-0-html/" title="如何生成不重复随机数" itemprop="url">
-  
-    <h1 itemprop="name">如何生成不重复随机数</h1>
-    
-     
-           <p itemprop="description" >如何生成不重复随机数？
-当然，简单粗暴的方法永远是可行的。生成一个随机数，在已生成的随机数中遍历，若未在其中，则归入随机数数组中，否则重新生成一随机数再重复此过程。
-具体代码可参照如下：
-N = 10
-na := make([]int32, 0, N)
-for {
-    n :</p>
+          
         
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><p><a href="http://en.wikipedia.org/wiki/Shellsort" target="_blank" rel="external">希尔排序</a>与之前的排序算法不同，她是以她的发明者<a href="http://en.wikipedia.org/wiki/Donald_Shell" target="_blank" rel="external">Donald Shell</a>来命名的。她是<a href="http://codingforever.cn/2014/12-27-2.html" target="_blank" rel="external">插入排序</a>的一种改进版本。</p>
+<p>希尔排序是基于<a href="http://codingforever.cn/2014/12-27-2.html" target="_blank" rel="external">插入排序</a>的以下两点性质而提出的改进算法：</p>
+<ul>
+<li>插入排序的效率与输入序列有关，当输入序列处于基本排好序的情况下可以达到线性排序的效率；</li>
+<li>插入排序在大规模乱序情况下，效率是比较低的，因为她只会交换相邻的元素，因此元素只能一点点从数组的一端移动到另一端，即最差情况下的平方级别的效率。</li>
+</ul>
+<p>希尔排序为了加快速度简单地改进了<a href="http://codingforever.cn/2014/12-27-2.html" target="_blank" rel="external">插入排序</a>，交换不相邻的元素以对数组的局部进行排序，并最终用插入排序将局部有序的数组排序。</p>
+<p><strong>希尔排序的思想是使数组中任意间隔为h的元素都是有序的</strong>。换句话说，<strong>希尔排序就是将数组中任意间隔为h的元素组成的新数组排列有序</strong>，当h为1时，该数组就排序完成了。事实上，h为1时，希尔排序就是<a href="http://codingforever.cn/2014/12-27-2.html" target="_blank" rel="external">插入排序</a>。</p>
+<p>那么，为什么希尔排序会比较高效呢？首先，我们知道<strong><a href="http://codingforever.cn/2014/12-27-2.html" target="_blank" rel="external">插入排序</a>对于基本有序的数组排序效率是线性的</strong>。希尔排序在排序之初，间隔为h的元素组成的新数组都很短，而且基本处于有序状态，所以采用<a href="http://codingforever.cn/2014/12-27-2.html" target="_blank" rel="external">插入排序</a>对子数组排序是很高效的。然后当h递减时，又由于已进行过几轮排序的原因，子数组又是基本牌有状态的，所以很适合采用<a href="http://codingforever.cn/2014/12-27-2.html" target="_blank" rel="external">插入排序</a>。</p>
+<p>说了这么多，其实希尔排序就是将数组中元素以h为间隔取出元素组成新的数组，并用<a href="http://codingforever.cn/2014/12-27-2.html" target="_blank" rel="external">插入排序</a>将新数组排列有序。递减h的值，重复以上过程，直到h==1为止。</p>
+<p>那么，h应该如何递减呢？事实上要回答这个问题并不简单。希尔算法的性能不仅取决于h，还取决于各h之间的数学性质，比如它们的公因子等。这里，我们以h=h*3+1做为h的递增方法，用<a href="https://golang.org/" target="_blank" rel="external">golang</a>实现如下：</p>
+<pre><code><span class="comment">// Sort方法从将间隔为h的元素组成的子数组进行插入排序，重复此过程直到h==1</span>
+<span class="comment">// Sort中参数类型Comparable为统一的可比较接口，若为整数数组排序，则Comparable为int即可</span>
+<span class="comment">// Sort中参数类型Compare为配合Comparable接口的比较方法，若为整数数组排序，则Compare即满足a int &lt; a int即可</span>
+func (this *ShellSort) <span class="keyword">Sort</span>(a []Comparable, <span class="keyword">compare</span> <span class="keyword">Compare</span>) {
+    arrayLen := len(a)
+
+    <span class="keyword">h</span> := 1
+    <span class="keyword">for</span> <span class="keyword">h</span> &lt; arrayLen/3 {
+        <span class="keyword">h</span> = 3*<span class="keyword">h</span> + 1
+    }
+
+    <span class="keyword">for</span> <span class="keyword">h</span> &gt;= 1 {
+        <span class="comment">// 对间隔为h的子数组进行插入排序</span>
+        <span class="keyword">for</span> i := <span class="keyword">h</span>; i &lt; len(a); i++ {
+            <span class="keyword">for</span> j := i; j &gt;= <span class="keyword">h</span> &amp;&amp; this.less(a[j], a[j-<span class="keyword">h</span>], <span class="keyword">compare</span>); j -= <span class="keyword">h</span> {
+                this.exch(a, j, j-<span class="keyword">h</span>)
+            }
+        }
+        <span class="keyword">h</span> = <span class="keyword">h</span> / 3
+    }
+}
+</code></pre><p>这里，我们并<strong>不讨论希尔排序的时间复杂度，因为这个问题至今还没有确定的答案</strong>，但肯定的是，她是可以用于进行大规模数据的排序，在最坏情况下<strong>时间复杂度可以达到O(NlogN*logN)</strong>。</p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
     
-    <time datetime="2014-11-15T16:00:00.000Z" itemprop="datePublished">11月 16 2014</time>
-  </a>
-</section>
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2014/12/27//2014/12-27-0.html/" itemprop="url">
+                经典算法巡礼(一) -- 排序之冒泡排序
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於
+          <time itemprop="dateCreated" datetime="2014-12-27T00:00:00+08:00" content="12月 27 2014">
+            12月 27 2014
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分類於
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a></span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><p><a href="http://en.wikipedia.org/wiki/Bubble_sort" target="_blank" rel="external"><strong>冒泡排序</strong></a>是一种简单的排序算法，相信绝大多数人学会的第一种排序算法就是她了。</p>
+<p>事实上，她重复地遍历需要排序的元素，一次比较相邻的两个元素，如果不满足预先定义的比较条件，则交换；否则继续下一组元素比较，直至遍历完成需要排序的所有元素。当然，遍历需要排序的元素需要重复进行，直到没有需要排序的元素为止。遍历需要排序的元素时，每一次交换不满足顺序条件的元素就如同气泡一样，从元素序列的一端慢慢“上升”到序列的另一端，此现象如同水中冒气泡一样，此排序算法以此得名。</p>
+<p>具体实现也较为简单，用<a href="https://golang.org/" target="_blank" rel="external">golang</a>表示如下：</p>
+<pre><code>// Sort方法从数组头开始冒泡，将最小元素位置上升到最后，直到数组排序完成为止<span class="comment">
+// Sort中参数类型Comparable为统一的可比较接口，若为整数数组排序，则Comparable为int即可</span><span class="comment">
+// Sort中参数类型Compare为配合Comparable接口的比较方法，若为整数数组排序，则Compare即满足a int &lt; a int即可</span>
+func (this *BubbleSort) Sort(<span class="operator">a</span> []Comparable, compare Compare) {
+    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="built_in">len</span>(<span class="operator">a</span>); i++ {
+        <span class="keyword">for</span> j := <span class="number">1</span>; j &lt; <span class="built_in">len</span>(<span class="operator">a</span>)-i; j++ {
+            <span class="keyword">if</span> this.less(<span class="operator">a</span>[j], <span class="operator">a</span>[j-<span class="number">1</span>], compare) {
+                this.exch(<span class="operator">a</span>, j-<span class="number">1</span>, j)
+            }
+        }
+    }
+}
+</code></pre><p>那么，冒泡排序的效率如何呢？事实上，她不咋滴。且看上述代码中的两重循环吧，这可是复杂度的恶梦啊。当然，很明显，她的<a href="http://en.wikipedia.org/wiki/Time_complexity" target="_blank" rel="external">时间复杂度</a>是<strong>O(N^2)</strong>。</p>
+<p>为了方便，我们以一次比较作为一次时间复杂度操作。根据冒泡排序的实现的思路，对长度为N的数组进行排序所需要的比较次数为<strong>N-1 + N-2 + … + 1 + 0</strong>，即<strong>(N-1)/2*N = (N^2-N)/2 ~ N^2</strong>。可见，通用简单的数学计算，冒泡排序的时间复杂度确实就是<strong>O(N^2)</strong>。</p>
+<p>换种通俗的方式来说，<strong>冒泡排序的时间复杂度是平方级别的</strong>。因此，她只<strong>适合对少量元素进行排序，而无法用于大规模数据的排序</strong>，可谓是中看不中用啊。</p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
 
 
-  <nav id="page-nav" class="clearfix">
-    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2014/12/12//2014/12-12-0.html/" itemprop="url">
+                案例研究：union-find算法(四) — 加权quick-union算法
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於
+          <time itemprop="dateCreated" datetime="2014-12-12T00:00:00+08:00" content="12月 12 2014">
+            12月 12 2014
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分類於
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a></span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><p>在<a href="https://zhujiefirst.github.io/2014/12-08-0.html" target="_blank" rel="external">Quick-Union算法</a>中，在Union方法中归并两个分量时，我们始终是分量p归并至分量q。事实上，这里我们可以进行简单的优化，将含有节点少的分量归并至含有节点多的分量，如此做法可以减少分量形成的树的高度，从而在Find方法中寻找根节点时，适当增加效率。</p>
+<p>加权Quick-Union算法首先就要保存各分量包含的节点数，struct具体修改成如下：</p>
+<pre><code><span class="typedef"><span class="keyword">type</span> <span class="type">UFWeightQuickUnion</span> struct <span class="container">{
+    <span class="type">UF</span>
+    <span class="title">sz</span> []<span class="title">int</span>
+}</span></span>
+</code></pre><p>当然Init方法也要做相应的修改：</p>
+<pre><code>func (<span class="keyword">u</span> *UFWeightQuickUnion) Init(<span class="keyword">n</span> int) {
+    <span class="keyword">u</span>.<span class="keyword">count</span> = <span class="keyword">n</span>
+    <span class="keyword">u</span>.id = make([]int, 0, <span class="keyword">n</span>)
+    <span class="keyword">u</span>.sz = make([]int, 0, <span class="keyword">n</span>)
+    <span class="keyword">for</span> i := 0; i &lt; <span class="keyword">n</span>; i++ {
+        <span class="keyword">u</span>.id = <span class="keyword">append</span>(<span class="keyword">u</span>.id, i)
+        <span class="keyword">u</span>.sz = <span class="keyword">append</span>(<span class="keyword">u</span>.sz, 1)
+    }
+}
+</code></pre><p>具体归并两个分量时，首先判断分量p与q含有节点数的多少，再将节点数少的分量归并至节点数多的分量，具体做法如下：</p>
+<pre><code>func (<span class="keyword">u</span> *UFWeightQuickUnion) Union(p int, q int) {
+    pRoot := <span class="keyword">u</span>.Find(p)
+    qRoot := <span class="keyword">u</span>.Find(q)
+
+    <span class="keyword">if</span> pRoot == qRoot {
+        <span class="literal">return</span>
+    }
+
+    <span class="keyword">if</span> <span class="keyword">u</span>.sz[pRoot] &lt; <span class="keyword">u</span>.sz[qRoot] {
+        <span class="keyword">u</span>.id[pRoot] = qRoot
+        <span class="keyword">u</span>.sz[qRoot] = <span class="keyword">u</span>.sz[qRoot] + <span class="keyword">u</span>.sz[pRoot]
+    } <span class="keyword">else</span> {
+        <span class="keyword">u</span>.id[qRoot] = pRoot
+        <span class="keyword">u</span>.sz[pRoot] = <span class="keyword">u</span>.sz[pRoot] + <span class="keyword">u</span>.sz[qRoot]
+    }
+    <span class="keyword">u</span>.<span class="keyword">count</span>--
+}
+</code></pre><p>当然，Find方法与Quick-Union保持一样：</p>
+<pre><code><span class="keyword">func</span> (u *UFWeightQuickUnion) Find(p <span class="typename">int</span>) <span class="typename">int</span> {
+    <span class="keyword">for</span> p != u.id[p] {
+        p = u.id[p]
+    }
+    <span class="keyword">return</span> p
+}
+</code></pre><p>那么，加权Quick-Union算法到底效率如何呢？首先，我们可以分析得到分量所形成的树高度最大为logN,那么，Find方法访问数组的次数为1到logN次。所以，Union方法访问数组的次数相应为3到2logN+1次，即最多2logN+1~logN次。</p>
+<p>可见，<strong>加权Quick-Union算法解决之前提出的问题时，最多访问数组NlogN次</strong>，完全可以用于现实项目。</p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2014/12/08//2014/12-08-0.html/" itemprop="url">
+                案例研究：union-find算法(三) -- quick-union算法
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於
+          <time itemprop="dateCreated" datetime="2014-12-08T00:00:00+08:00" content="12月 8 2014">
+            12月 8 2014
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分類於
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a></span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><p><strong>Quick-Union算法</strong>，就是提高Union方法的速度。在<a href="https://zhujiefirst.github.io/2014/12-07-0.html" target="_blank" rel="external">Quick-Find算法</a>中，Union方法每次调用均会遍历id[ ]数组，那么如何才能提高Union方法的效率呢。当然，这里我们先要赋予数组id[ ]不同的意义。Quick-Find中，id[i]表示第i个触点所有的分量为id[i]的值。而这里，<strong>id[i]的值表示与触点i具有相同分量的触点，即触点i和触点id[i]具有相同的分量</strong>。</p>
+<p>当然，id[i]必须构成一棵树，当达到根节点时，id[i]=i，即触点i的同一分量的下一个触点为其本身。</p>
+<p>根据id[ ]数组被赋予的新的意义，Find方法也需要修改。具体实现如下：</p>
+<pre><code><span class="keyword">func</span> (u *UFQuickUnion) Find(p <span class="typename">int</span>) <span class="typename">int</span> {
+    <span class="keyword">for</span> p != u.id[p] {
+        p = u.id[p]
+    }
+    <span class="keyword">return</span> p
+}
+</code></pre><p>上述代码就是找到触点p所在树的根节点，其根节点触点的索引即为我们所需的分量值。</p>
+<p>另外，Union方法也修改为如下：</p>
+<pre><code>func (<span class="keyword">u</span> *UFQuickUnion) Union(p int, q int) {
+    pRoot := <span class="keyword">u</span>.Find(p)
+    qRoot := <span class="keyword">u</span>.Find(q)
+
+    <span class="keyword">if</span> pRoot == qRoot {
+        <span class="literal">return</span>
+    }
+
+    <span class="keyword">u</span>.id[pRoot] = qRoot
+    <span class="keyword">u</span>.<span class="keyword">count</span>--
+}
+</code></pre><p>先通过Find方法找到触点p和触点q所在的分量值，然后直接修改触点p所有的分量值与触点q相同即可，即将触点p的下一个触点设置为触点q。</p>
+<p>通过Find方法和Union方法的代码展示，<strong>Quick-Union算法看起来比Quick-Find算法更快</strong>，因为它不需要遍历整个id[ ]数组。那么，事实上呢？</p>
+<p>首先我们来看Find方法。在最好的情况下，Find方法只需要一次数组访问即可(触点p恰巧为树的根节点)；在最坏的情况下，Find方法需要2N-1次数组访问(触点p恰巧在树叶上且所有触点组成了一个链表)，其中条件判断语句N次，赋值语句N-1次。</p>
+<p>然后，我们再分析下Union方法。在Union方法中，调用了两次Find方法，最后归并分量时又对数组进行了1次访问。所以，Union方法在最好的情况下，需要访问id[ ]数组3次，而在最坏的情况下，需要访问数组2N-1次。</p>
+<p>因此，假设我们使用Quick-Union算法来解决动态连通性问题并且最后只得到了一个连通分量，那么至少需要调用N-1次Union方法，即在最好的情况下，至少需要访问(N-1)<em>3 ~ N次数组，而在最坏的情况下，需要调用(N-1)</em>(2N-1) ~ N^2次数组。所以，同样可以推断，Quick-Union算法在最好的情况下，是线性复杂度的，在最坏的情况下，是平方复杂度的。</p>
+<p>可见，<strong>Quick-Union算法的复杂度是在最好情况下是线性级别的，在最坏情况下是平方级别的</strong>。所以，Quick-Find算法可以作为Quick-Find算法的改进。那么，Quick-Union算法是不是还有改进的余地？当然有。请移步<a href="https://zhujiefirst.github.io/2014/12-12-0.html" target="_blank" rel="external">加权Quick-Union算法</a>。</p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2014/12/07//2014/12-07-0.html/" itemprop="url">
+                案例研究：union-find算法(二) -- quick-find算法
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於
+          <time itemprop="dateCreated" datetime="2014-12-07T00:00:00+08:00" content="12月 7 2014">
+            12月 7 2014
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分類於
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a></span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><p>所谓<strong>Quick-Find算法</strong>，顾名思义就是Find实现是Quick版本，而相对于Union，则显得不那么Quick了。当然，这是通过结论推导原因，放在这里是十分牵强的。所以，还是正常思维，如果要实现这个功能，当然，暴力算法是不可少的。而恰巧，这个暴力算法正好就是<strong>Quick-Find算法</strong>。</p>
+<p>首先，我们考虑Find的实现。寻找触点p对应的分量，由于id[ ]存放着各触点对应的分量，所以简单粗暴的id[p]就是触点p对应的分量。所以，Find的实现如下：</p>
+<pre><code><span class="keyword">func</span> (u *UFQuickFind) Find(p <span class="typename">int</span>) <span class="typename">int</span> {
+    <span class="keyword">return</span> u.id[p]
+}
+</code></pre><p>其次，再来考虑Union的实现。由于id[ ]存放着各触点对应的分量，而Union的功能就是把触点p和触点q的分量统一，即id[p]==id[q]即可，当然，原来与p(q)处于同一分量的触点也满足上式即可。所以，具体实现可参考如下：</p>
+<pre><code>func (<span class="keyword">u</span> *UFQuickFind) Union(p int, q int) {
+    pID := <span class="keyword">u</span>.Find(p)
+    qID := <span class="keyword">u</span>.Find(q)
+
+    <span class="keyword">if</span> pID == qID {
+        <span class="literal">return</span>
+    }
+
+    <span class="keyword">for</span> i := 0; i &lt; len(<span class="keyword">u</span>.id); i++ {
+        <span class="keyword">if</span> <span class="keyword">u</span>.id[i] == pID {
+            <span class="keyword">u</span>.id[i] = qID
+        }
+    }
+
+    <span class="keyword">u</span>.<span class="keyword">count</span>--
+}
+</code></pre><p>分析上述Union方法的实现，简单来说就是触点p和触点q的分量如果不统一，则遍历所有触点，将原来属于触点p的分量的所有触点，全部统一成触点q的分量，如此做法即可达到触点p和触点q的分量统一，同时原先与触点p属于相同分量的其他触点依然保持处于相同分量的条件。</p>
+<p>那么，我们来分析下Quick-Find算法是否符合我们所说的，当问题规模增大时，解决问题所花的时间是否我们依然可以接受。</p>
+<p>首先，我们来看下Find方法。Find方法的速度显然是很快的，因为它只需要访问id[ ]数组一次。<br>那么，Union方法呢。很明显，Union方法的实现并不是很理想，因为每一次调用Union方法均要遍历一次id[ ]数组。我们可以具体算一下Union方法到底访问id[ ]数组多少次。归并两个分量操作首先会调用两次Find方法，而每个Find方法都会访问id[ ]数组一次，所以Union方法最起码要访问id[ ]数组2次。然后，Union方法在需要归并的时候，必须遍历id[ ]数组一次，所以Union方法最起码要访问id[ ]数组2+N次，其中N为id[ ]数组的大小。最后，检查id[ ]数组时，如果触点的分量需要改变时，则又需要访问id[ ]数组一次，所以还要加上1 ~ N-1次数组访问（至少有一个触点是q,一个触点是p)。综上所述，归并两个分量的Union方法访问数组的次数在N+3与2N+1之间。<br>单次调用Union方法其实我们并没有感觉该方法复杂度有多高（线性，id[ ]数组的访问为耗时单元），但是当我们具体处理问题时，比如我们用Quick-Find算法来解决之前说的动态连通性问题时，假设最后只得到了一个连通分量，那么根据上面的分析，我们<strong>至少需要访问数组(N+3)(N+1) ~ N^2次</strong>。因此，可以猜想，Quick-Find算法的复杂度是平方级别的（在最后得到少数连通分量的情况下，比如分析时的1条连通分量）。  </p>
+<p>可见，<strong>Quick-Find算法的复杂度是平方级别的</strong>，即当问题规则增长为原来的2倍时，计算所需的时间则为原来的2^2(4)倍。所以，Quick-Find算法并不是十分优秀。</p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2014/12/01//2014/12-01-0.html/" itemprop="url">
+                案例研究：union-find算法(一) -- 问题
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於
+          <time itemprop="dateCreated" datetime="2014-12-01T00:00:00+08:00" content="12月 1 2014">
+            12月 1 2014
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分類於
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a></span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><p><strong>问题描述</strong>:<br>问题的输入是一列整数对，其中每个整数都表示一个某种类型的对象，一对整数p, q可以被理解为”p和q是相连的”。假设”相连”是一种等价关系，这就意味着相连满足以下3个性质： </p>
+<ul>
+<li><strong>自反性</strong>: p和p是相连的。 </li>
+<li><strong>对称性</strong>: 如果p和q是相连的，则q和p也是相连的。 </li>
+<li><strong>传递性</strong>: 如果p和q是相连的，而且q和r也是相连的，则p和r也是相连的。 </li>
+</ul>
+<p>等价关系能够将对象分为多个等价类。在这里，当且仅当两个对象相连时它们才属于同一个等价类。现在寻找这样一种解决方法，过滤序列中所有无意义的整数对，即输入整数对为p,q时，如果已知的所有整数对都不能说明p和q是相连的话，则认为p，q是不相连的，并将p，q写入到输入中，否则认为p，q已经是相连的，应该抛弃这个整数对。 </p>
+<p><strong>问题解法</strong>:<br>当然，这个问题如果用在问题规则增大的情况下，想要快速实现这个功能将会愈发困难，所以需要某种算法，将问题简单化，即使在问题规则增大的时候，在可接受的时间范围内等到结果。 </p>
+<p>就目前对问题的描述，由于没有具体业务的渗入，所以我们将以网络方面的术语对问题相关变量进行命名。这里，我们将对象称之为<strong>触点</strong>，将整数对称为<strong>连接</strong>，而将等价类称为连通分量，简称<strong>分量</strong>。 </p>
+<p><strong>众所周知，数据结构的性质将直接影响到算法的效率</strong>。所以我们用int类型的数组id[ ]直接表示所有对象它所在的分量值，如id[i](假设其值为I)表示对象i所在的分量值为I。因此，我们可以这样定义保存必要信息的struct: </p>
+<pre><code><span class="keyword">type</span> UF <span class="keyword">struct</span> {
+    id    []<span class="typename">int</span>     <span class="comment">//  各触点包含分量信息 </span>
+    count <span class="typename">int</span>       <span class="comment">//  包含分量总数</span>
+}
+</code></pre><p>当然，接口也可以事先定义： </p>
+<pre><code><span class="keyword">type</span> UFI <span class="keyword">interface</span> {
+    Init(n <span class="typename">int</span>)                         <span class="comment">// 初始化</span>
+    Union(p <span class="typename">int</span>, q <span class="typename">int</span>)                 <span class="comment">// 连通触点p和q</span>
+    Find(p <span class="typename">int</span>) <span class="typename">int</span>                     <span class="comment">// 寻找触点p对应的分量</span>
+    Connected(find <span class="keyword">func</span>(<span class="typename">int</span>)<span class="typename">int</span>, p <span class="typename">int</span>, q <span class="typename">int</span>) <span class="typename">bool</span>         
+                                        <span class="comment">// 检查触点p和q是否连通</span>
+    Count() <span class="typename">int</span>                         <span class="comment">// 分量总数</span>
+}
+</code></pre><p>首先，我们假设一开始有N个触点，每个触点都构成了一个只包含有它自己的分量，因此可以将id[i]的值初始化为i，具体Init方法如下： </p>
+<pre><code>func (<span class="keyword">u</span> *UF) Init(<span class="keyword">n</span> int) {
+    <span class="keyword">u</span>.<span class="keyword">count</span> = <span class="keyword">n</span>
+    <span class="keyword">u</span>.id = make([]int, 0, <span class="keyword">n</span>)
+    <span class="keyword">for</span> i := 0; i &lt; <span class="keyword">n</span>; i++ {
+        <span class="keyword">u</span>.id = <span class="keyword">append</span>(<span class="keyword">u</span>.id, i)
+    }
+}
+</code></pre><p>当然，返回当前分量总数和检查触点是否连通都比较直接，如下： </p>
+<pre><code><span class="func"><span class="keyword">func</span> <span class="params">(u *UF)</span></span> <span class="type">Count</span>() int {
+    <span class="keyword">return</span> u.<span class="built_in">count</span>
+}
+
+<span class="func"><span class="keyword">func</span> <span class="params">(u *UF)</span></span> <span class="type">Connected</span>(<span class="built_in">find</span> <span class="func"><span class="keyword">func</span><span class="params">(int)</span></span>int, p int, q int) bool {
+    <span class="keyword">return</span> <span class="built_in">find</span>(p) == <span class="built_in">find</span>(q)
+}
+</code></pre><p>那么, 具体算法事实上就是剩下两个接口，即Union和Find的不同实现了。 </p>
+<p>下面就是Union和Find不同实现产生的几种不同算法：  </p>
+<ol>
+<li><a href="https://zhujiefirst.github.io/2014/12-07-0.html" target="_blank" rel="external">Quick-Find算法</a>  </li>
+<li><a href="https://zhujiefirst.github.io/2014/12-08-0.html" target="_blank" rel="external">Quick-Union算法</a>    </li>
+<li><a href="https://zhujiefirst.github.io/2014/12-12-0.html" target="_blank" rel="external">加权Quick-Union算法</a>  </li>
+</ol>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2014/11/20//2014/11-20-0.html/" itemprop="url">
+                Golang性能分析工具
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於
+          <time itemprop="dateCreated" datetime="2014-11-20T00:00:00+08:00" content="11月 20 2014">
+            11月 20 2014
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分類於
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/golang/" itemprop="url" rel="index"><span itemprop="name">golang</span></a></span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><p>作为一名合格的开发人员，对自己开发程序的性能分析是必不可少的技能。c++可以采用gperftools进行性能分析，那么go呢？是否也有同样逼格的工具？当当当当~当然有，她就是pprof!</p>
+<p>pprof是go自带的性能分析工具，当然她优雅，美丽，易操作。see~</p>
+<pre><code>package main
+
+<span class="built_in">import</span> <span class="params">(
+    <span class="string">"os"</span>
+    <span class="string">"runtime/pprof"</span>
+)</span>
+
+func main<span class="params">()</span> {
+    f, _ := os.Create<span class="params">(<span class="string">"profile_file"</span>)</span>
+    pprof.StartCPUProfile<span class="params">(f)</span>     <span class="comment">// 开始cpu profile，结果写到文件f中</span>
+    defer pprof.StopCPUProfile<span class="params">()</span> <span class="comment">// 结束profile</span>
+
+    doSomething<span class="params">()</span>;
+}
+</code></pre><p>上述程序具体鄙人就不解释了。运行app，生成profile_file文件，直接采用go tool pprof进行分析。</p>
+<p>更多信息，可以参见<a href="http://golang.org/pkg/net/http/pprof/" target="_blank" rel="external">go官方文档</a>。</p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2014/11/18//2014/11-18-0.html/" itemprop="url">
+                投掷色子10次，所投点数总数为50点的可能性是多少种
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於
+          <time itemprop="dateCreated" datetime="2014-11-18T00:00:00+08:00" content="11月 18 2014">
+            11月 18 2014
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分類於
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a></span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><p><strong>问</strong>：投掷色子10次，所投点数总数为50点的可能性是多少种？</p>
+<p>这是道经典的面试问题，当然，面试时可能让你编程实现，也可能用数学知识做答。这里我们就从这两方面分别解析下如何破题。</p>
+<p><strong>一、编程实现</strong><br>事实上，编程解决这题目着实不麻烦。首先我们定义一个过程f(x,y)表示投掷色子x次，所投点数为y点的可能性种数。分析投色子的过程，由于投掷一次色子可能的点数为1~6点,不难发现如下公式：</p>
+<pre><code><span class="function"><span class="title">f</span><span class="params">(x,y)</span></span>=<span class="function"><span class="title">f</span><span class="params">(x-<span class="number">1</span>,y-<span class="number">1</span>)</span></span>+<span class="function"><span class="title">f</span><span class="params">(x-<span class="number">1</span>,y-<span class="number">2</span>)</span></span>+<span class="function"><span class="title">f</span><span class="params">(x-<span class="number">1</span>,y-<span class="number">3</span>)</span></span>+<span class="function"><span class="title">f</span><span class="params">(x-<span class="number">1</span>,y-<span class="number">4</span>)</span></span>+<span class="function"><span class="title">f</span><span class="params">(x-<span class="number">1</span>,y-<span class="number">5</span>)</span></span>+<span class="function"><span class="title">f</span><span class="params">(x-<span class="number">1</span>,y-<span class="number">6</span>)</span></span>
+</code></pre><p>而f(x,y)在当6<em>xy时，值为0，当6</em>x=y时，值为1，当x=y时，值为1。<br>到这里，其实已经可以用递归解决这个问题了，代码如下：</p>
+<pre><code><span class="comment">// 投times次数色子，得到points点数，有多少种可能投法</span>
+func ThrowDice(<span class="keyword">times</span> <span class="keyword">int</span>, points <span class="keyword">int</span>) <span class="keyword">int</span> {
+    <span class="keyword">if</span> <span class="keyword">times</span>*MaxPoint &lt; points {
+        <span class="keyword">return</span> <span class="number">0</span>
+    }
+    <span class="keyword">if</span> <span class="keyword">times</span>*MaxPoint == points {
+        <span class="keyword">return</span> <span class="number">1</span>
+    }
+    <span class="keyword">if</span> <span class="keyword">times</span>*MinPoint &gt; points {
+        <span class="keyword">return</span> <span class="number">0</span>
+    }
+    <span class="keyword">if</span> <span class="keyword">times</span>*MinPoint == points {
+        <span class="keyword">return</span> <span class="number">1</span>
+    }
+    <span class="keyword">if</span> <span class="keyword">times</span> == <span class="number">1</span> {
+        <span class="keyword">return</span> <span class="number">1</span>
+    }
+    nextTimes := <span class="keyword">times</span> - <span class="number">1</span>
+    <span class="keyword">return</span> ThrowDice(nextTimes, points-OnePoint) + ThrowDice(nextTimes, points-TwoPoint) + ThrowDice(nextTimes, points-ThreePoint) + ThrowDice(nextTimes, points-FourPoint) + ThrowDice(nextTimes, points-FivePoint) + ThrowDice(nextTimes, points-SixPoint)
+}
+</code></pre><p><strong>二、数学实现</strong><br>这个问题的数学解法事实上用组合数学的知识很容易解决。</p>
+<p>首先，投一次色子的过程我们可以用一多项式表示：<strong>x+x^2+x^3+x^4+x^5+x^6</strong>,具体各项的系数为投掷的可能种类数，如上述多项式中x^5表示投掷一次色子，得到点数为5的可能种类数为1。</p>
+<p>既然有这种表示方法，原来投掷10次色子的问题用多项式表示如下：<strong>(x+x^2+x^3+x^4+x^5+x^6)^10</strong>。 原来问题的解即为多项式中x^50的系数。当然，这个多项式可以用数学公式解出来，我们就直接用python的sympy库计算，得出解为85225次。  </p>
+</span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2014/11/16//2014/11-16-0.html/" itemprop="url">
+                如何生成不重复随机数
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於
+          <time itemprop="dateCreated" datetime="2014-11-16T00:00:00+08:00" content="11月 16 2014">
+            11月 16 2014
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分類於
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a></span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody"><p>如何生成不重复随机数？</p>
+<p>当然，简单粗暴的方法永远是可行的。生成一个随机数，在已生成的随机数中遍历，若未在其中，则归入随机数数组中，否则重新生成一随机数再重复此过程。</p>
+<p>具体代码可参照如下：</p>
+<pre><code><span class="keyword">N</span> = 10
+na := make([]int32, 0, <span class="keyword">N</span>)
+<span class="keyword">for</span> {
+    <span class="keyword">n</span> := rand.Int31()
+    <span class="keyword">for</span> _, v := <span class="keyword">range</span> na {
+        <span class="keyword">if</span> <span class="keyword">n</span> == v {
+            <span class="keyword">continue</span>
+        }
+    }
+    na = <span class="keyword">append</span>(na, <span class="keyword">n</span>)
+    <span class="keyword">if</span> len(na) == <span class="keyword">N</span> {
+        <span class="keyword">break</span>
+    }
+}
+<span class="keyword">log</span>.Println(na)
+</code></pre><p>当然，这个方法很很黄很暴力。首先，此方法复杂度为N^2,在生成随机数量较小的情况下还可以接受，但随着问题规模的增大，此法顿时露出其狰狞的面孔，指数复杂度可不是盖的。其次，此法有个极端情况，那就是若每次生成的随机数都在之前的生成数组中，那不是个死循环。oh,no.</p>
+<p>那么没有其他方法了吗？额，可以牺牲空间来实现这个功能。首先，预先生成好所有随机数的可能范围，然后再每次随机一个数，取该数所指的位置的数将其做为新生成的数, 最后将该位置的数删除以确保取到不重复的随机数。代码如下：</p>
+<pre><code><span class="keyword">N</span> = 10
+na := make([]int, 0, <span class="keyword">N</span>)
+pna := make([]int, 0, 2*<span class="keyword">N</span>)
+<span class="keyword">for</span> i := 0; i &lt; 2*<span class="keyword">N</span>; i++ {
+    pna = <span class="keyword">append</span>(pna, i)
+}
+<span class="keyword">for</span> i := 0; i &lt; <span class="keyword">N</span>; i++ {
+    p := rand.Intn(2*<span class="keyword">N</span> - i)
+    na = <span class="keyword">append</span>(na, pna[p])
+    pna = <span class="keyword">append</span>(pna[:p], pna[p+1:]...)
+}
+<span class="keyword">log</span>.Println(na)
+</code></pre><p>这里，我们用slice存放预先生成的数，事实上存在一定的性能问题。slice的随机读虽然性能比较高，但是从slice中删除元素性能就不太理想了。如果想解决删除元素的性能问题，我们可以采用list代替slice,上述代码转换成如下：</p>
+<pre><code><span class="keyword">N</span> = 10
+na := make([]int, 0, <span class="keyword">N</span>)
+pna := <span class="keyword">list</span>.New()
+<span class="keyword">for</span> i := 0; i &lt; 2*<span class="keyword">N</span>; i++ {
+    pna.PushBack(i)
+}
+<span class="keyword">for</span> i := 0; i &lt; <span class="keyword">N</span>; i++ {
+    p := rand.Intn(2*<span class="keyword">N</span> - i)
+    na = <span class="keyword">append</span>(na, func(<span class="keyword">l</span> *<span class="keyword">list</span>.<span class="keyword">List</span>, pos int) int {
+        <span class="keyword">e</span> := <span class="keyword">l</span>.Front()
+        <span class="keyword">for</span> j := 0; j &lt; pos; j++ {
+            <span class="keyword">e</span> = <span class="keyword">e</span>.Next()
+        }
+        <span class="keyword">l</span>.Remove(<span class="keyword">e</span>)
+        <span class="keyword">return</span> <span class="keyword">e</span>.Value.(int)
+    }(pna, p))
+}
+<span class="keyword">log</span>.Println(na)
+</code></pre><p>但是，删除元素的性能问题虽然已经解决，但是list的随机读性能便成大问题了。所以上述方法并没有解决根本问题。</p>
+<p>让我们想想，既然slice的随机读性能高，但是删除元素性能不理想，索性我们就不删除元素，只是将其移动至最后，将其排除在下一轮随机选择之外，代码如下：</p>
+<pre><code><span class="keyword">N</span> = 10
+na := make([]int, 0, <span class="keyword">N</span>)
+pna := make([]int, 0, 2*<span class="keyword">N</span>)
+<span class="keyword">for</span> i := 0; i &lt; 2*<span class="keyword">N</span>; i++ {
+    pna = <span class="keyword">append</span>(pna, i)
+}
+<span class="keyword">for</span> i := 0; i &lt; <span class="keyword">N</span>; i++ {
+    p := rand.Intn(2*<span class="keyword">N</span> - i)
+    na = <span class="keyword">append</span>(na, pna[p])
+    pna[p], pna[2*<span class="keyword">N</span>-i-1] = pna[2*<span class="keyword">N</span>-i-1], pna[p]
+}
+<span class="keyword">log</span>.Println(na)
+</code></pre><p>至此，我们得到了一个牺牲空间，但是性能上可接受，在最坏情况下又不会进入死循环的无重复随机数生成方法。以上4种方法具体性能如下（仅供参考）:</p>
+<pre><code><span class="label">forceMethod:</span><span class="number">94.0661</span>ms
+<span class="label">arrayMethod:</span><span class="number">42.0317</span>ms
+<span class="label">listMethod:</span><span class="number">302.211</span>ms
+<span class="label">betterMethod:</span><span class="number">1.0043</span>ms
+</code></pre></span>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/">&laquo;</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">&raquo;</a>
   </nav>
 
-</div>
-      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
 
-<div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
-<aside class="clearfix">
+            </div>
 
+            
+
+            
+        </div>
+
+        
   
-  <div class="archiveslist">
-    <p class="asidetitle"><a href="/archives">归档</a></p>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/02/">February 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/01/">January 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">December 2014</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">November 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">July 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/07/">July 2013</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/06/">June 2013</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/03/">March 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/09/">September 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/12/">December 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/10/">October 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/06/">June 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/05/">May 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/09/">September 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/08/">August 2010</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/07/">July 2010</a><span class="archive-list-count">1</span></li></ul>
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
   </div>
 
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
 
-  
-<div class="categorieslist">
-	<p class="asidetitle">分类</p>
-		<ul>
-		
-			<li><a href="/categories/c-c/" title="c/c++">c/c++<sup>5</sup></a></li>
-		
-			<li><a href="/categories/golang/" title="golang">golang<sup>2</sup></a></li>
-		
-			<li><a href="/categories/lisp/" title="lisp">lisp<sup>1</sup></a></li>
-		
-			<li><a href="/categories/lua/" title="lua">lua<sup>1</sup></a></li>
-		
-			<li><a href="/categories/服务器编程/" title="服务器编程">服务器编程<sup>6</sup></a></li>
-		
-			<li><a href="/categories/杂感/" title="杂感">杂感<sup>5</sup></a></li>
-		
-			<li><a href="/categories/游戏开发/" title="游戏开发">游戏开发<sup>4</sup></a></li>
-		
-			<li><a href="/categories/算法/" title="算法">算法<sup>16</sup></a></li>
-		
-			<li><a href="/categories/编程思维/" title="编程思维">编程思维<sup>3</sup></a></li>
-		
-			<li><a href="/categories/设计模式/" title="设计模式">设计模式<sup>2</sup></a></li>
-		
-		</ul>
-</div>
+      
 
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/default_avatar.jpg" alt="zhujiefirst" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">zhujiefirst</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">学习总结 思考感悟 知识管理</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">45</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
 
-  
-<div class="tagslist">
-	<p class="asidetitle">标签</p>
-		<ul class="clearfix">
-		
-			<li><a href="/tags/openGL/" title="openGL">openGL<sup>4</sup></a></li>
-		
-			<li><a href="/tags/pprof/" title="pprof">pprof<sup>1</sup></a></li>
-		
-			<li><a href="/tags/union-find/" title="union-find">union-find<sup>4</sup></a></li>
-		
-			<li><a href="/tags/代码质量/" title="代码质量">代码质量<sup>3</sup></a></li>
-		
-			<li><a href="/tags/元编程/" title="元编程">元编程<sup>1</sup></a></li>
-		
-			<li><a href="/tags/内存管理/" title="内存管理">内存管理<sup>1</sup></a></li>
-		
-			<li><a href="/tags/基础/" title="基础">基础<sup>1</sup></a></li>
-		
-			<li><a href="/tags/小技巧/" title="小技巧">小技巧<sup>1</sup></a></li>
-		
-			<li><a href="/tags/性能/" title="性能">性能<sup>6</sup></a></li>
-		
-			<li><a href="/tags/排序/" title="排序">排序<sup>8</sup></a></li>
-		
-			<li><a href="/tags/架构/" title="架构">架构<sup>1</sup></a></li>
-		
-			<li><a href="/tags/查找/" title="查找">查找<sup>1</sup></a></li>
-		
-			<li><a href="/tags/网络I-O/" title="网络I/O">网络I/O<sup>1</sup></a></li>
-		
-			<li><a href="/tags/设计/" title="设计">设计<sup>7</sup></a></li>
-		
-			<li><a href="/tags/面向对象/" title="面向对象">面向对象<sup>2</sup></a></li>
-		
-			<li><a href="/tags/面试题/" title="面试题">面试题<sup>4</sup></a></li>
-		
-			<li><a href="/tags/高阶函数/" title="高阶函数">高阶函数<sup>1</sup></a></li>
-		
-		</ul>
-</div>
+          <div class="site-state-item site-state-categories">
+            
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">分類</span>
+              
+          </div>
 
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-name">標籤</span>
+              </a>
+          </div>
 
-</aside>
-</div>
-    </div>
-    <footer><div id="footer" >
-	
-	<div class="line">
-		<span></span>
-		<div class="author"></div>
-	</div>
-	
-	
-	<section class="info">
-		<p> Hello world! I&#39;m zhujiefirst in Tencent. <br/>
-			从小我就有个梦想，就是当一名合格的程序员。我不是码畜，我为自己带盐！</p>
-	</section>
-	 
-	<div class="social-font clearfix">
-		
-		<a href="http://weibo.com/2421642590" target="_blank" title="weibo"></a>
-		
-		
-		<a href="https://twitter.com/Jay1002008" target="_blank" title="twitter"></a>
-		
-		
-		<a href="https://github.com/zhujiefirst" target="_blank" title="github"></a>
-		
-		
-		
-	</div>
-		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2015 
-		
-		<a href="http://codingforever.com" target="_blank" title="zhujiefirst">zhujiefirst</a>
-		
-		</p>
-</div>
-</footer>
-    <script src="/js/jquery-2.1.0.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.navbar').click(function(){
-    $('header nav').toggleClass('shownav');
-  });
-  var myWidth = 0;
-  function getSize(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-  };
-  var m = $('#main'),
-      a = $('#asidepart'),
-      c = $('.closeaside'),
-      o = $('.openaside');
-  $(window).resize(function(){
-    getSize(); 
-    if (myWidth >= 1024) {
-      $('header nav').removeClass('shownav');
-    }else
-    {
-      m.removeClass('moveMain');
-      a.css('display', 'block').removeClass('fadeOut');
-      o.css('display', 'none');
+        </nav>
+
         
-    }
-  });
-  c.click(function(){
-    a.addClass('fadeOut').css('display', 'none');
-    o.css('display', 'block').addClass('fadeIn');
-    m.addClass('moveMain');
-  });
-  o.click(function(){
-    o.css('display', 'none').removeClass('beforeFadeIn');
-    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
-    m.removeClass('moveMain');
-  });
-  $(window).scroll(function(){
-    o.css("top",Math.max(80,260-$(this).scrollTop()));
-  });
-});
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+        <div class="footer-inner">
+            <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhujiefirst</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+        </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+</div>
+
+<script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+  
+  
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.4"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.4"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.4" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/js/search-toggle.js"></script>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        if (CONFIG.sidebar === 'always') {
+            displaySidebar();
+        }
+    });
 </script>
 
 
 
 
+  
+  
+
+  
 
 
 
-  </body>
- </html>
+
+
+
+
+<!-- lazyload -->
+<script type="text/javascript" src="/js/lazyload.js"></script>
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery("#posts img").lazyload({
+            placeholder: "/images/loading.gif",
+            effect: "fadeIn"
+        });
+    });
+</script>
+</body>
+</html>
