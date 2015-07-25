@@ -126,6 +126,14 @@ sky-mobi毕业后辗转来到天堂之一的杭州，就职于“中国移动互
         </li>
       
         
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            <i class="menu-item-icon icon-categories"></i> <br />
+            分類
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             <i class="menu-item-icon icon-archives"></i> <br />
@@ -138,6 +146,14 @@ sky-mobi毕业后辗转来到天堂之一的杭州，就职于“中国移动互
           <a href="/tags" rel="section">
             <i class="menu-item-icon icon-tags"></i> <br />
             標籤
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            <i class="menu-item-icon icon-about"></i> <br />
+            關於
           </a>
         </li>
       
@@ -186,6 +202,10 @@ sky-mobi毕业后辗转来到天堂之一的杭州，就职于“中国移动互
             
               <div class="comments" id="comments">
                 
+                  <div class="ds-thread" data-thread-key="about/index.html"
+                       data-title="About Me" data-url="http://codingforever.com/about/index.html">
+                  </div>
+                
               </div>
             
         </div>
@@ -207,7 +227,7 @@ sky-mobi毕业后辗转来到天堂之一的杭州，就职于“中国移动互
 
       <section class="site-overview">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="/images/default_avatar.jpg" alt="zhujiefirst" itemprop="image"/>
+          <img class="site-author-image" src="/images/avatar.jpg" alt="zhujiefirst" itemprop="image"/>
           <p class="site-author-name" itemprop="name">zhujiefirst</p>
         </div>
         <p class="site-description motion-element" itemprop="description">学习总结 思考感悟 知识管理</p>
@@ -220,10 +240,10 @@ sky-mobi毕业后辗转来到天堂之一的杭州，就职于“中国移动互
           </div>
 
           <div class="site-state-item site-state-categories">
-            
+            <a href="/categories">
               <span class="site-state-item-count">10</span>
               <span class="site-state-item-name">分類</span>
-              
+              </a>
           </div>
 
           <div class="site-state-item site-state-tags">
@@ -295,11 +315,29 @@ sky-mobi毕业后辗转来到天堂之一的杭州，就职于“中国移动互
   
   
     
-    
 
   
+    
+  
 
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"codingforever"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+  	<script src="/js/ua-parser.min.js"></script>
+  	<script src="/js/hook-duoshuo.js"></script>
+  
 
+    
   
   
   <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
@@ -328,6 +366,27 @@ sky-mobi毕业后辗转来到天堂之一的杭州，就职于“中国移动互
     });
 </script>
 
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 
 

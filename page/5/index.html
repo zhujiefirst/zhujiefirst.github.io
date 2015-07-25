@@ -112,6 +112,14 @@
         </li>
       
         
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            <i class="menu-item-icon icon-categories"></i> <br />
+            分類
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             <i class="menu-item-icon icon-archives"></i> <br />
@@ -124,6 +132,14 @@
           <a href="/tags" rel="section">
             <i class="menu-item-icon icon-tags"></i> <br />
             標籤
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            <i class="menu-item-icon icon-about"></i> <br />
+            關於
           </a>
         </li>
       
@@ -185,6 +201,13 @@
 
         
           
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2011/06/04//2011/06-04-0.html/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2011/06/04//2011/06-04-0.html/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
         
       </div>
     </header>
@@ -196,116 +219,17 @@
 
       
         
-          <span itemprop="articleBody"><p> C++语言在数组的支持方面不强其他语言强劲，如FORTRAN、BASIC、甚至在COBOL中可以产生二维数组、三维数组，乃至于n维数组，但你能 C++中这么做吗？有同学不同意了，C++中可以产生维数组啊，int data[2][3]不是吗？但是，如果这样：</p>
-<pre><code><span class="function"><span class="keyword">void</span> <span class="title">processInput</span><span class="params">(<span class="keyword">int</span> dim1, <span class="keyword">int</span> dim2)</span>  
-</span>{  
-     <span class="keyword">int</span> data[dim1][dim2];  
-     ........  
-}
-</code></pre><p>还行吗？C++不允许！</p>
-<p>那么怎么办呢？《more effective c++》中Item 30有详细的介绍，但没有给出具体代码。本人实现了下:</p>
-<pre><code><span class="comment">#include   </span>
-<span class="keyword">using</span> namespace std;  
-<span class="keyword">template</span>  
-class <span class="type">Array2D</span>{  
-public:  
-    <span class="type">Array2D</span>(<span class="type">int</span> realDim1, <span class="type">int</span> realDim2);  
-    ~<span class="type">Array2D</span>();  
-    class <span class="type">Array1D</span>{  
-    public:  
-        <span class="type">Array1D</span>(){};  
-        <span class="type">Array1D</span>(<span class="type">int</span> realDim2);  
-        <span class="type">Array1D</span>&amp; operator=(<span class="keyword">const</span> <span class="type">Array1D</span>&amp; lhs);  
-        ~<span class="type">Array1D</span>();  
-        T&amp; operator[](<span class="type">int</span> index);  
-        <span class="keyword">const</span> T&amp; operator[](<span class="type">int</span> index)<span class="keyword">const</span>;  
-    private:  
-        T* dim2Data;  
-        <span class="type">int</span> dim2;  
-    };  
-    <span class="type">Array1D</span>&amp; operator[](<span class="type">int</span> index);  
-    <span class="keyword">const</span> <span class="type">Array1D</span>&amp; operator[](<span class="type">int</span> index)<span class="keyword">const</span>;  
-private:  
-    <span class="type">int</span> dim1;  
-    <span class="type">Array1D</span>* dim1Data;  
-};  
-<span class="keyword">template</span> 
-typename <span class="type">Array2D</span>::<span class="type">Array1D</span>&amp; <span class="type">Array2D</span>::<span class="type">Array1D</span>::operator=(<span class="keyword">const</span> <span class="type">Array1D</span>&amp; lhs)  
-{  
-    dim2 = lhs.dim2;  
-    dim2Data = new T[dim2];  
-    <span class="keyword">if</span>(dim2Data == <span class="type">NULL</span>)  
-        cout &lt;&lt; <span class="string">"There is no memory!"</span> &lt;&lt; endl;  
-    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; dim2; ++i)  
-        dim2Data[i] = lhs.dim2Data[i];  
-    <span class="keyword">return</span> *this;  
-}  
-<span class="keyword">template</span> 
-<span class="type">Array2D</span>::<span class="type">Array1D</span>::<span class="type">Array1D</span>(<span class="type">int</span> realDim2)  
-:dim2(realDim2)  
-{  
-    dim2Data = new T[dim2];  
-    <span class="keyword">if</span>(dim2Data == <span class="type">NULL</span>)  
-        cout &lt;&lt; <span class="string">"There is no memory!"</span> &lt;&lt; endl;  
-}  
-<span class="keyword">template</span> 
-<span class="type">Array2D</span>::<span class="type">Array2D</span>(<span class="type">int</span> realDim1, <span class="type">int</span> realDim2)  
-:dim1(realDim1)  
-{  
-    typedef typename <span class="type">Array2D</span>::<span class="type">Array1D</span> myType;  
-    dim1Data = new myType[dim1];  
-    <span class="keyword">if</span>(dim1Data == <span class="type">NULL</span>)  
-        cout &lt;&lt; <span class="string">"There is no memory!"</span> &lt;&lt; endl;  
-    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; dim1; ++i)  
-        dim1Data[i] = myType(realDim2); // <span class="keyword">using</span> operator=!  
-}  
-<span class="keyword">template</span> 
-<span class="type">Array2D</span>::<span class="type">Array1D</span>::~<span class="type">Array1D</span>()  
-{  
-    delete []dim2Data;  
-}  
-<span class="keyword">template</span> 
-<span class="type">Array2D</span>::~<span class="type">Array2D</span>()  
-{  
-    delete []dim1Data;  
-}  
-<span class="keyword">template</span> 
-T&amp; <span class="type">Array2D</span>::<span class="type">Array1D</span>::operator [](<span class="type">int</span> index)  
-{  
-    <span class="keyword">return</span> dim2Data[index];  
-}  
-<span class="keyword">template</span> 
-<span class="keyword">const</span> T&amp; <span class="type">Array2D</span>::<span class="type">Array1D</span>::operator [](<span class="type">int</span> index)<span class="keyword">const</span> 
-{  
-    <span class="keyword">return</span> dim2Data[index];  
-}  
-<span class="keyword">template</span> 
-typename <span class="type">Array2D</span>::<span class="type">Array1D</span>&amp; <span class="type">Array2D</span>::operator [](<span class="type">int</span> index)  
-{  
-    <span class="keyword">return</span> dim1Data[index];  
-}  
-<span class="keyword">template</span> 
-<span class="keyword">const</span> typename <span class="type">Array2D</span>::<span class="type">Array1D</span>&amp; <span class="type">Array2D</span>::operator[](<span class="type">int</span> index)<span class="keyword">const</span> 
-{  
-    <span class="keyword">return</span> dim1Data[index];  
-}  
-<span class="type">int</span> main()  
-{  
-    <span class="type">Array2D</span> data(<span class="number">2</span>, <span class="number">3</span>);  
-    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; ++i)  
-        <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>; j &lt; <span class="number">3</span>; ++j)  
-            data[i][j] = j;  
-    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; ++i)  
-        <span class="keyword">for</span>(<span class="type">int</span> j = <span class="number">0</span>; j &lt; <span class="number">3</span>; ++j)  
-            cout &lt;&lt; data[i][j] &lt;&lt; endl;  
-    <span class="keyword">return</span> <span class="number">0</span>;  
-}
-</code></pre><p>当然，其中也遇到了一些困难，现整理如下：</p>
-<p><strong>FIRST</strong>，代码第27行中，typename Array2D<t>::Array1D&amp;，关键字typename有什么作用？</t></p>
-<p>typename有双重意义，具体参见《effective c++》 Item 42。这里只由于其第二重意义。观察Array2D<t>::Array1D，其类型取决于template参数T。template内出现 的名称如果相依于某个template参数，称之为从属名称。如果从属名称在class内呈嵌套状，则称之为嵌套从属名称。而嵌套从属名称有可能导致解析 困难，所以必须在其前加上关键字typename表示其是一个类型。</t></p>
-<p><strong>SECOND</strong>,代码50~55读者是否感到有些奇怪。为什么不写成dim1Data = new myType[dim1](realDim2);呢？事实上，该语句是不能通过编译的。因为这不符合C++的语法。那么只能用点小聪明代替了。这里还要注 意就是代码行62调用的是类赋值函数，刚开始笔者也在此处吃了亏。</p>
-<p>总之，学习C++之路还是很漫长啊。</p>
-</span>
+          <span itemprop="articleBody">
+            
+             C++语言在数组的支持方面不强其他语言强劲，如FORTRAN、BASIC、甚至在COBOL中可以产生二维数组、三维数组，乃至于n维数组，但你能 C++中这么做吗？有同学不同意了，C++中可以产生维数组啊，int data[2][3]不是吗？但是，如果这样：
+void processInput(in
+            ...
+          </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2011/06/04//2011/06-04-0.html/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -366,6 +290,13 @@ typename <span class="type">Array2D</span>::<span class="type">Array1D</span>&am
 
         
           
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2011/05/29//2011/05-29-0.html/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2011/05/29//2011/05-29-0.html/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
         
       </div>
     </header>
@@ -377,12 +308,17 @@ typename <span class="type">Array2D</span>::<span class="type">Array1D</span>&am
 
       
         
-          <span itemprop="articleBody"><p>断断续续读完了《推理的迷宫》一书，这是一本难得的好书。看到书的副标题，“悖论，谜题，及知识的脆弱性”，这本书就完全吸引了我。</p>
-<p>第一章就让我这个基本是“悖论盲”的人为之一惊。“缸中之脑”，对，我可能真的是不存在的，只是实验室里的一颗大脑。我这颗大脑不停的接收各种实验师给我 的电信号刺激，让我觉得我活在现在这个世界上，早晨起床，中午吃饭……。当然，这个世界也有可能存在的，我并不只是一颗大脑。从小就接受神奇国度的应试教 育，基本没有接触过这样的知识熏陶，我感到很兴奋。</p>
-<p>当享受到“亨普尔的乌鸦”这章时，我突然觉得我所掌握的各种知识的脆弱性了。一直认为乌鸦嘛，当然是黑色的嘛，有不是黑色的乌鸦吗？但是，我们获得知识只 有两种方法，一种是归纳，一种是演绎。而“所有乌鸦都是黑色的”这个命题就是由归纳得来的。而归纳这个方法值得信任吗？谁能保证下一次发现的乌鸦不是红色 的呢？又或者不是蓝色的呢？以前接受教育都是老师说什么就是什么，“两点确定一条直线”就是“两点确定一条直线”，不许怀疑，这是公理。什么是公理，公理 就是大家公认的定理，不需要证明的。但是，为什么不怀疑“两点不能确定一条直线”呢？也许在我们这个世界是这样子的，但是谁能保证在宇宙的另外一个星球上 是“三点确定一条直线”呢？</p>
-<p>随着阅读的深入，我在享受这本书给我的快乐的同时，也越来越怀疑这个世界的存在性与我掌握的知识的正确性。我看到的“绿色”是真的绿色吗？还是我看到的其 实是“黑色”，而我把它称为“绿色”，你看到的其实是“白色”，而你把它也称为“绿色”。为什么要这么做呢？我们从小就被长辈教育这是“绿色”，而不是其 它颜色，于是这就是“绿色”。没有能保证我们看到的“绿色”都是相同的颜色。</p>
-<p>这个世界真的存在吗？可信吗？</p>
-</span>
+          <span itemprop="articleBody">
+            
+            断断续续读完了《推理的迷宫》一书，这是一本难得的好书。看到书的副标题，“悖论，谜题，及知识的脆弱性”，这本书就完全吸引了我。
+第一章就让我这个基本是“悖论盲”的人为之一惊。“缸中之脑”，对，我可能真的是不存在的，只是实验室里的一颗大脑。我这颗大脑不停的接收各种实验师给我 的电信号刺激，让我觉得我活在
+            ...
+          </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2011/05/29//2011/05-29-0.html/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -443,6 +379,13 @@ typename <span class="type">Array2D</span>::<span class="type">Array1D</span>&am
 
         
           
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2010/09/03//2010/09-03-0.html/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2010/09/03//2010/09-03-0.html/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
         
       </div>
     </header>
@@ -454,17 +397,16 @@ typename <span class="type">Array2D</span>::<span class="type">Array1D</span>&am
 
       
         
-          <span itemprop="articleBody"><p>幸福是什么？网上流行这样一句话：幸福就是猫吃鱼，狗吃肉，奥特曼打小怪兽。这虽是一句俏皮话，但是，为什么不是猫吃肉，奥特曼吃鱼，让狗去打小怪兽呢？ 当然，这么办的话，猫不会觉得幸福，狗也过得不自在，奥特曼更是不知道幸福为何物了。所以，幸福的定义只能是主观的，每个人的幸福并不相同。比如，我们的 朝鲜同胞们有一辆自行车就觉得很幸福，而我们有辆普桑为什么就没觉得有多少幸福。</p>
-<p>那么，怎么才能幸福呢？是拥有大量的财产，还是手握巨大的权力？这个问题，答案只有自己知道。这里，我们只能告诉你一点点幸福的秘诀。</p>
-<p><strong>尽量获取不容易情感适应的，且会带来快乐的外部刺激；尽量规避不容易情感适应的，且会带来不快的外部刺激。</strong> 什么是情感适应呢？我们都会有这样的经历，当手伸入零度的冰水中时，会觉得异常冰冷与不 适应，但是随着时间的推移，我们渐渐觉得没有先前这么不适应了。这就是情感适应的因故。当然，有童鞋会说这不是生理上的适应嘛。事实上，导致情感适应的主 要原因包括生理适应，大脑对熟悉信息的模块化记忆，对于外部刺激注意力的转移以及对于事件结果的合理化解释。对于某件产生负向情感的事情，如将手伸入冰水 中，我们逐渐情感适应了，当然也不觉得这么难受了。相反，如果某件产生正向情感的事，比如说中的百万元的彩票，情感适应容易与否直接关系到快乐持续时间的 长短了。所以，对于能产生快乐的外部刺激，我们追求不容易情感适应的，如旅行等，而对于带来不快的外部刺激，我们则尽量避开不容易情感适应的，如失恋。</p>
-<p><strong>尽量花钱在单独消费时就可以感知其品质变化的产品或服务上，而不要花在只有在比较时才能感知相应变化的产品或服务上。</strong> 举个例子，假如你想更换家中书房里的办公椅，因为这把椅子坐着不舒服，有种倾斜的感觉，所以想把它换成高档的办公椅。与此同时，你又想更换自己的数码相机，因为是几年前买的，虽然镜头和其他功能都让人满意，但却只有 800 万相素。而新品虽然在其他方面相差不大，但却有 1200 万相素。办公椅与相机价格相当，但是你只有购买其中一个，你经常在家里办公，也经常外出旅游摄影。你会如何选择呢？幸福学告诉你，应该选择办公椅。为什么呢？因为办公椅解决的是你的肌肉疲劳程度，而这点又是人体比较容易感知的，无须进行比较。相反，照片的相素从 800 万上升到 1200 万，只有在比较的情况下才能感知，一般人肉眼是无法将其分辨。所以，把钱花在容易感知其品质变化的产品或服务上才是正确的选择。</p>
-<p><strong>偶尔吃点苦能提高整体幸福水平，偶尔体验较为高档的享受都降低整体幸福水平，除非这些偶尔的体验被你视为非正常状态。</strong> 如果你每天开车上班，可以每星期有那么一天去挤一次公交。这样的体验，能让你更能感受到开车上班的幸福感。正如有人说：忆苦思甜甜更甜。然而，偶尔体验较为高档的享受就不提倡了。如果你开的车是辆奇锐 QQ ，有个机会让你去免费试开宝马一个星期，你会把握这个机会吗？面对这样的机会，我们还是避而远之比较好。如果你去尝试了，等一个星期结束，你会发现你的奇锐 QQ 制动又差，方向盘又不舒适，总之是这有问题，那也有问题。然后，就会抱怨你的爱车有多么得差劲。其实，你大可不必这样，因为完全可以避免。当然，这里还有一种极端的情况，如果你这一辈子都买不起宝马，那么我建议去尝试吧，就好比刘姥姥游大观园而已。</p>
-<p><strong>学会创造流体验。</strong> 所谓流体验，是指人们在进行某些活动时的忘我状态，此时人们完全被活动吸引，所有注意力 完全投注于活动中，并且觉得没有比活动本身更加重要的东西。我们生活中多多少少，有意无意地都经历过一些流体验。例如阅读一本情节跌宕起伏的小说，你会觉 得整个自己都被这小说吸引了，然后会觉得时间过得很快，不知不觉就几个小时过去了。等阅读完后，会感觉自己仍然沉浸在阅读这本小说的快乐之中。生活中多经 历些流体验，就会觉得更加幸福与快乐。</p>
-<p><strong>不要忽视预测和体验时生理、经济、社会等状况的不同。此时所欲未必是彼时所欲，己所欲未必是他人所欲。</strong> 我们一定遇上过这样的情况，当你饥肠辘辘时点菜时，通常点了一大堆菜。等到你吃得差不多 的时候，就会发现你已经吃不了这么多菜了。这就是你点菜时候的状态并不是你吃菜时候的状态了。另一个例子就是，如果让你的父母来选择你们的配偶，通常是以 贤淑为标准的，他们从来不会把性生活作为标准之一。因为在他们的年龄来看这种事，已经不再重要了。这也就是说自己想要的不一定是他人想要的东西。</p>
-<p>总的来说，幸福可以自己去把握的。对于一些网上报道的城市幸福指数排名，我们大可不必理会。幸福从来都是自己的事，正如，猫吃着鱼，狗吃着肉，奥特曼一直喜欢打怪兽。</p>
-<hr>
-<p>—《撬动幸福》   奚恺元</p>
-</span>
+          <span itemprop="articleBody">
+            
+            幸福是什么？网上流行这样一句话：幸福就是猫吃鱼，狗吃肉，奥特曼打小怪兽。这虽是一句俏皮话，但是，为什么不是猫吃肉，奥特曼吃鱼，让狗去打小怪兽呢？ 当然，这么办的话，猫不会觉得幸福，狗也过得不自在，奥特曼更是不知道幸福为何物了。所以，幸福的定义只能是主观的，每个人的幸福并不相同。比如，我们的 朝鲜同胞
+            ...
+          </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2010/09/03//2010/09-03-0.html/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -525,6 +467,13 @@ typename <span class="type">Array2D</span>::<span class="type">Array1D</span>&am
 
         
           
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2010/08/02//2010/08-02-0.html/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2010/08/02//2010/08-02-0.html/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
         
       </div>
     </header>
@@ -536,17 +485,17 @@ typename <span class="type">Array2D</span>::<span class="type">Array1D</span>&am
 
       
         
-          <span itemprop="articleBody"><p>偶然在<a href="http://mindhacks.cn/" target="_blank" rel="external">刘未鹏</a>大牛的博客里看到<a href="http://book.douban.com/subject/1048007/" target="_blank" rel="external">《高效能人士的七个习惯》</a> 一书，便有兴趣一读。遂去图书馆借书一册，每晚睡觉前阅读几页，断断续续将其读完，颇有心得，与大家其享之。</p>
-<p>《高效能人士的七个习惯》，英文原名《The habits of highly effective people》。effective一词，可以认为是<a href="http://en.wikipedia.org/wiki/Effectiveness" target="_blank" rel="external">getting the right things done</a>。 但是，我觉得理解为getting the right things done rightly ，也就是说<strong>正确地做正确的事</strong> 。书中列举了effective人士的七个习惯，从<strong>依赖到独立，再从独立到互赖</strong>，完成到一个effective people的完全蜕变。</p>
-<p>习惯一：<strong>积极主动(be proactive)</strong> 。关于积极主动，可以算是老生长谈了。但凡是教人如何做事的书籍均会提到这样的词。确实，我们做做事情，如果缺乏积极主动，那么将一事无成。有句老话叫“天上不会掉馅饼”，没有积极主动，想想守株待兔的结局吧。</p>
-<p>习惯二：<strong>以终为始(begin with the end in mind)</strong>。任何事情的完成，都会经历两个阶段，一个为在你大脑里构思完成，另一个便是真正事实上完成。所以，我们必须一直抱着要完成的心态去做每一件事，切忌只将事情停留在你的大脑里。抛弃“我想……”，用“我要……”来代替，然后以完成它作为目标，直至事情的圆满结束。</p>
-<p>习惯三：<strong>要事第一(put first things first)</strong>。<a href="http://www.lixiaolai.com/" target="_blank" rel="external">笑来老师</a> 在他的博客里提到过，他辅导过一个女孩，见面时问她今天有什么事要处理。那女孩说给我两分钟时间，然后从包里拿出一本记事本，今天要处理的事全部都记在上 面。笑来老师认为这个女孩不错，会是个人才，因为她做事很有条理，而不是一团糟。后来，那女孩被耶鲁大学录取了。这里，我觉得这个女孩把要处理的事都记载 下来（尽管很多人会不屑），当然我并不觉得她的记忆力不好，是为了把事情按重要程度区别开来，以至于要事永远放在第一。</p>
-<p>习惯四：<strong>双赢思维(think win/win)</strong>。很多人认为双方竞争只有两个结果，已胜彼败，或者是已败彼胜。殊不知，还有<a href="http://en.wikipedia.org/wiki/Win_%26_Win" target="_blank" rel="external">双嬴</a>的可能。同一个团队，为了个人的竞争，勾心斗角不断，整个团队的效率就会停滞不前。很多公司的招聘，都会加上一个条件，要求有“团队合作精神”。先不论这样的招聘要求有没有实际的意义，但是企业的出发点还是好的，就是双嬴思维，双嬴才是目标。</p>
-<p>习惯五：<strong>知彼解已(seek first to understand, then to be understood)</strong>。想要别人了解你，那么首先要了解别人。我们看这个世界，都是带着有色眼镜观察。看别人的事，总会多少带一点个人色彩。同样一个小沈阳，你把他捧成星，我 却认为他是俗。更熟悉的说法就是，一千个读者就有一千个哈姆雷特。所以，评价别人的时候，摘掉我们的眼镜，用心真正去聆听别人，真正设身处地去了解别人， 这样，才能嬴得别人。</p>
-<p>习惯六：<strong>统合综效(synergize)</strong>。我们时常会听说1+1&gt;2的事，这就是统合综效的成果。如果我们没有做到统合综效，那整个团队无异于一盘散沙，你要往东走，我却要向西行，无论如何也达不到1+1&gt;2，反而1+1&lt;2；</p>
-<p>习惯七：<strong>不断更新(sharpen the saw)</strong>。我们处在一个高速发展的时代，如果不更新自己，很快就会被社会淘汰。中国有句老话，“活到老，学到老”。我们伟大的毛主席也说，“流水不腐，户枢不蠹”。只有经常更新自己，才能跟上时代的步伐，也才能迈向新的成长之路。</p>
-<p>这七个习惯都不是我们罕见的道理，但是谨记<strong>知易行难</strong>，如果真正做到了，那就恭喜了，你成为effecive people的一员了。</p>
-</span>
+          <span itemprop="articleBody">
+            
+            偶然在刘未鹏大牛的博客里看到《高效能人士的七个习惯》 一书，便有兴趣一读。遂去图书馆借书一册，每晚睡觉前阅读几页，断断续续将其读完，颇有心得，与大家其享之。
+《高效能人士的七个习惯》，英文原名《The habits of highly effective people》。effective一词，可以
+            ...
+          </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2010/08/02//2010/08-02-0.html/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -607,6 +556,13 @@ typename <span class="type">Array2D</span>::<span class="type">Array1D</span>&am
 
         
           
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2010/07/03//2010/07-03-0.html/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2010/07/03//2010/07-03-0.html/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
         
       </div>
     </header>
@@ -618,110 +574,17 @@ typename <span class="type">Array2D</span>::<span class="type">Array1D</span>&am
 
       
         
-          <span itemprop="articleBody"><p>编写高效程序需要两个活动：第一，我们必须选择一组最好的算法和数据结构；第二，我们必须编写出编译器能够有效优化以转换成高效可执行代码的源 代码。这里，我们主要讲述后者。</p>
-<p>首先，我们討論一下为什么要编写高效程序。不难想象，如果本来要用１０天运行完的程序，经过优化只需要１天就可运行完，这是一件多么令人振奋的 事啊。时间就是金钱呐。那么，什么时候才有必要优化。什么？优化不是无论什么时候都有必要的吗？太不可思议了！当然，作为一个程序员，我们必做在实现与维 护程序的简单性与它的运行速度之间做出权衡折衷。对于一个只会运行一次以产生一组数据点的程序，以一种尽量减少编程工作量并保证正确性来编写程序就更为重 要了。考虑一下，比如一个只用一次的算法，编写时间加上运行时间不超过一天，然而我们花上三天来优化这个算法让它只要一个小时就能出結果。乍一看多好的优 化啊，三天变成一小时！等等，让我们来算一算。不优化编写加运行时候只要一天，而优化后呢？三天加一小时！当然，如果这个算法反复执行的话，我们对它的优 化就值得肯定了。</p>
-<p>好了，说了这么多，切入正题，怎样才能在优码级别上进行优化呢？做那些编译器不能帮你做的优化。这里，我们先讲个例子。考虑一个简单向量数据结构。向量由两个存储器块表示。头部是一个声明如下的结构：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span>&#123;</span><br><span class="line">    <span class="keyword">int</span> len;</span><br><span class="line">    <span class="keyword">data_t</span>* data;</span><br><span class="line">&#125;vec_rec, *vec_ptr;</span><br></pre></td></tr></table></figure>
-<p>这个声明用数据类型data_t作为基本元素的数据类型。可以用int,float,double类型来评价我们代码的性能，这里我们使用float。代码如下：</p>
-<pre><code><span class="keyword">typedef</span> <span class="keyword">float</span> <span class="keyword">data_t</span>;
-</code></pre><p>除了头以外，我们还分配一个len长度的data_t类型对象的数组，以存放实际的向量元素。代码如下：</p>
-<pre><code>vec_ptr new_vec(<span class="type">int</span> len)
-{
-    vec_ptr <span class="literal">result</span> = (vec_ptr)malloc(sizeof(vec_rec));
-    <span class="keyword">if</span>(!<span class="literal">result</span>)
-        <span class="keyword">return</span> <span class="type">NULL</span>;
-    <span class="literal">result</span>-&gt;len = len;
-    <span class="keyword">if</span>(len &gt; <span class="number">0</span>){
-        data_t* data = (data_t*)calloc(len, sizeof(data_t));
-        <span class="keyword">if</span>(!data){
-            free((<span class="type">void</span>*)<span class="literal">result</span>);
-            <span class="keyword">return</span> <span class="type">NULL</span>;
-        }
-        <span class="literal">result</span>-&gt;data = data;
-    }
-    <span class="keyword">else</span>
-        <span class="literal">result</span>-&gt;data = <span class="type">NULL</span>;
-    <span class="keyword">return</span> <span class="literal">result</span>;
-}
-</code></pre><p>当然，还有另外的操作，如取data_t类型对象数组中的元素，得数组的长度等。</p>
-<pre><code><span class="built_in">int</span> get_vec_elment(vec_ptr v, <span class="built_in">int</span> <span class="built_in">index</span>, data_t* dest)
-{
-    <span class="keyword">if</span>(<span class="built_in">index</span> &lt; <span class="number">0</span> || <span class="built_in">index</span> &gt; <span class="number">0</span>)
-        <span class="keyword">return</span> <span class="number">0</span>;
-    *dest = v-&gt;<span class="type">data</span>[<span class="built_in">index</span>];
-    <span class="keyword">return</span> <span class="number">1</span>;
-}
-
-<span class="built_in">int</span> vec_length(vec_ptr v)
-{
-    <span class="keyword">return</span> v-&gt;len;
-}
-</code></pre><p>作为一个优化示例，必须有操作。这里我们将操作定义为把data_t类型对象数组中的元素根据某种运算合并成一个值。通过使用编译时常数IDENT和OPER定义：</p>
-<pre><code><span class="hexcolor">#def</span>ine INENT <span class="number">1</span>
-<span class="hexcolor">#def</span>ine OPER *
-</code></pre><p>最后，我们进行操作，函数如下：</p>
-<pre><code>void combine1(vec_ptr v, data_t* dest)
-{
-    int i;
-
-    *dest = <span class="type">INENT</span>;
-    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; vec_length(v); i++){
-        data_t <span class="function"><span class="keyword">val</span>;</span>
-        get_vec_elment(v, i, &amp;<span class="function"><span class="keyword">val</span>);</span>
-        *dest = *dest <span class="type">OPER</span> <span class="function"><span class="keyword">val</span>;</span>
-    }
-}
-</code></pre><p>这里就是将所有的元素通过乘法合并成一个元素。假设元素数组有１０亿个。默认地，编译器产生的代码没有经过任何的优化，所以，我们这个程序的运 行时间是相当的长。还是先说明下我的实验环境吧。我是在eclipse+Mingw下运行的，CPU为T5670　1.8GHz。那么这样的代码花了我多长时间呢？答案是12.680秒!天呐，那不是很慢嘛！这个嘛，要得益于我们高速发展的硬件设备了。但是，现在只是１０亿个，要是更多呢？操作只是简单的相乘，要是更复杂呢？不敢想象。。。</p>
-<p>至此，我们先来讨论第一个优化：消除循环的低效率 。观察combine1函数，我们发现，在for(i = 0; i &lt; vec_length(v); i++)中，我们调用函数vec_length()作为测试条件。想象一下上C语言课程时候对循环的讨论，每次循环迭代时都必须对测试条件进行求值。哇， 那我们运行１０亿次乘法不是要调用１０亿次vec_length()函数，但是，vec_length()的返回值在这１０亿次中根本不会变化!没错，我 们对一个不会变的结果运行计算了１０亿次！事实上１０亿减１次是根本不需要的！你想到了什么？没错，我们可以优化。正如在前面所说，我们要消除循环的低效率。</p>
-<p>我们编写combie2版本，它在开始时调用vec_length()函数，并将结果赋值给局部变量length,然后在for循环中使用这个变量。果不其然，我们提高了程序的性能，运行完只花了10.012秒。这里列出combine2的代码：</p>
-<pre><code>void combine2(vec_ptr v, data_t* dest)
-{
-    int i<span class="comment">;</span>
-    int len = vec_length(v)<span class="comment">;</span>
-
-    *dest = INENT<span class="comment">;</span>
-    for(i = 0<span class="comment">; i &lt; len; i++){</span>
-        data_t val<span class="comment">;</span>
-        get_vec_elment(v, i, &amp;val)<span class="comment">;</span>
-        *dest = *dest OPER val<span class="comment">;</span>
-    }
-}
-</code></pre><p>这个优化是一类常见的、称为代码移动的优化实例。这类优化包括识别出在循环里执行多次，但结果不会变化的计算，因而我们可以将计算移动到循环体外，这样这个计算就不会被执行多次。</p>
-<p>下面，我们对第二个优化进行讨论：减少过程调用 。过程调用可能会带来相当大的开销。如combine2中的get_vec_elment()函数。每次迭代循环，我们都要调用 get_vec_elment()函数以获得下一个元素。仔细观察代码，我们发现完全可以避免这个过程调用，因而也不需要进行边界检查，对程序来说是一个 良好的优化。我们可以进行如下 的改变：</p>
-<pre><code><span class="keyword">data_t</span>* get_vec_start(vec_ptr v)
-{
-    <span class="keyword">return</span> v-&gt;data;
-}
-
-<span class="function"><span class="keyword">void</span> <span class="title">combine3</span><span class="params">(vec_ptr v, data_t* dest)</span>
-</span>{
-    <span class="keyword">int</span> i;
-    <span class="keyword">int</span> len = vec_length(v);
-    <span class="keyword">data_t</span>* data = get_vec_start(v);
-
-    *dest = INENT;
-    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; len; i++){
-        *dest = *dest OPER data[i];
-    }
-}
-</code></pre><p>相比之前，我们在进行循环体之前先取得元素数组的起始位置，然后我们每次循环时用数组得到元素，而省去了对get+vec_elment的过程调用，减少了一些运行时间。改善后的时间是6.36秒。</p>
-<p>下面，我们再次进入下一个优化阶段：消除不必要的存储器引用 。我们知道，操作系统中对数据的读取与存储，寄存器快于存储器。然而，我们发现combine3中，每次循环中， <em>dest = </em>dest OPER data[i]语句先是对<em>dest进行读取，然后进行计算，再存到</em>dest中，这些是在存储器上进行的。但是，我们这一次存的数据就是我们下一次循环 读的数据，这样在存储器上操作不是很费时间？没错，所以，我们要消除不必要的存储器引用，将这个数据存到寄存器中。我们引入一个临时变量：</p>
-<pre><code><span class="function"><span class="keyword">void</span> <span class="title">combine4</span><span class="params">(vec_ptr v, data_t* dest)</span>
-</span>{
-    <span class="keyword">int</span> i;
-    <span class="keyword">int</span> len = vec_length(v);
-    <span class="keyword">data_t</span>* data = get_vec_start(v);
-    <span class="keyword">data_t</span> tmp = INENT;
-
-    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; len; i++){
-        tmp = tmp OPER data[i];
-    }
-    *dest = tmp;
-}
-</code></pre><p>经过如此改变之后，我们程序的性能又有所提高，只需要6.227秒。</p>
-<p>最后，我们再一次来回顾一下我们如何提高程序的性能。一、消除循环的低效率。二、减少过程调用。三、消除不必要的存储器引用。这里，有人会问，编译器不是 自己有优化的嘛。没错，现代的各种编译器都有能力不等的优化。但是，作为一个合格的程序员，把程序优化的工作交给编译器固然有益处，可编译器也不是万能的 啊。一部分的优化能是做不到的，而且，作为优化，最重要的是不能改变程序原来的执行结果。编译器当碰到能决定是否会改变你的程序结果的时候，他往往选择不 优化以保证结果的正确性，这个时候就需要我们手动来进行程序的优化了。所以，掌握这个技能还是很有必要的。</p>
-<p>另外，这是我第一次写Blog，当然文笔很生疏啦，请读者见谅！不管怎么样，这是我学习过程的一个总结，请批评指正。</p>
-</span>
+          <span itemprop="articleBody">
+            
+            编写高效程序需要两个活动：第一，我们必须选择一组最好的算法和数据结构；第二，我们必须编写出编译器能够有效优化以转换成高效可执行代码的源 代码。这里，我们主要讲述后者。
+首先，我们討論一下为什么要编写高效程序。不难想象，如果本来要用１０天运行完的程序，经过优化只需要１天就可运行完，这是一件多么令人振奋
+            ...
+          </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2010/07/03//2010/07-03-0.html/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -772,7 +635,7 @@ typename <span class="type">Array2D</span>::<span class="type">Array1D</span>&am
 
       <section class="site-overview">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="/images/default_avatar.jpg" alt="zhujiefirst" itemprop="image"/>
+          <img class="site-author-image" src="/images/avatar.jpg" alt="zhujiefirst" itemprop="image"/>
           <p class="site-author-name" itemprop="name">zhujiefirst</p>
         </div>
         <p class="site-description motion-element" itemprop="description">学习总结 思考感悟 知识管理</p>
@@ -785,10 +648,10 @@ typename <span class="type">Array2D</span>::<span class="type">Array1D</span>&am
           </div>
 
           <div class="site-state-item site-state-categories">
-            
+            <a href="/categories">
               <span class="site-state-item-count">10</span>
               <span class="site-state-item-name">分類</span>
-              
+              </a>
           </div>
 
           <div class="site-state-item site-state-tags">
@@ -860,11 +723,29 @@ typename <span class="type">Array2D</span>::<span class="type">Array1D</span>&am
   
   
   
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"codingforever"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+  	<script src="/js/ua-parser.min.js"></script>
+  	<script src="/js/hook-duoshuo.js"></script>
   
 
   
-
-
 
   
   <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
@@ -894,14 +775,53 @@ typename <span class="type">Array2D</span>::<span class="type">Array1D</span>&am
 </script>
 
 
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
 
 
   
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"codingforever"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+  	<script src="/js/ua-parser.min.js"></script>
+  	<script src="/js/hook-duoshuo.js"></script>
   
 
   
-
-
 
 
 

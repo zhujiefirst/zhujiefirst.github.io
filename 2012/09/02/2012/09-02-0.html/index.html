@@ -123,6 +123,14 @@ Strategy Pattern，在WikiPedia中解释为：a particularsoftware design patter
         </li>
       
         
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            <i class="menu-item-icon icon-categories"></i> <br />
+            分類
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             <i class="menu-item-icon icon-archives"></i> <br />
@@ -135,6 +143,14 @@ Strategy Pattern，在WikiPedia中解释为：a particularsoftware design patter
           <a href="/tags" rel="section">
             <i class="menu-item-icon icon-tags"></i> <br />
             標籤
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            <i class="menu-item-icon icon-about"></i> <br />
+            關於
           </a>
         </li>
       
@@ -193,6 +209,13 @@ Strategy Pattern，在WikiPedia中解释为：a particularsoftware design patter
         
 
         
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2012/09/02//2012/09-02-0.html/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2012/09/02//2012/09-02-0.html/" itemprop="commentsCount"></span>
+              </a>
+            </span>
           
         
       </div>
@@ -447,6 +470,10 @@ public <span class="class"><span class="keyword">class</span> <span class="title
             
               <div class="comments" id="comments">
                 
+                  <div class="ds-thread" data-thread-key="2012/09/02//2012/09-02-0.html/"
+                       data-title="策略模式(Strategy Pattern)" data-url="http://codingforever.com/2012/09/02//2012/09-02-0.html/">
+                  </div>
+                
               </div>
             
         </div>
@@ -477,7 +504,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
 
       <section class="site-overview">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" src="/images/default_avatar.jpg" alt="zhujiefirst" itemprop="image"/>
+          <img class="site-author-image" src="/images/avatar.jpg" alt="zhujiefirst" itemprop="image"/>
           <p class="site-author-name" itemprop="name">zhujiefirst</p>
         </div>
         <p class="site-description motion-element" itemprop="description">学习总结 思考感悟 知识管理</p>
@@ -490,10 +517,10 @@ public <span class="class"><span class="keyword">class</span> <span class="title
           </div>
 
           <div class="site-state-item site-state-categories">
-            
+            <a href="/categories">
               <span class="site-state-item-count">10</span>
               <span class="site-state-item-name">分類</span>
-              
+              </a>
           </div>
 
           <div class="site-state-item site-state-tags">
@@ -576,11 +603,29 @@ public <span class="class"><span class="keyword">class</span> <span class="title
   
   
     
-    
 
   
+    
+  
 
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"codingforever"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+  	<script src="/js/ua-parser.min.js"></script>
+  	<script src="/js/hook-duoshuo.js"></script>
+  
 
+    
   
   
   <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
@@ -747,6 +792,27 @@ public <span class="class"><span class="keyword">class</span> <span class="title
     });
 </script>
 
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 
 
