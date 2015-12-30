@@ -1,0 +1,703 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+    
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+  <link href='//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.4"/>
+
+
+    <meta name="description" content="学习总结 思考感悟 知识管理" />
+
+
+
+  <meta name="keywords" content="iOS入门," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.4" />
+
+
+<meta name="description" content="初识UIViewUIView是UIKit中重要的一个类，iOS开发者几乎无法绕过它，因为我们的App中，看得见摸得着的UI都是UIView以及它的子类，比如UIWindow，UILabel，UIPickerView，UIProgressView，UIActivityIndicatorView，UIImageView，UITabBar，UIToolbar，UINavigationBar，UITabl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UIView入门">
+<meta property="og:url" content="http://codingforever.com/2015/12/30//2015/12-30-0.html/index.html">
+<meta property="og:site_name" content="Codingforever">
+<meta property="og:description" content="初识UIViewUIView是UIKit中重要的一个类，iOS开发者几乎无法绕过它，因为我们的App中，看得见摸得着的UI都是UIView以及它的子类，比如UIWindow，UILabel，UIPickerView，UIProgressView，UIActivityIndicatorView，UIImageView，UITabBar，UIToolbar，UINavigationBar，UITabl">
+<meta property="og:updated_time" content="2015-12-30T13:27:27.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="UIView入门">
+<meta name="twitter:description" content="初识UIViewUIView是UIKit中重要的一个类，iOS开发者几乎无法绕过它，因为我们的App中，看得见摸得着的UI都是UIView以及它的子类，比如UIWindow，UILabel，UIPickerView，UIProgressView，UIActivityIndicatorView，UIImageView，UITabBar，UIToolbar，UINavigationBar，UITabl">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post'
+  };
+</script>
+
+    <title> UIView入门 // Codingforever </title>
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+<!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+
+
+
+
+<div class="container one-column page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Codingforever</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-home"></i> <br />
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            <i class="menu-item-icon icon-categories"></i> <br />
+            分類
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            標籤
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            <i class="menu-item-icon icon-about"></i> <br />
+            關於
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+        </div>
+    </header>
+
+    <main id="main" class="main">
+        <div class="main-inner">
+            <div id="content" class="content">
+                
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              UIView入门
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於
+          <time itemprop="dateCreated" datetime="2015-12-30T00:00:00+08:00" content="12月 30 2015">
+            12月 30 2015
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分類於
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a></span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2015/12/30//2015/12-30-0.html/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/30//2015/12-30-0.html/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h2 id="初识UIView">初识<em>UIView</em></h2><p><em>UIView</em>是<em>UIKit</em>中重要的一个类，<em>iOS</em>开发者几乎无法绕过它，因为我们的<em>App</em>中，看得见摸得着的<em>UI</em>都是<em>UIView</em>以及它的子类，比如<em>UIWindow，UILabel，UIPickerView，UIProgressView，UIActivityIndicatorView，UIImageView，UITabBar，UIToolbar，UINavigationBar，UITableViewCell，UIActionSheet，UIAlertView，UIScrollView，UISearchBar，UIWebView，UIControl</em>。既然我们绕不过去，就必须了解它。</p>
+<h2 id="浏览UIView">浏览<em>UIView</em></h2><p>打开<em>UIView.h</em>文件(<em>iOS9.1</em>)，近600行的代码，似乎彰示着这并不是个小类。当然<em>UIView</em>包含的功能确实不少，因为它既要负责你看得见的，又要负责你摸的着的。之前我们了解到<em>iOS</em>中存在着大量的<em>UIView</em>的子类，那岂不是个个类都是庞然大物？没错，但今天我们只看<em>UIView</em>。</p>
+<p>浏览<em>UIView.h</em>文件，里面包含了几部分声明:</p>
+<blockquote>
+<ul>
+<li>UIView : UIResponder …</li>
+<li>UIView(UIViewGeometry)</li>
+<li>UIView(UIViewHierarchy)</li>
+<li>UIView(UIViewRendering)</li>
+<li>UIView(UIViewAnimation)</li>
+<li>UIView(UIViewAnimationWithBlocks)</li>
+<li>UIView (UIViewGestureRecognizers)</li>
+<li>…</li>
+</ul>
+</blockquote>
+<p>下面具体了解下各部分声明。</p>
+<h2 id="UIView(UIViewGeometry)"><em>UIView(UIViewGeometry)</em></h2><p>从<em>Strategy</em>名称中我们可以看出些端倪，这部分基本都是与<em>Geometry</em>相关的。</p>
+<p>比如，包括指示<em>View</em>位置的<em>property</em>:</p>
+<blockquote>
+<p>@property(nonatomic) CGRect frame;</p>
+</blockquote>
+<p>指示<em>View</em>渲染区域的<em>property</em>:</p>
+<blockquote>
+<p>@property(nonatomic) CGRect bounds;</p>
+</blockquote>
+<p>指示<em>View</em>中心位置的<em>property</em>:</p>
+<blockquote>
+<p>@property(nonatomic) CGPoint center; </p>
+</blockquote>
+<p>指示<em>View</em>内容刻度因子的<em>property</em>:</p>
+<blockquote>
+<p>@property(nonatomic) CGFloat contentScaleFactor;</p>
+</blockquote>
+<p>指示<em>View</em>变换矩阵的<em>property</em>:</p>
+<blockquote>
+<p>@property(nonatomic) CGAffineTransform transform; </p>
+</blockquote>
+<p>等等。</p>
+<p>几个<em>property</em>中其他似乎都比较好理解，但是<em>transform</em> <em>property</em>有点晦涩。事实上，<em>transform</em> <em>perperty</em> 表示一个<em>3乘3</em>的矩阵，</p>
+<pre><code><span class="tag">a</span>   <span class="tag">b</span>   <span class="number">0</span> 
+c   d   <span class="number">0</span>
+tx  ty  <span class="number">1</span>    
+</code></pre><p>而经过这个变换矩阵后，结果如下:</p>
+<pre><code>                                        <span class="atom">a</span>   <span class="atom">b</span>   <span class="number">0</span>
+[<span class="atom">x</span><span class="string">'  y'</span>  <span class="number">1</span>]    =    [<span class="atom">x</span>   <span class="atom">y</span>   <span class="number">1</span>]    *     <span class="atom">c</span>   <span class="atom">d</span>   <span class="number">0</span>
+                                        <span class="atom">tx</span>  <span class="atom">ty</span>  <span class="number">1</span>
+</code></pre><p><em>CGAffineTransform</em>的定义也说明了这点：</p>
+<pre><code><span class="keyword">struct</span> <span class="built_in">CGAffineTransform</span> {
+  <span class="built_in">CGFloat</span> a, b, c, d;
+  <span class="built_in">CGFloat</span> tx, ty;
+};
+</code></pre><p>当然，我们真正使用的时候，极少直接定义<em>CGAffineTransform</em>里面的字段，而是直接使用<em>Apple</em>提供的宏：</p>
+<blockquote>
+<ul>
+<li>CGAffineTransformIdentity </li>
+<li>CGAffineTransformMake</li>
+<li>CGAffineTransformMakeTranslation </li>
+<li>CGAffineTransformMakeScale</li>
+<li>…</li>
+</ul>
+</blockquote>
+<h2 id="UIView(UIViewHierarchy)"><em>UIView(UIViewHierarchy)</em></h2><p>同样我们从<em>stratege</em>的名称中，我们可以猜想到这部分与<em>UIView</em>的层级有关。看一下此部分包含的<em>property</em>:</p>
+<blockquote>
+<p>@property(nullable, nonatomic,readonly) UIView       <em>superview;<br>@property(nonatomic,readonly,copy) NSArray&lt;__kindof UIView </em>&gt; <em>subviews;<br>@property(nullable, nonatomic,readonly) UIWindow     </em>window;</p>
+</blockquote>
+<p>既然是层级关系，这里包含了指向父<em>UIView</em>的<em>property — superview</em>, 以及指向子<em>UIView</em>的<em>property — subviews</em>。这里可以确定一点，每个<em>UIView</em>如果在层级关系中，一定存在其父<em>UIView</em>，而且最多只有一个父<em>UIView</em>，而子<em>UIView</em>，可能存在多个，也可能不存在。</p>
+<p>最后，<em>UIWindow</em>类型的<em>property</em>指向整个<em>UIView</em>层次结构的顶层。</p>
+<h2 id="UIView(UIViewRendering)"><em>UIView(UIViewRendering)</em></h2><p>这部分中，我们重点关注下包含的方法：</p>
+<p>&gt;</p>
+<ul>
+<li>- (void)drawRect:(CGRect)rect;</li>
+<li>- (void)setNeedsDisplay;</li>
+<li>- (void)setNeedsDisplayInRect:(CGRect)rect;</li>
+</ul>
+<p>之前我们提过，<em>UIView</em>负责我们看到的，既然如此，视图就会在一定周期内绘制可见部分于屏幕上。当视图改变时，我们需要重绘视图以显示视图的改变。方法<em>setNeedsDisplay</em>以及方法<em>setNeedsDisplayInRect:</em>就是通知程序视图失效，需要重绘。</p>
+<p>而<em>drawRect:</em>方法则是用于自定义<em>UIView</em>子类时，覆盖该方法以绘制自定义的内容。</p>
+<h2 id="Other"><em>Other</em></h2><p>我们并没有分析完整的<em>UIView</em>，<strong>“纸上得来终觉浅，觉知此事要躬行”</strong>，学习<em>UIView</em>最好的方法，还是使用它。当然，开头的时候我们就提到，进行<em>iOS</em>开发，几乎不可能不使用<em>UIView</em>及其子类，那么，<em>coding</em>吧。</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS入门/" rel="tag">#iOS入门</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/02/14//2015/02-14-0.html/" rel="next">经典算法巡礼(八) -- 查找之二叉查找树</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+            </div>
+
+            
+
+            
+              <div class="comments" id="comments">
+                
+                  <div class="ds-thread" data-thread-key="2015/12/30//2015/12-30-0.html/"
+                       data-title="UIView入门" data-url="http://codingforever.com/2015/12/30//2015/12-30-0.html/">
+                  </div>
+                
+              </div>
+            
+        </div>
+
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/avatar.jpg" alt="zhujiefirst" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">zhujiefirst</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">学习总结 思考感悟 知识管理</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">46</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-name">分類</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">18</span>
+              <span class="site-state-item-name">標籤</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#初识UIView"><span class="nav-number">1.</span> <span class="nav-text">初识UIView</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浏览UIView"><span class="nav-number">2.</span> <span class="nav-text">浏览UIView</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UIView(UIViewGeometry)"><span class="nav-number">3.</span> <span class="nav-text">UIView(UIViewGeometry)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UIView(UIViewHierarchy)"><span class="nav-number">4.</span> <span class="nav-text">UIView(UIViewHierarchy)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UIView(UIViewRendering)"><span class="nav-number">5.</span> <span class="nav-text">UIView(UIViewRendering)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Other"><span class="nav-number">6.</span> <span class="nav-text">Other</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+        <div class="footer-inner">
+            <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2015</span>
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhujiefirst</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+        </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+</div>
+
+<script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"codingforever"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+  	<script src="/js/ua-parser.min.js"></script>
+  	<script src="/js/hook-duoshuo.js"></script>
+  
+
+    
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.4"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.4"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.4" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/js/search-toggle.js"></script>
+
+
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.4" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if (isDesktop() && CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    });
+  </script>
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        if (CONFIG.sidebar === 'always') {
+            displaySidebar();
+        }
+    });
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+
+
+
+<!-- lazyload -->
+<script type="text/javascript" src="/js/lazyload.js"></script>
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery("#posts img").lazyload({
+            placeholder: "/images/loading.gif",
+            effect: "fadeIn"
+        });
+    });
+</script>
+</body>
+</html>

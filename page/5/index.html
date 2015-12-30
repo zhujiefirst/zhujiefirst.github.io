@@ -170,8 +170,8 @@
           
           
             
-              <a class="post-title-link" href="/2011/06/04//2011/06-04-0.html/" itemprop="url">
-                用代理类实现二组数组
+              <a class="post-title-link" href="/2014/11/16//2014/11-16-0.html/" itemprop="url">
+                如何生成不重复随机数
               </a>
             
           
@@ -181,8 +181,8 @@
       <div class="post-meta">
         <span class="post-time">
           發表於
-          <time itemprop="dateCreated" datetime="2011-06-04T00:00:00+08:00" content="6月 4 2011">
-            6月 4 2011
+          <time itemprop="dateCreated" datetime="2014-11-16T00:00:00+08:00" content="11月 16 2014">
+            11月 16 2014
           </time>
         </span>
 
@@ -190,7 +190,7 @@
           <span class="post-category" >
             &nbsp; | &nbsp; 分類於
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/c-c/" itemprop="url" rel="index"><span itemprop="name">c/c++</span></a></span>
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a></span>
 
               
               
@@ -203,8 +203,8 @@
           
             <span class="post-comments-count">
               &nbsp; | &nbsp;
-              <a href="/2011/06/04//2011/06-04-0.html/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2011/06/04//2011/06-04-0.html/" itemprop="commentsCount"></span>
+              <a href="/2014/11/16//2014/11-16-0.html/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2014/11/16//2014/11-16-0.html/" itemprop="commentsCount"></span>
               </a>
             </span>
           
@@ -221,12 +221,17 @@
         
           <span itemprop="articleBody">
             
-             C++语言在数组的支持方面不强其他语言强劲，如FORTRAN、BASIC、甚至在COBOL中可以产生二维数组、三维数组，乃至于n维数组，但你能 C++中这么做吗？有同学不同意了，C++中可以产生维数组啊，int data[2][3]不是吗？但是，如果这样：
-void processInput(in
+            如何生成不重复随机数？
+当然，简单粗暴的方法永远是可行的。生成一个随机数，在已生成的随机数中遍历，若未在其中，则归入随机数数组中，否则重新生成一随机数再重复此过程。
+具体代码可参照如下：
+N = 10
+na := make([]int32, 0, N)
+for {
+    n := rand.Int
             ...
           </span>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2011/06/04//2011/06-04-0.html/#more" rel="contents">
+            <a class="btn" href="/2014/11/16//2014/11-16-0.html/#more" rel="contents">
               閱讀全文 &raquo;
             </a>
           </div>
@@ -259,8 +264,8 @@ void processInput(in
           
           
             
-              <a class="post-title-link" href="/2011/05/29//2011/05-29-0.html/" itemprop="url">
-                重新审视这个世界
+              <a class="post-title-link" href="/2014/11/14//2014/11-14-0.html/" itemprop="url">
+                Go中实现Set类型
               </a>
             
           
@@ -270,8 +275,8 @@ void processInput(in
       <div class="post-meta">
         <span class="post-time">
           發表於
-          <time itemprop="dateCreated" datetime="2011-05-29T00:00:00+08:00" content="5月 29 2011">
-            5月 29 2011
+          <time itemprop="dateCreated" datetime="2014-11-14T00:00:00+08:00" content="11月 14 2014">
+            11月 14 2014
           </time>
         </span>
 
@@ -279,7 +284,7 @@ void processInput(in
           <span class="post-category" >
             &nbsp; | &nbsp; 分類於
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/杂感/" itemprop="url" rel="index"><span itemprop="name">杂感</span></a></span>
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/golang/" itemprop="url" rel="index"><span itemprop="name">golang</span></a></span>
 
               
               
@@ -292,8 +297,8 @@ void processInput(in
           
             <span class="post-comments-count">
               &nbsp; | &nbsp;
-              <a href="/2011/05/29//2011/05-29-0.html/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2011/05/29//2011/05-29-0.html/" itemprop="commentsCount"></span>
+              <a href="/2014/11/14//2014/11-14-0.html/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2014/11/14//2014/11-14-0.html/" itemprop="commentsCount"></span>
               </a>
             </span>
           
@@ -310,12 +315,12 @@ void processInput(in
         
           <span itemprop="articleBody">
             
-            断断续续读完了《推理的迷宫》一书，这是一本难得的好书。看到书的副标题，“悖论，谜题，及知识的脆弱性”，这本书就完全吸引了我。
-第一章就让我这个基本是“悖论盲”的人为之一惊。“缸中之脑”，对，我可能真的是不存在的，只是实验室里的一颗大脑。我这颗大脑不停的接收各种实验师给我 的电信号刺激，让我觉得我活在
+            这几天用go实现项目原有的xml数据导入服务器新设计的数据库中，以实现数据从客户机向服务器的转移。由于服务器的接口协议为json,所以面临的问题就是从xml解析出相应的struct，并将其转换为json。在这个过程中，go中xml与json库就不得不赞一下了。
+只需简单的定义struct的结构，并用
             ...
           </span>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2011/05/29//2011/05-29-0.html/#more" rel="contents">
+            <a class="btn" href="/2014/11/14//2014/11-14-0.html/#more" rel="contents">
               閱讀全文 &raquo;
             </a>
           </div>
@@ -348,8 +353,8 @@ void processInput(in
           
           
             
-              <a class="post-title-link" href="/2010/09/03//2010/09-03-0.html/" itemprop="url">
-                关于幸福
+              <a class="post-title-link" href="/2014/08/09//2014/08-09-2.html/" itemprop="url">
+                编程语言的发展之路 — 读《代码的未来》
               </a>
             
           
@@ -359,8 +364,8 @@ void processInput(in
       <div class="post-meta">
         <span class="post-time">
           發表於
-          <time itemprop="dateCreated" datetime="2010-09-03T00:00:00+08:00" content="9月 3 2010">
-            9月 3 2010
+          <time itemprop="dateCreated" datetime="2014-08-09T00:00:00+08:00" content="8月 9 2014">
+            8月 9 2014
           </time>
         </span>
 
@@ -368,7 +373,7 @@ void processInput(in
           <span class="post-category" >
             &nbsp; | &nbsp; 分類於
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/杂感/" itemprop="url" rel="index"><span itemprop="name">杂感</span></a></span>
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/编程思维/" itemprop="url" rel="index"><span itemprop="name">编程思维</span></a></span>
 
               
               
@@ -381,8 +386,8 @@ void processInput(in
           
             <span class="post-comments-count">
               &nbsp; | &nbsp;
-              <a href="/2010/09/03//2010/09-03-0.html/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2010/09/03//2010/09-03-0.html/" itemprop="commentsCount"></span>
+              <a href="/2014/08/09//2014/08-09-2.html/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2014/08/09//2014/08-09-2.html/" itemprop="commentsCount"></span>
               </a>
             </span>
           
@@ -399,11 +404,12 @@ void processInput(in
         
           <span itemprop="articleBody">
             
-            幸福是什么？网上流行这样一句话：幸福就是猫吃鱼，狗吃肉，奥特曼打小怪兽。这虽是一句俏皮话，但是，为什么不是猫吃肉，奥特曼吃鱼，让狗去打小怪兽呢？ 当然，这么办的话，猫不会觉得幸福，狗也过得不自在，奥特曼更是不知道幸福为何物了。所以，幸福的定义只能是主观的，每个人的幸福并不相同。比如，我们的 朝鲜同胞
+            本书是Matz在《日经Linux》上连载的各期内容的合集，虽然内容有些部分重复，但是内容还是很丰富的，主题也比较鲜明，与国内的某些合集甩开太远。    
+通书下来，个人觉得最精华的还是第2章：编程语言的过去、现在和未来。Matz通过简单回顾编程语言的过去，着重分析现在和未来的发展。主要分为以下几类：
             ...
           </span>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2010/09/03//2010/09-03-0.html/#more" rel="contents">
+            <a class="btn" href="/2014/08/09//2014/08-09-2.html/#more" rel="contents">
               閱讀全文 &raquo;
             </a>
           </div>
@@ -436,8 +442,8 @@ void processInput(in
           
           
             
-              <a class="post-title-link" href="/2010/08/02//2010/08-02-0.html/" itemprop="url">
-                《高效能人士的七个习惯》读后
+              <a class="post-title-link" href="/2014/08/09//2014/08-09-1.html/" itemprop="url">
+                如何用lua实现面向对象
               </a>
             
           
@@ -447,8 +453,8 @@ void processInput(in
       <div class="post-meta">
         <span class="post-time">
           發表於
-          <time itemprop="dateCreated" datetime="2010-08-02T00:00:00+08:00" content="8月 2 2010">
-            8月 2 2010
+          <time itemprop="dateCreated" datetime="2014-08-09T00:00:00+08:00" content="8月 9 2014">
+            8月 9 2014
           </time>
         </span>
 
@@ -456,7 +462,7 @@ void processInput(in
           <span class="post-category" >
             &nbsp; | &nbsp; 分類於
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/杂感/" itemprop="url" rel="index"><span itemprop="name">杂感</span></a></span>
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/lua/" itemprop="url" rel="index"><span itemprop="name">lua</span></a></span>
 
               
               
@@ -469,8 +475,8 @@ void processInput(in
           
             <span class="post-comments-count">
               &nbsp; | &nbsp;
-              <a href="/2010/08/02//2010/08-02-0.html/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2010/08/02//2010/08-02-0.html/" itemprop="commentsCount"></span>
+              <a href="/2014/08/09//2014/08-09-1.html/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2014/08/09//2014/08-09-1.html/" itemprop="commentsCount"></span>
               </a>
             </span>
           
@@ -487,12 +493,12 @@ void processInput(in
         
           <span itemprop="articleBody">
             
-            偶然在刘未鹏大牛的博客里看到《高效能人士的七个习惯》 一书，便有兴趣一读。遂去图书馆借书一册，每晚睡觉前阅读几页，断断续续将其读完，颇有心得，与大家其享之。
-《高效能人士的七个习惯》，英文原名《The habits of highly effective people》。effective一词，可以
+            lua作为一门非面向对象的轻量级语言，如何才能方便的用面向对象的方法来进行编程呢？
+首先,编程范型对面向对象编程（OOP）是如何定义的呢？通常，OOP被理解为一种将程序分解为封装数据及相关操作的模块而进行的编程方式。有别于其他编程方式，OOP中的与某些数据类型相关的一系列操作都被有机地封装到该数据类
             ...
           </span>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2010/08/02//2010/08-02-0.html/#more" rel="contents">
+            <a class="btn" href="/2014/08/09//2014/08-09-1.html/#more" rel="contents">
               閱讀全文 &raquo;
             </a>
           </div>
@@ -525,8 +531,8 @@ void processInput(in
           
           
             
-              <a class="post-title-link" href="/2010/07/03//2010/07-03-0.html/" itemprop="url">
-                优化程序性能
+              <a class="post-title-link" href="/2014/08/09//2014/08-09-0.html/" itemprop="url">
+                高效使用I/O
               </a>
             
           
@@ -536,8 +542,8 @@ void processInput(in
       <div class="post-meta">
         <span class="post-time">
           發表於
-          <time itemprop="dateCreated" datetime="2010-07-03T00:00:00+08:00" content="7月 3 2010">
-            7月 3 2010
+          <time itemprop="dateCreated" datetime="2014-08-09T00:00:00+08:00" content="8月 9 2014">
+            8月 9 2014
           </time>
         </span>
 
@@ -545,7 +551,7 @@ void processInput(in
           <span class="post-category" >
             &nbsp; | &nbsp; 分類於
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/c-c/" itemprop="url" rel="index"><span itemprop="name">c/c++</span></a></span>
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/服务器编程/" itemprop="url" rel="index"><span itemprop="name">服务器编程</span></a></span>
 
               
               
@@ -558,8 +564,8 @@ void processInput(in
           
             <span class="post-comments-count">
               &nbsp; | &nbsp;
-              <a href="/2010/07/03//2010/07-03-0.html/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2010/07/03//2010/07-03-0.html/" itemprop="commentsCount"></span>
+              <a href="/2014/08/09//2014/08-09-0.html/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2014/08/09//2014/08-09-0.html/" itemprop="commentsCount"></span>
               </a>
             </span>
           
@@ -576,12 +582,13 @@ void processInput(in
         
           <span itemprop="articleBody">
             
-            编写高效程序需要两个活动：第一，我们必须选择一组最好的算法和数据结构；第二，我们必须编写出编译器能够有效优化以转换成高效可执行代码的源 代码。这里，我们主要讲述后者。
-首先，我们討論一下为什么要编写高效程序。不难想象，如果本来要用１０天运行完的程序，经过优化只需要１天就可运行完，这是一件多么令人振奋
+            网络编程中，遇到最多而且必定会遇到的就是I/O了。那么，如何正确使用I/O模型，使程序能高效率运行呢?首先，我们要了解下具体有哪些I/O模型。
+I/O模型基本I/O模型一般有同步和异步，阻塞和非阻塞，基本可以分为阻塞型，非阻塞型，多路复用型和异步型4类。
+阻塞型阻塞型即最简单使用read(2)等方法
             ...
           </span>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2010/07/03//2010/07-03-0.html/#more" rel="contents">
+            <a class="btn" href="/2014/08/09//2014/08-09-0.html/#more" rel="contents">
               閱讀全文 &raquo;
             </a>
           </div>
@@ -607,7 +614,7 @@ void processInput(in
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/">&laquo;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span>
+    <a class="extend prev" rel="prev" href="/page/4/">&laquo;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/6/">&raquo;</a>
   </nav>
 
 
@@ -642,21 +649,21 @@ void processInput(in
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">45</span>
+              <span class="site-state-item-count">46</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-count">11</span>
               <span class="site-state-item-name">分類</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-count">18</span>
               <span class="site-state-item-name">標籤</span>
               </a>
           </div>

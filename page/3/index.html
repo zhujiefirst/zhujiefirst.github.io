@@ -170,8 +170,8 @@
           
           
             
-              <a class="post-title-link" href="/2014/11/14//2014/11-14-0.html/" itemprop="url">
-                Go中实现Set类型
+              <a class="post-title-link" href="/2014/12/27//2014/12-27-2.html/" itemprop="url">
+                经典算法巡礼(三) -- 排序之插入排序
               </a>
             
           
@@ -181,8 +181,8 @@
       <div class="post-meta">
         <span class="post-time">
           發表於
-          <time itemprop="dateCreated" datetime="2014-11-14T00:00:00+08:00" content="11月 14 2014">
-            11月 14 2014
+          <time itemprop="dateCreated" datetime="2014-12-27T00:00:00+08:00" content="12月 27 2014">
+            12月 27 2014
           </time>
         </span>
 
@@ -190,7 +190,7 @@
           <span class="post-category" >
             &nbsp; | &nbsp; 分類於
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/golang/" itemprop="url" rel="index"><span itemprop="name">golang</span></a></span>
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a></span>
 
               
               
@@ -203,8 +203,8 @@
           
             <span class="post-comments-count">
               &nbsp; | &nbsp;
-              <a href="/2014/11/14//2014/11-14-0.html/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2014/11/14//2014/11-14-0.html/" itemprop="commentsCount"></span>
+              <a href="/2014/12/27//2014/12-27-2.html/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2014/12/27//2014/12-27-2.html/" itemprop="commentsCount"></span>
               </a>
             </span>
           
@@ -221,12 +221,13 @@
         
           <span itemprop="articleBody">
             
-            这几天用go实现项目原有的xml数据导入服务器新设计的数据库中，以实现数据从客户机向服务器的转移。由于服务器的接口协议为json,所以面临的问题就是从xml解析出相应的struct，并将其转换为json。在这个过程中，go中xml与json库就不得不赞一下了。
-只需简单的定义struct的结构，并用
+            插入排序，与之前的冒泡排序和选择排序一样，其名称就说明了她的原理。所谓插入排序，就是对于数组中未排序的元素，依次遍历寻找合适的位置并插入到已排序的子数组中。当数组中没有未排序的元素时，插入排序即完成。
+同样，还是先展示golang实现的版本：
+// Sort方法从数组头开始，将未排序的元素依次选择合
             ...
           </span>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2014/11/14//2014/11-14-0.html/#more" rel="contents">
+            <a class="btn" href="/2014/12/27//2014/12-27-2.html/#more" rel="contents">
               閱讀全文 &raquo;
             </a>
           </div>
@@ -259,8 +260,8 @@
           
           
             
-              <a class="post-title-link" href="/2014/08/09//2014/08-09-2.html/" itemprop="url">
-                编程语言的发展之路 — 读《代码的未来》
+              <a class="post-title-link" href="/2014/12/27//2014/12-27-1.html/" itemprop="url">
+                经典算法巡礼(二) -- 排序之选择排序
               </a>
             
           
@@ -270,8 +271,8 @@
       <div class="post-meta">
         <span class="post-time">
           發表於
-          <time itemprop="dateCreated" datetime="2014-08-09T00:00:00+08:00" content="8月 9 2014">
-            8月 9 2014
+          <time itemprop="dateCreated" datetime="2014-12-27T00:00:00+08:00" content="12月 27 2014">
+            12月 27 2014
           </time>
         </span>
 
@@ -279,7 +280,7 @@
           <span class="post-category" >
             &nbsp; | &nbsp; 分類於
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/编程思维/" itemprop="url" rel="index"><span itemprop="name">编程思维</span></a></span>
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a></span>
 
               
               
@@ -292,8 +293,8 @@
           
             <span class="post-comments-count">
               &nbsp; | &nbsp;
-              <a href="/2014/08/09//2014/08-09-2.html/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2014/08/09//2014/08-09-2.html/" itemprop="commentsCount"></span>
+              <a href="/2014/12/27//2014/12-27-1.html/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2014/12/27//2014/12-27-1.html/" itemprop="commentsCount"></span>
               </a>
             </span>
           
@@ -310,12 +311,13 @@
         
           <span itemprop="articleBody">
             
-            本书是Matz在《日经Linux》上连载的各期内容的合集，虽然内容有些部分重复，但是内容还是很丰富的，主题也比较鲜明，与国内的某些合集甩开太远。    
-通书下来，个人觉得最精华的还是第2章：编程语言的过去、现在和未来。Matz通过简单回顾编程语言的过去，着重分析现在和未来的发展。主要分为以下几类：
+            选择排序，如冒泡排序一样，从名字中即可大概猜测其排序的原理。其工作原理就是从未排序的数组中选出最大（小）的元素，将其放置至数组的首（尾）部，重复此过程直至没有未排序的子数组。
+当然，在分析该排序算法前还是先将golang实现版本放置出来献下丑：
+// Sort方法从数组头开始，将未排序的元素做为子数
             ...
           </span>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2014/08/09//2014/08-09-2.html/#more" rel="contents">
+            <a class="btn" href="/2014/12/27//2014/12-27-1.html/#more" rel="contents">
               閱讀全文 &raquo;
             </a>
           </div>
@@ -348,8 +350,8 @@
           
           
             
-              <a class="post-title-link" href="/2014/08/09//2014/08-09-1.html/" itemprop="url">
-                如何用lua实现面向对象
+              <a class="post-title-link" href="/2014/12/27//2014/12-27-3.html/" itemprop="url">
+                经典算法巡礼(四) -- 排序之希尔排序
               </a>
             
           
@@ -359,8 +361,8 @@
       <div class="post-meta">
         <span class="post-time">
           發表於
-          <time itemprop="dateCreated" datetime="2014-08-09T00:00:00+08:00" content="8月 9 2014">
-            8月 9 2014
+          <time itemprop="dateCreated" datetime="2014-12-27T00:00:00+08:00" content="12月 27 2014">
+            12月 27 2014
           </time>
         </span>
 
@@ -368,7 +370,7 @@
           <span class="post-category" >
             &nbsp; | &nbsp; 分類於
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/lua/" itemprop="url" rel="index"><span itemprop="name">lua</span></a></span>
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a></span>
 
               
               
@@ -381,8 +383,8 @@
           
             <span class="post-comments-count">
               &nbsp; | &nbsp;
-              <a href="/2014/08/09//2014/08-09-1.html/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2014/08/09//2014/08-09-1.html/" itemprop="commentsCount"></span>
+              <a href="/2014/12/27//2014/12-27-3.html/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2014/12/27//2014/12-27-3.html/" itemprop="commentsCount"></span>
               </a>
             </span>
           
@@ -399,12 +401,15 @@
         
           <span itemprop="articleBody">
             
-            lua作为一门非面向对象的轻量级语言，如何才能方便的用面向对象的方法来进行编程呢？
-首先,编程范型对面向对象编程（OOP）是如何定义的呢？通常，OOP被理解为一种将程序分解为封装数据及相关操作的模块而进行的编程方式。有别于其他编程方式，OOP中的与某些数据类型相关的一系列操作都被有机地封装到该数据类
+            希尔排序与之前的排序算法不同，她是以她的发明者Donald Shell来命名的。她是插入排序的一种改进版本。
+希尔排序是基于插入排序的以下两点性质而提出的改进算法：
+
+插入排序的效率与输入序列有关，当输入序列处于基本排好序的情况下可以达到线性排序的效率；
+插入排序在大规模乱序情况下，效率是比较低的，
             ...
           </span>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2014/08/09//2014/08-09-1.html/#more" rel="contents">
+            <a class="btn" href="/2014/12/27//2014/12-27-3.html/#more" rel="contents">
               閱讀全文 &raquo;
             </a>
           </div>
@@ -437,8 +442,8 @@
           
           
             
-              <a class="post-title-link" href="/2014/08/09//2014/08-09-0.html/" itemprop="url">
-                高效使用I/O
+              <a class="post-title-link" href="/2014/12/27//2014/12-27-0.html/" itemprop="url">
+                经典算法巡礼(一) -- 排序之冒泡排序
               </a>
             
           
@@ -448,8 +453,8 @@
       <div class="post-meta">
         <span class="post-time">
           發表於
-          <time itemprop="dateCreated" datetime="2014-08-09T00:00:00+08:00" content="8月 9 2014">
-            8月 9 2014
+          <time itemprop="dateCreated" datetime="2014-12-27T00:00:00+08:00" content="12月 27 2014">
+            12月 27 2014
           </time>
         </span>
 
@@ -457,7 +462,7 @@
           <span class="post-category" >
             &nbsp; | &nbsp; 分類於
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/服务器编程/" itemprop="url" rel="index"><span itemprop="name">服务器编程</span></a></span>
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a></span>
 
               
               
@@ -470,8 +475,8 @@
           
             <span class="post-comments-count">
               &nbsp; | &nbsp;
-              <a href="/2014/08/09//2014/08-09-0.html/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2014/08/09//2014/08-09-0.html/" itemprop="commentsCount"></span>
+              <a href="/2014/12/27//2014/12-27-0.html/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2014/12/27//2014/12-27-0.html/" itemprop="commentsCount"></span>
               </a>
             </span>
           
@@ -488,13 +493,12 @@
         
           <span itemprop="articleBody">
             
-            网络编程中，遇到最多而且必定会遇到的就是I/O了。那么，如何正确使用I/O模型，使程序能高效率运行呢?首先，我们要了解下具体有哪些I/O模型。
-I/O模型基本I/O模型一般有同步和异步，阻塞和非阻塞，基本可以分为阻塞型，非阻塞型，多路复用型和异步型4类。
-阻塞型阻塞型即最简单使用read(2)等方法
+            冒泡排序是一种简单的排序算法，相信绝大多数人学会的第一种排序算法就是她了。
+事实上，她重复地遍历需要排序的元素，一次比较相邻的两个元素，如果不满足预先定义的比较条件，则交换；否则继续下一组元素比较，直至遍历完成需要排序的所有元素。当然，遍历需要排序的元素需要重复进行，直到没有需要排序的元素为止。遍历
             ...
           </span>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2014/08/09//2014/08-09-0.html/#more" rel="contents">
+            <a class="btn" href="/2014/12/27//2014/12-27-0.html/#more" rel="contents">
               閱讀全文 &raquo;
             </a>
           </div>
@@ -527,8 +531,8 @@ I/O模型基本I/O模型一般有同步和异步，阻塞和非阻塞，基本�
           
           
             
-              <a class="post-title-link" href="/2014/07/03//2014/07-03-0.html/" itemprop="url">
-                时间都去哪了
+              <a class="post-title-link" href="/2014/12/12//2014/12-12-0.html/" itemprop="url">
+                案例研究：union-find算法(四) — 加权quick-union算法
               </a>
             
           
@@ -538,8 +542,8 @@ I/O模型基本I/O模型一般有同步和异步，阻塞和非阻塞，基本�
       <div class="post-meta">
         <span class="post-time">
           發表於
-          <time itemprop="dateCreated" datetime="2014-07-03T00:00:00+08:00" content="7月 3 2014">
-            7月 3 2014
+          <time itemprop="dateCreated" datetime="2014-12-12T00:00:00+08:00" content="12月 12 2014">
+            12月 12 2014
           </time>
         </span>
 
@@ -547,7 +551,7 @@ I/O模型基本I/O模型一般有同步和异步，阻塞和非阻塞，基本�
           <span class="post-category" >
             &nbsp; | &nbsp; 分類於
             
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/杂感/" itemprop="url" rel="index"><span itemprop="name">杂感</span></a></span>
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a></span>
 
               
               
@@ -560,8 +564,8 @@ I/O模型基本I/O模型一般有同步和异步，阻塞和非阻塞，基本�
           
             <span class="post-comments-count">
               &nbsp; | &nbsp;
-              <a href="/2014/07/03//2014/07-03-0.html/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2014/07/03//2014/07-03-0.html/" itemprop="commentsCount"></span>
+              <a href="/2014/12/12//2014/12-12-0.html/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2014/12/12//2014/12-12-0.html/" itemprop="commentsCount"></span>
               </a>
             </span>
           
@@ -578,455 +582,12 @@ I/O模型基本I/O模型一般有同步和异步，阻塞和非阻塞，基本�
         
           <span itemprop="articleBody">
             
-            “我有太多的事要做，但却没有足够的时间。”“为什么我每天都忙的不可开交，有些人却一切井井有条?”“每次周末我都计划了一堆事，看书，运动，见朋友，但每次却都没有完成。”……
-这些曾经困扰我的问题，现在似乎已全都不存在了。因为我懂得了，时间是整理出来的。鲁迅先生说“时间就像海绵里的水，只要愿意挤，总还是
+            在Quick-Union算法中，在Union方法中归并两个分量时，我们始终是分量p归并至分量q。事实上，这里我们可以进行简单的优化，将含有节点少的分量归并至含有节点多的分量，如此做法可以减少分量形成的树的高度，从而在Find方法中寻找根节点时，适当增加效率。
+加权Quick-Union算法首先就要保
             ...
           </span>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2014/07/03//2014/07-03-0.html/#more" rel="contents">
-              閱讀全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2013/07/28//2013/07-28-0.html/" itemprop="url">
-                openGL学习（四） -- 颜色
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          發表於
-          <time itemprop="dateCreated" datetime="2013-07-28T00:00:00+08:00" content="7月 28 2013">
-            7月 28 2013
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分類於
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/游戏开发/" itemprop="url" rel="index"><span itemprop="name">游戏开发</span></a></span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-              &nbsp; | &nbsp;
-              <a href="/2013/07/28//2013/07-28-0.html/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2013/07/28//2013/07-28-0.html/" itemprop="commentsCount"></span>
-              </a>
-            </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-            1 RGBA和颜色索引模式  RGB显示模式：在此模式下，硬件为R、G、B和A成分保留一定数量的位平面（每种成分位平面数量并不一定相同）。像素可以显示的不同颜色的数量取决于位平面的数量以及硬件是如何解释这些位平面的。不同颜色的数量不能超过2的N次方，其中N是位平面的数量。  
-有些图形硬件使用抖动来
-            ...
-          </span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2013/07/28//2013/07-28-0.html/#more" rel="contents">
-              閱讀全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2013/07/27//2013/07-27-0.html/" itemprop="url">
-                openGL学习（三）-- 视图
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          發表於
-          <time itemprop="dateCreated" datetime="2013-07-27T00:00:00+08:00" content="7月 27 2013">
-            7月 27 2013
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分類於
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/游戏开发/" itemprop="url" rel="index"><span itemprop="name">游戏开发</span></a></span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-              &nbsp; | &nbsp;
-              <a href="/2013/07/27//2013/07-27-0.html/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2013/07/27//2013/07-27-0.html/" itemprop="commentsCount"></span>
-              </a>
-            </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-            计算机图形的要点就是创建三维物体的二维图像（图像必须是二维的，因为它是在平面的屏幕上显示的）。我们要避免考虑屏幕上的像素是如何绘制的，而是要尽量在三维空间中想象物体的形状。
-本章主要介绍如何使用OpenGL完成如下任务：如何在三维空间中设置模型的位置和方向，以及如何确定观察者的位置（也是在三维空间中
-            ...
-          </span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2013/07/27//2013/07-27-0.html/#more" rel="contents">
-              閱讀全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2013/07/17//2013/07-17-0.html/" itemprop="url">
-                openGL学习（二）-- 状态管理和绘制几何物体
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          發表於
-          <time itemprop="dateCreated" datetime="2013-07-17T00:00:00+08:00" content="7月 17 2013">
-            7月 17 2013
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分類於
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/游戏开发/" itemprop="url" rel="index"><span itemprop="name">游戏开发</span></a></span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-              &nbsp; | &nbsp;
-              <a href="/2013/07/17//2013/07-17-0.html/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2013/07/17//2013/07-17-0.html/" itemprop="commentsCount"></span>
-              </a>
-            </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-            在最高抽象层次上，有3种绘图是最基本的：消除窗口，绘制几何图形，以及绘制光栅对象(包括二维图像、位图和字体)。这里先介绍如何消除以及如何绘制几何物体，包括点、直接和平面多边形。
-1　绘图工具箱首先就是清除窗口。在计算机中，保存图片的内存通常被计算机所绘制的前一幅图像所填充，因此在绘制新场景之前，一般
-            ...
-          </span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2013/07/17//2013/07-17-0.html/#more" rel="contents">
-              閱讀全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2013/07/15//2013/07-15-0.html/" itemprop="url">
-                自省一则
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          發表於
-          <time itemprop="dateCreated" datetime="2013-07-15T00:00:00+08:00" content="7月 15 2013">
-            7月 15 2013
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分類於
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/杂感/" itemprop="url" rel="index"><span itemprop="name">杂感</span></a></span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-              &nbsp; | &nbsp;
-              <a href="/2013/07/15//2013/07-15-0.html/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2013/07/15//2013/07-15-0.html/" itemprop="commentsCount"></span>
-              </a>
-            </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-            一个人在某一方面的层次分为4层，即不知道自己不知道，知道自己不知道，知道自己知道，不知道自己知道。虽然很绕，但细细想来，还是很有道理的。而小猿自认为自己目前处在第二层，即知道自己不知道，所以也偶尔发奋努力下，但通常是三天打鱼，两天晒网了。所以在成就系统里至今也没有什么拿得出手的。最近小猿拜读了And
-            ...
-          </span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2013/07/15//2013/07-15-0.html/#more" rel="contents">
-              閱讀全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2013/06/29//2013/06-29-0.html/" itemprop="url">
-                openGL学习（一）-- 简介
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          發表於
-          <time itemprop="dateCreated" datetime="2013-06-29T00:00:00+08:00" content="6月 29 2013">
-            6月 29 2013
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分類於
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/游戏开发/" itemprop="url" rel="index"><span itemprop="name">游戏开发</span></a></span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-              &nbsp; | &nbsp;
-              <a href="/2013/06/29//2013/06-29-0.html/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2013/06/29//2013/06-29-0.html/" itemprop="commentsCount"></span>
-              </a>
-            </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-            1　什么是OpenGL, 它能够做什么，不能够做什么？OpenGL是图形硬件的一种软件接口。OpenGL包含700多个函数（OpenGL3.0），这些函数可以用于指定物体和操作，创建交互式的三维应用程序。但OpenGL并未包含用于执行窗口任务或者获取用户输入之类的函数，也不提供用于描述三维物体模型的
-            ...
-          </span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2013/06/29//2013/06-29-0.html/#more" rel="contents">
+            <a class="btn" href="/2014/12/12//2014/12-12-0.html/#more" rel="contents">
               閱讀全文 &raquo;
             </a>
           </div>
@@ -1052,7 +613,7 @@ I/O模型基本I/O模型一般有同步和异步，阻塞和非阻塞，基本�
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/">&laquo;</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">&raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo;</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/4/">&raquo;</a>
   </nav>
 
 
@@ -1087,21 +648,21 @@ I/O模型基本I/O模型一般有同步和异步，阻塞和非阻塞，基本�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">45</span>
+              <span class="site-state-item-count">46</span>
               <span class="site-state-item-name">文章</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-count">11</span>
               <span class="site-state-item-name">分類</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-count">18</span>
               <span class="site-state-item-name">標籤</span>
               </a>
           </div>
