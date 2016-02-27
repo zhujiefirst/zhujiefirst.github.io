@@ -1,0 +1,685 @@
+<!doctype html>
+<html class="theme-next use-motion ">
+<head>
+    
+
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5"/>
+
+
+
+  <link href='//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+
+<link rel="stylesheet" type="text/css" href="/css/main.css?v=0.4.4"/>
+
+
+    <meta name="description" content="学习总结 思考感悟 知识管理" />
+
+
+
+  <meta name="keywords" content="工具," />
+
+
+
+
+
+  <link rel="shorticon icon" type="image/x-icon" href="/favicon.ico?v=0.4.4" />
+
+
+<meta name="description" content="初识初次见面graphviz是一个非常棒的画图工具集，由AT&amp;amp;T实验室出品，码农装逼一大利器。
+小试牛刀如学习新语言一样，我们从hello world开始。
+1digraph HelloWorld &amp;#123;&amp;#10;  h;&amp;#10;  e;&amp;#10;  l;&amp;#10;  l;&amp;#10;  o;&amp;#10;&amp;#10;  w;&amp;#10;  o;&amp;#10;  r;&amp;#10;  l;&amp;#10;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="玩转graphviz绘图">
+<meta property="og:url" content="http://codingforever.com/2016/02/23//2016/02-23-0.html/index.html">
+<meta property="og:site_name" content="Codingforever">
+<meta property="og:description" content="初识初次见面graphviz是一个非常棒的画图工具集，由AT&amp;amp;T实验室出品，码农装逼一大利器。
+小试牛刀如学习新语言一样，我们从hello world开始。
+1digraph HelloWorld &amp;#123;&amp;#10;  h;&amp;#10;  e;&amp;#10;  l;&amp;#10;  l;&amp;#10;  o;&amp;#10;&amp;#10;  w;&amp;#10;  o;&amp;#10;  r;&amp;#10;  l;&amp;#10;">
+<meta property="og:image" content="http://codingforever.com/img/2016-02-23-0.png">
+<meta property="og:image" content="http://codingforever.com/img/2016-02-23-1.png">
+<meta property="og:image" content="http://codingforever.com/img/2016-02-23-2.png">
+<meta property="og:image" content="http://codingforever.com/img/2016-02-23-3.png">
+<meta property="og:image" content="http://codingforever.com/img/2016-02-23-4.png">
+<meta property="og:image" content="http://codingforever.com/img/2016-02-23-5.png">
+<meta property="og:image" content="http://codingforever.com/img/2016-02-23-6.png">
+<meta property="og:image" content="http://codingforever.com/img/2016-02-23-7.png">
+<meta property="og:updated_time" content="2016-02-27T02:47:12.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="玩转graphviz绘图">
+<meta name="twitter:description" content="初识初次见面graphviz是一个非常棒的画图工具集，由AT&amp;amp;T实验室出品，码农装逼一大利器。
+小试牛刀如学习新语言一样，我们从hello world开始。
+1digraph HelloWorld &amp;#123;&amp;#10;  h;&amp;#10;  e;&amp;#10;  l;&amp;#10;  l;&amp;#10;  o;&amp;#10;&amp;#10;  w;&amp;#10;  o;&amp;#10;  r;&amp;#10;  l;&amp;#10;">
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post'
+  };
+</script>
+
+    <title> 玩转graphviz绘图 // Codingforever </title>
+</head>
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+<!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+
+
+
+
+<div class="container one-column page-post-detail">
+    <div class="headband"></div>
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><h1 class="site-meta">
+  <span class="logo-line-before"><i></i></span>
+  <a href="/" class="brand" rel="start">
+      <span class="logo">
+        <i class="icon-logo"></i>
+      </span>
+      <span class="site-title">Codingforever</span>
+  </a>
+  <span class="logo-line-after"><i></i></span>
+</h1>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon icon-home"></i> <br />
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            <i class="menu-item-icon icon-categories"></i> <br />
+            分類
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            <i class="menu-item-icon icon-archives"></i> <br />
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            <i class="menu-item-icon icon-tags"></i> <br />
+            標籤
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            <i class="menu-item-icon icon-about"></i> <br />
+            關於
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+        </div>
+    </header>
+
+    <main id="main" class="main">
+        <div class="main-inner">
+            <div id="content" class="content">
+                
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              玩转graphviz绘图
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於
+          <time itemprop="dateCreated" datetime="2016-02-23T00:00:00+08:00" content="2月 23 2016">
+            2月 23 2016
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分類於
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/工具/" itemprop="url" rel="index"><span itemprop="name">工具</span></a></span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2016/02/23//2016/02-23-0.html/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/23//2016/02-23-0.html/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h3 id="初识">初识</h3><h4 id="初次见面">初次见面</h4><p><a href="http://www.graphviz.org/" target="_blank" rel="external">graphviz</a>是一个非常棒的画图工具集，由AT&amp;T实验室出品，码农装逼一大利器。</p>
+<h4 id="小试牛刀">小试牛刀</h4><p>如学习新语言一样，我们从<em>hello world</em>开始。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">digraph HelloWorld &#123;&#10;  h;&#10;  e;&#10;  l;&#10;  l;&#10;  o;&#10;&#10;  w;&#10;  o;&#10;  r;&#10;  l;&#10;  d;&#10;&#10;  h -&#62; e -&#62; l -&#62; l -&#62; o &#10;  w -&#62; o -&#62; r -&#62; l -&#62; d &#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>我们用<em>graphviz</em>工具集中的dot转换成图片：</p>
+<pre><code><span class="title">dot</span> -Tpdf <span class="regexp">*.dot</span> &gt; <span class="regexp">*.pdf</span>
+</code></pre><p>效果如下：</p>
+<p><img src="/img/2016-02-23-0.png" alt=""></p>
+<p>效果不错，但似乎有点单调，我们下面来剖析下。</p>
+<h3 id="剖析">剖析</h3><h4 id="graph">graph</h4><p>首先，graph可以设置许多特性，比如<em>label</em>，<em>rankdir</em>，<em>splines</em>等。具体说明参见：</p>
+<ul>
+<li><p>label=”My Graph”; Label a graph itself</p>
+</li>
+<li><p>rankdir=LR; Lay the graph out from Left to Right, instead of Top to Bottom</p>
+</li>
+<li><p>{rank=same; a, b, c} Group nodes together at the same level of a graph</p>
+</li>
+<li><p>splines=”line”; Force edges to be straight, no curves or angles</p>
+</li>
+<li><p>K=0.6; Used to influence the ‘spring’ used in the layout, Can be used to push nodes further apart, which is especially useful for twopi and sfdp layouts</p>
+</li>
+</ul>
+<h4 id="顶点">顶点</h4><p>我们再来改变下顶点的特点，比如将顶点从原先的圆形修改成鸡蛋型。我们加入对顶点设置:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node [shape=&#34;egg&#34;, style=&#34;filled&#34;]</span><br></pre></td></tr></table></figure>
+<p>效果如下：</p>
+<p><img src="/img/2016-02-23-1.png" alt=""></p>
+<p>当然，顶点还有很多特性可以设置，除了shape外，还有<em>label</em>，<em>fillcolor</em>，<em>style</em>等。 </p>
+<h4 id="边">边</h4><p>我们对边也可以进行某些特性的设置，如果<em>label</em>，<em>color</em>，<em>penwidth</em>等。</p>
+<p>我们简单设置下:</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">edge [color=&#34;blue&#34;, style=&#34;dashed&#34;]</span><br></pre></td></tr></table></figure>
+<p>效果如下:</p>
+<p><img src="/img/2016-02-23-2.png" alt=""></p>
+<h4 id="子图">子图</h4><p>graphviz另外还支持子图的绘制。比如：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">subgraph cluster_world &#123;&#10;  label=&#34;world&#34;&#10;  bgcolor=&#34;gray&#34;&#10;  ...&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>效果如下:</p>
+<p><img src="/img/2016-02-23-3.png" alt=""></p>
+<h3 id="玩转">玩转</h3><p>下面我们直接来看一下不同的效果图。</p>
+<h4 id="抽像树">抽像树</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">digraph ast &#123;&#10;  fontname = &#34;Microsoft YaHei&#34;&#10;  fontsize = 10&#10;&#10;  node [shape=&#34;plaintext&#34;, fontname=&#34;Microsoft YaHei&#34;, fontsize=10]&#10;  edge [fontname=&#34;Microsoft YaHei&#34;, fontsize=10]&#10;&#10;  mul [label=&#34;mul(*)&#34;]&#10;  add [label=&#34;add(+)&#34;]&#10;&#10;  add -&#62; 3&#10;  add -&#62; 4&#10;  mul -&#62; add&#10;  mul -&#62; 5&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/img/2016-02-23-4.png" alt=""></p>
+<h4 id="状态机">状态机</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">digraph automate &#123;&#10;  size = &#34;8.5, 11&#34;&#10;  fontname = &#34;Microsoft YaHei&#34;&#10;  fontsize = 10&#10;&#10;  node [shape=circle, fontname=&#34;Microsoft YaHei&#34;, fontsize=10]&#10;  edge [fontname=&#34;Microsoft YaHei&#34;, fontsize=10]&#10;&#10;  0 [style=filled, color=lightgray]&#10;  1&#10;  2 [shape=doublecircle]&#10;&#10;  0 -&#62; 2 [label=&#34;a&#34;]&#10;  0 -&#62; 1 [label=&#34;other&#34;]&#10;  1 -&#62; 2 [label=&#34;a&#34;]&#10;  1 -&#62; 1 [label=&#34;other&#34;]&#10;  2 -&#62; 2 [label=&#34;a&#34;]&#10;  2 -&#62; 1 [label=&#34;other&#34;]&#10;&#10;  &#34;Machine a&#34; [shape=plaintext]&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/img/2016-02-23-5.png" alt=""></p>
+<h4 id="hash表">hash表</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">digraph hashtable &#123;&#10;  fontname = &#34;Verdana&#34;&#10;  fontsize = 10&#10;  rankdir=TB&#10;&#10;  node [fontname=&#34;Verdana&#34;, fontsize=10, color=skyblue, shape=record]&#10;  edge [fontname=&#34;Verdana&#34;, fontsize=10, color=crimson, style=solid]&#10;&#10;  st_hash_type [label=&#34;&#123;&#60;head&#62;st_hash_type|(*compare)|(*hash)&#125;&#34;]&#10;  st_table_entry [label=&#34;&#123;&#60;head&#62;st_table_entry|hash|key|record|&#60;next&#62;next&#125;&#34;]&#10;  st_table [label=&#34;&#123;st_table|&#60;type&#62;type|num_bins|num_entries|&#60;bins&#62;bins&#125;&#34;]&#10;&#10;  st_table:bins -&#62; st_table_entry:head&#10;  st_table:type -&#62; st_hash_type:head&#10;  st_table_entry:next -&#62; st_table_entry:head [style=dashed, color=forestgreen]&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/img/2016-02-23-6.png" alt=""></p>
+<h4 id="流程图">流程图</h4><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">digraph JobStateDiagram &#123;&#10;  rankdir = LR&#10;  size = &#34;8,5&#34;&#10;  concentrate = true&#10;&#10;  node [style=&#34;rounded,filled,bold&#34;, shape=box, fixedsize=true, width=1.3, fontname=&#34;Arial&#34;]&#10;  Created [fillcolor=black, shape=circle, label=&#34;&#34;, width=0.25]&#10;  Destroyed [fillcolor=black, shape=doublecircle, label=&#34;&#34;, width=0.3]&#10;  Empty [fillcolor=&#34;#a0ffa0&#34;]&#10;  Failed [fillcolor=&#34;#ffa0a0&#34;]&#10;  Announced [fillcolor=&#34;#a0ffa0&#34;]&#10;  Assigned [fillcolor=&#34;#a0ffa0&#34;]&#10;  Working [fillcolor=&#34;#a0ffa0&#34;]&#10;  Ready [fillcolor=&#34;#a0ffa0&#34;] &#10;  TimeOut [fillcolor=&#34;#ffa0a0&#34;]&#10;&#10;  &#123;&#10;    rank=source; Created; Destroyed;&#10;  &#125;&#10;  &#123;&#10;    rank=same; Announced; Failed;&#10;  &#125;&#10;  &#123;&#10;    rank=same; Assigned; TimeOut;&#10;  &#125;&#10;&#10;  edge [style=bold, fontname=&#34;Arial&#34;, weight=100]&#10;  Empty -&#62; Announced [label=&#34;announce&#34;]&#10;  Announced -&#62; Assigned [label=&#34;assign&#34;]&#10;  Assigned -&#62; Working [label=&#34;start&#34;]&#10;  Working -&#62; Ready [label=&#34;finish&#34;]&#10;  Ready -&#62; Empty [label=&#34;revoke&#34;, weight=1]&#10;&#10;  edge [color=&#34;#aaaaaa&#34;, weight=1]&#10;  Announced -&#62; TimeOut [label=&#34;timeout&#34;] &#10;  Assigned -&#62; TimeOut [label=&#34;timeout&#34;]&#10;  Working -&#62; TimeOut [label=&#34;timeout&#34;]&#10;  Working -&#62; Failed [label=&#34;error&#34;]&#10;  TimeOut -&#62; Announced [label=&#34;annouce&#34;]&#10;  TimeOut -&#62; Empty [label=&#34;revoke&#34;]&#10;  Failed -&#62; Announced [label=&#34;announce&#34;]&#10;  Failed -&#62; Empty [label=&#34;revoke&#34;]&#10;&#10;  Created -&#62; Empty [label=&#34;initialize&#34;]&#10;  Empty -&#62; Destroyed [label=&#34;finalize&#34;]&#10;  Announced -&#62; Empty [label=&#34;revoke&#34;]&#10;  Assigned -&#62; Empty [label=&#34;revoke&#34;]&#10;  Working -&#62; Empty [label=&#34;revoke&#34;]&#10;&#125;</span><br></pre></td></tr></table></figure>
+<p>(<a href="http://stackoverflow.com/questions/11588667/how-to-influence-layout-of-graph-items" target="_blank" rel="external">来自stackoverflow</a>)</p>
+<p><img src="/img/2016-02-23-7.png" alt=""></p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/工具/" rel="tag">#工具</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/31//2015/12-31-0.html/" rel="next">2016年计划</a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+            </div>
+
+            
+
+            
+              <div class="comments" id="comments">
+                
+                  <div class="ds-thread" data-thread-key="2016/02/23//2016/02-23-0.html/"
+                       data-title="玩转graphviz绘图" data-url="http://codingforever.com/2016/02/23//2016/02-23-0.html/">
+                  </div>
+                
+              </div>
+            
+        </div>
+
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/avatar.jpg" alt="zhujiefirst" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">zhujiefirst</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">学习总结 思考感悟 知识管理</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">48</span>
+              <span class="site-state-item-name">文章</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">13</span>
+              <span class="site-state-item-name">分類</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">20</span>
+              <span class="site-state-item-name">標籤</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator"></div>
+          <div class="post-toc">
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#初识"><span class="nav-number">1.</span> <span class="nav-text">初识</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#初次见面"><span class="nav-number">1.1.</span> <span class="nav-text">初次见面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#小试牛刀"><span class="nav-number">1.2.</span> <span class="nav-text">小试牛刀</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#剖析"><span class="nav-number">2.</span> <span class="nav-text">剖析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#graph"><span class="nav-number">2.1.</span> <span class="nav-text">graph</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#顶点"><span class="nav-number">2.2.</span> <span class="nav-text">顶点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#边"><span class="nav-number">2.3.</span> <span class="nav-text">边</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#子图"><span class="nav-number">2.4.</span> <span class="nav-text">子图</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#玩转"><span class="nav-number">3.</span> <span class="nav-text">玩转</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#抽像树"><span class="nav-number">3.1.</span> <span class="nav-text">抽像树</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#状态机"><span class="nav-number">3.2.</span> <span class="nav-text">状态机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#hash表"><span class="nav-number">3.3.</span> <span class="nav-text">hash表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#流程图"><span class="nav-number">3.4.</span> <span class="nav-text">流程图</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator"></div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+    </main>
+
+    <footer id="footer" class="footer">
+        <div class="footer-inner">
+            <div class="copyright" >
+  
+  &copy; &nbsp; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhujiefirst</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+
+
+        </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+</div>
+
+<script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"codingforever"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+  	<script src="/js/ua-parser.min.js"></script>
+  	<script src="/js/hook-duoshuo.js"></script>
+  
+
+    
+  
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.4"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.4"></script>
+  
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/js/motion_global.js?v=0.4.4" id="motion.global"></script>
+
+
+
+  <script type="text/javascript" src="/js/search-toggle.js"></script>
+
+
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.4" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+          var self = this;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      $(indicator).velocity('stop').velocity({
+        opacity: action === 'show' ? 0.4 : 0
+      }, { duration: 100 });
+    }
+
+  });
+</script>
+
+
+  <script type="text/javascript" id="sidebar.nav">
+    $(document).ready(function () {
+      var html = $('html');
+
+      $('.sidebar-nav li').on('click', function () {
+        var item = $(this);
+        var activeTabClassName = 'sidebar-nav-active';
+        var activePanelClassName = 'sidebar-panel-active';
+        if (item.hasClass(activeTabClassName)) {
+          return;
+        }
+
+        var currentTarget = $('.' + activePanelClassName);
+        var target = $('.' + item.data('target'));
+
+        currentTarget.velocity('transition.slideUpOut', 200, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', 200)
+            .addClass(activePanelClassName);
+        });
+
+        item.siblings().removeClass(activeTabClassName);
+        item.addClass(activeTabClassName);
+      });
+
+      $('.post-toc a').on('click', function (e) {
+        e.preventDefault();
+        var offset = $(escapeSelector(this.getAttribute('href'))).offset().top;
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        });
+      });
+
+      // Expand sidebar on post detail page by default, when post has a toc.
+      var $tocContent = $('.post-toc-content');
+      if (isDesktop() && CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    });
+  </script>
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        if (CONFIG.sidebar === 'always') {
+            displaySidebar();
+        }
+    });
+</script>
+
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+
+
+
+
+
+<!-- lazyload -->
+<script type="text/javascript" src="/js/lazyload.js"></script>
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery("#posts img").lazyload({
+            placeholder: "/images/loading.gif",
+            effect: "fadeIn"
+        });
+    });
+</script>
+</body>
+</html>
