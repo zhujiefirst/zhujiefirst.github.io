@@ -107,7 +107,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             <i class="menu-item-icon icon-home"></i> <br />
-            首页
+            首頁
           </a>
         </li>
       
@@ -115,7 +115,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             <i class="menu-item-icon icon-categories"></i> <br />
-            分类
+            分類
           </a>
         </li>
       
@@ -123,7 +123,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             <i class="menu-item-icon icon-archives"></i> <br />
-            归档
+            歸檔
           </a>
         </li>
       
@@ -131,7 +131,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             <i class="menu-item-icon icon-tags"></i> <br />
-            标签
+            標籤
           </a>
         </li>
       
@@ -139,7 +139,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             <i class="menu-item-icon icon-about"></i> <br />
-            关于
+            關於
           </a>
         </li>
       
@@ -170,6 +170,281 @@
           
           
             
+              <a class="post-title-link" href="/2011/10/16//2011/10-16-0.html/" itemprop="url">
+                编写高质量C语言代码 -- Assert Yourself
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於
+          <time itemprop="dateCreated" datetime="2011-10-16T00:00:00+08:00" content="10月 16 2011">
+            10月 16 2011
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分類於
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/c-c/" itemprop="url" rel="index"><span itemprop="name">c/c++</span></a></span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2011/10/16//2011/10-16-0.html/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2011/10/16//2011/10-16-0.html/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+            C语言中assert功能强大，人称“断言”，如语句assert ( expression )，即断言expression始终为true, 若为false，则程序运行失败。
+但是，assert ( expression ) 看似function，但它其实是macro, 而且只是一个debug-only
+            ...
+          </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2011/10/16//2011/10-16-0.html/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2011/10/07//2011/10-07-0.html/" itemprop="url">
+                编写高质量C语言代码 -- API设计
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於
+          <time itemprop="dateCreated" datetime="2011-10-07T00:00:00+08:00" content="10月 7 2011">
+            10月 7 2011
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分類於
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/c-c/" itemprop="url" rel="index"><span itemprop="name">c/c++</span></a></span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2011/10/07//2011/10-07-0.html/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2011/10/07//2011/10-07-0.html/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+            首先我们先来看一个程序：
+char* strdup(char* str)
+{
+    char* strNew;
+
+    strNew = (char*)malloc(strlen(str) + 1);
+    strcpy(strNew, str);
+    return(strNew);
+}
+
+            ...
+          </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2011/10/07//2011/10-07-0.html/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2011/06/04//2011/06-04-0.html/" itemprop="url">
+                用代理类实现二组数组
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於
+          <time itemprop="dateCreated" datetime="2011-06-04T00:00:00+08:00" content="6月 4 2011">
+            6月 4 2011
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分類於
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/c-c/" itemprop="url" rel="index"><span itemprop="name">c/c++</span></a></span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2011/06/04//2011/06-04-0.html/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2011/06/04//2011/06-04-0.html/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+             C++语言在数组的支持方面不强其他语言强劲，如FORTRAN、BASIC、甚至在COBOL中可以产生二维数组、三维数组，乃至于n维数组，但你能 C++中这么做吗？有同学不同意了，C++中可以产生维数组啊，int data[2][3]不是吗？但是，如果这样：
+void processInput(in
+            ...
+          </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2011/06/04//2011/06-04-0.html/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2011/05/29//2011/05-29-0.html/" itemprop="url">
                 重新审视这个世界
               </a>
@@ -180,7 +455,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          发表于
+          發表於
           <time itemprop="dateCreated" datetime="2011-05-29T00:00:00+08:00" content="5月 29 2011">
             5月 29 2011
           </time>
@@ -188,7 +463,7 @@
 
         
           <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+            &nbsp; | &nbsp; 分類於
             
               <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/杂感/" itemprop="url" rel="index"><span itemprop="name">杂感</span></a></span>
 
@@ -227,7 +502,7 @@
           </span>
           <div class="post-more-link text-center">
             <a class="btn" href="/2011/05/29//2011/05-29-0.html/#more" rel="contents">
-              阅读全文 &raquo;
+              閱讀全文 &raquo;
             </a>
           </div>
         
@@ -269,7 +544,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          发表于
+          發表於
           <time itemprop="dateCreated" datetime="2010-09-03T00:00:00+08:00" content="9月 3 2010">
             9月 3 2010
           </time>
@@ -277,7 +552,7 @@
 
         
           <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+            &nbsp; | &nbsp; 分類於
             
               <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/杂感/" itemprop="url" rel="index"><span itemprop="name">杂感</span></a></span>
 
@@ -315,185 +590,7 @@
           </span>
           <div class="post-more-link text-center">
             <a class="btn" href="/2010/09/03//2010/09-03-0.html/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2010/08/02//2010/08-02-0.html/" itemprop="url">
-                《高效能人士的七个习惯》读后
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2010-08-02T00:00:00+08:00" content="8月 2 2010">
-            8月 2 2010
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/杂感/" itemprop="url" rel="index"><span itemprop="name">杂感</span></a></span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-              &nbsp; | &nbsp;
-              <a href="/2010/08/02//2010/08-02-0.html/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2010/08/02//2010/08-02-0.html/" itemprop="commentsCount"></span>
-              </a>
-            </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-            偶然在刘未鹏大牛的博客里看到《高效能人士的七个习惯》 一书，便有兴趣一读。遂去图书馆借书一册，每晚睡觉前阅读几页，断断续续将其读完，颇有心得，与大家其享之。
-《高效能人士的七个习惯》，英文原名《The habits of highly effective people》。effective一词，可以
-            ...
-          </span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2010/08/02//2010/08-02-0.html/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2010/07/03//2010/07-03-0.html/" itemprop="url">
-                优化程序性能
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2010-07-03T00:00:00+08:00" content="7月 3 2010">
-            7月 3 2010
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/c-c/" itemprop="url" rel="index"><span itemprop="name">c/c++</span></a></span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-              &nbsp; | &nbsp;
-              <a href="/2010/07/03//2010/07-03-0.html/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2010/07/03//2010/07-03-0.html/" itemprop="commentsCount"></span>
-              </a>
-            </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-            编写高效程序需要两个活动：第一，我们必须选择一组最好的算法和数据结构；第二，我们必须编写出编译器能够有效优化以转换成高效可执行代码的源 代码。这里，我们主要讲述后者。
-首先，我们討論一下为什么要编写高效程序。不难想象，如果本来要用１０天运行完的程序，经过优化只需要１天就可运行完，这是一件多么令人振奋
-            ...
-          </span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2010/07/03//2010/07-03-0.html/#more" rel="contents">
-              阅读全文 &raquo;
+              閱讀全文 &raquo;
             </a>
           </div>
         
@@ -518,7 +615,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/9/">&laquo;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span>
+    <a class="extend prev" rel="prev" href="/page/9/">&laquo;</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/11/">&raquo;</a>
   </nav>
 
 
@@ -553,22 +650,22 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">49</span>
-              <span class="site-state-item-name">日志</span>
+              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-name">文章</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">14</span>
-              <span class="site-state-item-name">分类</span>
+              <span class="site-state-item-count">16</span>
+              <span class="site-state-item-name">分類</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">21</span>
-              <span class="site-state-item-name">标签</span>
+              <span class="site-state-item-count">22</span>
+              <span class="site-state-item-name">標籤</span>
               </a>
           </div>
 
@@ -610,11 +707,11 @@
 </div>
 
 <div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
 </div>
 
 <div class="theme-info">
-  主题 -
+  主題 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT
   </a>

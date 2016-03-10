@@ -107,7 +107,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             <i class="menu-item-icon icon-home"></i> <br />
-            首页
+            首頁
           </a>
         </li>
       
@@ -115,7 +115,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             <i class="menu-item-icon icon-categories"></i> <br />
-            分类
+            分類
           </a>
         </li>
       
@@ -123,7 +123,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             <i class="menu-item-icon icon-archives"></i> <br />
-            归档
+            歸檔
           </a>
         </li>
       
@@ -131,7 +131,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             <i class="menu-item-icon icon-tags"></i> <br />
-            标签
+            標籤
           </a>
         </li>
       
@@ -139,7 +139,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             <i class="menu-item-icon icon-about"></i> <br />
-            关于
+            關於
           </a>
         </li>
       
@@ -170,6 +170,293 @@
           
           
             
+              <a class="post-title-link" href="/2016/03/11//2016/03-11-0.html/" itemprop="url">
+                NSQ入门记 -- Quick Start
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於
+          <time itemprop="dateCreated" datetime="2016-03-11T00:00:00+08:00" content="3月 11 2016">
+            3月 11 2016
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分類於
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/go-nsq/" itemprop="url" rel="index"><span itemprop="name">go, nsq</span></a></span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2016/03/11//2016/03-11-0.html/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/11//2016/03-11-0.html/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+            尝鲜步骤
+开启拓扑管理服务:
+
+1$ nsqlookupd
+
+开启nsq核心服务:
+
+1$ nsqd --lookupd-tcp-address=127.0.0.1:4160
+
+开启nsq web管理服务:
+
+1$ nsqadmin --lookupd-http-address=127.0.0.1:
+            ...
+          </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/03/11//2016/03-11-0.html/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2016/03/10//2016/03-10-0.html/" itemprop="url">
+                NSQ入门记 -- 安装
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於
+          <time itemprop="dateCreated" datetime="2016-03-10T00:00:00+08:00" content="3月 10 2016">
+            3月 10 2016
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分類於
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/go-nsq/" itemprop="url" rel="index"><span itemprop="name">go, nsq</span></a></span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2016/03/10//2016/03-10-0.html/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/10//2016/03-10-0.html/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+            安装
+从官方clone代码：
+ git clone https://github.com/nsqio/nsq
+
+安装包管理器gpm：
+ brew install gpm    
+
+切换到nsq目录，用gpm安装:
+ gpm install go get github.com/nsqio/nsq/…
+
+            ...
+          </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/03/10//2016/03-10-0.html/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
+              <a class="post-title-link" href="/2016/03/09//2016/03-09-0.html/" itemprop="url">
+                Git爬坑行 -- 本地切换远程分支
+              </a>
+            
+          
+        </h1>
+      
+
+      <div class="post-meta">
+        <span class="post-time">
+          發表於
+          <time itemprop="dateCreated" datetime="2016-03-09T00:00:00+08:00" content="3月 9 2016">
+            3月 9 2016
+          </time>
+        </span>
+
+        
+          <span class="post-category" >
+            &nbsp; | &nbsp; 分類於
+            
+              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/git-爬坑行/" itemprop="url" rel="index"><span itemprop="name">git, 爬坑行</span></a></span>
+
+              
+              
+
+            
+          </span>
+        
+
+        
+          
+            <span class="post-comments-count">
+              &nbsp; | &nbsp;
+              <a href="/2016/03/09//2016/03-09-0.html/#comments" itemprop="discussionUrl">
+                <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/09//2016/03-09-0.html/" itemprop="commentsCount"></span>
+              </a>
+            </span>
+          
+        
+      </div>
+    </header>
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+            从github上clone了一个项目，发现其master是非稳定版本，dev分支才是稳定版本。WTF！那好，就切下分支呗。
+输入git branch后，发现本地只有一条master分支啊。什么鬼！
+其实，就是git基础不好，少见多怪。咱来分析下。
+Git基础恶补首先，理解下远程分支(remote b
+            ...
+          </span>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/03/09//2016/03-09-0.html/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      
+      
+        <h1 class="post-title" itemprop="name headline">
+          
+          
+            
               <a class="post-title-link" href="/2016/03/05//2016/03-05-0.html/" itemprop="url">
                 利用PhpStorm开发php爬坑行
               </a>
@@ -180,7 +467,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          发表于
+          發表於
           <time itemprop="dateCreated" datetime="2016-03-05T00:00:00+08:00" content="3月 5 2016">
             3月 5 2016
           </time>
@@ -188,7 +475,7 @@
 
         
           <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+            &nbsp; | &nbsp; 分類於
             
               <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/php/" itemprop="url" rel="index"><span itemprop="name">php</span></a></span>
 
@@ -227,7 +514,7 @@
           </span>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/03/05//2016/03-05-0.html/#more" rel="contents">
-              阅读全文 &raquo;
+              閱讀全文 &raquo;
             </a>
           </div>
         
@@ -269,7 +556,7 @@
 
       <div class="post-meta">
         <span class="post-time">
-          发表于
+          發表於
           <time itemprop="dateCreated" datetime="2016-02-23T00:00:00+08:00" content="2月 23 2016">
             2月 23 2016
           </time>
@@ -277,7 +564,7 @@
 
         
           <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
+            &nbsp; | &nbsp; 分類於
             
               <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/工具/" itemprop="url" rel="index"><span itemprop="name">工具</span></a></span>
 
@@ -317,272 +604,7 @@
           </span>
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/02/23//2016/02-23-0.html/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/31//2015/12-31-0.html/" itemprop="url">
-                2016年计划
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-31T00:00:00+08:00" content="12月 31 2015">
-            12月 31 2015
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/我的计划/" itemprop="url" rel="index"><span itemprop="name">我的计划</span></a></span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-              &nbsp; | &nbsp;
-              <a href="/2015/12/31//2015/12-31-0.html/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/31//2015/12-31-0.html/" itemprop="commentsCount"></span>
-              </a>
-            </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-            One of my goals for 2016 is to achieve the goal of 2015 which I should have done in 2014 because I promised a promise in 2013 &amp; planned a plan in 
-            ...
-          </span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/31//2015/12-31-0.html/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/12/30//2015/12-30-0.html/" itemprop="url">
-                UIView入门
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-12-30T00:00:00+08:00" content="12月 30 2015">
-            12月 30 2015
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a></span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-              &nbsp; | &nbsp;
-              <a href="/2015/12/30//2015/12-30-0.html/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/30//2015/12-30-0.html/" itemprop="commentsCount"></span>
-              </a>
-            </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-            初识UIViewUIView是UIKit中重要的一个类，iOS开发者几乎无法绕过它，因为我们的App中，看得见摸得着的UI都是UIView以及它的子类，比如UIWindow，UILabel，UIPickerView，UIProgressView，UIActivityIndicatorView，UII
-            ...
-          </span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/30//2015/12-30-0.html/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      
-      
-        <h1 class="post-title" itemprop="name headline">
-          
-          
-            
-              <a class="post-title-link" href="/2015/02/14//2015/02-14-0.html/" itemprop="url">
-                经典算法巡礼(八) -- 查找之二叉查找树
-              </a>
-            
-          
-        </h1>
-      
-
-      <div class="post-meta">
-        <span class="post-time">
-          发表于
-          <time itemprop="dateCreated" datetime="2015-02-14T00:00:00+08:00" content="2月 14 2015">
-            2月 14 2015
-          </time>
-        </span>
-
-        
-          <span class="post-category" >
-            &nbsp; | &nbsp; 分类于
-            
-              <span itemprop="about" itemscope itemtype="https://schema.org/Thing"><a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a></span>
-
-              
-              
-
-            
-          </span>
-        
-
-        
-          
-            <span class="post-comments-count">
-              &nbsp; | &nbsp;
-              <a href="/2015/02/14//2015/02-14-0.html/#comments" itemprop="discussionUrl">
-                <span class="post-comments-count ds-thread-count" data-thread-key="2015/02/14//2015/02-14-0.html/" itemprop="commentsCount"></span>
-              </a>
-            </span>
-          
-        
-      </div>
-    </header>
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-            理论说概念二叉查找树是计算机科学中最重要的算法之一，它将链表插入的灵活性和有序数组查找的高效性结合在一起，即同时拥有插入灵活性和查找高效性的一种符号表实现。
-性能我们知道，链表以插入灵活性闻名，但是它的实现直接导致在查找效率上不是如此优美，平均情况下的成本数量级为O(N/2)，最坏情况下为O(N)。
-            ...
-          </span>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/02/14//2015/02-14-0.html/#more" rel="contents">
-              阅读全文 &raquo;
+              閱讀全文 &raquo;
             </a>
           </div>
         
@@ -607,7 +629,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/2/">&raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/2/">&raquo;</a>
   </nav>
 
 
@@ -642,22 +664,22 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">49</span>
-              <span class="site-state-item-name">日志</span>
+              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-name">文章</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">14</span>
-              <span class="site-state-item-name">分类</span>
+              <span class="site-state-item-count">16</span>
+              <span class="site-state-item-name">分類</span>
               </a>
           </div>
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">21</span>
-              <span class="site-state-item-name">标签</span>
+              <span class="site-state-item-count">22</span>
+              <span class="site-state-item-name">標籤</span>
               </a>
           </div>
 
@@ -699,11 +721,11 @@
 </div>
 
 <div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 強力驅動
 </div>
 
 <div class="theme-info">
-  主题 -
+  主題 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
     NexT
   </a>
