@@ -76,7 +76,7 @@
 
 1$ nsq_to_file --t">
 <meta property="og:image" content="http://codingforever.com/img/2016-03-11-0.png">
-<meta property="og:updated_time" content="2016-03-10T13:25:08.000Z">
+<meta property="og:updated_time" content="2016-03-12T14:48:45.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NSQ入门记 -- Quick Start">
 <meta name="twitter:description" content="尝鲜步骤
@@ -261,29 +261,29 @@
       
 
       
-        <span itemprop="articleBody"><h2 id="尝鲜步骤">尝鲜步骤</h2><ol>
+        <span itemprop="articleBody"><h2 id="尝鲜步骤">尝鲜步骤</h2><ul>
 <li>开启拓扑管理服务:</li>
-</ol>
+</ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nsqlookupd</span><br></pre></td></tr></table></figure>
-<ol>
+<ul>
 <li>开启nsq核心服务:</li>
-</ol>
+</ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nsqd --lookupd-tcp-address=127.0.0.1:4160</span><br></pre></td></tr></table></figure>
-<ol>
+<ul>
 <li>开启nsq web管理服务:</li>
-</ol>
+</ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nsqadmin --lookupd-http-address=127.0.0.1:4161</span><br></pre></td></tr></table></figure>
-<ol>
+<ul>
 <li>开启nsq消费者工具之一nsq_to_file:</li>
-</ol>
+</ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nsq_to_file --topic=test --output-dir=/tmp --lookupd-http-address=127.0.0.1:4161</span><br></pre></td></tr></table></figure>
-<ol>
+<ul>
 <li>生产一条消息:</li>
-</ol>
+</ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ curl -d &#39;hello world 1&#39; &#39;http://127.0.0.1:4151/put?topic=test&#39;</span><br></pre></td></tr></table></figure>
-<ol>
+<ul>
 <li>在/tmp目录下查看<em>.log文件，发现带有信息</em>hello world 1*</li>
-</ol>
+</ul>
 <h2 id="说明">说明</h2><p>事实上，nsq最核心其实就两个服务: nsqlookupd和nsqd。上述步骤最终的拓扑结构如下:</p>
 <p><img src="/img/2016-03-11-0.png" alt=""></p>
 </span>
